@@ -9,6 +9,6 @@ class Ingredient
 
   Ingredient(String n)
   {
-      this.name = n;
+    this.name = n;
   }
 }
