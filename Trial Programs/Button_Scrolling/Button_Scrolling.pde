@@ -5,6 +5,7 @@ int currentPage = 0;
 int buttonsPerPage = 9;
 int totalPages;
 ArrayList<GButton> buttons = new ArrayList<>();
+GButton prevButton, nextButton;
 
 void setup() {
   size(1000, 700);
@@ -16,22 +17,35 @@ void setup() {
   }
 
   totalPages = (int) ceil((float) recipes.size() / buttonsPerPage);
+  
+  float navButtonWidth = 100;
+  float navButtonHeight = 40;
+  float navButtonY = height - 100;
+  
+  prevButton = new GButton(this, width / 2 - navButtonWidth - 20, navButtonY, navButtonWidth, navButtonHeight, "Previous");
+  prevButton.addEventHandler(this, "handleButtonEvents");
+
+  nextButton = new GButton(this, width / 2 + 20, navButtonY, navButtonWidth, navButtonHeight, "Next");
+  nextButton.addEventHandler(this, "handleButtonEvents");
+  
   createButtons();
 }
 
 void draw()
 {
-
+  background(220);
 }
 
-void createButtons() {
-  // Remove existing buttons
-  for (GButton button : buttons) {
-    button.dispose(); // Dispose of the button to remove it from the canvas
+void createButtons() 
+{
+  for (GButton btn : buttons) {
+    if (btn != null) {
+      btn.dispose();
+    }
   }
-  buttons.clear(); // Clear the button list to avoid lingering references
-
-  // Create recipe buttons for the current page
+  
+  buttons.clear();
+  
   int startIndex = currentPage * buttonsPerPage;
   int endIndex = min(startIndex + buttonsPerPage, recipes.size());
   float buttonWidth = 300;
@@ -39,46 +53,39 @@ void createButtons() {
   float buttonSpacing = 10;
   float buttonStartX = 350;
   float buttonStartY = 50;
-
-  // Add buttons for current recipes
-  for (int i = startIndex; i < endIndex; i++) {
+  
+  for (int i = startIndex; i < endIndex; i++) 
+  {
     int buttonIndex = i - startIndex;
     float x = buttonStartX;
     float y = buttonStartY + buttonIndex * (buttonHeight + buttonSpacing);
-    GButton button = new GButton(this, x, y, buttonWidth, buttonHeight, recipes.get(i));
-    button.addEventHandler(this, "handleButtonEvents");
-    buttons.add(button);
+    GButton btn = new GButton(this, x, y, buttonWidth, buttonHeight, recipes.get(i));
+    btn.addEventHandler(this, "handleRecipesButton");
+    buttons.add(btn);
   }
-
-  // Add navigation buttons
-  float navButtonWidth = 100;
-  float navButtonHeight = 40;
-  float navButtonY = height - 100;
-
-  GButton prevButton = new GButton(this, width / 2 - navButtonWidth - 20, navButtonY, navButtonWidth, navButtonHeight, "Previous");
-  prevButton.addEventHandler(this, "handleButtonEvents");
-  prevButton.setEnabled(currentPage > 0);
-  buttons.add(prevButton);
-
-  GButton nextButton = new GButton(this, width / 2 + 20, navButtonY, navButtonWidth, navButtonHeight, "Next");
-  nextButton.addEventHandler(this, "handleButtonEvents");
-  nextButton.setEnabled(currentPage < totalPages - 1);
-  buttons.add(nextButton);
+  
 }
 
-
 public void handleButtonEvents(GButton button, GEvent event) {
-  if (button.getText().equals("Previous")) {
-    if (currentPage > 0) {
-      currentPage--;
-      createButtons();
-    }
-  } else if (button.getText().equals("Next")) {
+  if (button == nextButton && event == GEvent.CLICKED) {
     if (currentPage < totalPages - 1) {
       currentPage++;
       createButtons();
     }
-  } else {
-    println("Clicked on " + button.getText());
+  }
+  else if (button == prevButton && event == GEvent.CLICKED) {
+    if (currentPage > 0) {
+      currentPage--;
+      createButtons();
+    }
+  }
+}
+
+
+public void handleRecipesButton(GButton button, GEvent event)
+{
+  if (event == GEvent.CLICKED)
+  {
+    println(button.getText());
   }
 }
