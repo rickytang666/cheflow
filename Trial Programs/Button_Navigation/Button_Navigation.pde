@@ -1,11 +1,14 @@
 import g4p_controls.*;
 
 ArrayList<String> recipes;
-int currentPage = 0;
+int[] currentPages = {0, 0, 0}; 
 int buttonsPerPage = 9;
 int totalPages;
 ArrayList<GButton> buttons = new ArrayList<>();
+int layer = 0;
 GButton prevButton, nextButton;
+GLabel txt;
+GButton back;
 
 void setup() {
   size(1000, 700);
@@ -46,36 +49,50 @@ void createButtons()
   
   buttons.clear();
   
-  int startIndex = currentPage * buttonsPerPage;
-  int endIndex = min(startIndex + buttonsPerPage, recipes.size());
-  float buttonWidth = 300;
-  float buttonHeight = 50;
-  float buttonSpacing = 10;
-  float buttonStartX = 350;
-  float buttonStartY = 50;
   
-  for (int i = startIndex; i < endIndex; i++) 
+  if (layer == 0)
   {
-    int buttonIndex = i - startIndex;
-    float x = buttonStartX;
-    float y = buttonStartY + buttonIndex * (buttonHeight + buttonSpacing);
-    GButton btn = new GButton(this, x, y, buttonWidth, buttonHeight, recipes.get(i));
-    btn.addEventHandler(this, "handleRecipesButton");
-    buttons.add(btn);
+    int startIndex = currentPages[0] * buttonsPerPage;
+    int endIndex = min(startIndex + buttonsPerPage, recipes.size());
+    float buttonWidth = 300;
+    float buttonHeight = 50;
+    float buttonSpacing = 10;
+    float buttonStartX = 350;
+    float buttonStartY = 50;
+    
+    for (int i = startIndex; i < endIndex; i++) 
+    {
+      int buttonIndex = i - startIndex;
+      float x = buttonStartX;
+      float y = buttonStartY + buttonIndex * (buttonHeight + buttonSpacing);
+      GButton btn = new GButton(this, x, y, buttonWidth, buttonHeight, recipes.get(i));
+      btn.addEventHandler(this, "handleRecipesButton");
+      buttons.add(btn);
+    }
   }
+  else
+  {
+    txt = new GLabel(this, 100, 100, 200, 100, "Hahahaha");
+    txt.setVisible(true);
+    
+    back = new GButton(this, 300, 300, 200, 100, "back");
+    back.addEventHandler(this, "back_btn");
+  }
+  
+  
   
 }
 
 public void handleButtonEvents(GButton button, GEvent event) {
   if (button == nextButton && event == GEvent.CLICKED) {
-    if (currentPage < totalPages - 1) {
-      currentPage++;
+    if (currentPages[0] < totalPages - 1) {
+      currentPages[0]++;
       createButtons();
     }
   }
   else if (button == prevButton && event == GEvent.CLICKED) {
-    if (currentPage > 0) {
-      currentPage--;
+    if (currentPages[0] > 0) {
+      currentPages[0]--;
       createButtons();
     }
   }
@@ -87,5 +104,19 @@ public void handleRecipesButton(GButton button, GEvent event)
   if (event == GEvent.CLICKED)
   {
     println(button.getText());
+    layer++;
+    createButtons();
+  }
+}
+
+public void back_btn(GButton button, GEvent event)
+{
+  if (event == GEvent.CLICKED)
+  {
+    back.dispose();
+    txt.dispose();
+    layer--;
+    
+    createButtons();
   }
 }
