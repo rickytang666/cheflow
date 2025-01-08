@@ -1,14 +1,14 @@
 
 class Ingredient
 {
-    /* Fields */
+  /* Fields */
 
-    String name;
+  String name;
 
-    /* Constructor */
+  /* Constructor */
 
-    Ingredient(String n)
-    {
-        this.name = n;
-    }
+  Ingredient(String n)
+  {
+      this.name = n;
+  }
 }
