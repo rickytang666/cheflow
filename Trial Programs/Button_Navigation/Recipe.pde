@@ -10,7 +10,7 @@ class Recipe
     this.name = n;
     this.ingredients = new ArrayList<Ingredient>();
     
-    for (int i = 0; i < 50; ++i)
+    for (int i = 1; i < 51; ++i)
     {
       Ingredient ing = new Ingredient("Ingredient " + str(i));
       this.ingredients.add(ing);
