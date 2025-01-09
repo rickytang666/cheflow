@@ -1,9 +1,9 @@
 import g4p_controls.*;
 
-ArrayList<String> recipes;
+ArrayList<String> recipes = new ArrayList<>();
 int[] currentPages = {0, 0, 0}; 
 int buttonsPerPage = 9;
-int totalPages;
+int[] totalPages = {0, 0, 0};
 ArrayList<GButton> buttons = new ArrayList<>();
 int layer = 0;
 GButton prevButton, nextButton;
@@ -12,14 +12,12 @@ GButton back;
 
 void setup() {
   size(1000, 700);
-  recipes = new ArrayList<>();
-
-  // Generate 50 test recipes
+  
   for (int i = 1; i <= 50; i++) {
     recipes.add("Recipe " + i);
   }
 
-  totalPages = (int) ceil((float) recipes.size() / buttonsPerPage);
+  totalPages[0] = (int) ceil((float) recipes.size() / buttonsPerPage);
   
   float navButtonWidth = 100;
   float navButtonHeight = 40;
@@ -84,8 +82,12 @@ void createButtons()
 }
 
 public void handleButtonEvents(GButton button, GEvent event) {
+  
+  if (layer > 0)
+    return;
+  
   if (button == nextButton && event == GEvent.CLICKED) {
-    if (currentPages[0] < totalPages - 1) {
+    if (currentPages[0] < totalPages[0] - 1) {
       currentPages[0]++;
       createButtons();
     }
