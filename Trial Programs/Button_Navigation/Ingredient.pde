@@ -4,6 +4,7 @@ class Ingredient
   String name;
   String content;
   GButton button;
+  GLabel label;
   
   Ingredient(String n)
   {
@@ -17,5 +18,6 @@ class Ingredient
     }
     
     this.button = null;
+    this.label = null;
   }
 }

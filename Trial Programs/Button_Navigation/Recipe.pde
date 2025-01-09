@@ -2,12 +2,15 @@
 class Recipe
 {
   String name;
+  int id;
   ArrayList<Ingredient> ingredients;
   GButton button;
   
   Recipe(String n)
   {
     this.name = n;
+    this.id = ingredientID;
+    ++ingredientID;
     this.ingredients = new ArrayList<Ingredient>();
     
     for (int i = 1; i < 51; ++i)

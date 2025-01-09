@@ -1,5 +1,7 @@
 import g4p_controls.*;
 
+int recipeID = 1;
+int ingredientID = 1;
 ArrayList<Recipe> recipes = new ArrayList<Recipe>();
 int[] currentPages = {0, 0, 0}; 
 int buttonsPerPage = 9;
@@ -15,8 +17,10 @@ float buttonSpacing = 10;
 float buttonStartX = 350;
 float buttonStartY = 50;
 Recipe currentR;
+Ingredient currentIngredient;
 
-void setup() {
+void setup() 
+{
   size(1000, 700);
   
   for (int i = 1; i <= 50; i++) {
@@ -37,7 +41,10 @@ void setup() {
   nextButton = new GButton(this, width / 2 + 20, navButtonY, navButtonWidth, navButtonHeight, "Next");
   nextButton.addEventHandler(this, "handleButtonEvents");
   
-  createButtons();
+  back = new GButton(this, 100, 100, 70, 50, "back");
+  back.addEventHandler(this, "handleButtonEvents");
+  
+  set_recipes_page();
 }
 
 void draw()
@@ -45,10 +52,12 @@ void draw()
   background(220);
 }
 
-void createButtons() 
+void set_recipes_page() 
 {
-  for (Recipe r : recipes) {
-    if (r.button != null) {
+  for (Recipe r : recipes) 
+  {
+    if (r.button != null) 
+    {
       r.button.dispose();
     }
   }
@@ -64,15 +73,22 @@ void createButtons()
     }
   }
 
+  if (currentIngredient != null)
+  {
+    if (currentIngredient.label != null)
+    {
+      currentIngredient.label.dispose();
+    }
+  }
+
+
+  back.setEnabled(layer > 0);
+  prevButton.setEnabled(layer < 2 && currentPages[layer] > 0);
+  nextButton.setEnabled(layer < 2 && currentPages[layer] < totalPages[layer] - 1);
+
   
   if (layer == 0)
   {
-    
-    for (Recipe r : recipes) {
-      if (r.button != null) {
-        r.button.dispose();
-      }
-    }
     
     int startIndex = currentPages[0] * buttonsPerPage;
     int endIndex = min(startIndex + buttonsPerPage, recipes.size());
@@ -85,13 +101,12 @@ void createButtons()
       float x = buttonStartX;
       float y = buttonStartY + buttonIndex * (buttonHeight + buttonSpacing);
       r.button = new GButton(this, x, y, buttonWidth, buttonHeight, r.name);
-      r.button.addEventHandler(this, "handleRecipesButton");
+      r.button.addEventHandler(this, "recipe_button_handler");
     }
   }
   else if (layer == 1)
   {
-    
-    
+        
     int startIndex = currentPages[1] * buttonsPerPage;
     int endIndex = min(startIndex + buttonsPerPage, currentR.ingredients.size());
     
@@ -102,65 +117,84 @@ void createButtons()
       float x = buttonStartX;
       float y = buttonStartY + buttonIndex * (buttonHeight + buttonSpacing);
       ing.button = new GButton(this, x, y, buttonWidth, buttonHeight, ing.name);
-      ing.button.setEnabled(false);
+      ing.button.addEventHandler(this, "ingredient_button_handler"); // Add event handler
+      ing.button.setEnabled(true); // Enable the button
     }
     
-    txt = new GLabel(this, 300, 300, 200, 100, "Hahahaha");
-    txt.setVisible(false);
-    
-    back = new GButton(this, 100, 100, 70, 50, "back");
-    back.addEventHandler(this, "back_btn");
   }
-  
+  else if (layer == 2)
+  {
+    currentIngredient.label = new GLabel(this, 100, 100, 800, 500, currentIngredient.content);
+  }
   
   
 }
 
-public void handleButtonEvents(GButton button, GEvent event) {
+public void handleButtonEvents(GButton button, GEvent event) 
+{
   
-  if (button == nextButton && event == GEvent.CLICKED) {
-    if (currentPages[layer] < totalPages[layer] - 1) {
+  if (button == nextButton && event == GEvent.CLICKED) 
+  {
+    if (currentPages[layer] < totalPages[layer] - 1) 
+    {
       currentPages[layer]++;
-      createButtons();
+      set_recipes_page();
     }
   }
-  else if (button == prevButton && event == GEvent.CLICKED) {
-    if (currentPages[layer] > 0) {
+  else if (button == prevButton && event == GEvent.CLICKED) 
+  {
+    if (currentPages[layer] > 0) 
+    {
       currentPages[layer]--;
-      createButtons();
+      set_recipes_page();
     }
+  }
+  else if (button == back && event == GEvent.CLICKED)
+  {
+    currentPages[layer] = 0;
+    totalPages[layer] = 0;
+    layer--;
+    
+    set_recipes_page();
   }
 }
 
 
-public void handleRecipesButton(GButton button, GEvent event) {
-  if (event == GEvent.CLICKED) {
-    for (int i = 0; i < recipes.size(); i++) {
+public void recipe_button_handler(GButton button, GEvent event) 
+{
+  if (event == GEvent.CLICKED) 
+  {
+    for (int i = 0; i < recipes.size(); i++) 
+    {
       Recipe r = recipes.get(i);
-      if (r.button == button) {
+      if (r.name.equals(button.getText())) 
+      {
         println(button.getText());
-        int index = i;
-        println(index);
         currentR = r;
         layer = 1;
         totalPages[layer] = (int) ceil((float) r.ingredients.size() / buttonsPerPage);
-        createButtons();
+        set_recipes_page();
         break;
       }
     }
   }
 }
 
-public void back_btn(GButton button, GEvent event)
+
+public void ingredient_button_handler(GButton button, GEvent event)
 {
   if (event == GEvent.CLICKED)
   {
-    back.dispose();
-    txt.dispose();
-    currentPages[layer] = 0;
-    totalPages[layer] = 0;
-    layer--;
-    
-    createButtons();
+    for (int i = 0; i < currentR.ingredients.size(); i++)
+    {
+      Ingredient ing = currentR.ingredients.get(i);
+      if (ing.name.equals(button.getText()))
+      {
+        currentIngredient = ing;
+        layer = 2;
+        set_recipes_page();
+        break;
+      }
+    }
   }
 }
