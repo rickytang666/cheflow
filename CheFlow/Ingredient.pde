@@ -4,6 +4,7 @@ class Ingredient
   String name;
   String content;
   GButton button;
+  GButton del_button;
   GLabel label;
   GTextField renamer;
   
@@ -19,6 +20,7 @@ class Ingredient
     }
     
     this.button = null;
+    this.del_button = null;
     this.label = null;
     this.renamer = null;
   }

@@ -14,6 +14,11 @@ void set_recipes_page()
     {
       r.button.dispose();
     }
+    
+    if (r.del_button != null)
+    {
+      r.del_button.dispose();
+    }
   }
   
   if (currentR != null)
@@ -28,6 +33,11 @@ void set_recipes_page()
       if (i.button != null)
       {
          i.button.dispose();
+      }
+
+      if (i.del_button != null)
+      {
+        i.del_button.dispose();
       }
     }
   }
@@ -64,6 +74,8 @@ void set_recipes_page()
       float y = buttonStartY + buttonIndex * (buttonHeight + buttonSpacing);
       r.button = new GButton(this, x, y, buttonWidth, buttonHeight, r.name);
       r.button.addEventHandler(this, "recipe_button_handler");
+      r.del_button = new GButton(this, x + buttonWidth + 10, y, 50, buttonHeight, "Delete");
+      r.del_button.addEventHandler(this, "recipe_del_button_handler");
     }
   }
   else if (layer == 1)
@@ -115,6 +127,27 @@ public void recipe_button_handler(GButton button, GEvent event)
         currentR = r;
         layer = 1;
         totalPages[layer] = (int) ceil((float) r.ingredients.size() / buttonsPerPage);
+        set_recipes_page();
+        break;
+      }
+    }
+  }
+}
+
+
+void recipe_del_button_handler(GButton button, GEvent event)
+{
+  if (event == GEvent.CLICKED)
+  {
+    for (int i = 0; i < recipes.size(); i++)
+    {
+      Recipe r = recipes.get(i);
+      if (r.del_button == button)
+      {
+        println("Deleting " + r.name);
+        r.delete();
+        totalPages[0] = (int) ceil((float) recipes.size() / buttonsPerPage);
+        currentPages[0] = constrain(currentPages[0], 0, totalPages[0] - 1);
         set_recipes_page();
         break;
       }

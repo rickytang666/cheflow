@@ -1,11 +1,16 @@
 
 class Recipe
 {
+  /* FIELDS */
+
   String name;
   int id;
   ArrayList<Ingredient> ingredients;
   GButton button;
+  GButton del_button;
   GTextField renamer;
+
+  /* CONSTRUCTORS */
   
   Recipe(String n)
   {
@@ -21,6 +26,28 @@ class Recipe
     }
     
     this.button = null;
+    this.del_button = null;
     this.renamer = null;
+  }
+
+  /* METHODS */
+
+  void delete()
+  {
+    recipes.remove(this);
+    if (this.button != null)
+    {
+      this.button.dispose();
+    }
+
+    if (this.del_button != null)
+    {
+      this.del_button.dispose();
+    }
+
+    if (this.renamer != null)
+    {
+      this.renamer.dispose();
+    }
   }
 }
