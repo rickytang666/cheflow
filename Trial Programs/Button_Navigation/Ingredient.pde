@@ -5,6 +5,7 @@ class Ingredient
   String content;
   GButton button;
   GLabel label;
+  GTextField renamer;
   
   Ingredient(String n)
   {
@@ -19,5 +20,6 @@ class Ingredient
     
     this.button = null;
     this.label = null;
+    this.renamer = null;
   }
 }

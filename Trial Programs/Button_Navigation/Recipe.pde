@@ -5,6 +5,7 @@ class Recipe
   int id;
   ArrayList<Ingredient> ingredients;
   GButton button;
+  GTextField renamer;
   
   Recipe(String n)
   {
@@ -20,5 +21,6 @@ class Recipe
     }
     
     this.button = null;
+    this.renamer = null;
   }
 }

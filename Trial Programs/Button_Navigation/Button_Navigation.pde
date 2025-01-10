@@ -12,10 +12,10 @@ GButton prevButton, nextButton;
 GLabel txt;
 GButton back;
 float buttonWidth = 300;
-float buttonHeight = 50;
+float buttonHeight = 40;
 float buttonSpacing = 10;
 float buttonStartX = 350;
-float buttonStartY = 50;
+float buttonStartY = 100;
 Recipe currentR;
 Ingredient currentIngredient;
 
@@ -64,6 +64,11 @@ void set_recipes_page()
   
   if (currentR != null)
   {
+    if (currentR.renamer != null)
+    {
+      currentR.renamer.dispose();
+    }
+    
     for (Ingredient i : currentR.ingredients)
     {
       if (i.button != null)
@@ -75,6 +80,11 @@ void set_recipes_page()
 
   if (currentIngredient != null)
   {
+    if (currentIngredient.renamer != null)
+    {
+      currentIngredient.renamer.dispose();
+    }
+    
     if (currentIngredient.label != null)
     {
       currentIngredient.label.dispose();
@@ -110,6 +120,10 @@ void set_recipes_page()
     int startIndex = currentPages[1] * buttonsPerPage;
     int endIndex = min(startIndex + buttonsPerPage, currentR.ingredients.size());
     
+    currentR.renamer = new GTextField(this, 350, 20, 200, 50, G4P.SCROLLBARS_HORIZONTAL_ONLY);
+    currentR.renamer.setText(currentR.name);
+    currentR.renamer.addEventHandler(this, "recipe_renamer_handler");  
+    
     for (int i = startIndex; i < endIndex; i++) 
     {
       Ingredient ing = currentR.ingredients.get(i);
@@ -124,7 +138,11 @@ void set_recipes_page()
   }
   else if (layer == 2)
   {
-    currentIngredient.label = new GLabel(this, 100, 100, 800, 500, currentIngredient.content);
+    currentIngredient.label = new GLabel(this, 200, 100, 800, 500, currentIngredient.content);
+    currentIngredient.renamer = new GTextField(this, 350, 20, 200, 50, G4P.SCROLLBARS_HORIZONTAL_ONLY);
+    currentIngredient.renamer.setText(currentIngredient.name);
+    currentIngredient.renamer.addEventHandler(this, "ingredient_renamer_handler");  
+    
   }
   
   
@@ -181,6 +199,15 @@ public void recipe_button_handler(GButton button, GEvent event)
 }
 
 
+public void recipe_renamer_handler(GTextField source, GEvent event)
+{
+  if (event == GEvent.CHANGED && currentR != null)
+  {
+    currentR.name = source.getText();
+  }
+}
+
+
 public void ingredient_button_handler(GButton button, GEvent event)
 {
   if (event == GEvent.CLICKED)
@@ -196,5 +223,14 @@ public void ingredient_button_handler(GButton button, GEvent event)
         break;
       }
     }
+  }
+}
+
+
+public void ingredient_renamer_handler(GTextField source, GEvent event)
+{
+  if (event == GEvent.CHANGED && currentIngredient != null)
+  {
+    currentIngredient.name = source.getText();
   }
 }
