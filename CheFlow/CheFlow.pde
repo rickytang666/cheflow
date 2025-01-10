@@ -16,12 +16,13 @@ import g4p_controls.*;
 
 final color accent_col = #6be76b;
 ArrayList<Recipe> recipes = new ArrayList<Recipe>();
+ArrayList<Ingredient> library_ingredients = new ArrayList<Ingredient>();
 final float buttonWidth = 300;
 final float buttonHeight = 40;
 final float buttonSpacing = 10;
 final float buttonStartX = 350;
 final float buttonStartY = 100;
-int recipeID = 1;
+int recipe_id = 1, ingredient_id = 1;
 Recipe currentR;
 Ingredient currentIngredient;
 

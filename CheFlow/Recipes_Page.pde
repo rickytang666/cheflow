@@ -10,49 +10,21 @@ void set_recipes_page()
 
   for (Recipe r : recipes) 
   {
-    if (r.button != null) 
-    {
-      r.button.dispose();
-    }
-    
-    if (r.del_button != null)
-    {
-      r.del_button.dispose();
-    }
+    r.dispose_controls();
   }
   
   if (currentR != null)
   {
-    if (currentR.renamer != null)
-    {
-      currentR.renamer.dispose();
-    }
-    
+
     for (Ingredient i : currentR.ingredients)
     {
-      if (i.button != null)
-      {
-         i.button.dispose();
-      }
-
-      if (i.del_button != null)
-      {
-        i.del_button.dispose();
-      }
+      i.dispose_controls();
     }
   }
 
   if (currentIngredient != null)
   {
-    if (currentIngredient.renamer != null)
-    {
-      currentIngredient.renamer.dispose();
-    }
-    
-    if (currentIngredient.label != null)
-    {
-      currentIngredient.label.dispose();
-    }
+    currentIngredient.dispose_controls();
   }
 
 
@@ -94,9 +66,13 @@ void set_recipes_page()
       int buttonIndex = i - startIndex;
       float x = buttonStartX;
       float y = buttonStartY + buttonIndex * (buttonHeight + buttonSpacing);
+
       ing.button = new GButton(this, x, y, buttonWidth, buttonHeight, ing.name);
       ing.button.addEventHandler(this, "ingredient_button_handler"); // Add event handler
       ing.button.setEnabled(true); // Enable the button
+
+      ing.del_button = new GButton(this, x + buttonWidth + 10, y, 50, buttonHeight, "Delete");
+      ing.del_button.addEventHandler(this, "ingredient_del_button_handler");
     }
     
   }
@@ -123,7 +99,7 @@ public void recipe_button_handler(GButton button, GEvent event)
       Recipe r = recipes.get(i);
       if (r.name.equals(button.getText())) 
       {
-        println(button.getText());
+        // println(button.getText());
         currentR = r;
         layer = 1;
         totalPages[layer] = (int) ceil((float) r.ingredients.size() / buttonsPerPage);
@@ -184,10 +160,31 @@ public void ingredient_button_handler(GButton button, GEvent event)
 }
 
 
+public void ingredient_del_button_handler(GButton button, GEvent event)
+{
+  if (event == GEvent.CLICKED)
+  {
+    for (int i = 0; i < currentR.ingredients.size(); i++)
+    {
+      Ingredient ing = currentR.ingredients.get(i);
+      if (ing.del_button == button)
+      {
+        println("Deleting " + ing.name);
+        currentR.delete_ingredient(i);
+        totalPages[1] = (int) ceil((float) currentR.ingredients.size() / buttonsPerPage);
+        currentPages[1] = constrain(currentPages[1], 0, totalPages[1] - 1);
+        set_recipes_page();
+        break;
+      }
+    }
+  }
+}
+
+
 public void ingredient_renamer_handler(GTextField source, GEvent event)
 {
   if (event == GEvent.CHANGED && currentIngredient != null)
   {
-    currentIngredient.name = source.getText();
+    currentIngredient.set_name(source.getText());
   }
 }

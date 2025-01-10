@@ -3,8 +3,8 @@ class Recipe
 {
   /* FIELDS */
 
+  final int id;
   String name;
-  int id;
   ArrayList<Ingredient> ingredients;
   GButton button;
   GButton del_button;
@@ -14,15 +14,17 @@ class Recipe
   
   Recipe(String n)
   {
+    this.id = recipe_id;
+    ++recipe_id;
+    
     this.name = n;
-    this.id = recipeID;
-    ++recipeID;
+    
     this.ingredients = new ArrayList<Ingredient>();
     
     for (int i = 1; i < 51; ++i)
     {
-      Ingredient ing = new Ingredient("Ingredient " + str(i));
-      this.ingredients.add(ing);
+      Ingredient ing = new Ingredient("Ingredient " + str(ingredient_id));
+      this.add_ingredient(ing);
     }
     
     this.button = null;
@@ -32,9 +34,32 @@ class Recipe
 
   /* METHODS */
 
-  void delete()
+  void add_ingredient(Ingredient ing)
   {
-    recipes.remove(this);
+    library_ingredients.add(ing);
+    this.ingredients.add(ing);
+    ing.related_recipes.add(this);
+    ing.set_contents();
+  }
+
+  void delete_ingredient(int index)
+  {
+    if (index < 0 || index >= this.ingredients.size())
+    {
+      return;
+    }
+    else
+    {
+      Ingredient ing = this.ingredients.get(index);
+      ing.related_recipes.remove(this);
+      ing.set_contents();
+      ing.dispose_controls();
+      this.ingredients.remove(index);
+    }
+  }
+
+  void dispose_controls()
+  {
     if (this.button != null)
     {
       this.button.dispose();
@@ -49,5 +74,18 @@ class Recipe
     {
       this.renamer.dispose();
     }
+  }
+
+  void delete()
+  {
+    recipes.remove(this);
+
+    for (Ingredient ing : this.ingredients)
+    {
+      ing.related_recipes.remove(this);
+      ing.set_contents();
+    }
+    
+    dispose_controls();
   }
 }
