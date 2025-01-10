@@ -1,0 +1,506 @@
+[
+    {
+        "name": "spaghetti bolognese",
+        "id": 1,
+        "ingredients": [
+            {
+                "name": "spaghetti",
+                "id": 1001
+            },
+            {
+                "name": "ground beef",
+                "id": 1002
+            },
+            {
+                "name": "tomato sauce",
+                "id": 1003
+            },
+            {
+                "name": "onion",
+                "id": 1004
+            },
+            {
+                "name": "garlic",
+                "id": 1005
+            }
+        ]
+    },
+    {
+        "name": "pancakes",
+        "id": 2,
+        "ingredients": [
+            {
+                "name": "flour",
+                "id": 1006
+            },
+            {
+                "name": "milk",
+                "id": 1007
+            },
+            {
+                "name": "egg",
+                "id": 1008
+            },
+            {
+                "name": "butter",
+                "id": 1009
+            },
+            {
+                "name": "sugar",
+                "id": 1010
+            }
+        ]
+    },
+    {
+        "name": "caesar salad",
+        "id": 3,
+        "ingredients": [
+            {
+                "name": "romaine lettuce",
+                "id": 1011
+            },
+            {
+                "name": "croutons",
+                "id": 1012
+            },
+            {
+                "name": "parmesan cheese",
+                "id": 1013
+            },
+            {
+                "name": "caesar dressing",
+                "id": 1014
+            }
+        ]
+    },
+    {
+        "name": "chicken curry",
+        "id": 4,
+        "ingredients": [
+            {
+                "name": "chicken",
+                "id": 1015
+            },
+            {
+                "name": "curry powder",
+                "id": 1016
+            },
+            {
+                "name": "coconut milk",
+                "id": 1017
+            },
+            {
+                "name": "onion",
+                "id": 1018
+            },
+            {
+                "name": "garlic",
+                "id": 1019
+            }
+        ]
+    },
+    {
+        "name": "beef stew",
+        "id": 5,
+        "ingredients": [
+            {
+                "name": "beef",
+                "id": 1020
+            },
+            {
+                "name": "potatoes",
+                "id": 1021
+            },
+            {
+                "name": "carrots",
+                "id": 1022
+            },
+            {
+                "name": "onion",
+                "id": 1023
+            },
+            {
+                "name": "celery",
+                "id": 1024
+            }
+        ]
+    },
+    {
+        "name": "vegetable stir-fry",
+        "id": 6,
+        "ingredients": [
+            {
+                "name": "broccoli",
+                "id": 1025
+            },
+            {
+                "name": "carrot",
+                "id": 1026
+            },
+            {
+                "name": "bell pepper",
+                "id": 1027
+            },
+            {
+                "name": "soy sauce",
+                "id": 1028
+            },
+            {
+                "name": "ginger",
+                "id": 1029
+            }
+        ]
+    },
+    {
+        "name": "lasagna",
+        "id": 7,
+        "ingredients": [
+            {
+                "name": "lasagna noodles",
+                "id": 1030
+            },
+            {
+                "name": "ricotta cheese",
+                "id": 1031
+            },
+            {
+                "name": "ground beef",
+                "id": 1032
+            },
+            {
+                "name": "tomato sauce",
+                "id": 1033
+            },
+            {
+                "name": "mozzarella",
+                "id": 1034
+            }
+        ]
+    },
+    {
+        "name": "chocolate cake",
+        "id": 8,
+        "ingredients": [
+            {
+                "name": "flour",
+                "id": 1035
+            },
+            {
+                "name": "sugar",
+                "id": 1036
+            },
+            {
+                "name": "cocoa powder",
+                "id": 1037
+            },
+            {
+                "name": "eggs",
+                "id": 1038
+            },
+            {
+                "name": "butter",
+                "id": 1039
+            }
+        ]
+    },
+    {
+        "name": "apple pie",
+        "id": 9,
+        "ingredients": [
+            {
+                "name": "apples",
+                "id": 1040
+            },
+            {
+                "name": "sugar",
+                "id": 1041
+            },
+            {
+                "name": "cinnamon",
+                "id": 1042
+            },
+            {
+                "name": "flour",
+                "id": 1043
+            },
+            {
+                "name": "butter",
+                "id": 1044
+            }
+        ]
+    },
+    {
+        "name": "grilled cheese",
+        "id": 10,
+        "ingredients": [
+            {
+                "name": "bread",
+                "id": 1045
+            },
+            {
+                "name": "cheddar cheese",
+                "id": 1046
+            },
+            {
+                "name": "butter",
+                "id": 1047
+            }
+        ]
+    },
+    {
+        "name": "omelette",
+        "id": 11,
+        "ingredients": [
+            {
+                "name": "eggs",
+                "id": 1048
+            },
+            {
+                "name": "milk",
+                "id": 1049
+            },
+            {
+                "name": "cheese",
+                "id": 1050
+            },
+            {
+                "name": "bell pepper",
+                "id": 1051
+            },
+            {
+                "name": "onion",
+                "id": 1052
+            }
+        ]
+    },
+    {
+        "name": "fish tacos",
+        "id": 12,
+        "ingredients": [
+            {
+                "name": "fish fillet",
+                "id": 1053
+            },
+            {
+                "name": "tortilla",
+                "id": 1054
+            },
+            {
+                "name": "cabbage",
+                "id": 1055
+            },
+            {
+                "name": "lime",
+                "id": 1056
+            },
+            {
+                "name": "sour cream",
+                "id": 1057
+            }
+        ]
+    },
+    {
+        "name": "fried rice",
+        "id": 13,
+        "ingredients": [
+            {
+                "name": "rice",
+                "id": 1058
+            },
+            {
+                "name": "egg",
+                "id": 1059
+            },
+            {
+                "name": "soy sauce",
+                "id": 1060
+            },
+            {
+                "name": "peas",
+                "id": 1061
+            },
+            {
+                "name": "carrot",
+                "id": 1062
+            }
+        ]
+    },
+    {
+        "name": "tuna salad",
+        "id": 14,
+        "ingredients": [
+            {
+                "name": "canned tuna",
+                "id": 1063
+            },
+            {
+                "name": "mayonnaise",
+                "id": 1064
+            },
+            {
+                "name": "celery",
+                "id": 1065
+            },
+            {
+                "name": "onion",
+                "id": 1066
+            },
+            {
+                "name": "lettuce",
+                "id": 1067
+            }
+        ]
+    },
+    {
+        "name": "pizza margherita",
+        "id": 15,
+        "ingredients": [
+            {
+                "name": "pizza dough",
+                "id": 1068
+            },
+            {
+                "name": "tomato sauce",
+                "id": 1069
+            },
+            {
+                "name": "mozzarella",
+                "id": 1070
+            },
+            {
+                "name": "basil",
+                "id": 1071
+            },
+            {
+                "name": "olive oil",
+                "id": 1072
+            }
+        ]
+    },
+    {
+        "name": "french toast",
+        "id": 16,
+        "ingredients": [
+            {
+                "name": "bread",
+                "id": 1073
+            },
+            {
+                "name": "egg",
+                "id": 1074
+            },
+            {
+                "name": "milk",
+                "id": 1075
+            },
+            {
+                "name": "cinnamon",
+                "id": 1076
+            },
+            {
+                "name": "butter",
+                "id": 1077
+            }
+        ]
+    },
+    {
+        "name": "banana smoothie",
+        "id": 17,
+        "ingredients": [
+            {
+                "name": "banana",
+                "id": 1078
+            },
+            {
+                "name": "milk",
+                "id": 1079
+            },
+            {
+                "name": "yogurt",
+                "id": 1080
+            },
+            {
+                "name": "honey",
+                "id": 1081
+            }
+        ]
+    },
+    {
+        "name": "chili con carne",
+        "id": 18,
+        "ingredients": [
+            {
+                "name": "ground beef",
+                "id": 1082
+            },
+            {
+                "name": "beans",
+                "id": 1083
+            },
+            {
+                "name": "tomato sauce",
+                "id": 1084
+            },
+            {
+                "name": "chili powder",
+                "id": 1085
+            },
+            {
+                "name": "onion",
+                "id": 1086
+            }
+        ]
+    },
+    {
+        "name": "hamburger",
+        "id": 19,
+        "ingredients": [
+            {
+                "name": "burger patty",
+                "id": 1087
+            },
+            {
+                "name": "burger bun",
+                "id": 1088
+            },
+            {
+                "name": "lettuce",
+                "id": 1089
+            },
+            {
+                "name": "tomato",
+                "id": 1090
+            },
+            {
+                "name": "cheese",
+                "id": 1091
+            }
+        ]
+    },
+    {
+        "name": "mac and cheese",
+        "id": 20,
+        "ingredients": [
+            {
+                "name": "pasta",
+                "id": 1092
+            },
+            {
+                "name": "cheddar cheese",
+                "id": 1093
+            },
+            {
+                "name": "milk",
+                "id": 1094
+            },
+            {
+                "name": "butter",
+                "id": 1095
+            },
+            {
+                "name": "flour",
+                "id": 1096
+            }
+        ]
+    }
+]

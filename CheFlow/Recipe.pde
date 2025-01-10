@@ -21,12 +21,6 @@ class Recipe
     
     this.ingredients = new ArrayList<Ingredient>();
     
-    for (int i = 1; i < 51; ++i)
-    {
-      Ingredient ing = new Ingredient("Ingredient " + str(ingredient_id));
-      this.add_ingredient(ing);
-    }
-    
     this.button = null;
     this.del_button = null;
     this.renamer = null;

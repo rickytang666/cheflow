@@ -132,11 +132,14 @@ void recipe_del_button_handler(GButton button, GEvent event)
 }
 
 
-public void recipe_renamer_handler(GTextField source, GEvent event)
+public void recipe_renamer_handler(GTextField textControl, GEvent event)
 {
   if (event == GEvent.CHANGED && currentR != null)
   {
-    currentR.name = source.getText();
+    if (!name_is_repeated(textControl.getText(), 0))
+    {
+      currentR.name = textControl.getText();
+    }
   }
 }
 
@@ -185,6 +188,10 @@ public void ingredient_renamer_handler(GTextField source, GEvent event)
 {
   if (event == GEvent.CHANGED && currentIngredient != null)
   {
-    currentIngredient.set_name(source.getText());
+    if (!name_is_repeated(source.getText(), 1))
+    {
+      currentIngredient.set_name(source.getText());
+    }  
+    
   }
 }
