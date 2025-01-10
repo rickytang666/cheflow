@@ -1,14 +1,25 @@
 
 class Ingredient
 {
-  /* Fields */
-
   String name;
-
-  /* Constructor */
-
+  String content;
+  GButton button;
+  GLabel label;
+  GTextField renamer;
+  
   Ingredient(String n)
   {
     this.name = n;
+    
+    this.content = "";
+    
+    for (int i = 0; i < 30; ++i)
+    {
+      this.content += "Hello World! This is a placeholder\n";
+    }
+    
+    this.button = null;
+    this.label = null;
+    this.renamer = null;
   }
 }
