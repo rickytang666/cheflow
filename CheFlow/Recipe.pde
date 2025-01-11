@@ -30,7 +30,19 @@ class Recipe
 
   void add_ingredient(Ingredient ing)
   {
-    library_ingredients.add(ing);
+
+    if (!ingredient_map.containsKey(ing.name))
+    {
+      println("No duplicates");
+      ingredient_map.put(ing.name, ing);
+      library_ingredients.add(ing);
+    }
+    else
+    {
+      println("Duplicate ingredient: " + ing.name);
+      ing = ingredient_map.get(ing.name);
+    }
+
     this.ingredients.add(ing);
     ing.related_recipes.add(this);
     ing.set_contents();

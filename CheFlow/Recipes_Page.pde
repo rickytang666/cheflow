@@ -78,7 +78,7 @@ void set_recipes_page()
   }
   else if (layer == 2)
   {
-    currentIngredient.label = new GLabel(this, 200, 100, 800, 500, currentIngredient.content);
+    currentIngredient.label = new GLabel(this, 350, 100, 400, 500, currentIngredient.content);
     currentIngredient.renamer = new GTextField(this, 350, 20, 200, 50, G4P.SCROLLBARS_HORIZONTAL_ONLY);
     currentIngredient.renamer.setText(currentIngredient.name);
     currentIngredient.renamer.addEventHandler(this, "ingredient_renamer_handler");  

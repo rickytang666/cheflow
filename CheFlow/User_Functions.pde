@@ -1,5 +1,10 @@
 
+/* GLOBAL VARIABLES OR CONSTANTS */
+
 GButton export_button;
+HashMap<String, Ingredient> ingredient_map = new HashMap<String, Ingredient>();
+
+/* FUNCTIONS */
 
 void export_recipes()
 {
@@ -15,7 +20,6 @@ void export_recipes()
     for (Ingredient ing : r.ingredients)
     {
       JSONObject ingredient_obj = new JSONObject();
-      ingredient_obj.setInt("id", ing.id);
       ingredient_obj.setString("name", ing.name);
       ingredients_array.append(ingredient_obj);
     }
@@ -62,16 +66,44 @@ void import_recipes()
     {
       JSONObject ingredient_obj = ingredients_array.getJSONObject(j);
       Ingredient ing = new Ingredient(ingredient_obj.getString("name"));
+
+      
       r.add_ingredient(ing);
+      
     }
 
     recipes.add(r);
   }
 
+  sort_recipes(1);
   totalPages[0] = (int) ceil((float) recipes.size() / buttonsPerPage);
   set_recipes_page();
 }
 
+
+void sort_recipes(int option)
+{
+  /*
+  1: Sort by id (descending)
+  2: Sort by id (ascending)
+  3: Sort by name (alphabetical)
+  */
+
+  if (option == 1)
+  {
+    recipes.sort((a, b) -> b.id - a.id);
+  }
+  else if (option == 2)
+  {
+    recipes.sort((a, b) -> a.id - b.id);
+  }
+  else if (option == 3)
+  {
+    recipes.sort((a, b) -> a.name.compareTo(b.name));
+  }
+}
+
+/* EVENT HANDLERS */
 
 public void export_button_handler(GButton button, GEvent event)
 {

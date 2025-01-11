@@ -3,8 +3,7 @@ class Ingredient
 {
 
   /* FIELDS */
-
-  final int id;
+  
   String name;
   String content;
 
@@ -19,8 +18,6 @@ class Ingredient
   
   Ingredient(String n)
   {
-    this.id = ingredient_id;
-    ++ingredient_id;
 
     this.name = n.toLowerCase();
 
