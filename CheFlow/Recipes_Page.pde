@@ -91,7 +91,7 @@ class Recipes_Page extends Page
     prevButton.setEnabled(layer < 2 && currentPages[layer] > 0);
     nextButton.setEnabled(layer < 2 && currentPages[layer] < totalPages[layer] - 1);
     back.setEnabled(layer > 0);
-    add_button.setEnabled(layer < 2 && search_bar.getText().equals("") && !searching);
+    add_button.setEnabled(layer < 2 && (layer == 0 && !searching) || (layer == 1));
     search_button.setEnabled(layer == 0 && searching);
     search_toggle.setEnabled(layer == 0);
   }
