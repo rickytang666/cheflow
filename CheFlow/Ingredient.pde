@@ -7,8 +7,6 @@ class Ingredient
   String name;
   String content;
 
-  ArrayList<Recipe> related_recipes;
-
   GButton button;
   GButton del_button;
   GLabel label;
@@ -19,12 +17,8 @@ class Ingredient
   Ingredient(String n)
   {
 
-    this.name = n.toLowerCase();
-
-    this.related_recipes = new ArrayList<Recipe>();
-    
-    set_contents();    
-    
+    this.name = n.toLowerCase(); 
+    this.content = "";
     this.button = null;
     this.del_button = null;
     this.label = null;
@@ -40,11 +34,23 @@ class Ingredient
 
   void set_contents()
   {
-    this.content = "";
-    
-    for (int i = 0; i < related_recipes.size(); ++i)
+    this.content = "This ingredient is used in the following recipes:\n\n";
+
+    ArrayList<Recipe> related_recipes = get_related_recipes(this.name);
+
+    if (related_recipes.isEmpty())
     {
-      this.content += related_recipes.get(i).name + "\n";
+      this.content += "None\n";
+    }
+
+    for (Recipe r : related_recipes)
+    {
+      this.content += r.name + "\n";
+    }
+
+    if (this.label != null)
+    {
+      this.label.setText(this.content);
     }
   }
 

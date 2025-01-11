@@ -30,22 +30,8 @@ class Recipe
 
   void add_ingredient(Ingredient ing)
   {
-
-    if (!ingredient_map.containsKey(ing.name))
-    {
-      println("No duplicates");
-      ingredient_map.put(ing.name, ing);
-      library_ingredients.add(ing);
-    }
-    else
-    {
-      println("Duplicate ingredient: " + ing.name);
-      ing = ingredient_map.get(ing.name);
-    }
-
+    
     this.ingredients.add(ing);
-    ing.related_recipes.add(this);
-    ing.set_contents();
   }
 
   void delete_ingredient(int index)
@@ -57,8 +43,6 @@ class Recipe
     else
     {
       Ingredient ing = this.ingredients.get(index);
-      ing.related_recipes.remove(this);
-      ing.set_contents();
       ing.dispose_controls();
       this.ingredients.remove(index);
     }
@@ -85,12 +69,6 @@ class Recipe
   void delete()
   {
     recipes.remove(this);
-
-    for (Ingredient ing : this.ingredients)
-    {
-      ing.related_recipes.remove(this);
-      ing.set_contents();
-    }
     
     dispose_controls();
   }

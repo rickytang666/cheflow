@@ -52,7 +52,6 @@ void import_recipes()
   }
 
   recipes.clear();
-  library_ingredients.clear();
   ingredient_id = 1;
   recipe_id = 1;
 
@@ -66,16 +65,14 @@ void import_recipes()
     {
       JSONObject ingredient_obj = ingredients_array.getJSONObject(j);
       Ingredient ing = new Ingredient(ingredient_obj.getString("name"));
-
       
       r.add_ingredient(ing);
-      
     }
 
     recipes.add(r);
   }
 
-  sort_recipes(1);
+  sort_recipes(2);
   totalPages[0] = (int) ceil((float) recipes.size() / buttonsPerPage);
   set_recipes_page();
 }

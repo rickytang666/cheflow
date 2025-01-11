@@ -13,18 +13,18 @@ void set_recipes_page()
     r.dispose_controls();
   }
   
-  if (currentR != null)
+  if (current_r != null)
   {
 
-    for (Ingredient i : currentR.ingredients)
+    for (Ingredient i : current_r.ingredients)
     {
       i.dispose_controls();
     }
   }
 
-  if (currentIngredient != null)
+  if (current_ing != null)
   {
-    currentIngredient.dispose_controls();
+    current_ing.dispose_controls();
   }
 
 
@@ -54,15 +54,15 @@ void set_recipes_page()
   {
         
     int startIndex = currentPages[1] * buttonsPerPage;
-    int endIndex = min(startIndex + buttonsPerPage, currentR.ingredients.size());
+    int endIndex = min(startIndex + buttonsPerPage, current_r.ingredients.size());
     
-    currentR.renamer = new GTextField(this, 350, 20, 200, 50, G4P.SCROLLBARS_HORIZONTAL_ONLY);
-    currentR.renamer.setText(currentR.name);
-    currentR.renamer.addEventHandler(this, "recipe_renamer_handler");  
+    current_r.renamer = new GTextField(this, 350, 20, 200, 50, G4P.SCROLLBARS_HORIZONTAL_ONLY);
+    current_r.renamer.setText(current_r.name);
+    current_r.renamer.addEventHandler(this, "recipe_renamer_handler");  
     
     for (int i = startIndex; i < endIndex; i++) 
     {
-      Ingredient ing = currentR.ingredients.get(i);
+      Ingredient ing = current_r.ingredients.get(i);
       int buttonIndex = i - startIndex;
       float x = buttonStartX;
       float y = buttonStartY + buttonIndex * (buttonHeight + buttonSpacing);
@@ -78,10 +78,10 @@ void set_recipes_page()
   }
   else if (layer == 2)
   {
-    currentIngredient.label = new GLabel(this, 350, 100, 400, 500, currentIngredient.content);
-    currentIngredient.renamer = new GTextField(this, 350, 20, 200, 50, G4P.SCROLLBARS_HORIZONTAL_ONLY);
-    currentIngredient.renamer.setText(currentIngredient.name);
-    currentIngredient.renamer.addEventHandler(this, "ingredient_renamer_handler");  
+    current_ing.label = new GLabel(this, 350, 100, 400, 500, current_ing.content);
+    current_ing.renamer = new GTextField(this, 350, 20, 200, 50, G4P.SCROLLBARS_HORIZONTAL_ONLY);
+    current_ing.renamer.setText(current_ing.name);
+    current_ing.renamer.addEventHandler(this, "ingredient_renamer_handler");  
     
   }
   
@@ -100,7 +100,7 @@ public void recipe_button_handler(GButton button, GEvent event)
       if (r.name.equals(button.getText())) 
       {
         // println(button.getText());
-        currentR = r;
+        current_r = r;
         layer = 1;
         totalPages[layer] = (int) ceil((float) r.ingredients.size() / buttonsPerPage);
         set_recipes_page();
@@ -134,11 +134,11 @@ void recipe_del_button_handler(GButton button, GEvent event)
 
 public void recipe_renamer_handler(GTextField textControl, GEvent event)
 {
-  if (event == GEvent.CHANGED && currentR != null)
+  if (event == GEvent.CHANGED && current_r != null)
   {
     if (!name_is_repeated(textControl.getText(), 0))
     {
-      currentR.name = textControl.getText();
+      current_r.name = textControl.getText();
     }
   }
 }
@@ -148,13 +148,14 @@ public void ingredient_button_handler(GButton button, GEvent event)
 {
   if (event == GEvent.CLICKED)
   {
-    for (int i = 0; i < currentR.ingredients.size(); i++)
+    for (int i = 0; i < current_r.ingredients.size(); i++)
     {
-      Ingredient ing = currentR.ingredients.get(i);
+      Ingredient ing = current_r.ingredients.get(i);
       if (ing.name.equals(button.getText()))
       {
-        currentIngredient = ing;
+        current_ing = ing;
         layer = 2;
+        ing.set_contents();
         set_recipes_page();
         break;
       }
@@ -167,14 +168,14 @@ public void ingredient_del_button_handler(GButton button, GEvent event)
 {
   if (event == GEvent.CLICKED)
   {
-    for (int i = 0; i < currentR.ingredients.size(); i++)
+    for (int i = 0; i < current_r.ingredients.size(); i++)
     {
-      Ingredient ing = currentR.ingredients.get(i);
+      Ingredient ing = current_r.ingredients.get(i);
       if (ing.del_button == button)
       {
         println("Deleting " + ing.name);
-        currentR.delete_ingredient(i);
-        totalPages[1] = (int) ceil((float) currentR.ingredients.size() / buttonsPerPage);
+        current_r.delete_ingredient(i);
+        totalPages[1] = (int) ceil((float) current_r.ingredients.size() / buttonsPerPage);
         currentPages[1] = constrain(currentPages[1], 0, totalPages[1] - 1);
         set_recipes_page();
         break;
@@ -186,12 +187,17 @@ public void ingredient_del_button_handler(GButton button, GEvent event)
 
 public void ingredient_renamer_handler(GTextField source, GEvent event)
 {
-  if (event == GEvent.CHANGED && currentIngredient != null)
+  if (event == GEvent.CHANGED && current_ing != null)
   {
-    if (!name_is_repeated(source.getText(), 1))
+
+    if (!name_is_repeated(source.getText(), 1, current_r))
     {
-      currentIngredient.set_name(source.getText());
-    }  
+      current_ing.set_name(source.getText());
+      current_ing.set_contents();
+    }
     
   }
 }
+
+
+public void handleTextEvents(GEditableTextControl textcontrol, GEvent event) { /* code */ }

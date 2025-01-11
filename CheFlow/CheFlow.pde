@@ -16,7 +16,6 @@ import g4p_controls.*;
 
 final color accent_col = #6be76b;
 ArrayList<Recipe> recipes = new ArrayList<Recipe>();
-ArrayList<Ingredient> library_ingredients = new ArrayList<Ingredient>();
 
 final String file_name_recipes = "recipes.json";
 
@@ -27,8 +26,8 @@ final float buttonStartX = 350;
 final float buttonStartY = 100;
 
 int recipe_id = 1, ingredient_id = 1;
-Recipe currentR;
-Ingredient currentIngredient;
+Recipe current_r;
+Ingredient current_ing;
 
 
 /* SETUP AND DRAW */
