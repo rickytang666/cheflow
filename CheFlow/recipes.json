@@ -1,5 +1,12 @@
 [
   {
+    "duration": 32,
+    "name": "chicken nuggets",
+    "ingredients": [{"name": "salt"}],
+    "id": 21
+  },
+  {
+    "duration": 89,
     "name": "chocolate cake",
     "ingredients": [
       {"name": "flour"},
@@ -13,6 +20,7 @@
     "id": 1
   },
   {
+    "duration": 30,
     "name": "cookies",
     "ingredients": [
       {"name": "flour"},
@@ -26,6 +34,7 @@
     "id": 2
   },
   {
+    "duration": 10,
     "name": "pancakes",
     "ingredients": [
       {"name": "flour"},
@@ -38,6 +47,7 @@
     "id": 3
   },
   {
+    "duration": 30,
     "name": "omelette",
     "ingredients": [
       {"name": "eggs"},
@@ -49,6 +59,7 @@
     "id": 4
   },
   {
+    "duration": 30,
     "name": "pizza dough",
     "ingredients": [
       {"name": "flour"},
@@ -59,6 +70,7 @@
     "id": 5
   },
   {
+    "duration": 30,
     "name": "banana bread",
     "ingredients": [
       {"name": "flour"},
@@ -71,6 +83,7 @@
     "id": 6
   },
   {
+    "duration": 30,
     "name": "vanilla cake",
     "ingredients": [
       {"name": "flour"},
@@ -83,6 +96,7 @@
     "id": 7
   },
   {
+    "duration": 30,
     "name": "french toast",
     "ingredients": [
       {"name": "bread"},
@@ -95,6 +109,7 @@
     "id": 8
   },
   {
+    "duration": 30,
     "name": "lasagna",
     "ingredients": [
       {"name": "lasagna noodles"},
@@ -106,6 +121,7 @@
     "id": 9
   },
   {
+    "duration": 30,
     "name": "mac and cheese",
     "ingredients": [
       {"name": "pasta"},
@@ -117,6 +133,7 @@
     "id": 10
   },
   {
+    "duration": 30,
     "name": "muffins",
     "ingredients": [
       {"name": "flour"},
@@ -129,6 +146,7 @@
     "id": 11
   },
   {
+    "duration": 30,
     "name": "cupcakes",
     "ingredients": [
       {"name": "flour"},
@@ -141,6 +159,7 @@
     "id": 12
   },
   {
+    "duration": 30,
     "name": "apple pie",
     "ingredients": [
       {"name": "apples"},
@@ -152,6 +171,7 @@
     "id": 13
   },
   {
+    "duration": 30,
     "name": "grilled cheese",
     "ingredients": [
       {"name": "bread"},
@@ -161,6 +181,7 @@
     "id": 14
   },
   {
+    "duration": 30,
     "name": "smoothie",
     "ingredients": [
       {"name": "milk"},
@@ -171,6 +192,7 @@
     "id": 15
   },
   {
+    "duration": 30,
     "name": "fried rice",
     "ingredients": [
       {"name": "rice"},
@@ -182,6 +204,7 @@
     "id": 16
   },
   {
+    "duration": 30,
     "name": "fish tacos",
     "ingredients": [
       {"name": "fish fillet"},
@@ -193,6 +216,7 @@
     "id": 17
   },
   {
+    "duration": 30,
     "name": "burger",
     "ingredients": [
       {"name": "burger patty"},
@@ -204,6 +228,7 @@
     "id": 18
   },
   {
+    "duration": 30,
     "name": "salad",
     "ingredients": [
       {"name": "lettuce"},
@@ -215,6 +240,7 @@
     "id": 19
   },
   {
+    "duration": 30,
     "name": "chili con carne",
     "ingredients": [
       {"name": "ground beef"},

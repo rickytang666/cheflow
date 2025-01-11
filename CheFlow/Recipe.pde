@@ -3,12 +3,14 @@ class Recipe
 {
   /* FIELDS */
 
-  final int id;
+  int id;
   String name;
+  int duration;
   ArrayList<Ingredient> ingredients;
   GButton button;
   GButton del_button;
   GTextField renamer;
+  GTextField duration_editor;
 
   /* CONSTRUCTORS */
   
@@ -18,12 +20,14 @@ class Recipe
     ++recipe_id;
     
     this.name = n;
+    this.duration = 30;
     
     this.ingredients = new ArrayList<Ingredient>();
     
     this.button = null;
     this.del_button = null;
     this.renamer = null;
+    this.duration_editor = null;
   }
 
   /* METHODS */
@@ -62,6 +66,11 @@ class Recipe
     if (this.renamer != null)
     {
       this.renamer.dispose();
+    }
+
+    if (this.renamer != null)
+    {
+      this.duration_editor.dispose();
     }
   }
 

@@ -38,15 +38,15 @@ void sort_recipes(int option)
 
   if (option == 1)
   {
-    search_results.sort((a, b) -> b.id - a.id);
+    recipes.sort((a, b) -> b.id - a.id);
   }
   else if (option == 2)
   {
-    search_results.sort((a, b) -> a.id - b.id);
+    recipes.sort((a, b) -> a.id - b.id);
   }
   else if (option == 3)
   {
-    search_results.sort((a, b) -> a.name.compareTo(b.name));
+    recipes.sort((a, b) -> a.name.compareTo(b.name));
   }
 }
 

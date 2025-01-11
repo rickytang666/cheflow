@@ -77,12 +77,12 @@ class Recipes_Page extends Page
     export_button = new GButton(parent, 800, 300, 70, 50, "Export");
     export_button.addEventHandler(parent, "export_button_handler");
 
-    search_bar = new GTextField(parent, 100, 100, 400, 40, G4P.SCROLLBARS_HORIZONTAL_ONLY);
+    search_bar = new GTextField(parent, 100, 60, 400, 40, G4P.SCROLLBARS_HORIZONTAL_ONLY);
     
-    search_button = new GButton(parent, 520, 100, 70, 40, "Search");
+    search_button = new GButton(parent, 520, 60, 70, 40, "Search");
     search_button.addEventHandler(parent, "handleButtonEvents");
 
-    search_toggle = new GOption(parent, 600, 100, 100, 40);
+    search_toggle = new GOption(parent, 600, 60, 100, 40);
     search_toggle.addEventHandler(parent, "search_mode_handler");
     search_toggle.setText("Search Mode");
 
@@ -173,9 +173,14 @@ class Recipes_Page extends Page
       int start = currentPages[1] * buttons_per_page;
       int end = min(start + buttons_per_page, current_r.ingredients.size());
       
-      current_r.renamer = new GTextField(parent, 350, 150, 200, 40, G4P.SCROLLBARS_HORIZONTAL_ONLY);
+      current_r.renamer = new GTextField(parent, 350, 110, 200, 40, G4P.SCROLLBARS_HORIZONTAL_ONLY);
       current_r.renamer.setText(current_r.name);
       current_r.renamer.addEventHandler(parent, "recipe_renamer_handler");  
+
+      current_r.duration_editor = new GTextField(parent, 350, 160, 200, 30);
+      current_r.duration_editor.setText(str(current_r.duration));
+      current_r.duration_editor.addEventHandler(parent, "recipe_duration_handler");
+      current_r.duration_editor.setNumeric(1, 60 * 24, 30);
       
       for (int i = start; i < end; i++) 
       {
@@ -379,6 +384,24 @@ public void recipe_renamer_handler(GTextField textControl, GEvent event)
     if (!is_recipe_repeated(textControl.getText(), recipes))
     {
       current_r.name = textControl.getText();
+    }
+  }
+}
+
+
+public void recipe_duration_handler(GTextField textControl, GEvent event)
+{
+  if (event == GEvent.CHANGED && current_r != null)
+  {
+    try
+    {
+      int duration = constrain(Integer.parseInt(textControl.getText()), 1, 60 * 24);
+      current_r.duration = duration;
+    }
+    catch (NumberFormatException e)
+    {
+      println("Invalid duration");
+      current_r.duration = 30;
     }
   }
 }

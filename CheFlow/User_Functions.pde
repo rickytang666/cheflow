@@ -13,6 +13,7 @@ void export_recipes()
     JSONObject recipe_obj = new JSONObject();
     recipe_obj.setInt("id", r.id);
     recipe_obj.setString("name", r.name);
+    recipe_obj.setInt("duration", r.duration);
 
     JSONArray ingredients_array = new JSONArray();
     for (Ingredient ing : r.ingredients)
@@ -55,6 +56,13 @@ void import_recipes()
   {
     JSONObject recipe_obj = recipes_array.getJSONObject(i);
     Recipe r = new Recipe(recipe_obj.getString("name"));
+    r.id = recipe_obj.getInt("id");
+    r.duration = recipe_obj.getInt("duration");
+    
+    if (r.id >= recipe_id)
+    {
+      recipe_id = r.id + 1;
+    }
 
     JSONArray ingredients_array = recipe_obj.getJSONArray("ingredients");
     for (int j = 0; j < ingredients_array.size(); j++)
@@ -70,7 +78,7 @@ void import_recipes()
 
   search_results.clear();
   search_results.addAll(recipes);
-  sort_recipes(2);
+  sort_recipes(1);
   println(recipes.size() + " recipes loaded successfully");
   
 }
