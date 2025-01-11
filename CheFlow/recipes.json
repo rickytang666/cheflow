@@ -7,7 +7,8 @@
       {"name": "cocoa powder"},
       {"name": "eggs"},
       {"name": "butter"},
-      {"name": "milk"}
+      {"name": "milk"},
+      {"name": "ricky"}
     ],
     "id": 1
   },
@@ -19,7 +20,8 @@
       {"name": "butter"},
       {"name": "eggs"},
       {"name": "chocolate chips"},
-      {"name": "salt"}
+      {"name": "salt"},
+      {"name": "ricky"}
     ],
     "id": 2
   },

@@ -1,6 +1,8 @@
 
 /* GLOBAL VARIABLES OR CONSTANTS */
 
+GButton add_button;
+
 /* FUNCTIONS */
 
 void set_recipes_page() 
@@ -34,13 +36,15 @@ void set_recipes_page()
   if (layer == 0)
   {
     
+    ArrayList<Recipe> to_display = searching ? search_results : recipes;
+
     int startIndex = currentPages[0] * buttonsPerPage;
-    int endIndex = min(startIndex + buttonsPerPage, recipes.size());
+    int endIndex = min(startIndex + buttonsPerPage, to_display.size());
     
     
     for (int i = startIndex; i < endIndex; i++) 
     {
-      Recipe r = recipes.get(i);
+      Recipe r = to_display.get(i);
       int buttonIndex = i - startIndex;
       float x = buttonStartX;
       float y = buttonStartY + buttonIndex * (buttonHeight + buttonSpacing);
@@ -48,6 +52,7 @@ void set_recipes_page()
       r.button.addEventHandler(this, "recipe_button_handler");
       r.del_button = new GButton(this, x + buttonWidth + 10, y, 50, buttonHeight, "Delete");
       r.del_button.addEventHandler(this, "recipe_del_button_handler");
+      r.del_button.setEnabled(!searching);
     }
   }
   else if (layer == 1)
@@ -56,7 +61,7 @@ void set_recipes_page()
     int startIndex = currentPages[1] * buttonsPerPage;
     int endIndex = min(startIndex + buttonsPerPage, current_r.ingredients.size());
     
-    current_r.renamer = new GTextField(this, 350, 20, 200, 50, G4P.SCROLLBARS_HORIZONTAL_ONLY);
+    current_r.renamer = new GTextField(this, 350, 150, 200, 40, G4P.SCROLLBARS_HORIZONTAL_ONLY);
     current_r.renamer.setText(current_r.name);
     current_r.renamer.addEventHandler(this, "recipe_renamer_handler");  
     
@@ -79,7 +84,7 @@ void set_recipes_page()
   else if (layer == 2)
   {
     current_ing.label = new GLabel(this, 350, 100, 400, 500, current_ing.content);
-    current_ing.renamer = new GTextField(this, 350, 20, 200, 50, G4P.SCROLLBARS_HORIZONTAL_ONLY);
+    current_ing.renamer = new GTextField(this, 350, 150, 200, 40, G4P.SCROLLBARS_HORIZONTAL_ONLY);
     current_ing.renamer.setText(current_ing.name);
     current_ing.renamer.addEventHandler(this, "ingredient_renamer_handler");  
     
@@ -89,6 +94,34 @@ void set_recipes_page()
 }
 
 /* HANDLERS */
+
+public void add_button_handler(GButton button, GEvent event) 
+{
+  if (event == GEvent.CLICKED) 
+  {
+
+    if (layer == 0)
+    {
+      String name = "Recipe " + recipe_id;
+      Recipe r = new Recipe(name);
+      recipes.add(0, r);
+      totalPages[0] = (int) ceil((float) recipes.size() / buttonsPerPage);
+      set_recipes_page();
+    }
+    else if (layer == 1)
+    {
+      String name = "Ingredient " + ingredient_id;
+      ++ingredient_id;
+      Ingredient ing = new Ingredient(name);
+      current_r.add_ingredient(ing);
+      totalPages[1] = (int) ceil((float) current_r.ingredients.size() / buttonsPerPage);
+      currentPages[1] = totalPages[1] - 1;
+      set_recipes_page();
+    }
+    
+  }
+}
+
 
 public void recipe_button_handler(GButton button, GEvent event) 
 {

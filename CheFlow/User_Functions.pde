@@ -72,33 +72,14 @@ void import_recipes()
     recipes.add(r);
   }
 
+  search_results.clear();
+  search_results.addAll(recipes);
   sort_recipes(2);
-  totalPages[0] = (int) ceil((float) recipes.size() / buttonsPerPage);
+  println(recipes.size() + " recipes loaded successfully");
+  totalPages[0] = (int) ceil((float) search_results.size() / buttonsPerPage);
   set_recipes_page();
 }
 
-
-void sort_recipes(int option)
-{
-  /*
-  1: Sort by id (descending)
-  2: Sort by id (ascending)
-  3: Sort by name (alphabetical)
-  */
-
-  if (option == 1)
-  {
-    recipes.sort((a, b) -> b.id - a.id);
-  }
-  else if (option == 2)
-  {
-    recipes.sort((a, b) -> a.id - b.id);
-  }
-  else if (option == 3)
-  {
-    recipes.sort((a, b) -> a.name.compareTo(b.name));
-  }
-}
 
 /* EVENT HANDLERS */
 

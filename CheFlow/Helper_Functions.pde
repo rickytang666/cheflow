@@ -1,3 +1,4 @@
+
 Boolean name_is_repeated(String name, int option)
 {
   return name_is_repeated(name, option, null);
@@ -37,6 +38,29 @@ Boolean name_is_repeated(String name, int option, Recipe r)
 }
 
 
+void sort_recipes(int option)
+{
+  /*
+  1: Sort by id (descending)
+  2: Sort by id (ascending)
+  3: Sort by name (alphabetical)
+  */
+
+  if (option == 1)
+  {
+    search_results.sort((a, b) -> b.id - a.id);
+  }
+  else if (option == 2)
+  {
+    search_results.sort((a, b) -> a.id - b.id);
+  }
+  else if (option == 3)
+  {
+    search_results.sort((a, b) -> a.name.compareTo(b.name));
+  }
+}
+
+
 ArrayList<Recipe> get_related_recipes(String name)
 {
   ArrayList<Recipe> related_recipes = new ArrayList<Recipe>();
@@ -58,4 +82,36 @@ ArrayList<Recipe> get_related_recipes(String name)
   }
 
   return related_recipes;
+}
+
+
+void fill_search_results(String search)
+{
+  search_results.clear();
+
+  println(recipes.size());
+
+  if (search.equals(""))
+  {
+    println("No search query", recipes.size());
+    search_results.addAll(recipes);
+  }
+  else
+  {
+    for (Recipe r : recipes)
+    {
+      if (r.name.toLowerCase().contains(search.toLowerCase()))
+      {
+        // println("Found recipe: " + r.name);
+        search_results.add(r);
+      }
+      else
+      {
+        // println(r.name, "does not contain", search);
+      }
+    }
+  }
+  
+  totalPages[0] = (int) ceil((float) search_results.size() / buttonsPerPage);
+  set_recipes_page();
 }

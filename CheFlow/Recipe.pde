@@ -30,7 +30,6 @@ class Recipe
 
   void add_ingredient(Ingredient ing)
   {
-    
     this.ingredients.add(ing);
   }
 
