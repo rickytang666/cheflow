@@ -17,19 +17,21 @@ import g4p_controls.*;
 final color accent_col = #6be76b;
 ArrayList<Recipe> recipes = new ArrayList<Recipe>();
 ArrayList<Recipe> search_results = new ArrayList<Recipe>();
+ArrayList<Ingredient> fridge = new ArrayList<Ingredient>();
 
 final String file_name_recipes = "recipes.json";
+final String file_name_fridge = "fridge.json";
 
-final float buttonWidth = 300;
-final float buttonHeight = 40;
-final float buttonSpacing = 10;
-final float buttonStartX = 350;
-final float buttonStartY = 200;
+final float button_width = 300;
+final float button_height = 40;
+final float button_spacing = 10;
+final float button_startX = 350;
+final float button_startY = 200;
 
 int layer = 0;
 int[] currentPages = {0, 0, 0}; 
 int[] totalPages = {0, 0, 0};
-int buttonsPerPage = 9;
+int buttons_per_page = 9;
 
 Recipe current_r;
 Ingredient current_ing;

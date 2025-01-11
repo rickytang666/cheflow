@@ -1,35 +1,25 @@
 
-Boolean name_is_repeated(String name, int option)
+Boolean is_recipe_repeated(String name, ArrayList<Recipe> arr)
 {
-  return name_is_repeated(name, option, null);
+  for (Recipe r : arr)
+  {
+    if (r.name.equals(name))
+    {
+      return true;
+    }
+  }
+  
+  return false;
 }
 
 
-Boolean name_is_repeated(String name, int option, Recipe r)
+Boolean is_ingredient_repeated(String name, ArrayList<Ingredient> arr)
 {
-  /* 
-    option 0: check recipe names
-    option 1: check ingredient names
-  */
-
-  if (option == 0)
+  for (Ingredient i : arr)
   {
-    for (Recipe rec : recipes)
+    if (i.name.equals(name))
     {
-      if (rec.name.equals(name))
-      {
-        return true;
-      }
-    }
-  }
-  else if (option == 1)
-  {
-    for (Ingredient ing : r.ingredients)
-    {
-      if (ing.name.equals(name))
-      {
-        return true;
-      }
+      return true;
     }
   }
 
