@@ -112,6 +112,5 @@ void fill_search_results(String search)
     }
   }
   
-  totalPages[0] = (int) ceil((float) search_results.size() / buttonsPerPage);
-  set_recipes_page();
+  
 }

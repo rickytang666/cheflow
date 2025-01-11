@@ -26,9 +26,18 @@ final float buttonSpacing = 10;
 final float buttonStartX = 350;
 final float buttonStartY = 200;
 
-int recipe_id = 1, ingredient_id = 1;
+int layer = 0;
+int[] currentPages = {0, 0, 0}; 
+int[] totalPages = {0, 0, 0};
+int buttonsPerPage = 9;
+
 Recipe current_r;
 Ingredient current_ing;
+
+int recipe_id = 1, ingredient_id = 1;
+
+Page current_page;
+Recipes_Page rp;
 
 
 /* SETUP AND DRAW */
@@ -36,9 +45,11 @@ Ingredient current_ing;
 void setup() 
 {
   size(1000, 700);
-  
-  set_nav_gui(); 
+  G4P.messagesEnabled(false);
   import_recipes();
+  rp = new Recipes_Page(this);
+  current_page = rp;
+  current_page.setup();
 }
 
 void draw()

@@ -1,99 +1,243 @@
 
-/* GLOBAL VARIABLES OR CONSTANTS */
+/* RECIPES_PAGE CLASS */
 
-GButton add_button;
-
-/* FUNCTIONS */
-
-void set_recipes_page() 
+class Recipes_Page extends Page
 {
+  /* SPECIFIC FIELDS */
 
-  // Dispose everything in the screen
+  GButton prevButton, nextButton, back, search_button, add_button, export_button;
+  GTextField search_bar;
+  GOption search_toggle;
 
-  for (Recipe r : recipes) 
-  {
-    r.dispose_controls();
-  }
+  Boolean searching = false;
+
   
-  if (current_r != null)
-  {
 
-    for (Ingredient i : current_r.ingredients)
+  /* CONSTRUCTOR */
+
+  Recipes_Page(PApplet p)
+  {
+    super(p);
+  }
+
+  /* IMPLEMENT ABSTRACT METHODS */
+
+  void setup()
+  {
+    set_nav_gui(); 
+    set_recipes_page();
+    println(this.parent);
+  }
+
+  void dispose()
+  {
+    for (Recipe r : recipes) 
     {
-      i.dispose_controls();
+      r.dispose_controls();
+    }
+    
+    if (current_r != null)
+    {
+
+      for (Ingredient i : current_r.ingredients)
+      {
+        i.dispose_controls();
+      }
+    }
+
+    if (current_ing != null)
+    {
+      current_ing.dispose_controls();
     }
   }
 
-  if (current_ing != null)
+  /* ADDITIONAL METHODS */
+
+  void set_nav_gui()
   {
-    current_ing.dispose_controls();
+    float navButtonWidth = 100;
+    float navButtonHeight = 40;
+    float navButtonY = height - 50;
+    
+    prevButton = new GButton(this.parent, width / 2 - navButtonWidth - 20, navButtonY, navButtonWidth, navButtonHeight, "Previous");
+    prevButton.addEventHandler(this.parent, "handleButtonEvents");
+
+    nextButton = new GButton(this.parent, width / 2 + 20, navButtonY, navButtonWidth, navButtonHeight, "Next");
+    nextButton.addEventHandler(this.parent, "handleButtonEvents");
+    
+    back = new GButton(this.parent, 100, 200, 70, 50, "back");
+    back.addEventHandler(this.parent, "handleButtonEvents");
+
+    add_button = new GButton(this.parent, 800, 200, 70, 50, "+Item");
+    add_button.addEventHandler(this.parent, "add_button_handler");
+
+    export_button = new GButton(this.parent, 800, 300, 70, 50, "Export");
+    export_button.addEventHandler(this.parent, "export_button_handler");
+
+    search_bar = new GTextField(this.parent, 100, 20, 400, 40, G4P.SCROLLBARS_HORIZONTAL_ONLY);
+    
+    search_button = new GButton(this.parent, 520, 20, 70, 40, "Search");
+    search_button.addEventHandler(this.parent, "handleButtonEvents");
+
+    search_toggle = new GOption(this.parent, 600, 20, 100, 40);
+    search_toggle.addEventHandler(this.parent, "search_mode_handler");
+    search_toggle.setText("Search Mode");
+
+    println("finished nav gui");
   }
 
-
-  update_nav_gui();
-
-  
-  if (layer == 0)
+  void update_nav_gui()
   {
-    
-    ArrayList<Recipe> to_display = searching ? search_results : recipes;
+    prevButton.setEnabled(layer < 2 && currentPages[layer] > 0);
+    nextButton.setEnabled(layer < 2 && currentPages[layer] < totalPages[layer] - 1);
+    back.setEnabled(layer > 0);
+    add_button.setEnabled(layer < 2 && search_bar.getText().equals("") && !searching);
+    search_button.setEnabled(layer == 0 && searching);
+    search_toggle.setEnabled(layer == 0);
+  }
 
-    int startIndex = currentPages[0] * buttonsPerPage;
-    int endIndex = min(startIndex + buttonsPerPage, to_display.size());
+  void set_recipes_page() 
+  {
+
+    // Dispose everything in the screen and update the navigation GUI
+
+    this.dispose();
+
+    update_nav_gui();
+
+    println("Setting recipes page");
     
-    
-    for (int i = startIndex; i < endIndex; i++) 
+    if (layer == 0)
     {
-      Recipe r = to_display.get(i);
-      int buttonIndex = i - startIndex;
-      float x = buttonStartX;
-      float y = buttonStartY + buttonIndex * (buttonHeight + buttonSpacing);
-      r.button = new GButton(this, x, y, buttonWidth, buttonHeight, r.name);
-      r.button.addEventHandler(this, "recipe_button_handler");
-      r.del_button = new GButton(this, x + buttonWidth + 10, y, 50, buttonHeight, "Delete");
-      r.del_button.addEventHandler(this, "recipe_del_button_handler");
-      r.del_button.setEnabled(!searching);
+
+      totalPages[0] = (int) ceil((float) recipes.size() / buttonsPerPage);
+      
+      ArrayList<Recipe> to_display = searching ? search_results : recipes;
+
+      int startIndex = currentPages[0] * buttonsPerPage;
+      int endIndex = min(startIndex + buttonsPerPage, to_display.size());
+      
+      
+      for (int i = startIndex; i < endIndex; i++) 
+      {
+        Recipe r = to_display.get(i);
+        int buttonIndex = i - startIndex;
+        float x = buttonStartX;
+        float y = buttonStartY + buttonIndex * (buttonHeight + buttonSpacing);
+
+        // when creating a button, we cannot use "this" anymore
+        r.button = new GButton(this.parent, x, y, buttonWidth, buttonHeight, r.name);
+        r.button.addEventHandler(this.parent, "recipe_button_handler");
+
+        println("Creating recipe button: " + r.name);
+
+        r.del_button = new GButton(this.parent, x + buttonWidth + 10, y, 50, buttonHeight, "Delete");
+        r.del_button.addEventHandler(this.parent, "recipe_del_button_handler");
+        r.del_button.setEnabled(!searching);
+      }
     }
-  }
-  else if (layer == 1)
-  {
-        
-    int startIndex = currentPages[1] * buttonsPerPage;
-    int endIndex = min(startIndex + buttonsPerPage, current_r.ingredients.size());
-    
-    current_r.renamer = new GTextField(this, 350, 150, 200, 40, G4P.SCROLLBARS_HORIZONTAL_ONLY);
-    current_r.renamer.setText(current_r.name);
-    current_r.renamer.addEventHandler(this, "recipe_renamer_handler");  
-    
-    for (int i = startIndex; i < endIndex; i++) 
+    else if (layer == 1)
     {
-      Ingredient ing = current_r.ingredients.get(i);
-      int buttonIndex = i - startIndex;
-      float x = buttonStartX;
-      float y = buttonStartY + buttonIndex * (buttonHeight + buttonSpacing);
+          
+      int startIndex = currentPages[1] * buttonsPerPage;
+      int endIndex = min(startIndex + buttonsPerPage, current_r.ingredients.size());
+      
+      current_r.renamer = new GTextField(this.parent, 350, 150, 200, 40, G4P.SCROLLBARS_HORIZONTAL_ONLY);
+      current_r.renamer.setText(current_r.name);
+      current_r.renamer.addEventHandler(this.parent, "recipe_renamer_handler");  
+      
+      for (int i = startIndex; i < endIndex; i++) 
+      {
+        Ingredient ing = current_r.ingredients.get(i);
+        int buttonIndex = i - startIndex;
+        float x = buttonStartX;
+        float y = buttonStartY + buttonIndex * (buttonHeight + buttonSpacing);
 
-      ing.button = new GButton(this, x, y, buttonWidth, buttonHeight, ing.name);
-      ing.button.addEventHandler(this, "ingredient_button_handler"); // Add event handler
-      ing.button.setEnabled(true); // Enable the button
+        ing.button = new GButton(this.parent, x, y, buttonWidth, buttonHeight, ing.name);
+        ing.button.addEventHandler(this.parent, "ingredient_button_handler"); // Add event handler
+        ing.button.setEnabled(true); // Enable the button
 
-      ing.del_button = new GButton(this, x + buttonWidth + 10, y, 50, buttonHeight, "Delete");
-      ing.del_button.addEventHandler(this, "ingredient_del_button_handler");
+        ing.del_button = new GButton(this.parent, x + buttonWidth + 10, y, 50, buttonHeight, "Delete");
+        ing.del_button.addEventHandler(this.parent, "ingredient_del_button_handler");
+      }
+      
+    }
+    else if (layer == 2)
+    {
+      current_ing.label = new GLabel(this.parent, 350, 100, 400, 500, current_ing.content);
+      
+      current_ing.renamer = new GTextField(this.parent, 350, 150, 200, 40, G4P.SCROLLBARS_HORIZONTAL_ONLY);
+      current_ing.renamer.setText(current_ing.name);
+      current_ing.renamer.addEventHandler(this.parent, "ingredient_renamer_handler");  
+      
     }
     
-  }
-  else if (layer == 2)
-  {
-    current_ing.label = new GLabel(this, 350, 100, 400, 500, current_ing.content);
-    current_ing.renamer = new GTextField(this, 350, 150, 200, 40, G4P.SCROLLBARS_HORIZONTAL_ONLY);
-    current_ing.renamer.setText(current_ing.name);
-    current_ing.renamer.addEventHandler(this, "ingredient_renamer_handler");  
     
   }
-  
   
 }
 
-/* HANDLERS */
+
+/* EVENT HANDLERS */
+
+public void handleButtonEvents(GButton button, GEvent event) 
+{
+  
+  if (button == rp.nextButton && event == GEvent.CLICKED) 
+  {
+    if (currentPages[layer] < totalPages[layer] - 1) 
+    {
+      currentPages[layer]++;
+      rp.set_recipes_page();
+    }
+  }
+  else if (button == rp.prevButton && event == GEvent.CLICKED) 
+  {
+    if (currentPages[layer] > 0) 
+    {
+      currentPages[layer]--;
+      rp.set_recipes_page();
+    }
+  }
+  else if (button == rp.back && event == GEvent.CLICKED)
+  {
+    currentPages[layer] = 0;
+    totalPages[layer] = 0;
+    layer--;
+    
+    rp.set_recipes_page();
+  }
+  else if (button == rp.search_button && event == GEvent.CLICKED)
+  {
+    println("Searching...");
+    String search = rp.search_bar.getText();
+    fill_search_results(search);
+    totalPages[0] = (int) ceil((float) search_results.size() / buttonsPerPage);
+    rp.set_recipes_page();
+  }
+}
+
+
+public void search_mode_handler(GOption option, GEvent event)
+{
+  if (event == GEvent.SELECTED)
+  {
+    println("Search mode enabled");
+    rp.searching = true;
+    search_results.clear();
+    search_results.addAll(recipes);
+    rp.set_recipes_page();
+  }
+  else if (event == GEvent.DESELECTED)
+  {
+    println("Search mode disabled");
+    rp.searching = false;
+    rp.search_bar.setText("");
+    totalPages[layer] = (int) ceil((float) recipes.size() / buttonsPerPage);
+    rp.set_recipes_page();
+  }
+}
+
 
 public void add_button_handler(GButton button, GEvent event) 
 {
@@ -106,7 +250,7 @@ public void add_button_handler(GButton button, GEvent event)
       Recipe r = new Recipe(name);
       recipes.add(0, r);
       totalPages[0] = (int) ceil((float) recipes.size() / buttonsPerPage);
-      set_recipes_page();
+      rp.set_recipes_page();
     }
     else if (layer == 1)
     {
@@ -116,27 +260,37 @@ public void add_button_handler(GButton button, GEvent event)
       current_r.add_ingredient(ing);
       totalPages[1] = (int) ceil((float) current_r.ingredients.size() / buttonsPerPage);
       currentPages[1] = totalPages[1] - 1;
-      set_recipes_page();
+      rp.set_recipes_page();
     }
     
+  }
+}
+
+public void export_button_handler(GButton button, GEvent event)
+{
+  if (event == GEvent.CLICKED)
+  {
+    export_recipes();
   }
 }
 
 
 public void recipe_button_handler(GButton button, GEvent event) 
 {
+
   if (event == GEvent.CLICKED) 
   {
+    println("Recipe button clicked");
     for (int i = 0; i < recipes.size(); i++) 
     {
       Recipe r = recipes.get(i);
       if (r.name.equals(button.getText())) 
       {
-        // println(button.getText());
+        println(button.getText());
         current_r = r;
         layer = 1;
         totalPages[layer] = (int) ceil((float) r.ingredients.size() / buttonsPerPage);
-        set_recipes_page();
+        rp.set_recipes_page();
         break;
       }
     }
@@ -144,7 +298,7 @@ public void recipe_button_handler(GButton button, GEvent event)
 }
 
 
-void recipe_del_button_handler(GButton button, GEvent event)
+public void recipe_del_button_handler(GButton button, GEvent event)
 {
   if (event == GEvent.CLICKED)
   {
@@ -157,7 +311,7 @@ void recipe_del_button_handler(GButton button, GEvent event)
         r.delete();
         totalPages[0] = (int) ceil((float) recipes.size() / buttonsPerPage);
         currentPages[0] = constrain(currentPages[0], 0, totalPages[0] - 1);
-        set_recipes_page();
+        rp.set_recipes_page();
         break;
       }
     }
@@ -189,7 +343,7 @@ public void ingredient_button_handler(GButton button, GEvent event)
         current_ing = ing;
         layer = 2;
         ing.set_contents();
-        set_recipes_page();
+        rp.set_recipes_page();
         break;
       }
     }
@@ -210,7 +364,7 @@ public void ingredient_del_button_handler(GButton button, GEvent event)
         current_r.delete_ingredient(i);
         totalPages[1] = (int) ceil((float) current_r.ingredients.size() / buttonsPerPage);
         currentPages[1] = constrain(currentPages[1], 0, totalPages[1] - 1);
-        set_recipes_page();
+        rp.set_recipes_page();
         break;
       }
     }

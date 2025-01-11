@@ -1,8 +1,6 @@
 
 /* GLOBAL VARIABLES OR CONSTANTS */
 
-GButton export_button;
-HashMap<String, Ingredient> ingredient_map = new HashMap<String, Ingredient>();
 
 /* FUNCTIONS */
 
@@ -76,17 +74,8 @@ void import_recipes()
   search_results.addAll(recipes);
   sort_recipes(2);
   println(recipes.size() + " recipes loaded successfully");
-  totalPages[0] = (int) ceil((float) search_results.size() / buttonsPerPage);
-  set_recipes_page();
+  
 }
 
 
 /* EVENT HANDLERS */
-
-public void export_button_handler(GButton button, GEvent event)
-{
-  if (event == GEvent.CLICKED)
-  {
-    export_recipes();
-  }
-}
