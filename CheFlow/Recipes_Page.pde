@@ -1,16 +1,17 @@
 
-/* RECIPES_PAGE CLASS */
+/** RECIPES_PAGE CLASS **/
 
 class Recipes_Page extends Page
 {
   /* SPECIFIC FIELDS */
+
+  ArrayList<GAbstractControl> static_controls = new ArrayList<GAbstractControl>();
 
   GButton prevButton, nextButton, back, search_button, add_button, export_button;
   GTextField search_bar;
   GOption search_toggle;
 
   Boolean searching = false;
-
   
 
   /* CONSTRUCTOR */
@@ -26,29 +27,29 @@ class Recipes_Page extends Page
   {
     set_nav_gui(); 
     set_recipes_page();
-    println(this.parent);
+
+    static_controls.add(prevButton);
+    static_controls.add(nextButton);
+    static_controls.add(back);
+    static_controls.add(search_bar);
+    static_controls.add(search_button);
+    static_controls.add(search_toggle);
+    static_controls.add(add_button);
+    static_controls.add(export_button);
   }
 
-  void dispose()
+  
+  void die()
   {
-    for (Recipe r : recipes) 
+    for (GAbstractControl c : static_controls)
     {
-      r.dispose_controls();
-    }
-    
-    if (current_r != null)
-    {
-
-      for (Ingredient i : current_r.ingredients)
+      if (c != null)
       {
-        i.dispose_controls();
+        c.dispose();
       }
     }
 
-    if (current_ing != null)
-    {
-      current_ing.dispose_controls();
-    }
+    clear_variable_controls();
   }
 
   /* ADDITIONAL METHODS */
@@ -74,17 +75,16 @@ class Recipes_Page extends Page
     export_button = new GButton(this.parent, 800, 300, 70, 50, "Export");
     export_button.addEventHandler(this.parent, "export_button_handler");
 
-    search_bar = new GTextField(this.parent, 100, 20, 400, 40, G4P.SCROLLBARS_HORIZONTAL_ONLY);
+    search_bar = new GTextField(this.parent, 100, 100, 400, 40, G4P.SCROLLBARS_HORIZONTAL_ONLY);
     
-    search_button = new GButton(this.parent, 520, 20, 70, 40, "Search");
+    search_button = new GButton(this.parent, 520, 100, 70, 40, "Search");
     search_button.addEventHandler(this.parent, "handleButtonEvents");
 
-    search_toggle = new GOption(this.parent, 600, 20, 100, 40);
+    search_toggle = new GOption(this.parent, 600, 100, 100, 40);
     search_toggle.addEventHandler(this.parent, "search_mode_handler");
     search_toggle.setText("Search Mode");
-
-    println("finished nav gui");
   }
+
 
   void update_nav_gui()
   {
@@ -96,17 +96,40 @@ class Recipes_Page extends Page
     search_toggle.setEnabled(layer == 0);
   }
 
+
+  void clear_variable_controls()
+  {
+    for (Recipe r : recipes) 
+    {
+      r.dispose_controls();
+    }
+    
+    if (current_r != null)
+    {
+
+      for (Ingredient i : current_r.ingredients)
+      {
+        i.dispose_controls();
+      }
+    }
+
+    if (current_ing != null)
+    {
+      current_ing.dispose_controls();
+    }
+  }
+
+
   void set_recipes_page() 
   {
 
     // Dispose everything in the screen and update the navigation GUI
 
-    this.dispose();
+    this.clear_variable_controls();
 
     update_nav_gui();
 
-    println("Setting recipes page");
-    
+        
     if (layer == 0)
     {
 
@@ -129,8 +152,7 @@ class Recipes_Page extends Page
         r.button = new GButton(this.parent, x, y, buttonWidth, buttonHeight, r.name);
         r.button.addEventHandler(this.parent, "recipe_button_handler");
 
-        println("Creating recipe button: " + r.name);
-
+        
         r.del_button = new GButton(this.parent, x + buttonWidth + 10, y, 50, buttonHeight, "Delete");
         r.del_button.addEventHandler(this.parent, "recipe_del_button_handler");
         r.del_button.setEnabled(!searching);
@@ -209,7 +231,7 @@ public void handleButtonEvents(GButton button, GEvent event)
   }
   else if (button == rp.search_button && event == GEvent.CLICKED)
   {
-    println("Searching...");
+    
     String search = rp.search_bar.getText();
     fill_search_results(search);
     totalPages[0] = (int) ceil((float) search_results.size() / buttonsPerPage);
@@ -280,13 +302,12 @@ public void recipe_button_handler(GButton button, GEvent event)
 
   if (event == GEvent.CLICKED) 
   {
-    println("Recipe button clicked");
+    
     for (int i = 0; i < recipes.size(); i++) 
     {
       Recipe r = recipes.get(i);
       if (r.name.equals(button.getText())) 
       {
-        println(button.getText());
         current_r = r;
         layer = 1;
         totalPages[layer] = (int) ceil((float) r.ingredients.size() / buttonsPerPage);
@@ -307,7 +328,6 @@ public void recipe_del_button_handler(GButton button, GEvent event)
       Recipe r = recipes.get(i);
       if (r.del_button == button)
       {
-        println("Deleting " + r.name);
         r.delete();
         totalPages[0] = (int) ceil((float) recipes.size() / buttonsPerPage);
         currentPages[0] = constrain(currentPages[0], 0, totalPages[0] - 1);
@@ -360,7 +380,6 @@ public void ingredient_del_button_handler(GButton button, GEvent event)
       Ingredient ing = current_r.ingredients.get(i);
       if (ing.del_button == button)
       {
-        println("Deleting " + ing.name);
         current_r.delete_ingredient(i);
         totalPages[1] = (int) ceil((float) current_r.ingredients.size() / buttonsPerPage);
         currentPages[1] = constrain(currentPages[1], 0, totalPages[1] - 1);

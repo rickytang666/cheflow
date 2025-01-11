@@ -36,8 +36,12 @@ Ingredient current_ing;
 
 int recipe_id = 1, ingredient_id = 1;
 
+Nav_Bar nb;
 Page current_page;
 Recipes_Page rp;
+Frige_Page fp;
+Home_Page hp;
+Matching_Page mp;
 
 
 /* SETUP AND DRAW */
@@ -47,9 +51,17 @@ void setup()
   size(1000, 700);
   G4P.messagesEnabled(false);
   import_recipes();
+  
+  nb = new Nav_Bar(this);
   rp = new Recipes_Page(this);
-  current_page = rp;
+  fp = new Frige_Page(this);
+  hp = new Home_Page(this);
+  mp = new Matching_Page(this);
+  
+  nb.setup();
+  current_page = hp;
   current_page.setup();
+  
 }
 
 void draw()

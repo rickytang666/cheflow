@@ -15,5 +15,5 @@ abstract class Page
   /* SHARED METHODS */
 
   abstract void setup();
-  abstract void dispose();
+  abstract void die();
 }
