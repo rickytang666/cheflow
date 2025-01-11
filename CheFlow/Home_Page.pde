@@ -26,7 +26,7 @@ class Home_Page extends Page
 
   void die()
   {
-    println(static_controls.size());
+    // println(controls.size());
     for (GAbstractControl c : static_controls)
     {
       if (c != null)

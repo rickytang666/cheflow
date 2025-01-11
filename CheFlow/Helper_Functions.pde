@@ -65,16 +65,16 @@ ArrayList<Recipe> get_related_recipes(String name)
 {
   ArrayList<Recipe> related_recipes = new ArrayList<Recipe>();
 
-  println("Searching for recipes using ingredient: " + name);
+  // println("Searching for recipes using ingredient: " + name);
   for (Recipe r : recipes)
   {
-    println("Checking recipe: " + r.name);
+    // println("Checking recipe: " + r.name);
     for (Ingredient ing : r.ingredients)
     {
-      println("Checking ingredient: " + ing.name);
+      // println("Checking ingredient: " + ing.name);
       if (ing.name.equals(name))
       {
-        println("Found in recipe: " + r.name);
+        // println("Found in recipe: " + r.name);
         related_recipes.add(r);
         break;
       }
@@ -89,11 +89,8 @@ void fill_search_results(String search)
 {
   search_results.clear();
 
-  println(recipes.size());
-
   if (search.equals(""))
   {
-    println("No search query", recipes.size());
     search_results.addAll(recipes);
   }
   else

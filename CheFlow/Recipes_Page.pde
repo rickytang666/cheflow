@@ -25,6 +25,13 @@ class Recipes_Page extends Page
 
   void setup()
   {
+    for (int i : currentPages)
+    {
+      i = 0;
+    }
+
+    layer = 0;
+
     set_nav_gui(); 
     set_recipes_page();
 
