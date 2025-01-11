@@ -50,8 +50,6 @@ void import_recipes()
   }
 
   recipes.clear();
-  ingredient_id = 1;
-  recipe_id = 1;
 
   for (int i = 0; i < recipes_array.size(); i++)
   {
@@ -75,6 +73,75 @@ void import_recipes()
   sort_recipes(2);
   println(recipes.size() + " recipes loaded successfully");
   
+}
+
+
+void export_fridge()
+{
+  JSONArray fridge_array = new JSONArray();
+
+  for (Ingredient ing : fridge)
+  {
+    JSONObject ingredient_obj = new JSONObject();
+    ingredient_obj.setString("name", ing.name);
+    fridge_array.append(ingredient_obj);
+  }
+
+  try
+  {
+    saveJSONArray(fridge_array, "fridge.json");
+    println("Fridge saved successfully");
+  }
+  catch (Exception e)
+  {
+    println("Error saving fridge");
+  }
+
+}
+
+
+void import_fridge()
+{
+  JSONArray fridge_array = loadJSONArray("fridge.json");
+
+  if (fridge_array == null)
+  {
+    println("Error loading fridge");
+    return;
+  }
+
+  fridge.clear();
+  HashMap<String, Ingredient> ing_map = new HashMap<String, Ingredient>();
+
+  for (int i = 0; i < fridge_array.size(); i++)
+  {
+    JSONObject ingredient_obj = fridge_array.getJSONObject(i);
+    String name = ingredient_obj.getString("name");
+    
+    if (!ing_map.containsKey(name))
+    {
+      Ingredient ing = new Ingredient(name);
+      fridge.add(ing);
+      ing_map.put(name, ing);
+    }
+  }
+
+  println(fridge.size() + " ingredients loaded successfully");
+  
+}
+
+
+void export_data()
+{
+  export_recipes();
+  export_fridge();
+}
+
+
+void import_data()
+{
+  import_recipes();
+  import_fridge();
 }
 
 

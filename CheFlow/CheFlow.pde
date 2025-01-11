@@ -52,7 +52,7 @@ void setup()
 {
   size(1000, 700);
   G4P.messagesEnabled(false);
-  import_recipes();
+  import_data();
   
   nb = new Nav_Bar(this);
   rp = new Recipes_Page(this);

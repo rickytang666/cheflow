@@ -8,7 +8,7 @@ class Frige_Page extends Page
   ArrayList<GAbstractControl> static_controls = new ArrayList<GAbstractControl>();
   
   GLabel title;
-  GButton prev_button, next_button, back, add_button;
+  GButton prev_button, next_button, back, add_button, export_button;
   
   /* CONSTRUCTORS */
 
@@ -68,12 +68,16 @@ class Frige_Page extends Page
 
     add_button = new GButton(parent, 800, 200, 70, 50, "+Item");
     add_button.addEventHandler(parent, "add_button_handler_f");
+
+    export_button = new GButton(parent, 800, 300, 70, 50, "Export");
+    export_button.addEventHandler(parent, "export_button_handler");
     
     static_controls.add(title);
     static_controls.add(prev_button);
     static_controls.add(next_button);
     static_controls.add(back);
     static_controls.add(add_button);
+    static_controls.add(export_button);
   }
 
 

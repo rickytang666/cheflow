@@ -318,7 +318,14 @@ public void export_button_handler(GButton button, GEvent event)
 {
   if (event == GEvent.CLICKED)
   {
-    export_recipes();
+    if (button == rp.export_button)
+    {
+      export_recipes();
+    }
+    else if (button == fp.export_button)
+    {
+      export_fridge();
+    }
   }
 }
 
