@@ -24,9 +24,9 @@ class Activity_Page extends Page
   {
     layer = 0;
 
-    for (int i : page_nums)
+    for (int i = 0; i < page_nums.length; ++i)
     {
-      i = 0;
+      page_nums[i] = 0;
     }
 
     total_page_nums[0] = (int) ceil((float) log_records.size() / buttons_per_page);
@@ -152,7 +152,7 @@ class Activity_Page extends Page
         float x = button_startX;
         float y = button_startY + button_index * (button_height + button_spacing);
 
-        l.button = new GButton(parent, x, y, button_width, button_height, l.time_finished.get_time_str() + " - " + (l.recipe == null ? l.recipe_name : l.recipe.name));
+        l.button = new GButton(parent, x, y, button_width, button_height, l.time_finished.get_time_str() + " - " + (l.recipe == null ? l.name : l.recipe.name));
         l.button.addEventHandler(parent, "log_button_handler");
 
         l.del_button = new GButton(parent, x + button_width + button_spacing, y, 50, button_height, "Delete");
@@ -169,7 +169,7 @@ class Activity_Page extends Page
       duration_editor.setText(str(current_log.duration));
 
       current_log.recipe_label = new GLabel(parent, 350, 100, 200, 30);
-      String str = (current_log.recipe == null ? current_log.recipe_name : current_log.recipe.name);
+      String str = (current_log.recipe == null ? current_log.name : current_log.recipe.name);
       
       current_log.recipe_label.setText(str);
       
@@ -297,7 +297,7 @@ public void duration_editor_handler(GTextField source, GEvent event)
     try
     {
       int duration = Integer.parseInt(source.getText());
-      current_log.duration = duration;
+      current_log.duration = constrain(duration, 1, 24 * 60);
     }
     catch (Exception e)
     {

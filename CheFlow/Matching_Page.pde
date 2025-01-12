@@ -23,9 +23,9 @@ class Matching_Page extends Page
   {
     layer = 0;
 
-    for (int i : page_nums)
+    for (int i = 0; i < page_nums.length; ++i)
     {
-      i = 0;
+      page_nums[i] = 0;
     }
 
     matching_results.clear();

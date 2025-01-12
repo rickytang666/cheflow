@@ -7,6 +7,7 @@ class Home_Page extends Page
 
   ArrayList<GAbstractControl> static_controls = new ArrayList<GAbstractControl>();
   GLabel title;
+  GButton export_button;
 
   /* CONSTRUCTORS */
 
@@ -19,8 +20,14 @@ class Home_Page extends Page
 
   void setup()
   {
-    title = new GLabel(parent, 300, 100, 500, 50, "This is the Home Page");
-    static_controls.add(title);
+    layer = 0;
+
+    for (int i = 0; i < page_nums.length; ++i)
+    {
+      page_nums[i] = 0;
+    }
+
+    set_static_gui();
   }
 
 
@@ -37,4 +44,25 @@ class Home_Page extends Page
   }
 
   /* ADDITIONAL METHODS */
+
+  void set_static_gui()
+  {
+    title = new GLabel(parent, 300, 100, 500, 50, "This is the Home Page");
+
+    export_button = new GButton(parent, 400, 200, 200, 40, "Export Data");
+    export_button.addEventHandler(parent, "export_button_handler");
+
+    static_controls.add(title);
+    static_controls.add(export_button);
+  }
+}
+
+/* EVENT HANDLERS */
+
+public void export_button_handler(GButton button, GEvent event)
+{
+  if (event == GEvent.CLICKED)
+  {
+    export_data();
+  }
 }

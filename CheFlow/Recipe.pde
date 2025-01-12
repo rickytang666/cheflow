@@ -115,6 +115,14 @@ class Recipe
   void delete()
   {
     recipes.remove(this);
+
+    for (Log l : log_records)
+    {
+      if (l.recipe == this)
+      {
+        l.recipe = null;
+      }
+    }
     
     dispose_controls();
   }

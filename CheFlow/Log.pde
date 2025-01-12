@@ -4,7 +4,7 @@ class Log
   /* FIELDS */
 
   Recipe recipe;
-  String recipe_name;
+  String name;
   Time time_finished;
   int duration;
 
@@ -16,7 +16,7 @@ class Log
   Log()
   {
     this.recipe = null;
-    this.recipe_name = "Custom cooking";
+    this.name = "Custom cooking";
     this.time_finished = new Time();
     this.duration = 1;
 

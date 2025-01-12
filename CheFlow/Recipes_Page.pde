@@ -7,7 +7,7 @@ class Recipes_Page extends Page
 
   ArrayList<GAbstractControl> static_controls = new ArrayList<GAbstractControl>();
 
-  GButton prev_button, next_button, back, search_button, add_button, export_button;
+  GButton prev_button, next_button, back, search_button, add_button;
   GTextField search_bar;
   GOption search_toggle;
 
@@ -28,9 +28,9 @@ class Recipes_Page extends Page
 
     layer = 0;
 
-    for (int i : page_nums)
+    for (int i = 0; i < page_nums.length; ++i)
     {
-      i = 0;
+      page_nums[i] = 0;
     }
     
     total_page_nums[0] = (int) ceil((float) recipes.size() / buttons_per_page);
@@ -43,6 +43,8 @@ class Recipes_Page extends Page
   
   void die()
   {
+    searching = false;
+
     for (GAbstractControl c : static_controls)
     {
       if (c != null)
@@ -74,9 +76,6 @@ class Recipes_Page extends Page
     add_button = new GButton(parent, 800, 200, 70, 50, "+Item");
     add_button.addEventHandler(parent, "add_button_handler");
 
-    export_button = new GButton(parent, 800, 300, 70, 50, "Export");
-    export_button.addEventHandler(parent, "export_button_handler");
-
     search_bar = new GTextField(parent, 100, 60, 400, 40, G4P.SCROLLBARS_HORIZONTAL_ONLY);
     
     search_button = new GButton(parent, 520, 60, 70, 40, "Search");
@@ -93,7 +92,6 @@ class Recipes_Page extends Page
     static_controls.add(search_button);
     static_controls.add(search_toggle);
     static_controls.add(add_button);
-    static_controls.add(export_button);
   }
 
 
@@ -103,8 +101,10 @@ class Recipes_Page extends Page
     next_button.setEnabled(layer < 2 && page_nums[layer] < total_page_nums[layer] - 1);
     back.setEnabled(layer > 0);
     add_button.setEnabled(layer < 2 && (layer == 0 && !searching) || (layer == 1));
+    add_button.setVisible(layer < 2 && (layer == 0 && !searching) || (layer == 1));
     search_button.setEnabled(layer == 0 && searching);
     search_toggle.setEnabled(layer == 0);
+    search_bar.setEnabled(layer == 0 && searching);
   }
 
 
@@ -164,6 +164,7 @@ class Recipes_Page extends Page
         r.del_button = new GButton(parent, x + button_width + 10, y, 50, button_height, "Delete");
         r.del_button.addEventHandler(parent, "recipe_del_button_handler");
         r.del_button.setEnabled(!searching);
+        r.del_button.setVisible(!searching);
       }
     }
     else if (layer == 1)
@@ -241,6 +242,7 @@ public void handleButtonEvents(GButton button, GEvent event)
     String search = rp.search_bar.getText();
     fill_search_results(search);
     total_page_nums[0] = (int) ceil((float) search_results.size() / buttons_per_page);
+    println("Search size", search.length(), "Search results: " + search_results.size());
     page_nums[0] = constrain(page_nums[0], 0, total_page_nums[0] - 1);
     rp.set_recipes_page();
   }
@@ -303,6 +305,7 @@ public void search_mode_handler(GOption option, GEvent event)
   {
     println("Search mode enabled");
     rp.searching = true;
+    rp.search_bar.setText("");
     search_results.clear();
     search_results.addAll(recipes);
     rp.set_recipes_page();
@@ -322,7 +325,6 @@ public void add_button_handler(GButton button, GEvent event)
 {
   if (event == GEvent.CLICKED) 
   {
-
     if (layer == 0)
     {
       String name = "Recipe " + recipe_id;
@@ -342,21 +344,6 @@ public void add_button_handler(GButton button, GEvent event)
       rp.set_recipes_page();
     }
     
-  }
-}
-
-public void export_button_handler(GButton button, GEvent event)
-{
-  if (event == GEvent.CLICKED)
-  {
-    if (button == rp.export_button)
-    {
-      export_recipes();
-    }
-    else if (button == fp.export_button)
-    {
-      export_fridge();
-    }
   }
 }
 

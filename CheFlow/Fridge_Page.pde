@@ -8,7 +8,7 @@ class Frige_Page extends Page
   ArrayList<GAbstractControl> static_controls = new ArrayList<GAbstractControl>();
   
   GLabel title;
-  GButton prev_button, next_button, back, add_button, export_button;
+  GButton prev_button, next_button, back, add_button;
   
   /* CONSTRUCTORS */
 
@@ -23,10 +23,12 @@ class Frige_Page extends Page
   {
     layer = 0;
 
-    for (int i : page_nums)
+    for (int i = 0; i < page_nums.length; ++i)
     {
-      i = 0;
+      page_nums[i] = 0;
     }
+
+    total_page_nums[0] = (int) ceil((float) fridge.size() / buttons_per_page);
     
     set_nav_gui();
     set_fridge_page();
@@ -52,7 +54,6 @@ class Frige_Page extends Page
   {
     title = new GLabel(parent, 300, 60, 500, 30, "This is the Fridge Page");
     
-    
     float navButtonWidth = 100;
     float navButtonHeight = 40;
     float navButtonY = height - 50;
@@ -68,16 +69,12 @@ class Frige_Page extends Page
 
     add_button = new GButton(parent, 800, 200, 70, 50, "+Item");
     add_button.addEventHandler(parent, "add_button_handler_f");
-
-    export_button = new GButton(parent, 800, 300, 70, 50, "Export");
-    export_button.addEventHandler(parent, "export_button_handler");
     
     static_controls.add(title);
     static_controls.add(prev_button);
     static_controls.add(next_button);
     static_controls.add(back);
     static_controls.add(add_button);
-    static_controls.add(export_button);
   }
 
 
@@ -185,6 +182,7 @@ public void ingredient_del_button_handler_f(GButton button, GEvent event)
     {
       if (ing.del_button == button)
       {
+        ing.dispose_controls();
         fridge.remove(ing);
         total_page_nums[0] = (int) ceil((float) fridge.size() / buttons_per_page);
         page_nums[0] = constrain(page_nums[0], 0, total_page_nums[0] - 1);

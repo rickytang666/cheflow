@@ -6,144 +6,85 @@
     "id": 21
   },
   {
-    "duration": 89,
-    "name": "chocolate cake",
-    "ingredients": [
-      {"name": "flour"},
-      {"name": "sugar"},
-      {"name": "cocoa powder"},
-      {"name": "eggs"},
-      {"name": "butter"},
-      {"name": "milk"},
-      {"name": "ricky"}
-    ],
-    "id": 1
-  },
-  {
     "duration": 30,
-    "name": "cookies",
+    "name": "salad",
     "ingredients": [
-      {"name": "flour"},
-      {"name": "sugar"},
-      {"name": "butter"},
-      {"name": "eggs"},
-      {"name": "chocolate chips"},
-      {"name": "salt"},
-      {"name": "ricky"}
-    ],
-    "id": 2
-  },
-  {
-    "duration": 10,
-    "name": "pancakes",
-    "ingredients": [
-      {"name": "flour"},
-      {"name": "milk"},
-      {"name": "eggs"},
-      {"name": "butter"},
-      {"name": "sugar"},
+      {"name": "lettuce"},
+      {"name": "tomato"},
+      {"name": "cucumber"},
+      {"name": "olive oil"},
       {"name": "salt"}
     ],
-    "id": 3
+    "id": 19
   },
   {
     "duration": 30,
-    "name": "omelette",
+    "name": "burger",
     "ingredients": [
+      {"name": "burger patty"},
+      {"name": "burger bun"},
+      {"name": "lettuce"},
+      {"name": "tomato"},
+      {"name": "cheese"}
+    ],
+    "id": 18
+  },
+  {
+    "duration": 30,
+    "name": "fish tacos",
+    "ingredients": [
+      {"name": "fish fillet"},
+      {"name": "tortilla"},
+      {"name": "cabbage"},
+      {"name": "lime"},
+      {"name": "sour cream"}
+    ],
+    "id": 17
+  },
+  {
+    "duration": 30,
+    "name": "fried rice",
+    "ingredients": [
+      {"name": "rice"},
       {"name": "eggs"},
+      {"name": "soy sauce"},
+      {"name": "peas"},
+      {"name": "carrot"}
+    ],
+    "id": 16
+  },
+  {
+    "duration": 30,
+    "name": "smoothie",
+    "ingredients": [
       {"name": "milk"},
-      {"name": "cheese"},
-      {"name": "salt"},
-      {"name": "pepper"}
-    ],
-    "id": 4
-  },
-  {
-    "duration": 30,
-    "name": "pizza dough",
-    "ingredients": [
-      {"name": "flour"},
-      {"name": "water"},
-      {"name": "yeast"},
-      {"name": "salt"}
-    ],
-    "id": 5
-  },
-  {
-    "duration": 30,
-    "name": "banana bread",
-    "ingredients": [
-      {"name": "flour"},
-      {"name": "sugar"},
-      {"name": "butter"},
-      {"name": "eggs"},
       {"name": "banana"},
-      {"name": "milk"}
+      {"name": "yogurt"},
+      {"name": "honey"}
     ],
-    "id": 6
+    "id": 15
   },
   {
     "duration": 30,
-    "name": "vanilla cake",
-    "ingredients": [
-      {"name": "flour"},
-      {"name": "sugar"},
-      {"name": "eggs"},
-      {"name": "butter"},
-      {"name": "milk"},
-      {"name": "vanilla extract"}
-    ],
-    "id": 7
-  },
-  {
-    "duration": 30,
-    "name": "french toast",
+    "name": "grilled cheese",
     "ingredients": [
       {"name": "bread"},
-      {"name": "eggs"},
-      {"name": "milk"},
-      {"name": "butter"},
-      {"name": "sugar"},
-      {"name": "cinnamon"}
-    ],
-    "id": 8
-  },
-  {
-    "duration": 30,
-    "name": "lasagna",
-    "ingredients": [
-      {"name": "lasagna noodles"},
-      {"name": "ricotta cheese"},
-      {"name": "ground beef"},
-      {"name": "tomato sauce"},
-      {"name": "mozzarella"}
-    ],
-    "id": 9
-  },
-  {
-    "duration": 30,
-    "name": "mac and cheese",
-    "ingredients": [
-      {"name": "pasta"},
       {"name": "cheddar cheese"},
-      {"name": "milk"},
-      {"name": "butter"},
-      {"name": "flour"}
+      {"name": "butter"}
     ],
-    "id": 10
+    "id": 14
   },
   {
     "duration": 30,
-    "name": "muffins",
+    "name": "apple pie",
     "ingredients": [
-      {"name": "flour"},
+      {"name": "apples"},
       {"name": "sugar"},
-      {"name": "milk"},
-      {"name": "eggs"},
-      {"name": "butter"},
-      {"name": "blueberries"}
+      {"name": "cinnamon"},
+      {"name": "flour"},
+      {"name": "butter"}
     ],
-    "id": 11
+    "id": 13
   },
   {
     "duration": 30,
@@ -160,95 +101,142 @@
   },
   {
     "duration": 30,
-    "name": "apple pie",
+    "name": "muffins",
     "ingredients": [
-      {"name": "apples"},
-      {"name": "sugar"},
-      {"name": "cinnamon"},
       {"name": "flour"},
-      {"name": "butter"}
+      {"name": "sugar"},
+      {"name": "milk"},
+      {"name": "eggs"},
+      {"name": "butter"},
+      {"name": "blueberries"}
     ],
-    "id": 13
+    "id": 11
   },
   {
     "duration": 30,
-    "name": "grilled cheese",
+    "name": "mac and cheese",
+    "ingredients": [
+      {"name": "pasta"},
+      {"name": "cheddar cheese"},
+      {"name": "milk"},
+      {"name": "butter"},
+      {"name": "flour"}
+    ],
+    "id": 10
+  },
+  {
+    "duration": 30,
+    "name": "lasagna",
+    "ingredients": [
+      {"name": "lasagna noodles"},
+      {"name": "ricotta cheese"},
+      {"name": "ground beef"},
+      {"name": "tomato sauce"},
+      {"name": "mozzarella"}
+    ],
+    "id": 9
+  },
+  {
+    "duration": 30,
+    "name": "french toast",
     "ingredients": [
       {"name": "bread"},
-      {"name": "cheddar cheese"},
-      {"name": "butter"}
-    ],
-    "id": 14
-  },
-  {
-    "duration": 30,
-    "name": "smoothie",
-    "ingredients": [
-      {"name": "milk"},
-      {"name": "banana"},
-      {"name": "yogurt"},
-      {"name": "honey"}
-    ],
-    "id": 15
-  },
-  {
-    "duration": 30,
-    "name": "fried rice",
-    "ingredients": [
-      {"name": "rice"},
       {"name": "eggs"},
-      {"name": "soy sauce"},
-      {"name": "peas"},
-      {"name": "carrot"}
+      {"name": "milk"},
+      {"name": "butter"},
+      {"name": "sugar"},
+      {"name": "cinnamon"}
     ],
-    "id": 16
+    "id": 8
   },
   {
     "duration": 30,
-    "name": "fish tacos",
+    "name": "vanilla cake",
     "ingredients": [
-      {"name": "fish fillet"},
-      {"name": "tortilla"},
-      {"name": "cabbage"},
-      {"name": "lime"},
-      {"name": "sour cream"}
+      {"name": "flour"},
+      {"name": "sugar"},
+      {"name": "eggs"},
+      {"name": "butter"},
+      {"name": "milk"},
+      {"name": "vanilla extract"}
     ],
-    "id": 17
+    "id": 7
   },
   {
     "duration": 30,
-    "name": "burger",
+    "name": "banana bread",
     "ingredients": [
-      {"name": "burger patty"},
-      {"name": "burger bun"},
-      {"name": "lettuce"},
-      {"name": "tomato"},
-      {"name": "cheese"}
+      {"name": "flour"},
+      {"name": "sugar"},
+      {"name": "butter"},
+      {"name": "eggs"},
+      {"name": "banana"},
+      {"name": "milk"}
     ],
-    "id": 18
+    "id": 6
   },
   {
     "duration": 30,
-    "name": "salad",
+    "name": "pizza dough",
     "ingredients": [
-      {"name": "lettuce"},
-      {"name": "tomato"},
-      {"name": "cucumber"},
-      {"name": "olive oil"},
+      {"name": "flour"},
+      {"name": "water"},
+      {"name": "yeast"},
       {"name": "salt"}
     ],
-    "id": 19
+    "id": 5
   },
   {
     "duration": 30,
-    "name": "chili con carne",
+    "name": "omelette",
     "ingredients": [
-      {"name": "ground beef"},
-      {"name": "beans"},
-      {"name": "tomato sauce"},
-      {"name": "chili powder"},
-      {"name": "onion"}
+      {"name": "eggs"},
+      {"name": "milk"},
+      {"name": "cheese"},
+      {"name": "salt"},
+      {"name": "pepper"}
     ],
-    "id": 20
+    "id": 4
+  },
+  {
+    "duration": 10,
+    "name": "pancakes",
+    "ingredients": [
+      {"name": "flour"},
+      {"name": "milk"},
+      {"name": "eggs"},
+      {"name": "butter"},
+      {"name": "sugar"},
+      {"name": "salt"}
+    ],
+    "id": 3
+  },
+  {
+    "duration": 30,
+    "name": "cookies",
+    "ingredients": [
+      {"name": "flour"},
+      {"name": "sugar"},
+      {"name": "butter"},
+      {"name": "eggs"},
+      {"name": "chocolate chips"},
+      {"name": "salt"},
+      {"name": "ricky"}
+    ],
+    "id": 2
+  },
+  {
+    "duration": 89,
+    "name": "chocolate cake",
+    "ingredients": [
+      {"name": "flour"},
+      {"name": "sugar"},
+      {"name": "cocoa powder"},
+      {"name": "eggs"},
+      {"name": "butter"},
+      {"name": "milk"},
+      {"name": "ricky"}
+    ],
+    "id": 1
   }
 ]

@@ -77,9 +77,10 @@ ArrayList<Recipe> get_related_recipes(String name)
 
 void fill_search_results(String search)
 {
+  
   search_results.clear();
 
-  if (search.equals(""))
+  if (search.equals("") || search.equals(" "))
   {
     search_results.addAll(recipes);
   }
