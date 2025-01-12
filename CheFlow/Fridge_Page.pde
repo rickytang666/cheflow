@@ -23,7 +23,7 @@ class Frige_Page extends Page
   {
     layer = 0;
 
-    for (int i : currentPages)
+    for (int i : page_nums)
     {
       i = 0;
     }
@@ -83,8 +83,8 @@ class Frige_Page extends Page
 
   void update_nav_gui()
   {
-    prev_button.setEnabled(layer == 0 && currentPages[0] > 0);
-    next_button.setEnabled(layer == 0 && currentPages[0] < totalPages[0] - 1);
+    prev_button.setEnabled(layer == 0 && page_nums[0] > 0);
+    next_button.setEnabled(layer == 0 && page_nums[0] < total_page_nums[0] - 1);
     back.setEnabled(layer > 0);
     add_button.setEnabled(layer == 0);
   }
@@ -107,9 +107,9 @@ class Frige_Page extends Page
 
     if (layer == 0)
     {
-      totalPages[0] = (int) ceil((float) fridge.size() / buttons_per_page);
+      total_page_nums[0] = (int) ceil((float) fridge.size() / buttons_per_page);
 
-      int start = currentPages[0] * buttons_per_page;
+      int start = page_nums[0] * buttons_per_page;
       int end = min(fridge.size(), start + buttons_per_page);
 
       for (int i = start; i < end; i++)
@@ -151,8 +151,8 @@ public void add_button_handler_f(GButton button, GEvent event)
     ++ingredient_id;
     Ingredient ing = new Ingredient(name);
     fridge.add(ing);
-    totalPages[0] = (int) ceil((float) fridge.size() / buttons_per_page);
-    currentPages[0] = totalPages[0] - 1;
+    total_page_nums[0] = (int) ceil((float) fridge.size() / buttons_per_page);
+    page_nums[0] = total_page_nums[0] - 1;
     fp.set_fridge_page();
   }
 }
@@ -186,8 +186,8 @@ public void ingredient_del_button_handler_f(GButton button, GEvent event)
       if (ing.del_button == button)
       {
         fridge.remove(ing);
-        totalPages[0] = (int) ceil((float) fridge.size() / buttons_per_page);
-        currentPages[0] = constrain(currentPages[0], 0, totalPages[0] - 1);
+        total_page_nums[0] = (int) ceil((float) fridge.size() / buttons_per_page);
+        page_nums[0] = constrain(page_nums[0], 0, total_page_nums[0] - 1);
         fp.set_fridge_page();
         break;
       }

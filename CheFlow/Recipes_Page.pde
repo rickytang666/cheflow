@@ -28,12 +28,12 @@ class Recipes_Page extends Page
 
     layer = 0;
 
-    for (int i : currentPages)
+    for (int i : page_nums)
     {
       i = 0;
     }
     
-    totalPages[0] = (int) ceil((float) recipes.size() / buttons_per_page);
+    total_page_nums[0] = (int) ceil((float) recipes.size() / buttons_per_page);
 
     set_nav_gui(); 
     set_recipes_page();
@@ -99,8 +99,8 @@ class Recipes_Page extends Page
 
   void update_nav_gui()
   {
-    prev_button.setEnabled(layer < 2 && currentPages[layer] > 0);
-    next_button.setEnabled(layer < 2 && currentPages[layer] < totalPages[layer] - 1);
+    prev_button.setEnabled(layer < 2 && page_nums[layer] > 0);
+    next_button.setEnabled(layer < 2 && page_nums[layer] < total_page_nums[layer] - 1);
     back.setEnabled(layer > 0);
     add_button.setEnabled(layer < 2 && (layer == 0 && !searching) || (layer == 1));
     search_button.setEnabled(layer == 0 && searching);
@@ -142,11 +142,11 @@ class Recipes_Page extends Page
     if (layer == 0)
     {
 
-      totalPages[0] = (int) ceil((float) recipes.size() / buttons_per_page);
+      total_page_nums[0] = (int) ceil((float) recipes.size() / buttons_per_page);
       
       ArrayList<Recipe> to_display = searching ? search_results : recipes;
 
-      int start = currentPages[0] * buttons_per_page;
+      int start = page_nums[0] * buttons_per_page;
       int end = min(start + buttons_per_page, to_display.size());
       
       
@@ -170,7 +170,7 @@ class Recipes_Page extends Page
     else if (layer == 1)
     {
           
-      int start = currentPages[1] * buttons_per_page;
+      int start = page_nums[1] * buttons_per_page;
       int end = min(start + buttons_per_page, current_r.ingredients.size());
       
       current_r.renamer = new GTextField(parent, 350, 110, 200, 40, G4P.SCROLLBARS_HORIZONTAL_ONLY);
@@ -221,18 +221,18 @@ public void handleButtonEvents(GButton button, GEvent event)
   
   if (button == rp.next_button && event == GEvent.CLICKED) 
   {
-    currentPages[layer]++;
+    page_nums[layer]++;
     rp.set_recipes_page();
   }
   else if (button == rp.prev_button && event == GEvent.CLICKED) 
   {
-    currentPages[layer]--;
+    page_nums[layer]--;
     rp.set_recipes_page();
   }
   else if (button == rp.back && event == GEvent.CLICKED)
   {
-    currentPages[layer] = 0;
-    totalPages[layer] = 0;
+    page_nums[layer] = 0;
+    total_page_nums[layer] = 0;
     layer--;
     
     rp.set_recipes_page();
@@ -242,40 +242,40 @@ public void handleButtonEvents(GButton button, GEvent event)
     
     String search = rp.search_bar.getText();
     fill_search_results(search);
-    totalPages[0] = (int) ceil((float) search_results.size() / buttons_per_page);
+    total_page_nums[0] = (int) ceil((float) search_results.size() / buttons_per_page);
     rp.set_recipes_page();
   }
   else if (button == fp.prev_button && event == GEvent.CLICKED)
   {
-    if (currentPages[layer] > 0)
+    if (page_nums[layer] > 0)
     {
-      currentPages[layer]--;
+      page_nums[layer]--;
       fp.set_fridge_page();
     }
   }
   else if (button == fp.next_button && event == GEvent.CLICKED)
   {
-    if (currentPages[layer] < totalPages[layer] - 1)
+    if (page_nums[layer] < total_page_nums[layer] - 1)
     {
-      currentPages[layer]++;
+      page_nums[layer]++;
       fp.set_fridge_page();
     }
   }
   else if (button == fp.back && event == GEvent.CLICKED)
   {
-    currentPages[layer] = 0;
-    totalPages[layer] = 0;
+    page_nums[layer] = 0;
+    total_page_nums[layer] = 0;
     layer--;
     fp.set_fridge_page();
   }
   else if (button == mp.prev_button && event == GEvent.CLICKED)
   {
-    currentPages[layer]--;
+    page_nums[layer]--;
     mp.set_matching_page();
   }
   else if (button == mp.next_button && event == GEvent.CLICKED)
   {
-    currentPages[layer]++;
+    page_nums[layer]++;
     mp.set_matching_page();
   }
 }
@@ -296,7 +296,7 @@ public void search_mode_handler(GOption option, GEvent event)
     println("Search mode disabled");
     rp.searching = false;
     rp.search_bar.setText("");
-    totalPages[layer] = (int) ceil((float) recipes.size() / buttons_per_page);
+    total_page_nums[layer] = (int) ceil((float) recipes.size() / buttons_per_page);
     rp.set_recipes_page();
   }
 }
@@ -312,7 +312,7 @@ public void add_button_handler(GButton button, GEvent event)
       String name = "Recipe " + recipe_id;
       Recipe r = new Recipe(name);
       recipes.add(0, r);
-      totalPages[0] = (int) ceil((float) recipes.size() / buttons_per_page);
+      total_page_nums[0] = (int) ceil((float) recipes.size() / buttons_per_page);
       rp.set_recipes_page();
     }
     else if (layer == 1)
@@ -321,8 +321,8 @@ public void add_button_handler(GButton button, GEvent event)
       ++ingredient_id;
       Ingredient ing = new Ingredient(name);
       current_r.add_ingredient(ing);
-      totalPages[1] = (int) ceil((float) current_r.ingredients.size() / buttons_per_page);
-      currentPages[1] = totalPages[1] - 1;
+      total_page_nums[1] = (int) ceil((float) current_r.ingredients.size() / buttons_per_page);
+      page_nums[1] = total_page_nums[1] - 1;
       rp.set_recipes_page();
     }
     
@@ -358,7 +358,7 @@ public void recipe_button_handler(GButton button, GEvent event)
       {
         current_r = r;
         layer = 1;
-        totalPages[layer] = (int) ceil((float) r.ingredients.size() / buttons_per_page);
+        total_page_nums[layer] = (int) ceil((float) r.ingredients.size() / buttons_per_page);
         rp.set_recipes_page();
         break;
       }
@@ -377,8 +377,8 @@ public void recipe_del_button_handler(GButton button, GEvent event)
       if (r.del_button == button)
       {
         r.delete();
-        totalPages[0] = (int) ceil((float) recipes.size() / buttons_per_page);
-        currentPages[0] = constrain(currentPages[0], 0, totalPages[0] - 1);
+        total_page_nums[0] = (int) ceil((float) recipes.size() / buttons_per_page);
+        page_nums[0] = constrain(page_nums[0], 0, total_page_nums[0] - 1);
         rp.set_recipes_page();
         break;
       }
@@ -447,8 +447,8 @@ public void ingredient_del_button_handler(GButton button, GEvent event)
       if (ing.del_button == button)
       {
         current_r.delete_ingredient(i);
-        totalPages[1] = (int) ceil((float) current_r.ingredients.size() / buttons_per_page);
-        currentPages[1] = constrain(currentPages[1], 0, totalPages[1] - 1);
+        total_page_nums[1] = (int) ceil((float) current_r.ingredients.size() / buttons_per_page);
+        page_nums[1] = constrain(page_nums[1], 0, total_page_nums[1] - 1);
         rp.set_recipes_page();
         break;
       }

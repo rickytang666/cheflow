@@ -30,8 +30,8 @@ final float button_startX = 350;
 final float button_startY = 200;
 
 int layer = 0;
-int[] currentPages = {0, 0, 0}; 
-int[] totalPages = {0, 0, 0};
+int[] page_nums = {0, 0, 0}; 
+int[] total_page_nums = {0, 0, 0};
 int buttons_per_page = 9;
 
 Recipe current_r;
@@ -40,11 +40,12 @@ Ingredient current_ing;
 int recipe_id = 1, ingredient_id = 1;
 
 Nav_Bar nb;
-Page current_page;
+Page current_Page;
 Recipes_Page rp;
 Frige_Page fp;
 Home_Page hp;
 Matching_Page mp;
+Activity_Page ap;
 
 
 /* SETUP AND DRAW */
@@ -60,10 +61,11 @@ void setup()
   fp = new Frige_Page(this);
   hp = new Home_Page(this);
   mp = new Matching_Page(this);
+  ap = new Activity_Page(this);
   
   nb.setup();
-  current_page = hp;
-  current_page.setup();
+  current_Page = hp;
+  current_Page.setup();
   
 }
 

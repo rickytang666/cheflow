@@ -23,7 +23,7 @@ class Matching_Page extends Page
   {
     layer = 0;
 
-    for (int i : currentPages)
+    for (int i : page_nums)
     {
       i = 0;
     }
@@ -31,7 +31,7 @@ class Matching_Page extends Page
     matching_results.clear();
     matching_results.addAll(recipes);
 
-    totalPages[0] = (int) ceil((float) matching_results.size() / buttons_per_page);
+    total_page_nums[0] = (int) ceil((float) matching_results.size() / buttons_per_page);
 
     for (Recipe r : matching_results)
     {
@@ -84,8 +84,8 @@ class Matching_Page extends Page
 
   void update_nav_gui()
   {
-    prev_button.setEnabled(layer == 0 && currentPages[0] > 0);
-    next_button.setEnabled(layer == 0 && currentPages[0] < totalPages[0] - 1);
+    prev_button.setEnabled(layer == 0 && page_nums[0] > 0);
+    next_button.setEnabled(layer == 0 && page_nums[0] < total_page_nums[0] - 1);
   }
 
 
@@ -104,7 +104,7 @@ class Matching_Page extends Page
 
     update_nav_gui();
     
-    int start = currentPages[0] * buttons_per_page;
+    int start = page_nums[0] * buttons_per_page;
     int end = min(matching_results.size(), start + buttons_per_page);
 
     for (int i = start; i < end; ++i)
