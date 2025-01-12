@@ -11,6 +11,8 @@ class Recipes_Page extends Page
   GTextField search_bar;
   GOption search_toggle;
 
+  GLabel entries_status;
+
   Boolean searching = false;
   
 
@@ -85,6 +87,8 @@ class Recipes_Page extends Page
     search_toggle.addEventHandler(parent, "search_mode_handler");
     search_toggle.setText("Search Mode");
 
+    entries_status = new GLabel(parent, 700, 100, 600, 40);
+
     static_controls.add(prev_button);
     static_controls.add(next_button);
     static_controls.add(back);
@@ -92,6 +96,7 @@ class Recipes_Page extends Page
     static_controls.add(search_button);
     static_controls.add(search_toggle);
     static_controls.add(add_button);
+    static_controls.add(entries_status);
   }
 
 
@@ -146,6 +151,8 @@ class Recipes_Page extends Page
       
       ArrayList<Recipe> to_display = searching ? search_results : recipes;
 
+      entries_status.setText("Entries: " + to_display.size());
+
       int start = page_nums[0] * buttons_per_page;
       int end = min(start + buttons_per_page, to_display.size());
       
@@ -169,7 +176,8 @@ class Recipes_Page extends Page
     }
     else if (layer == 1)
     {
-          
+      entries_status.setText("Ingredients: " + current_r.ingredients.size());
+
       int start = page_nums[1] * buttons_per_page;
       int end = min(start + buttons_per_page, current_r.ingredients.size());
       
@@ -241,8 +249,7 @@ public void handleButtonEvents(GButton button, GEvent event)
   {
     String search = rp.search_bar.getText();
     fill_search_results(search);
-    total_page_nums[0] = (int) ceil((float) search_results.size() / buttons_per_page);
-    println("Search size", search.length(), "Search results: " + search_results.size());
+    total_page_nums[0] = max(1, (int) ceil((float) search_results.size() / buttons_per_page));
     page_nums[0] = constrain(page_nums[0], 0, total_page_nums[0] - 1);
     rp.set_recipes_page();
   }
@@ -315,7 +322,7 @@ public void search_mode_handler(GOption option, GEvent event)
     println("Search mode disabled");
     rp.searching = false;
     rp.search_bar.setText("");
-    total_page_nums[layer] = (int) ceil((float) recipes.size() / buttons_per_page);
+    total_page_nums[0] = max(1, (int) ceil((float) recipes.size() / buttons_per_page));
     rp.set_recipes_page();
   }
 }
@@ -330,7 +337,7 @@ public void add_button_handler(GButton button, GEvent event)
       String name = "Recipe " + recipe_id;
       Recipe r = new Recipe(name);
       recipes.add(0, r);
-      total_page_nums[0] = (int) ceil((float) recipes.size() / buttons_per_page);
+      total_page_nums[0] = max(1, (int) ceil((float) recipes.size() / buttons_per_page));
       rp.set_recipes_page();
     }
     else if (layer == 1)
@@ -339,7 +346,7 @@ public void add_button_handler(GButton button, GEvent event)
       ++ingredient_id;
       Ingredient ing = new Ingredient(name);
       current_r.add_ingredient(ing);
-      total_page_nums[1] = (int) ceil((float) current_r.ingredients.size() / buttons_per_page);
+      total_page_nums[1] = max(1, (int) ceil((float) current_r.ingredients.size() / buttons_per_page));      
       page_nums[1] = total_page_nums[1] - 1;
       rp.set_recipes_page();
     }
@@ -380,7 +387,7 @@ public void recipe_del_button_handler(GButton button, GEvent event)
       if (r.del_button == button)
       {
         r.delete();
-        total_page_nums[0] = (int) ceil((float) recipes.size() / buttons_per_page);
+        total_page_nums[0] = max(1, (int) ceil((float) recipes.size() / buttons_per_page));
         page_nums[0] = constrain(page_nums[0], 0, total_page_nums[0] - 1);
         rp.set_recipes_page();
         break;

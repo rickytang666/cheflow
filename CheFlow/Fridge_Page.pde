@@ -148,7 +148,7 @@ public void add_button_handler_f(GButton button, GEvent event)
     ++ingredient_id;
     Ingredient ing = new Ingredient(name);
     fridge.add(ing);
-    total_page_nums[0] = (int) ceil((float) fridge.size() / buttons_per_page);
+    total_page_nums[0] = max(1, (int) ceil((float) fridge.size() / buttons_per_page));
     page_nums[0] = total_page_nums[0] - 1;
     fp.set_fridge_page();
   }
@@ -184,7 +184,7 @@ public void ingredient_del_button_handler_f(GButton button, GEvent event)
       {
         ing.dispose_controls();
         fridge.remove(ing);
-        total_page_nums[0] = (int) ceil((float) fridge.size() / buttons_per_page);
+        total_page_nums[0] = max(1, (int) ceil((float) fridge.size() / buttons_per_page));
         page_nums[0] = constrain(page_nums[0], 0, total_page_nums[0] - 1);
         fp.set_fridge_page();
         break;

@@ -1,24 +1,4 @@
 [
-  {"name": "milk"},
-  {"name": "sugar"},
-  {"name": "butter"},
-  {"name": "eggs"},
-  {"name": "flour"},
   {"name": "salt"},
-  {"name": "cheddar cheese"},
-  {"name": "banana"},
-  {"name": "cinnamon"},
-  {"name": "bread"},
-  {"name": "chocolate chips"},
-  {"name": "pepper"},
-  {"name": "apples"},
-  {"name": "yeast"},
-  {"name": "water"},
-  {"name": "honey"},
-  {"name": "blueberries"},
-  {"name": "rice"},
-  {"name": "tomato"},
-  {"name": "lettuce"},
-  {"name": "carrot"},
-  {"name": "ground beef"}
+  {"name": "egg"}
 ]

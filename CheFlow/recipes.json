@@ -1,241 +1,26 @@
 [
   {
-    "duration": 32,
-    "name": "chicken nuggets",
+    "duration": 2,
+    "name": "french fries",
     "ingredients": [{"name": "salt"}],
-    "id": 21
-  },
-  {
-    "duration": 30,
-    "name": "salad",
-    "ingredients": [
-      {"name": "lettuce"},
-      {"name": "tomato"},
-      {"name": "cucumber"},
-      {"name": "olive oil"},
-      {"name": "salt"}
-    ],
-    "id": 19
-  },
-  {
-    "duration": 30,
-    "name": "burger",
-    "ingredients": [
-      {"name": "burger patty"},
-      {"name": "burger bun"},
-      {"name": "lettuce"},
-      {"name": "tomato"},
-      {"name": "cheese"}
-    ],
-    "id": 18
-  },
-  {
-    "duration": 30,
-    "name": "fish tacos",
-    "ingredients": [
-      {"name": "fish fillet"},
-      {"name": "tortilla"},
-      {"name": "cabbage"},
-      {"name": "lime"},
-      {"name": "sour cream"}
-    ],
-    "id": 17
-  },
-  {
-    "duration": 30,
-    "name": "fried rice",
-    "ingredients": [
-      {"name": "rice"},
-      {"name": "eggs"},
-      {"name": "soy sauce"},
-      {"name": "peas"},
-      {"name": "carrot"}
-    ],
-    "id": 16
-  },
-  {
-    "duration": 30,
-    "name": "smoothie",
-    "ingredients": [
-      {"name": "milk"},
-      {"name": "banana"},
-      {"name": "yogurt"},
-      {"name": "honey"}
-    ],
-    "id": 15
-  },
-  {
-    "duration": 30,
-    "name": "grilled cheese",
-    "ingredients": [
-      {"name": "bread"},
-      {"name": "cheddar cheese"},
-      {"name": "butter"}
-    ],
-    "id": 14
-  },
-  {
-    "duration": 30,
-    "name": "apple pie",
-    "ingredients": [
-      {"name": "apples"},
-      {"name": "sugar"},
-      {"name": "cinnamon"},
-      {"name": "flour"},
-      {"name": "butter"}
-    ],
-    "id": 13
-  },
-  {
-    "duration": 30,
-    "name": "cupcakes",
-    "ingredients": [
-      {"name": "flour"},
-      {"name": "sugar"},
-      {"name": "eggs"},
-      {"name": "butter"},
-      {"name": "milk"},
-      {"name": "vanilla extract"}
-    ],
-    "id": 12
-  },
-  {
-    "duration": 30,
-    "name": "muffins",
-    "ingredients": [
-      {"name": "flour"},
-      {"name": "sugar"},
-      {"name": "milk"},
-      {"name": "eggs"},
-      {"name": "butter"},
-      {"name": "blueberries"}
-    ],
-    "id": 11
-  },
-  {
-    "duration": 30,
-    "name": "mac and cheese",
-    "ingredients": [
-      {"name": "pasta"},
-      {"name": "cheddar cheese"},
-      {"name": "milk"},
-      {"name": "butter"},
-      {"name": "flour"}
-    ],
-    "id": 10
-  },
-  {
-    "duration": 30,
-    "name": "lasagna",
-    "ingredients": [
-      {"name": "lasagna noodles"},
-      {"name": "ricotta cheese"},
-      {"name": "ground beef"},
-      {"name": "tomato sauce"},
-      {"name": "mozzarella"}
-    ],
-    "id": 9
-  },
-  {
-    "duration": 30,
-    "name": "french toast",
-    "ingredients": [
-      {"name": "bread"},
-      {"name": "eggs"},
-      {"name": "milk"},
-      {"name": "butter"},
-      {"name": "sugar"},
-      {"name": "cinnamon"}
-    ],
-    "id": 8
-  },
-  {
-    "duration": 30,
-    "name": "vanilla cake",
-    "ingredients": [
-      {"name": "flour"},
-      {"name": "sugar"},
-      {"name": "eggs"},
-      {"name": "butter"},
-      {"name": "milk"},
-      {"name": "vanilla extract"}
-    ],
-    "id": 7
-  },
-  {
-    "duration": 30,
-    "name": "banana bread",
-    "ingredients": [
-      {"name": "flour"},
-      {"name": "sugar"},
-      {"name": "butter"},
-      {"name": "eggs"},
-      {"name": "banana"},
-      {"name": "milk"}
-    ],
-    "id": 6
-  },
-  {
-    "duration": 30,
-    "name": "pizza dough",
-    "ingredients": [
-      {"name": "flour"},
-      {"name": "water"},
-      {"name": "yeast"},
-      {"name": "salt"}
-    ],
-    "id": 5
-  },
-  {
-    "duration": 30,
-    "name": "omelette",
-    "ingredients": [
-      {"name": "eggs"},
-      {"name": "milk"},
-      {"name": "cheese"},
-      {"name": "salt"},
-      {"name": "pepper"}
-    ],
     "id": 4
   },
   {
-    "duration": 10,
-    "name": "pancakes",
+    "duration": 20,
+    "name": "fried rice",
     "ingredients": [
-      {"name": "flour"},
-      {"name": "milk"},
-      {"name": "eggs"},
-      {"name": "butter"},
-      {"name": "sugar"},
-      {"name": "salt"}
+      {"name": "egg"},
+      {"name": "salt"},
+      {"name": "rice"}
     ],
     "id": 3
   },
   {
     "duration": 30,
-    "name": "cookies",
+    "name": "chicken nuggets",
     "ingredients": [
-      {"name": "flour"},
-      {"name": "sugar"},
-      {"name": "butter"},
-      {"name": "eggs"},
-      {"name": "chocolate chips"},
-      {"name": "salt"},
-      {"name": "ricky"}
-    ],
-    "id": 2
-  },
-  {
-    "duration": 89,
-    "name": "chocolate cake",
-    "ingredients": [
-      {"name": "flour"},
-      {"name": "sugar"},
-      {"name": "cocoa powder"},
-      {"name": "eggs"},
-      {"name": "butter"},
-      {"name": "milk"},
-      {"name": "ricky"}
+      {"name": "chicken"},
+      {"name": "salt"}
     ],
     "id": 1
   }
