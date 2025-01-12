@@ -119,3 +119,130 @@ color get_color_from_value(float value)
   }
   
 }
+
+
+Boolean is_leap_year(int input)
+{
+  if (input % 4 == 0)
+  {
+    if (input % 100 == 0)
+    {
+      if (input % 400 == 0)
+      {
+        return true;
+      }
+      return false;
+    }
+    return true;
+  }
+  return false;
+}
+
+
+int days_in_month(int month, int year)
+{
+  if (month == 2)
+  {
+    if (is_leap_year(year))
+    {
+      return 29;
+    }
+    return 28;
+  }
+  else if (month == 4 || month == 6 || month == 9 || month == 11)
+  {
+    return 30;
+  }
+  return 31;
+}
+
+
+int validate_time_str(String timeStr) 
+{
+  // Split the string into date and time
+  String[] parts = timeStr.split(" ");
+  if (parts.length != 2) 
+  {
+    return -1; // Incorrect format (missing space or parts)
+  }
+
+  String datePart = parts[0];
+  String timePart = parts[1];
+
+  // Validate the date part (YYYY-MM-DD)
+  String[] dateParts = datePart.split("-");
+  if (dateParts.length != 3) 
+  {
+    return -1; // Incorrect date format
+  }
+
+  try 
+  {
+    int year = Integer.parseInt(dateParts[0]);
+    int month = Integer.parseInt(dateParts[1]);
+    int day = Integer.parseInt(dateParts[2]);
+
+    if (month < 1 || month > 12) 
+    {
+      return -2; // Invalid month
+    }
+
+    // Check days in the month
+    if (day < 1 || day > days_in_month(month, year)) 
+    {
+      return -2; // Invalid day
+    }
+  } 
+  catch (NumberFormatException e) 
+  {
+    return -1; // Date part contains non-numeric values
+  }
+
+  // Validate the time part (HH:MM)
+  String[] timeParts = timePart.split(":");
+  if (timeParts.length != 2) 
+  {
+    return -1; // Incorrect time format
+  }
+
+  try 
+  {
+    int hour = Integer.parseInt(timeParts[0]);
+    int minute = Integer.parseInt(timeParts[1]);
+
+    if (hour < 0 || hour > 23) 
+    {
+      return -2; // Invalid hour
+    }
+
+    if (minute < 0 || minute > 59) 
+    {
+      return -2; // Invalid minute
+    }
+  } 
+  catch (NumberFormatException e) 
+  {
+    return -1; // Time part contains non-numeric values
+  }
+
+  // Check if the gvien time is later than the current time
+
+  Time current_time = new Time();
+  Time given_time = new Time(timeStr);
+
+  if (given_time.compareTo(current_time) > 0) 
+  {
+    return -3; // Given time is later than the current time
+  }
+
+  // All checks passed
+  return 0;
+}
+
+
+void sort_log_records()
+{
+  // From lastest to oldest
+
+  log_records.sort((a, b) -> b.time_finished.compareTo(a.time_finished));
+}

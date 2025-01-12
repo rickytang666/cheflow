@@ -19,6 +19,7 @@ ArrayList<Recipe> recipes = new ArrayList<Recipe>();
 ArrayList<Recipe> search_results = new ArrayList<Recipe>();
 ArrayList<Recipe> matching_results = new ArrayList<Recipe>();
 ArrayList<Ingredient> fridge = new ArrayList<Ingredient>();
+ArrayList<Log> log_records = new ArrayList<Log>();
 
 final String file_name_recipes = "recipes.json";
 final String file_name_fridge = "fridge.json";
@@ -36,6 +37,7 @@ int buttons_per_page = 9;
 
 Recipe current_r;
 Ingredient current_ing;
+Log current_log;
 
 int recipe_id = 1, ingredient_id = 1;
 

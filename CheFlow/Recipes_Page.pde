@@ -157,7 +157,6 @@ class Recipes_Page extends Page
         float x = button_startX;
         float y = button_startY + buttonIndex * (button_height + button_spacing);
 
-        // when creating a button, we cannot use "this" anymore
         r.button = new GButton(parent, x, y, button_width, button_height, r.name);
         r.button.addEventHandler(parent, "recipe_button_handler");
 
@@ -239,10 +238,10 @@ public void handleButtonEvents(GButton button, GEvent event)
   }
   else if (button == rp.search_button && event == GEvent.CLICKED)
   {
-    
     String search = rp.search_bar.getText();
     fill_search_results(search);
     total_page_nums[0] = (int) ceil((float) search_results.size() / buttons_per_page);
+    page_nums[0] = constrain(page_nums[0], 0, total_page_nums[0] - 1);
     rp.set_recipes_page();
   }
   else if (button == fp.prev_button && event == GEvent.CLICKED)
@@ -277,6 +276,23 @@ public void handleButtonEvents(GButton button, GEvent event)
   {
     page_nums[layer]++;
     mp.set_matching_page();
+  }
+  else if (button == ap.prev_button && event == GEvent.CLICKED)
+  {
+    page_nums[layer]--;
+    ap.set_activity_page();
+  }
+  else if (button == ap.next_button && event == GEvent.CLICKED)
+  {
+    page_nums[layer]++;
+    ap.set_activity_page();
+  }
+  else if (button == ap.back && event == GEvent.CLICKED)
+  {
+    page_nums[layer] = 0;
+    total_page_nums[layer] = 0;
+    layer--;
+    ap.set_activity_page(); 
   }
 }
 
