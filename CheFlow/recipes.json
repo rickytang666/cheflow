@@ -1,0 +1,27 @@
+[
+  {
+    "duration": 2,
+    "name": "french fries",
+    "ingredients": [{"name": "salt"}],
+    "id": 4
+  },
+  {
+    "duration": 20,
+    "name": "fried rice",
+    "ingredients": [
+      {"name": "egg"},
+      {"name": "salt"},
+      {"name": "rice"}
+    ],
+    "id": 3
+  },
+  {
+    "duration": 30,
+    "name": "chicken nuggets",
+    "ingredients": [
+      {"name": "chicken"},
+      {"name": "salt"}
+    ],
+    "id": 1
+  }
+]
