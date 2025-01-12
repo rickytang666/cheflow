@@ -83,8 +83,8 @@ class Frige_Page extends Page
 
   void update_nav_gui()
   {
-    prev_button.setEnabled(layer == 0);
-    next_button.setEnabled(layer == 0);
+    prev_button.setEnabled(layer == 0 && currentPages[0] > 0);
+    next_button.setEnabled(layer == 0 && currentPages[0] < totalPages[0] - 1);
     back.setEnabled(layer > 0);
     add_button.setEnabled(layer == 0);
   }

@@ -17,6 +17,7 @@ import g4p_controls.*;
 final color accent_col = #6be76b;
 ArrayList<Recipe> recipes = new ArrayList<Recipe>();
 ArrayList<Recipe> search_results = new ArrayList<Recipe>();
+ArrayList<Recipe> matching_results = new ArrayList<Recipe>();
 ArrayList<Ingredient> fridge = new ArrayList<Ingredient>();
 
 final String file_name_recipes = "recipes.json";

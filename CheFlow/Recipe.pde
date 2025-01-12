@@ -12,6 +12,9 @@ class Recipe
   GTextField renamer;
   GTextField duration_editor;
 
+  float matching_score;
+  GLabel title_label, matching_score_label;
+
   /* CONSTRUCTORS */
   
   Recipe(String n)
@@ -21,6 +24,7 @@ class Recipe
     
     this.name = n;
     this.duration = 30;
+    this.matching_score = 0;
     
     this.ingredients = new ArrayList<Ingredient>();
     
@@ -28,6 +32,8 @@ class Recipe
     this.del_button = null;
     this.renamer = null;
     this.duration_editor = null;
+    this.title_label = null;
+    this.matching_score_label = null;
   }
 
   /* METHODS */
@@ -51,6 +57,28 @@ class Recipe
     }
   }
 
+
+  void set_matching_score()
+  {
+    this.matching_score = 0;
+    int num_matched = 0;
+
+    for (Ingredient ing : this.ingredients)
+    {
+      for (Ingredient fridge_ing : fridge)
+      {
+        if (ing.name.equals(fridge_ing.name))
+        {
+          ++num_matched;
+          break;
+        }
+      }
+    }
+
+    this.matching_score = 100.0 * ((float) num_matched / this.ingredients.size());
+  }
+
+
   void dispose_controls()
   {
     if (this.button != null)
@@ -71,6 +99,16 @@ class Recipe
     if (this.renamer != null)
     {
       this.duration_editor.dispose();
+    }
+
+    if (this.title_label != null)
+    {
+      this.title_label.dispose();
+    }
+
+    if (this.matching_score_label != null)
+    {
+      this.matching_score_label.dispose();
     }
   }
 

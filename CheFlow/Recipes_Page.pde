@@ -268,6 +268,16 @@ public void handleButtonEvents(GButton button, GEvent event)
     layer--;
     fp.set_fridge_page();
   }
+  else if (button == mp.prev_button && event == GEvent.CLICKED)
+  {
+    currentPages[layer]--;
+    mp.set_matching_page();
+  }
+  else if (button == mp.next_button && event == GEvent.CLICKED)
+  {
+    currentPages[layer]++;
+    mp.set_matching_page();
+  }
 }
 
 

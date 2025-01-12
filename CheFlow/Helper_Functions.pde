@@ -99,5 +99,23 @@ void fill_search_results(String search)
     }
   }
   
+}
+
+
+color get_color_from_value(float value)
+{
+
+  // red-yellow-green color scale, where red is 0, green is 100
+
+  value = constrain(value, 0, 100); // Ensure the value is within the 0-100 range
+  
+  if (value <= 50) 
+  {
+    // Interpolate between Red and Yellow
+    return lerpColor(color(255, 0, 0), color(255, 255, 0), value / 50.0);
+  } else {
+    // Interpolate between Yellow and Green
+    return lerpColor(color(255, 255, 0), color(0, 255, 0), (value - 50) / 50.0);
+  }
   
 }
