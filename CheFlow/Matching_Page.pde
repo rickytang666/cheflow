@@ -119,7 +119,8 @@ class Matching_Page extends Page
       r.title_label.setOpaque(true);
 
       r.matching_score_label = new GLabel(parent, x + button_width + 10, y, 100, button_height, str(r.matching_score));
-      r.matching_score_label.setLocalColor(2, get_color_from_value(r.matching_score));
+      r.matching_score_label.setOpaque(true);
+      r.matching_score_label.setLocalColor(6, get_color_from_value(r.matching_score));
       r.matching_score_label.setTextBold();
     }
 

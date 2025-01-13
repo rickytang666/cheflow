@@ -228,4 +228,54 @@ void import_data()
 }
 
 
+float get_average_duration(int option)
+{
+  
+  Time current_time = new Time();
+  
+  float total_duration = 0;
+  
+  if (option == 1)
+  {
+    // option 1: calculate within the past 365 days
+    
+    
+    Time start_time = current_time.subtract_days(365);
+    
+    
+    for (Log l : log_records)
+    {
+      if (l.time_finished.compareTo(start_time) >= 0 && l.time_finished.compareTo(current_time) <= 0)
+      {
+        total_duration += l.duration;
+      }
+    }
+    
+    return total_duration/365.0;
+    
+  }
+  else if (option == 2)
+  {
+    // option 2: with in the past 7 days
+    
+    Time start_time = current_time.subtract_days(7);
+    
+    
+    for (Log l : log_records)
+    {
+      if (l.time_finished.compareTo(start_time) >= 0 && l.time_finished.compareTo(current_time) <= 0)
+      {
+        total_duration += l.duration;
+      }
+    }
+    
+    return total_duration/7.0;
+  }
+  else
+  {
+    return 0;
+  }
+}
+
+
 /* EVENT HANDLERS */

@@ -44,6 +44,44 @@ class Time
   {
     return year + "-" + nf(month, 2) + "-" + nf(day, 2) + " " + nf(hour, 2) + ":" + nf(minute, 2);
   }
+  
+  
+  String get_date_str()
+  {
+    return year + "-" + nf(month, 2) + "-" + nf(day, 2);
+  }
+  
+  
+  Time subtract_days(int days)
+  {
+    int y = year;
+    int mo = month;
+    int d = day;
+    
+    while (days > 0)
+    {
+      if (days >= d)
+      {
+        days -= d;
+        mo--;
+        
+        if (mo < 1)
+        {
+          mo = 12;
+          y--;
+        }
+        
+        d = days_in_month(mo, y);
+      }
+      else
+      {
+        d -= days;
+        days = 0;
+      }
+    }
+    
+    return new Time(y, mo, d, hour, minute);
+  }
 
   // implement compareTo method
 
