@@ -247,3 +247,29 @@ void sort_log_records()
 
   log_records.sort((a, b) -> b.time_finished.compareTo(a.time_finished));
 }
+
+
+float get_average_duration(int days)
+{
+
+  if (days <= 0)
+  {
+    return 0.0;
+  }
+  
+  Time current_time = new Time();
+  
+  float total_duration = 0;
+
+  Time start_time = current_time.subtract_days(days);
+
+  for (Log l : log_records)
+  {
+    if (l.time_finished.compareTo(start_time) >= 0 && l.time_finished.compareTo(current_time) <= 0)
+    {
+      total_duration += l.duration;
+    }
+  }
+  
+  return total_duration / days;
+}

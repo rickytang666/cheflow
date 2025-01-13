@@ -63,6 +63,12 @@ class Recipe
     this.matching_score = 0;
     int num_matched = 0;
 
+    if (this.ingredients.size() == 0)
+    {
+      this.matching_score = 100;
+      return;
+    }
+
     for (Ingredient ing : this.ingredients)
     {
       for (Ingredient fridge_ing : fridge)

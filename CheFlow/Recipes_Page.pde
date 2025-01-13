@@ -79,9 +79,7 @@ class Recipes_Page extends Page
     add_button.addEventHandler(parent, "add_button_handler");
 
     search_bar = new GTextField(parent, 100, 60, 400, 40, G4P.SCROLLBARS_HORIZONTAL_ONLY);
-    
-    search_button = new GButton(parent, 520, 60, 70, 40, "Search");
-    search_button.addEventHandler(parent, "handleButtonEvents");
+    search_bar.addEventHandler(parent, "search_bar_handler");
 
     search_toggle = new GOption(parent, 600, 60, 100, 40);
     search_toggle.addEventHandler(parent, "search_mode_handler");
@@ -105,11 +103,12 @@ class Recipes_Page extends Page
     prev_button.setEnabled(layer < 2 && page_nums[layer] > 0);
     next_button.setEnabled(layer < 2 && page_nums[layer] < total_page_nums[layer] - 1);
     back.setEnabled(layer > 0);
+    back.setVisible(layer > 0);
     add_button.setEnabled(layer < 2 && (layer == 0 && !searching) || (layer == 1));
     add_button.setVisible(layer < 2 && (layer == 0 && !searching) || (layer == 1));
-    search_button.setEnabled(layer == 0 && searching);
     search_toggle.setEnabled(layer == 0);
     search_bar.setEnabled(layer == 0 && searching);
+    search_bar.setVisible(layer == 0 && searching);
   }
 
 
@@ -170,8 +169,6 @@ class Recipes_Page extends Page
         
         r.del_button = new GButton(parent, x + button_width + 10, y, 50, button_height, "Delete");
         r.del_button.addEventHandler(parent, "recipe_del_button_handler");
-        r.del_button.setEnabled(!searching);
-        r.del_button.setVisible(!searching);
       }
     }
     else if (layer == 1)
@@ -245,14 +242,6 @@ public void handleButtonEvents(GButton button, GEvent event)
     
     rp.set_recipes_page();
   }
-  else if (button == rp.search_button && event == GEvent.CLICKED)
-  {
-    String search = rp.search_bar.getText();
-    fill_search_results(search);
-    total_page_nums[0] = max(1, (int) ceil((float) search_results.size() / buttons_per_page));
-    page_nums[0] = constrain(page_nums[0], 0, total_page_nums[0] - 1);
-    rp.set_recipes_page();
-  }
   else if (button == fp.prev_button && event == GEvent.CLICKED)
   {
     if (page_nums[layer] > 0)
@@ -302,6 +291,29 @@ public void handleButtonEvents(GButton button, GEvent event)
     total_page_nums[layer] = 0;
     layer--;
     ap.set_activity_page(); 
+  }
+}
+
+
+public void search_bar_handler(GTextField source, GEvent event)
+{
+  if (event == GEvent.CHANGED)
+  {
+    if (source == ap.search_bar)
+    {
+      fill_search_results(source.getText());
+      page_nums[0] = 0;
+      total_page_nums[0] = max(1, (int) ceil((float) log_records.size() / buttons_per_page));
+      page_nums[0] = constrain(page_nums[0], 0, total_page_nums[0] - 1);
+      ap.set_activity_page();
+    }
+    else if (source == rp.search_bar)
+    {
+      fill_search_results(source.getText());
+      total_page_nums[0] = max(1, (int) ceil((float) search_results.size() / buttons_per_page));
+      page_nums[0] = constrain(page_nums[0], 0, total_page_nums[0] - 1);
+      rp.set_recipes_page();
+    }
   }
 }
 
@@ -387,7 +399,17 @@ public void recipe_del_button_handler(GButton button, GEvent event)
       if (r.del_button == button)
       {
         r.delete();
-        total_page_nums[0] = max(1, (int) ceil((float) recipes.size() / buttons_per_page));
+
+        if (rp.searching)
+        {
+          search_results.remove(r);
+          total_page_nums[0] = max(1, (int) ceil((float) search_results.size() / buttons_per_page));
+        }
+        else
+        {
+          total_page_nums[0] = max(1, (int) ceil((float) recipes.size() / buttons_per_page));
+        }
+
         page_nums[0] = constrain(page_nums[0], 0, total_page_nums[0] - 1);
         rp.set_recipes_page();
         break;

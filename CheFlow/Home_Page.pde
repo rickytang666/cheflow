@@ -6,7 +6,7 @@ class Home_Page extends Page
   /* FIELDS */
 
   ArrayList<GAbstractControl> static_controls = new ArrayList<GAbstractControl>();
-  GLabel title;
+  GLabel title, insights;
   GButton export_button;
 
   /* CONSTRUCTORS */
@@ -47,13 +47,24 @@ class Home_Page extends Page
 
   void set_static_gui()
   {
-    title = new GLabel(parent, 300, 100, 500, 50, "This is the Home Page");
+    title = new GLabel(parent, 400, 100, 300, 50, "This is the Home Page");
 
     export_button = new GButton(parent, 400, 200, 200, 40, "Export Data");
     export_button.addEventHandler(parent, "export_button_handler");
 
+    insights = new GLabel(parent, 300, 300, 500, 300);
+
+    String str = "Insights:\n";
+
+    str += "You spend " + nf(get_average_duration(7), 0, 2) + " minutes on average cooking in the past 7 days.\n";
+    str += "You spend " + nf(get_average_duration(30), 0, 2) + " minutes on average cooking in the past 30 days.\n";
+    str += "You spend " + nf(get_average_duration(365), 0, 2) + " minutes on average cooking in the past year.\n";
+
+    insights.setText(str);
+
     static_controls.add(title);
     static_controls.add(export_button);
+    static_controls.add(insights);
   }
 }
 

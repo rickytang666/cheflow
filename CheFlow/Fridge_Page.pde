@@ -83,7 +83,9 @@ class Frige_Page extends Page
     prev_button.setEnabled(layer == 0 && page_nums[0] > 0);
     next_button.setEnabled(layer == 0 && page_nums[0] < total_page_nums[0] - 1);
     back.setEnabled(layer > 0);
+    back.setVisible(layer > 0);
     add_button.setEnabled(layer == 0);
+    add_button.setVisible(layer == 0);
   }
 
 

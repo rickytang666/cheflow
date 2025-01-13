@@ -240,19 +240,7 @@ public void add_button_handler_log(GButton button, GEvent event)
     Log l = new Log();
     log_records.add(0, l);
     total_page_nums[0] = max(1, (int) ceil((float) log_records.size() / buttons_per_page));
-    ap.set_activity_page();
-  }
-}
-
-
-public void search_bar_handler(GTextField source, GEvent event)
-{
-  if (event == GEvent.CHANGED)
-  {
-    fill_search_results(source.getText());
     page_nums[0] = 0;
-    total_page_nums[0] = max(1, (int) ceil((float) log_records.size() / buttons_per_page));
-    page_nums[0] = constrain(page_nums[0], 0, total_page_nums[0] - 1);
     ap.set_activity_page();
   }
 }

@@ -70,8 +70,6 @@ void setup()
   current_Page = hp;
   current_Page.setup();
   
-  println(get_average_duration(2));
-  
 }
 
 void draw()
