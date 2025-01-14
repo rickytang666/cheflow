@@ -263,40 +263,71 @@ float get_average_duration(int days)
 }
 
 
-void draw_linear_regression(PApplet appc) {
-  int n = daily_durations.size();
-  float sumX = 0, sumY = 0, sumXY = 0, sumX2 = 0;
+void draw_scatter_plot(PApplet appc, int n) {
+  // Constrain n between 7 and 365
+  n = constrain(n, 7, 365);
+  
+  float circle_size = map(float(n), 7, 365, 5, 2.5);
 
-  // Calculate sums for least squares regression
-  for (int x = 0; x < n; x++) {
-    float y = daily_durations.get(x);
+  // Background and axis setup
+  appc.background(255);
+  appc.stroke(0);
+  appc.strokeWeight(1);
+  appc.fill(0);
+
+  // Draw axes
+  int xAxis = 50; // Left margin
+  int yAxis = appc.height - 50; // Bottom margin
+
+  // X-axis
+  appc.line(xAxis, yAxis, appc.width - 50, yAxis);
+  // Y-axis
+  appc.line(xAxis, yAxis, xAxis, 50);
+
+  // Calculate max duration for mapping
+  float maxDuration = 0;
+  for (int i = daily_durations.size() - n; i < daily_durations.size(); ++i) {
+    maxDuration = max(maxDuration, daily_durations.get(i));
+  }
+
+  // Draw scatter plot
+  appc.fill(0, 0, 255);
+  appc.stroke(0, 0, 255);
+  appc.strokeWeight(2);
+  for (int i = daily_durations.size() - n; i < daily_durations.size(); ++i) {
+    float duration = daily_durations.get(i);
+    //if (duration == 0) continue;
+
+    float x = map(i - (daily_durations.size() - n), 0, n - 1, xAxis, appc.width - 50);
+    float y = map(duration, 0, maxDuration, yAxis, 50);
+    appc.circle(x, y, circle_size);
+  }
+
+  // Calculate linear regression
+  float sumX = 0, sumY = 0, sumXY = 0, sumX2 = 0;
+  for (int i = daily_durations.size() - n; i < daily_durations.size(); ++i) {
+    float x = i - (daily_durations.size() - n);
+    float y = daily_durations.get(i);
     sumX += x;
     sumY += y;
     sumXY += x * y;
     sumX2 += x * x;
   }
 
-  // Calculate slope (m) and y-intercept (b)
-  float m = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
-  float b = (sumY - m * sumX) / n;
+  float slope = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
+  float intercept = (sumY - slope * sumX) / n;
 
-  // Find the maximum value in daily_durations
-  float maxDuration = 0; // Assume non-negative values
-  for (float duration : daily_durations) {
-    if (duration > maxDuration) {
-      maxDuration = duration;
-    }
-  }
+  // Map regression line to canvas
+  float yStart = slope * 0 + intercept;
+  float yEnd = slope * (n - 1) + intercept;
 
-  // Get y-values for the line of best fit
-  float yStart = m * 0 + b;       // y-value at x = 0
-  float yEnd = m * (n - 1) + b;  // y-value at x = n-1 (364)
+  float xStartMapped = xAxis;
+  float xEndMapped = appc.width - 50;
+  float yStartMapped = map(yStart, 0, maxDuration, yAxis, 50);
+  float yEndMapped = map(yEnd, 0, maxDuration, yAxis, 50);
 
-  // Map y-values to sketch height (invert y-axis)
-  float yStartMapped = appc.map(yStart, 0, maxDuration, appc.height, 0);
-  float yEndMapped = appc.map(yEnd, 0, maxDuration, appc.height, 0);
-
-  // Draw the line of best fit
+  // Draw linear regression line
   appc.stroke(255, 0, 0);
-  appc.line(0, yStartMapped, appc.width, yEndMapped);
+  appc.strokeWeight(1.5);
+  appc.line(xStartMapped, yStartMapped, xEndMapped, yEndMapped);
 }
