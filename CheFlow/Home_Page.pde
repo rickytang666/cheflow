@@ -28,6 +28,8 @@ class Home_Page extends Page
       page_nums[i] = 0;
     }
 
+    update_daily_durations();
+
     set_static_gui();
   }
 
@@ -102,7 +104,7 @@ public void graph_button_handler(GButton button, GEvent event)
 
 void open_graph_window()
 {
-  hp.graph_window = GWindow.getWindow(this, "Graph", 600, 400, 800, 600, JAVA2D);
+  hp.graph_window = GWindow.getWindow(this, "Graph", 600, 400, 1200, 600, JAVA2D);
   hp.graph_window.addDrawHandler(this, "graph_window_draw");
   hp.graph_window.addOnCloseHandler(this, "graph_window_close");
   hp.graph_window.setActionOnClose(G4P.CLOSE_WINDOW);
@@ -112,8 +114,19 @@ void open_graph_window()
 public void graph_window_draw(PApplet appc, GWinData data)
 {
   appc.background(255);
-  appc.fill(0);
-  appc.text("This is the graph window", 400, 300);
+  appc.fill(0, 0, 255);
+  appc.stroke(0, 0, 255);
+
+  for (int i = 0; i < daily_durations.size(); ++i)
+  {
+    if (daily_durations.get(i) == 0)
+    {
+      continue;
+    }
+    appc.circle(i * appc.width/364, 600 - daily_durations.get(i)/5, 2.5);
+  }
+
+  draw_linear_regression(appc);
 }
 
 

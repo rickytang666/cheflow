@@ -11,6 +11,7 @@
 /* PACKAGES */
 
 import g4p_controls.*;
+import java.util.*;
 
 /* GLOBAL VARIABLES OR CONSTANTS */
 
@@ -20,6 +21,8 @@ ArrayList<Recipe> search_results = new ArrayList<Recipe>();
 ArrayList<Recipe> matching_results = new ArrayList<Recipe>();
 ArrayList<Ingredient> fridge = new ArrayList<Ingredient>();
 ArrayList<Log> log_records = new ArrayList<Log>();
+
+ArrayList<Integer> daily_durations = new ArrayList<>();
 
 final String file_name_recipes = "recipes.json";
 final String file_name_fridge = "fridge.json";

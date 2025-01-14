@@ -252,24 +252,51 @@ void sort_log_records()
 float get_average_duration(int days)
 {
 
-  if (days <= 0)
+  float sum = 0.0;
+
+  for (int i = 0; i < days; i++)
   {
-    return 0.0;
+    sum += daily_durations.get(i);
   }
-  
-  Time current_time = new Time();
-  
-  float total_duration = 0;
 
-  Time start_time = current_time.subtract_days(days);
+  return sum / days;
+}
 
-  for (Log l : log_records)
-  {
-    if (l.time_finished.compareTo(start_time) >= 0 && l.time_finished.compareTo(current_time) <= 0)
-    {
-      total_duration += l.duration;
+
+void draw_linear_regression(PApplet appc) {
+  int n = daily_durations.size();
+  float sumX = 0, sumY = 0, sumXY = 0, sumX2 = 0;
+
+  // Calculate sums for least squares regression
+  for (int x = 0; x < n; x++) {
+    float y = daily_durations.get(x);
+    sumX += x;
+    sumY += y;
+    sumXY += x * y;
+    sumX2 += x * x;
+  }
+
+  // Calculate slope (m) and y-intercept (b)
+  float m = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
+  float b = (sumY - m * sumX) / n;
+
+  // Find the maximum value in daily_durations
+  float maxDuration = 0; // Assume non-negative values
+  for (float duration : daily_durations) {
+    if (duration > maxDuration) {
+      maxDuration = duration;
     }
   }
-  
-  return total_duration / days;
+
+  // Get y-values for the line of best fit
+  float yStart = m * 0 + b;       // y-value at x = 0
+  float yEnd = m * (n - 1) + b;  // y-value at x = n-1 (364)
+
+  // Map y-values to sketch height (invert y-axis)
+  float yStartMapped = appc.map(yStart, 0, maxDuration, appc.height, 0);
+  float yEndMapped = appc.map(yEnd, 0, maxDuration, appc.height, 0);
+
+  // Draw the line of best fit
+  appc.stroke(255, 0, 0);
+  appc.line(0, yStartMapped, appc.width, yEndMapped);
 }

@@ -228,4 +228,23 @@ void import_data()
 }
 
 
+void update_daily_durations()
+{
+  Time now = new Time();
+
+  daily_durations = new ArrayList<>(Collections.nCopies(365, 0));
+
+  for (Log l : log_records)
+  {
+    Time time = l.time_finished;
+    int days_ago = now.days_difference(time);
+
+    if (days_ago >= 0 && days_ago < 365) 
+    {
+      daily_durations.set(365 - days_ago - 1, daily_durations.get(365 - days_ago - 1) + l.duration);
+    }
+  }
+}
+
+
 /* EVENT HANDLERS */
