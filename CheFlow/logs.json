@@ -1,477 +1,407 @@
 [
   {
-    "duration": 25,
-    "name": "grilled cheese",
-    "time finished": "2025-01-12 19:45"
-  },
-  {
-    "duration": 40,
-    "name": "chicken curry",
-    "time finished": "2025-01-12 13:20"
-  },
-  {
-    "duration": 15,
-    "name": "tuna sandwich",
-    "time finished": "2025-01-11 12:15"
-  },
-  {
-    "duration": 30,
-    "name": "pasta carbonara",
-    "time finished": "2025-01-09 18:30"
-  },
-  {
-    "duration": 20,
-    "name": "scrambled eggs",
-    "time finished": "2025-01-09 08:45"
-  },
-  {
-    "duration": 35,
-    "name": "beef stir fry",
-    "time finished": "2025-01-08 19:20"
-  },
-  {
-    "duration": 25,
-    "name": "pancakes",
-    "time finished": "2025-01-06 11:30"
-  },
-  {
-    "duration": 45,
-    "name": "lasagna",
-    "time finished": "2025-01-04 17:45"
-  },
-  {
-    "duration": 20,
-    "name": "avocado toast",
-    "time finished": "2025-01-04 09:15"
-  },
-  {
-    "duration": 35,
-    "name": "mushroom risotto",
-    "time finished": "2025-01-02 18:50"
-  },
-  {
-    "duration": 30,
-    "name": "chicken sandwich",
-    "time finished": "2024-12-31 12:30"
-  },
-  {
-    "duration": 25,
+    "duration": 277,
     "name": "garden salad",
-    "time finished": "2024-12-29 13:45"
+    "time finished": "2025-01-12 22:37"
   },
   {
-    "duration": 40,
+    "duration": 203,
     "name": "baked salmon",
-    "time finished": "2024-12-28 19:20"
+    "time finished": "2025-01-10 03:12"
   },
   {
-    "duration": 15,
-    "name": "omelette",
-    "time finished": "2024-12-28 08:15"
+    "duration": 262,
+    "name": "chicken curry",
+    "time finished": "2025-01-04 12:09"
   },
   {
-    "duration": 35,
-    "name": "vegetable soup",
-    "time finished": "2024-12-26 17:30"
-  },
-  {
-    "duration": 30,
-    "name": "caesar salad",
-    "time finished": "2024-12-26 12:45"
-  },
-  {
-    "duration": 45,
-    "name": "pizza margherita",
-    "time finished": "2024-12-24 18:20"
-  },
-  {
-    "duration": 20,
-    "name": "fruit smoothie",
-    "time finished": "2024-12-24 09:30"
-  },
-  {
-    "duration": 25,
-    "name": "french toast",
-    "time finished": "2024-12-22 10:15"
-  },
-  {
-    "duration": 35,
-    "name": "spaghetti bolognese",
-    "time finished": "2024-12-21 19:45"
-  },
-  {
-    "duration": 30,
+    "duration": 217,
     "name": "chicken sandwich",
-    "time finished": "2024-12-19 13:20"
+    "time finished": "2025-01-03 15:30"
   },
   {
-    "duration": 25,
-    "name": "greek salad",
-    "time finished": "2024-12-19 12:15"
+    "duration": 150,
+    "name": "pancakes",
+    "time finished": "2025-01-02 05:33"
   },
   {
-    "duration": 40,
-    "name": "beef burger",
-    "time finished": "2024-12-17 18:45"
+    "duration": 136,
+    "name": "avocado toast",
+    "time finished": "2024-12-31 19:54"
   },
   {
-    "duration": 20,
-    "name": "scrambled eggs",
-    "time finished": "2024-12-17 08:30"
+    "duration": 250,
+    "name": "spaghetti bolognese",
+    "time finished": "2024-12-28 21:02"
   },
   {
-    "duration": 35,
+    "duration": 259,
+    "name": "garden salad",
+    "time finished": "2024-12-24 21:23"
+  },
+  {
+    "duration": 12,
+    "name": "french toast",
+    "time finished": "2024-12-23 02:34"
+  },
+  {
+    "duration": 340,
+    "name": "spaghetti bolognese",
+    "time finished": "2024-12-15 22:24"
+  },
+  {
+    "duration": 309,
+    "name": "beef stir fry",
+    "time finished": "2024-12-10 10:33"
+  },
+  {
+    "duration": 338,
+    "name": "pizza margherita",
+    "time finished": "2024-12-10 08:06"
+  },
+  {
+    "duration": 183,
+    "name": "lasagna",
+    "time finished": "2024-12-07 05:43"
+  },
+  {
+    "duration": 58,
+    "name": "caesar salad",
+    "time finished": "2024-12-07 03:32"
+  },
+  {
+    "duration": 187,
+    "name": "fruit smoothie",
+    "time finished": "2024-12-06 04:02"
+  },
+  {
+    "duration": 133,
+    "name": "chicken curry",
+    "time finished": "2024-11-25 20:16"
+  },
+  {
+    "duration": 235,
+    "name": "pancakes",
+    "time finished": "2024-11-14 23:39"
+  },
+  {
+    "duration": 356,
+    "name": "baked salmon",
+    "time finished": "2024-11-07 20:23"
+  },
+  {
+    "duration": 233,
+    "name": "avocado toast",
+    "time finished": "2024-11-02 20:46"
+  },
+  {
+    "duration": 94,
     "name": "mushroom risotto",
-    "time finished": "2024-12-15 19:20"
+    "time finished": "2024-10-28 00:36"
   },
   {
-    "duration": 25,
+    "duration": 345,
+    "name": "vegetable soup",
+    "time finished": "2024-10-10 21:04"
+  },
+  {
+    "duration": 199,
+    "name": "caesar salad",
+    "time finished": "2024-10-01 02:18"
+  },
+  {
+    "duration": 143,
+    "name": "greek salad",
+    "time finished": "2024-09-30 01:12"
+  },
+  {
+    "duration": 260,
+    "name": "baked salmon",
+    "time finished": "2024-09-24 23:18"
+  },
+  {
+    "duration": 5,
+    "name": "garden salad",
+    "time finished": "2024-09-23 23:46"
+  },
+  {
+    "duration": 219,
+    "name": "baked salmon",
+    "time finished": "2024-09-21 12:40"
+  },
+  {
+    "duration": 352,
+    "name": "garden salad",
+    "time finished": "2024-09-12 22:10"
+  },
+  {
+    "duration": 28,
+    "name": "vegetable soup",
+    "time finished": "2024-09-05 01:19"
+  },
+  {
+    "duration": 185,
+    "name": "spaghetti bolognese",
+    "time finished": "2024-08-16 17:32"
+  },
+  {
+    "duration": 310,
+    "name": "chicken curry",
+    "time finished": "2024-08-13 05:25"
+  },
+  {
+    "duration": 140,
+    "name": "mushroom risotto",
+    "time finished": "2024-08-10 21:55"
+  },
+  {
+    "duration": 273,
+    "name": "chicken curry",
+    "time finished": "2024-08-09 22:41"
+  },
+  {
+    "duration": 190,
+    "name": "omelette",
+    "time finished": "2024-08-08 14:18"
+  },
+  {
+    "duration": 240,
+    "name": "tuna sandwich",
+    "time finished": "2024-08-06 16:03"
+  },
+  {
+    "duration": 260,
+    "name": "spaghetti bolognese",
+    "time finished": "2024-08-02 06:55"
+  },
+  {
+    "duration": 170,
+    "name": "greek salad",
+    "time finished": "2024-07-21 13:10"
+  },
+  {
+    "duration": 13,
+    "name": "beef burger",
+    "time finished": "2024-07-16 05:07"
+  },
+  {
+    "duration": 195,
+    "name": "french toast",
+    "time finished": "2024-07-10 10:11"
+  },
+  {
+    "duration": 93,
+    "name": "pancakes",
+    "time finished": "2024-07-03 04:43"
+  },
+  {
+    "duration": 187,
+    "name": "grilled cheese",
+    "time finished": "2024-07-03 04:06"
+  },
+  {
+    "duration": 197,
+    "name": "chicken curry",
+    "time finished": "2024-06-30 21:09"
+  },
+  {
+    "duration": 270,
+    "name": "avocado toast",
+    "time finished": "2024-06-24 07:15"
+  },
+  {
+    "duration": 233,
+    "name": "lasagna",
+    "time finished": "2024-06-20 02:18"
+  },
+  {
+    "duration": 236,
+    "name": "tuna sandwich",
+    "time finished": "2024-06-18 06:43"
+  },
+  {
+    "duration": 260,
+    "name": "caesar salad",
+    "time finished": "2024-06-16 14:13"
+  },
+  {
+    "duration": 242,
+    "name": "beef burger",
+    "time finished": "2024-06-10 09:43"
+  },
+  {
+    "duration": 216,
+    "name": "scrambled eggs",
+    "time finished": "2024-06-07 13:08"
+  },
+  {
+    "duration": 94,
+    "name": "french toast",
+    "time finished": "2024-05-31 13:03"
+  },
+  {
+    "duration": 221,
+    "name": "garden salad",
+    "time finished": "2024-05-31 04:13"
+  },
+  {
+    "duration": 335,
+    "name": "beef stir fry",
+    "time finished": "2024-05-17 01:21"
+  },
+  {
+    "duration": 244,
+    "name": "beef burger",
+    "time finished": "2024-05-14 20:30"
+  },
+  {
+    "duration": 89,
+    "name": "pizza margherita",
+    "time finished": "2024-05-05 17:00"
+  },
+  {
+    "duration": 300,
+    "name": "greek salad",
+    "time finished": "2024-05-03 19:04"
+  },
+  {
+    "duration": 134,
+    "name": "pancakes",
+    "time finished": "2024-05-01 06:41"
+  },
+  {
+    "duration": 194,
+    "name": "pizza margherita",
+    "time finished": "2024-04-26 16:19"
+  },
+  {
+    "duration": 184,
+    "name": "pizza margherita",
+    "time finished": "2024-04-22 04:09"
+  },
+  {
+    "duration": 225,
+    "name": "pancakes",
+    "time finished": "2024-04-13 07:03"
+  },
+  {
+    "duration": 283,
+    "name": "scrambled eggs",
+    "time finished": "2024-04-12 18:27"
+  },
+  {
+    "duration": 229,
+    "name": "omelette",
+    "time finished": "2024-04-07 20:45"
+  },
+  {
+    "duration": 180,
+    "name": "scrambled eggs",
+    "time finished": "2024-03-30 11:49"
+  },
+  {
+    "duration": 211,
+    "name": "lasagna",
+    "time finished": "2024-03-28 21:11"
+  },
+  {
+    "duration": 310,
+    "name": "beef stir fry",
+    "time finished": "2024-03-26 19:58"
+  },
+  {
+    "duration": 335,
+    "name": "fruit smoothie",
+    "time finished": "2024-03-23 08:50"
+  },
+  {
+    "duration": 28,
+    "name": "chicken sandwich",
+    "time finished": "2024-03-18 17:45"
+  },
+  {
+    "duration": 249,
+    "name": "garden salad",
+    "time finished": "2024-03-05 04:14"
+  },
+  {
+    "duration": 262,
     "name": "vegetable stir fry",
-    "time finished": "2024-12-15 12:45"
+    "time finished": "2024-03-04 12:38"
   },
   {
-    "duration": 30,
-    "name": "caesar salad",
-    "time finished": "2024-12-13 17:30"
-  },
-  {
-    "duration": 15,
-    "name": "tuna sandwich",
-    "time finished": "2024-12-13 12:15"
-  },
-  {
-    "duration": 45,
-    "name": "lasagna",
-    "time finished": "2024-12-11 19:45"
-  },
-  {
-    "duration": 20,
-    "name": "avocado toast",
-    "time finished": "2024-12-11 08:30"
-  },
-  {
-    "duration": 35,
-    "name": "beef stir fry",
-    "time finished": "2024-12-09 18:20"
-  },
-  {
-    "duration": 25,
-    "name": "pancakes",
-    "time finished": "2024-12-09 09:15"
-  },
-  {
-    "duration": 40,
-    "name": "chicken curry",
-    "time finished": "2024-12-07 19:30"
-  },
-  {
-    "duration": 30,
-    "name": "pasta carbonara",
-    "time finished": "2024-12-07 13:45"
-  },
-  {
-    "duration": 20,
-    "name": "fruit smoothie",
-    "time finished": "2024-12-05 08:20"
-  },
-  {
-    "duration": 35,
-    "name": "vegetable soup",
-    "time finished": "2024-12-03 18:45"
-  },
-  {
-    "duration": 25,
-    "name": "grilled cheese",
-    "time finished": "2024-12-03 12:30"
-  },
-  {
-    "duration": 40,
-    "name": "baked salmon",
-    "time finished": "2024-12-01 19:15"
-  },
-  {
-    "duration": 15,
-    "name": "omelette",
-    "time finished": "2024-12-01 08:45"
-  },
-  {
-    "duration": 30,
-    "name": "chicken sandwich",
-    "time finished": "2024-11-29 17:30"
-  },
-  {
-    "duration": 25,
-    "name": "garden salad",
-    "time finished": "2024-11-29 12:15"
-  },
-  {
-    "duration": 35,
-    "name": "spaghetti bolognese",
-    "time finished": "2024-11-27 19:45"
-  },
-  {
-    "duration": 20,
-    "name": "scrambled eggs",
-    "time finished": "2024-11-27 08:30"
-  },
-  {
-    "duration": 45,
-    "name": "pizza margherita",
-    "time finished": "2024-11-25 18:20"
-  },
-  {
-    "duration": 25,
+    "duration": 161,
     "name": "french toast",
-    "time finished": "2024-11-25 09:15"
+    "time finished": "2024-03-02 12:12"
   },
   {
-    "duration": 35,
-    "name": "mushroom risotto",
-    "time finished": "2024-11-23 19:30"
-  },
-  {
-    "duration": 30,
-    "name": "caesar salad",
-    "time finished": "2024-11-23 13:45"
-  },
-  {
-    "duration": 40,
-    "name": "beef burger",
-    "time finished": "2024-11-21 18:15"
-  },
-  {
-    "duration": 20,
-    "name": "avocado toast",
-    "time finished": "2024-11-21 08:45"
-  },
-  {
-    "duration": 35,
-    "name": "beef stir fry",
-    "time finished": "2024-11-19 19:20"
-  },
-  {
-    "duration": 15,
-    "name": "tuna sandwich",
-    "time finished": "2024-11-19 12:30"
-  },
-  {
-    "duration": 30,
-    "name": "pasta carbonara",
-    "time finished": "2024-11-17 18:45"
-  },
-  {
-    "duration": 25,
-    "name": "pancakes",
-    "time finished": "2024-11-17 09:15"
-  },
-  {
-    "duration": 40,
-    "name": "chicken curry",
-    "time finished": "2024-11-15 19:30"
-  },
-  {
-    "duration": 20,
-    "name": "fruit smoothie",
-    "time finished": "2024-11-15 08:20"
-  },
-  {
-    "duration": 35,
-    "name": "vegetable soup",
-    "time finished": "2024-11-13 18:45"
-  },
-  {
-    "duration": 25,
-    "name": "greek salad",
-    "time finished": "2024-11-13 12:30"
-  },
-  {
-    "duration": 45,
-    "name": "lasagna",
-    "time finished": "2024-11-11 19:15"
-  },
-  {
-    "duration": 15,
-    "name": "omelette",
-    "time finished": "2024-11-11 08:45"
-  },
-  {
-    "duration": 30,
-    "name": "chicken sandwich",
-    "time finished": "2024-11-09 17:30"
-  },
-  {
-    "duration": 25,
-    "name": "garden salad",
-    "time finished": "2024-11-09 12:15"
-  },
-  {
-    "duration": 35,
-    "name": "spaghetti bolognese",
-    "time finished": "2024-11-07 19:45"
-  },
-  {
-    "duration": 20,
-    "name": "scrambled eggs",
-    "time finished": "2024-11-07 08:30"
-  },
-  {
-    "duration": 40,
-    "name": "beef burger",
-    "time finished": "2024-11-05 18:20"
-  },
-  {
-    "duration": 25,
-    "name": "french toast",
-    "time finished": "2024-11-05 09:15"
-  },
-  {
-    "duration": 35,
-    "name": "mushroom risotto",
-    "time finished": "2024-11-03 19:30"
-  },
-  {
-    "duration": 30,
-    "name": "caesar salad",
-    "time finished": "2024-11-03 13:45"
-  },
-  {
-    "duration": 45,
+    "duration": 249,
     "name": "pizza margherita",
-    "time finished": "2024-11-01 18:15"
+    "time finished": "2024-03-01 13:35"
   },
   {
-    "duration": 20,
-    "name": "avocado toast",
-    "time finished": "2024-11-01 08:45"
-  },
-  {
-    "duration": 35,
-    "name": "beef stir fry",
-    "time finished": "2024-10-30 19:20"
-  },
-  {
-    "duration": 15,
-    "name": "tuna sandwich",
-    "time finished": "2024-10-30 12:30"
-  },
-  {
-    "duration": 30,
-    "name": "pasta carbonara",
-    "time finished": "2024-10-28 18:45"
-  },
-  {
-    "duration": 25,
-    "name": "pancakes",
-    "time finished": "2024-10-28 09:15"
-  },
-  {
-    "duration": 40,
-    "name": "baked salmon",
-    "time finished": "2024-10-26 19:30"
-  },
-  {
-    "duration": 20,
-    "name": "fruit smoothie",
-    "time finished": "2024-10-26 08:20"
-  },
-  {
-    "duration": 35,
+    "duration": 21,
     "name": "vegetable soup",
-    "time finished": "2024-10-24 18:45"
+    "time finished": "2024-02-28 06:26"
   },
   {
-    "duration": 25,
-    "name": "grilled cheese",
-    "time finished": "2024-10-24 12:30"
-  },
-  {
-    "duration": 45,
-    "name": "lasagna",
-    "time finished": "2024-10-22 19:15"
-  },
-  {
-    "duration": 15,
-    "name": "omelette",
-    "time finished": "2024-10-22 08:45"
-  },
-  {
-    "duration": 30,
-    "name": "chicken sandwich",
-    "time finished": "2024-10-20 17:30"
-  },
-  {
-    "duration": 25,
-    "name": "garden salad",
-    "time finished": "2024-10-20 12:15"
-  },
-  {
-    "duration": 35,
-    "name": "spaghetti bolognese",
-    "time finished": "2024-10-18 19:45"
-  },
-  {
-    "duration": 20,
-    "name": "scrambled eggs",
-    "time finished": "2024-10-18 08:30"
-  },
-  {
-    "duration": 40,
-    "name": "chicken curry",
-    "time finished": "2024-10-16 18:20"
-  },
-  {
-    "duration": 25,
-    "name": "french toast",
-    "time finished": "2024-10-16 09:15"
-  },
-  {
-    "duration": 35,
-    "name": "mushroom risotto",
-    "time finished": "2024-10-14 19:30"
-  },
-  {
-    "duration": 30,
-    "name": "caesar salad",
-    "time finished": "2024-10-14 13:45"
-  },
-  {
-    "duration": 45,
-    "name": "pizza margherita",
-    "time finished": "2024-10-12 18:15"
-  },
-  {
-    "duration": 20,
-    "name": "avocado toast",
-    "time finished": "2024-10-12 08:45"
-  },
-  {
-    "duration": 35,
-    "name": "beef stir fry",
-    "time finished": "2024-10-10 19:20"
-  },
-  {
-    "duration": 15,
-    "name": "tuna sandwich",
-    "time finished": "2024-10-10 12:30"
-  },
-  {
-    "duration": 30,
-    "name": "pasta carbonara",
-    "time finished": "2024-10-08 18:45"
-  },
-  {
-    "duration": 25,
-    "name": "pancakes",
-    "time finished": "2024-10-08 09:15"
-  },
-  {
-    "duration": 40,
-    "name": "beef burger",
-    "time finished": "2024-10-06 19:30"
-  },
-  {
-    "duration": 20,
+    "duration": 147,
     "name": "fruit smoothie",
-    "time finished": "2024-10-06 08:20"
+    "time finished": "2024-02-26 17:31"
+  },
+  {
+    "duration": 351,
+    "name": "omelette",
+    "time finished": "2024-02-16 18:38"
+  },
+  {
+    "duration": 24,
+    "name": "lasagna",
+    "time finished": "2024-02-15 11:09"
+  },
+  {
+    "duration": 210,
+    "name": "scrambled eggs",
+    "time finished": "2024-02-14 23:53"
+  },
+  {
+    "duration": 247,
+    "name": "omelette",
+    "time finished": "2024-02-10 05:35"
+  },
+  {
+    "duration": 136,
+    "name": "lasagna",
+    "time finished": "2024-02-08 21:02"
+  },
+  {
+    "duration": 74,
+    "name": "beef stir fry",
+    "time finished": "2024-02-05 08:08"
+  },
+  {
+    "duration": 312,
+    "name": "beef burger",
+    "time finished": "2024-01-27 08:12"
+  },
+  {
+    "duration": 205,
+    "name": "omelette",
+    "time finished": "2024-01-23 07:45"
+  },
+  {
+    "duration": 77,
+    "name": "fruit smoothie",
+    "time finished": "2024-01-17 08:41"
+  },
+  {
+    "duration": 326,
+    "name": "chicken curry",
+    "time finished": "2024-01-17 06:23"
+  },
+  {
+    "duration": 218,
+    "name": "fruit smoothie",
+    "time finished": "2024-01-16 23:48"
   }
 ]
