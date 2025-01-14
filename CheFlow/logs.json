@@ -1,5 +1,10 @@
 [
   {
+    "duration": 200,
+    "name": "lasagna",
+    "time finished": "2025-01-14 11:52"
+  },
+  {
     "duration": 165,
     "name": "lasagna",
     "time finished": "2025-01-13 11:52"
@@ -10,72 +15,72 @@
     "time finished": "2025-01-12 11:52"
   },
   {
-    "duration": 167,
+    "duration": 120,
     "name": "vegetable soup",
     "time finished": "2025-01-11 11:52"
   },
   {
-    "duration": 187,
+    "duration": 110,
     "name": "greek salad",
     "time finished": "2025-01-10 11:52"
   },
   {
-    "duration": 191,
+    "duration": 102,
     "name": "greek salad",
     "time finished": "2025-01-09 11:52"
   },
   {
-    "duration": 178,
+    "duration": 78,
     "name": "beef stir fry",
     "time finished": "2025-01-09 02:09"
   },
   {
-    "duration": 190,
+    "duration": 66,
     "name": "beef burger",
     "time finished": "2025-01-08 11:52"
   },
   {
-    "duration": 216,
+    "duration": 20,
     "name": "vegetable soup",
     "time finished": "2025-01-07 11:52"
   },
   {
-    "duration": 213,
+    "duration": 40,
     "name": "pizza margherita",
     "time finished": "2025-01-06 11:52"
   },
   {
-    "duration": 216,
+    "duration": 60,
     "name": "spaghetti bolognese",
     "time finished": "2025-01-05 11:52"
   },
   {
-    "duration": 223,
+    "duration": 80,
     "name": "pizza margherita",
     "time finished": "2025-01-04 11:52"
   },
   {
-    "duration": 223,
+    "duration": 100,
     "name": "beef stir fry",
     "time finished": "2025-01-03 11:52"
   },
   {
-    "duration": 287,
+    "duration": 130,
     "name": "baked salmon",
     "time finished": "2025-01-02 11:52"
   },
   {
-    "duration": 291,
+    "duration": 177,
     "name": "chicken curry",
     "time finished": "2025-01-01 11:52"
   },
   {
-    "duration": 276,
+    "duration": 200,
     "name": "chicken curry",
     "time finished": "2024-12-31 11:52"
   },
   {
-    "duration": 237,
+    "duration": 212,
     "name": "chicken curry",
     "time finished": "2024-12-30 11:52"
   },

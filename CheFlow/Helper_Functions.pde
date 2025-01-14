@@ -263,7 +263,8 @@ float get_average_duration(int days)
 }
 
 
-void draw_scatter_plot(PApplet appc, int n) {
+void draw_scatter_plot(PApplet appc, int n) 
+{
   // Constrain n between 7 and 365
   n = constrain(n, 7, 365);
   
@@ -303,18 +304,29 @@ void draw_scatter_plot(PApplet appc, int n) {
     appc.circle(x, y, circle_size);
   }
 
+  // Draw linear regression
+
+  linear_regression(appc, n, maxDuration, xAxis, yAxis);
+  quadratic_regression(appc, n, maxDuration, xAxis, yAxis);
+  
+}
+
+
+void linear_regression(PApplet appc, int n, float maxDuration, int xAxis, int yAxis)
+{
   // Calculate linear regression
-  float sumX = 0, sumY = 0, sumXY = 0, sumX2 = 0;
-  for (int i = daily_durations.size() - n; i < daily_durations.size(); ++i) {
+  float sumX = 0, sumY = 0, sumXY = 0, sumX_squared = 0;
+  for (int i = daily_durations.size() - n; i < daily_durations.size(); ++i) 
+  {
     float x = i - (daily_durations.size() - n);
     float y = daily_durations.get(i);
     sumX += x;
     sumY += y;
     sumXY += x * y;
-    sumX2 += x * x;
+    sumX_squared += x * x;
   }
 
-  float slope = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
+  float slope = (n * sumXY - sumX * sumY) / (n * sumX_squared - sumX * sumX);
   float intercept = (sumY - slope * sumX) / n;
 
   // Map regression line to canvas
@@ -327,7 +339,132 @@ void draw_scatter_plot(PApplet appc, int n) {
   float yEndMapped = map(yEnd, 0, maxDuration, yAxis, 50);
 
   // Draw linear regression line
-  appc.stroke(255, 0, 0);
+  appc.stroke(0, 255, 0);
   appc.strokeWeight(1.5);
   appc.line(xStartMapped, yStartMapped, xEndMapped, yEndMapped);
+
+  // println("Slope: ", slope, "Intercept: ", intercept);
+}
+
+
+void quadratic_regression(PApplet appc, int n, float max_duration, int xAxis, int y_axis)
+{
+  // Calculate quadratic regression
+
+  // float sum_x = 0, sum_y = 0, sum_xx = 0, sum_xy = 0, sum_xx2 = 0, sum_x2x2 = 0, sum_x2y = 0; 
+  // for (int i = daily_durations.size() - n; i < daily_durations.size(); ++i) 
+  // {
+  //   float x = i - (daily_durations.size() - n);
+  //   float y = daily_durations.get(i);
+  //   sum_x += x;
+  //   sum_y += y;
+  // }
+
+  // float x_bar = sum_x / n, y_bar = sum_y / n;
+
+  // for (int i = daily_durations.size() - n; i < daily_durations.size(); ++i) 
+  // {
+  //   float x = i - (daily_durations.size() - n);
+  //   float y = daily_durations.get(i);
+    
+  //   sum_xx += pow((x - x_bar), 2);
+  //   sum_xy += (x - x_bar) * (y - y_bar);
+  //   sum_xx2 += (x - x_bar) * (pow(x, 2) - pow(x_bar, 2));
+  //   sum_x2x2 += pow(x, 2) - pow(x_bar, 2);
+  //   sum_x2y += (pow(x, 2) - pow(x_bar, 2)) * (y - y_bar);
+  // }
+
+  // float a = (sum_x2y * sum_xx - sum_xy * sum_xx2) / (sum_xx * sum_x2x2 - pow(sum_xx2, 2));
+  // float b = (sum_xy * sum_x2x2 - sum_x2y * sum_xx2) / (sum_xx * sum_x2x2 - pow(sum_xx2, 2));
+  // float c = y_bar - b * x_bar - a * pow(x_bar, 2);
+
+  int startIndex = daily_durations.size() - n;
+  float sumX = 0, sumY = 0, sumX2 = 0, sumX3 = 0, sumX4 = 0, sumXY = 0, sumX2Y = 0;
+
+  for (int i = startIndex; i < daily_durations.size(); ++i) {
+    float x = i - startIndex;
+    float y = daily_durations.get(i);
+
+    sumX += x;
+    sumY += y;
+    sumX2 += x * x;
+    sumX3 += x * x * x;
+    sumX4 += x * x * x * x;
+    sumXY += x * y;
+    sumX2Y += x * x * y;
+  }
+
+  float nData = n;
+
+  // Solving the system of equations to find a, b, c
+  float[][] matrix = {
+    {nData, sumX, sumX2},
+    {sumX, sumX2, sumX3},
+    {sumX2, sumX3, sumX4}
+  };
+
+  float[] constants = {sumY, sumXY, sumX2Y};
+
+  float[] coefficients = solveLinearSystem(matrix, constants);
+  float a = coefficients[2];
+  float b = coefficients[1];
+  float c = coefficients[0];
+
+  
+  // Draw quadratic regression curve
+
+  appc.stroke(255, 0, 0);
+  appc.strokeWeight(1.5);
+  appc.noFill();
+
+  for (int i = xAxis; i < appc.width - 50; i++) {
+    float x1 = map(i, xAxis, appc.width - 50, 0, n - 1);
+    float x2 = map(i + 1, xAxis, appc.width - 50, 0, n - 1);
+
+    float y1 = a * pow(x1, 2) + b * x1 + c;
+    float y2 = a * pow(x2, 2) + b * x2 + c;
+
+    float y1_mapped = map(y1, 0, max_duration, y_axis, 50);
+    float y2_mapped = map(y2, 0, max_duration, y_axis, 50);
+
+    appc.line(i, y1_mapped, i + 1, y2_mapped);
+  }
+
+  // println("a: ", a, "b: ", b, "c: ", c);
+
+}
+
+
+float[] solveLinearSystem(float[][] matrix, float[] constants) {
+  int n = matrix.length;
+
+  // Forward elimination
+  for (int i = 0; i < n; i++) {
+    // Make the diagonal element 1
+    float factor = matrix[i][i];
+    for (int j = 0; j < n; j++) {
+      matrix[i][j] /= factor;
+    }
+    constants[i] /= factor;
+
+    // Make the rest of the column 0
+    for (int k = i + 1; k < n; k++) {
+      factor = matrix[k][i];
+      for (int j = 0; j < n; j++) {
+        matrix[k][j] -= factor * matrix[i][j];
+      }
+      constants[k] -= factor * constants[i];
+    }
+  }
+
+  // Back substitution
+  float[] solution = new float[n];
+  for (int i = n - 1; i >= 0; i--) {
+    solution[i] = constants[i];
+    for (int j = i + 1; j < n; j++) {
+      solution[i] -= matrix[i][j] * solution[j];
+    }
+  }
+
+  return solution;
 }
