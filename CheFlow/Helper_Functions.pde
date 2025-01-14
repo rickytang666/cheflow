@@ -267,7 +267,7 @@ void draw_scatter_plot(PApplet appc, int n) {
   // Constrain n between 7 and 365
   n = constrain(n, 7, 365);
   
-  float circle_size = map(float(n), 7, 365, 5, 2.5);
+  float circle_size = map(float(n), 7, 365, 5, 2);
 
   // Background and axis setup
   appc.background(255);
