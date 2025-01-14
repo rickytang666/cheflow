@@ -203,11 +203,13 @@ void import_logs()
       l.time_finished = new Time(log_obj.getString("time finished"));
     }
     
-    l.duration = log_obj.getInt("duration");
+    l.duration = constrain(log_obj.getInt("duration"), 1, 24 * 60);
 
     log_records.add(l);
   }
 
+  sort_log_records();
+  
   println(log_records.size() + " activities loaded successfully");
 }
 
