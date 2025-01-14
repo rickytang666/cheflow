@@ -7,7 +7,8 @@ class Home_Page extends Page
 
   ArrayList<GAbstractControl> static_controls = new ArrayList<GAbstractControl>();
   GLabel title, insights;
-  GButton export_button;
+  GButton export_button, graph_button;
+  GWindow graph_window;
 
   /* CONSTRUCTORS */
 
@@ -52,6 +53,9 @@ class Home_Page extends Page
     export_button = new GButton(parent, 400, 200, 200, 40, "Export Data");
     export_button.addEventHandler(parent, "export_button_handler");
 
+    graph_button = new GButton(parent, 400, 250, 200, 40, "View Graph");
+    graph_button.addEventHandler(parent, "graph_button_handler");
+
     insights = new GLabel(parent, 300, 300, 500, 300);
 
     String str = "Insights:\n";
@@ -64,6 +68,7 @@ class Home_Page extends Page
 
     static_controls.add(title);
     static_controls.add(export_button);
+    static_controls.add(graph_button);
     static_controls.add(insights);
   }
 }
@@ -76,4 +81,44 @@ public void export_button_handler(GButton button, GEvent event)
   {
     export_data();
   }
+}
+
+
+public void graph_button_handler(GButton button, GEvent event)
+{
+  if (event == GEvent.CLICKED)
+  {
+    if (hp.graph_window == null)
+    {
+      open_graph_window();
+    }
+    else
+    {
+      println("Graph window already open");
+    }
+  }
+}
+
+
+void open_graph_window()
+{
+  hp.graph_window = GWindow.getWindow(this, "Graph", 600, 400, 800, 600, JAVA2D);
+  hp.graph_window.addDrawHandler(this, "graph_window_draw");
+  hp.graph_window.addOnCloseHandler(this, "graph_window_close");
+  hp.graph_window.setActionOnClose(G4P.CLOSE_WINDOW);
+}
+
+
+public void graph_window_draw(PApplet appc, GWinData data)
+{
+  appc.background(255);
+  appc.fill(0);
+  appc.text("This is the graph window", 400, 300);
+}
+
+
+public void graph_window_close(GWindow window)
+{
+  hp.graph_window.dispose();
+  hp.graph_window = null;
 }
