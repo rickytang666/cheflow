@@ -78,4 +78,6 @@ void setup()
 void draw()
 {
   background(220);
+
+  nb.draw();
 }

@@ -500,4 +500,3 @@ float[] calculate_exponential_coefficients(int n)
 
   return coefficients;
 }
-
