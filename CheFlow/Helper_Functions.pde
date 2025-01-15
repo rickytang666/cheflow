@@ -350,34 +350,7 @@ void linear_regression(PApplet appc, int n, float maxDuration, int xAxis, int yA
 void quadratic_regression(PApplet appc, int n, float max_duration, int xAxis, int y_axis)
 {
   // Calculate quadratic regression
-
-  // float sum_x = 0, sum_y = 0, sum_xx = 0, sum_xy = 0, sum_xx2 = 0, sum_x2x2 = 0, sum_x2y = 0; 
-  // for (int i = daily_durations.size() - n; i < daily_durations.size(); ++i) 
-  // {
-  //   float x = i - (daily_durations.size() - n);
-  //   float y = daily_durations.get(i);
-  //   sum_x += x;
-  //   sum_y += y;
-  // }
-
-  // float x_bar = sum_x / n, y_bar = sum_y / n;
-
-  // for (int i = daily_durations.size() - n; i < daily_durations.size(); ++i) 
-  // {
-  //   float x = i - (daily_durations.size() - n);
-  //   float y = daily_durations.get(i);
-    
-  //   sum_xx += pow((x - x_bar), 2);
-  //   sum_xy += (x - x_bar) * (y - y_bar);
-  //   sum_xx2 += (x - x_bar) * (pow(x, 2) - pow(x_bar, 2));
-  //   sum_x2x2 += pow(x, 2) - pow(x_bar, 2);
-  //   sum_x2y += (pow(x, 2) - pow(x_bar, 2)) * (y - y_bar);
-  // }
-
-  // float a = (sum_x2y * sum_xx - sum_xy * sum_xx2) / (sum_xx * sum_x2x2 - pow(sum_xx2, 2));
-  // float b = (sum_xy * sum_x2x2 - sum_x2y * sum_xx2) / (sum_xx * sum_x2x2 - pow(sum_xx2, 2));
-  // float c = y_bar - b * x_bar - a * pow(x_bar, 2);
-
+  
   int startIndex = daily_durations.size() - n;
   float sumX = 0, sumY = 0, sumX2 = 0, sumX3 = 0, sumX4 = 0, sumXY = 0, sumX2Y = 0;
 
