@@ -304,7 +304,7 @@ void draw_scatter_plot(PApplet appc, int n)
     appc.circle(x, y, circle_size);
   }
 
-  // Draw linear regression
+  // Draw regression
 
   linear_regression(appc, n, maxDuration, xAxis, yAxis);
   quadratic_regression(appc, n, maxDuration, xAxis, yAxis);
@@ -351,10 +351,10 @@ void quadratic_regression(PApplet appc, int n, float max_duration, int xAxis, in
 {
   // Calculate quadratic regression
   
-  float[] coefficients = calculate_quadratic_coefficients2(n);
-  float a = coefficients[2];
+  float[] coefficients = calculate_quadratic_coefficients(n);
+  float a = coefficients[0];
   float b = coefficients[1];
-  float c = coefficients[0];
+  float c = coefficients[2];
   
   // Draw quadratic regression curve
 
@@ -376,82 +376,10 @@ void quadratic_regression(PApplet appc, int n, float max_duration, int xAxis, in
     appc.line(i, y1_mapped, i + 1, y2_mapped);
   }
 
-  // println("a: ", a, "b: ", b, "c: ", c);
-
 }
 
 
-float[] solveLinearSystem(float[][] matrix, float[] constants) {
-  int n = matrix.length;
-
-  // Forward elimination
-  for (int i = 0; i < n; i++) {
-    // Make the diagonal element 1
-    float factor = matrix[i][i];
-    for (int j = 0; j < n; j++) {
-      matrix[i][j] /= factor;
-    }
-    constants[i] /= factor;
-
-    // Make the rest of the column 0
-    for (int k = i + 1; k < n; k++) {
-      factor = matrix[k][i];
-      for (int j = 0; j < n; j++) {
-        matrix[k][j] -= factor * matrix[i][j];
-      }
-      constants[k] -= factor * constants[i];
-    }
-  }
-
-  // Back substitution
-  float[] solution = new float[n];
-  for (int i = n - 1; i >= 0; i--) {
-    solution[i] = constants[i];
-    for (int j = i + 1; j < n; j++) {
-      solution[i] -= matrix[i][j] * solution[j];
-    }
-  }
-
-  return solution;
-}
-
-
-float[] calculate_quadratic_coefficients1(int n)
-{
-  int startIndex = daily_durations.size() - n;
-  float sumX = 0, sumY = 0, sumX2 = 0, sumX3 = 0, sumX4 = 0, sumXY = 0, sumX2Y = 0;
-
-  for (int i = startIndex; i < daily_durations.size(); ++i) {
-    float x = i - startIndex;
-    float y = daily_durations.get(i);
-
-    sumX += x;
-    sumY += y;
-    sumX2 += x * x;
-    sumX3 += x * x * x;
-    sumX4 += x * x * x * x;
-    sumXY += x * y;
-    sumX2Y += x * x * y;
-  }
-
-  float nData = n;
-
-  // Solving the system of equations to find a, b, c
-  float[][] matrix = {
-    {nData, sumX, sumX2},
-    {sumX, sumX2, sumX3},
-    {sumX2, sumX3, sumX4}
-  };
-
-  float[] constants = {sumY, sumXY, sumX2Y};
-
-  float[] coefficients = solveLinearSystem(matrix, constants);
-  
-  return coefficients;
-}
-
-
-float[] calculate_quadratic_coefficients2(int n)
+float[] calculate_quadratic_coefficients(int n)
 {
   float nData = n;
 
@@ -483,7 +411,7 @@ float[] calculate_quadratic_coefficients2(int n)
   float b = (sumXY * sumX2X2 - sumX2Y * sumXX2) / (sumXX * sumX2X2 - pow(sumXX2, 2));
   float c = (sumY/nData) - (b * sumX/nData) - (a * sumX2/nData);
 
-  float[] coefficients = {c, b, a};
+  float[] coefficients = {a, b, cS};
 
   return coefficients;
 
