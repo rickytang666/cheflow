@@ -351,38 +351,10 @@ void quadratic_regression(PApplet appc, int n, float max_duration, int xAxis, in
 {
   // Calculate quadratic regression
   
-  int startIndex = daily_durations.size() - n;
-  float sumX = 0, sumY = 0, sumX2 = 0, sumX3 = 0, sumX4 = 0, sumXY = 0, sumX2Y = 0;
-
-  for (int i = startIndex; i < daily_durations.size(); ++i) {
-    float x = i - startIndex;
-    float y = daily_durations.get(i);
-
-    sumX += x;
-    sumY += y;
-    sumX2 += x * x;
-    sumX3 += x * x * x;
-    sumX4 += x * x * x * x;
-    sumXY += x * y;
-    sumX2Y += x * x * y;
-  }
-
-  float nData = n;
-
-  // Solving the system of equations to find a, b, c
-  float[][] matrix = {
-    {nData, sumX, sumX2},
-    {sumX, sumX2, sumX3},
-    {sumX2, sumX3, sumX4}
-  };
-
-  float[] constants = {sumY, sumXY, sumX2Y};
-
-  float[] coefficients = solveLinearSystem(matrix, constants);
+  float[] coefficients = calculate_quadratic_coefficients1(n);
   float a = coefficients[2];
   float b = coefficients[1];
   float c = coefficients[0];
-
   
   // Draw quadratic regression curve
 
@@ -390,7 +362,8 @@ void quadratic_regression(PApplet appc, int n, float max_duration, int xAxis, in
   appc.strokeWeight(1.5);
   appc.noFill();
 
-  for (int i = xAxis; i < appc.width - 50; i++) {
+  for (int i = xAxis; i < appc.width - 50; i++) 
+  {
     float x1 = map(i, xAxis, appc.width - 50, 0, n - 1);
     float x2 = map(i + 1, xAxis, appc.width - 50, 0, n - 1);
 
@@ -440,4 +413,39 @@ float[] solveLinearSystem(float[][] matrix, float[] constants) {
   }
 
   return solution;
+}
+
+
+float[] calculate_quadratic_coefficients1(int n)
+{
+  int startIndex = daily_durations.size() - n;
+  float sumX = 0, sumY = 0, sumX2 = 0, sumX3 = 0, sumX4 = 0, sumXY = 0, sumX2Y = 0;
+
+  for (int i = startIndex; i < daily_durations.size(); ++i) {
+    float x = i - startIndex;
+    float y = daily_durations.get(i);
+
+    sumX += x;
+    sumY += y;
+    sumX2 += x * x;
+    sumX3 += x * x * x;
+    sumX4 += x * x * x * x;
+    sumXY += x * y;
+    sumX2Y += x * x * y;
+  }
+
+  float nData = n;
+
+  // Solving the system of equations to find a, b, c
+  float[][] matrix = {
+    {nData, sumX, sumX2},
+    {sumX, sumX2, sumX3},
+    {sumX2, sumX3, sumX4}
+  };
+
+  float[] constants = {sumY, sumXY, sumX2Y};
+
+  float[] coefficients = solveLinearSystem(matrix, constants);
+  
+  return coefficients;
 }
