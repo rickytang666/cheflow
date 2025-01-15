@@ -113,7 +113,7 @@ void open_graph_window()
 
 public void graph_window_draw(PApplet appc, GWinData data)
 {
-  draw_scatter_plot(appc, 15);
+  draw_scatter_plot(appc, 14);
 }
 
 
