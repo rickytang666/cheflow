@@ -308,6 +308,7 @@ void draw_scatter_plot(PApplet appc, int n)
 
   linear_regression(appc, n, maxDuration, xAxis, yAxis);
   quadratic_regression(appc, n, maxDuration, xAxis, yAxis);
+  exponential_regression(appc, n, maxDuration, xAxis, yAxis);
   
 }
 
@@ -315,21 +316,14 @@ void draw_scatter_plot(PApplet appc, int n)
 void linear_regression(PApplet appc, int n, float maxDuration, int xAxis, int yAxis)
 {
   // Calculate linear regression
-  float sumX = 0, sumY = 0, sumXY = 0, sumX_squared = 0;
-  for (int i = daily_durations.size() - n; i < daily_durations.size(); ++i) 
-  {
-    float x = i - (daily_durations.size() - n);
-    float y = daily_durations.get(i);
-    sumX += x;
-    sumY += y;
-    sumXY += x * y;
-    sumX_squared += x * x;
-  }
 
-  float slope = (n * sumXY - sumX * sumY) / (n * sumX_squared - sumX * sumX);
-  float intercept = (sumY - slope * sumX) / n;
+  float[] coefficients = calculate_linear_coefficients(n);
+
+  float slope = coefficients[0];
+  float intercept = coefficients[1];
 
   // Map regression line to canvas
+
   float yStart = slope * 0 + intercept;
   float yEnd = slope * (n - 1) + intercept;
 
@@ -342,8 +336,31 @@ void linear_regression(PApplet appc, int n, float maxDuration, int xAxis, int yA
   appc.stroke(0, 255, 0);
   appc.strokeWeight(1.5);
   appc.line(xStartMapped, yStartMapped, xEndMapped, yEndMapped);
+}
 
-  // println("Slope: ", slope, "Intercept: ", intercept);
+
+float[] calculate_linear_coefficients(int n)
+{
+  float n_data = n;
+
+  float sumX = 0, sumY = 0, sumXY = 0, sumX_squared = 0;
+  for (int i = daily_durations.size() - n; i < daily_durations.size(); ++i) 
+  {
+    float x = i - (daily_durations.size() - n);
+    float y = daily_durations.get(i);
+    sumX += x;
+    sumY += y;
+    sumXY += x * y;
+    sumX_squared += x * x;
+  }
+
+  float m = (n_data * sumXY - sumX * sumY) / (n_data * sumX_squared - sumX * sumX);
+  float b = (sumY - m * sumX) / n_data;
+
+  float coefficients[] = {m, b};
+
+  return coefficients;
+
 }
 
 
@@ -411,8 +428,76 @@ float[] calculate_quadratic_coefficients(int n)
   float b = (sumXY * sumX2X2 - sumX2Y * sumXX2) / (sumXX * sumX2X2 - pow(sumXX2, 2));
   float c = (sumY/nData) - (b * sumX/nData) - (a * sumX2/nData);
 
-  float[] coefficients = {a, b, cS};
+  float[] coefficients = {a, b, c};
 
   return coefficients;
 
 }
+
+
+void exponential_regression(PApplet appc, int n, float maxDuration, int xAxis, int yAxis)
+{
+  float[] coefficients = calculate_exponential_coefficients(n);
+
+  float m = coefficients[0], b = coefficients[1];
+
+  float a = exp(b);
+
+  appc.stroke(255, 0, 255);
+  appc.strokeWeight(1.5);
+  appc.noFill();
+
+  for (int i = xAxis; i < appc.width - 50; ++i)
+  {
+    float x1 = map(i, xAxis, appc.width - 50, 0, n - 1);
+    float x2 = map(i + 1, xAxis, appc.width - 50, 0, n - 1);
+
+    float y1 = a * exp(m * x1);
+    float y2 = a * exp(m * x2);
+
+    float y1_mapped = map(y1, 0, maxDuration, yAxis, 50);
+    float y2_mapped = map(y2, 0, maxDuration, yAxis, 50);
+
+    appc.line(i, y1_mapped, i + 1, y2_mapped);
+  }
+
+}
+
+
+float[] calculate_exponential_coefficients(int n)
+{
+  int startIndex = daily_durations.size() - n;
+
+  float sumX = 0, sumY = 0, sumXY = 0, sumX2 = 0;
+  for (int i = startIndex; i < daily_durations.size(); ++i) 
+  {
+    float x = i - startIndex;
+    float y = daily_durations.get(i);
+
+    if (y <= 0) {
+      continue; // Skip non-positive values
+    }
+
+    float log_y = log(y); // Transform y to ln(y)
+
+    sumX += x;
+    sumY += log_y;
+    sumXY += x * log_y;
+    sumX2 += x * x;
+  }
+
+  // Avoid divide-by-zero errors by adding a check
+  float denominator = (n * sumX2 - sumX * sumX);
+  if (denominator == 0) {
+    println("Error: Denominator in slope calculation is zero.");
+    return new float[]{0, 0}; // Return zero coefficients as a fallback
+  }
+
+  float slope = (n * sumXY - sumX * sumY) / denominator; // B = slope
+  float intercept = (sumY - slope * sumX) / n; // A = intercept
+
+  float[] coefficients = {slope, intercept};
+
+  return coefficients;
+}
+
