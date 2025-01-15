@@ -351,7 +351,7 @@ void quadratic_regression(PApplet appc, int n, float max_duration, int xAxis, in
 {
   // Calculate quadratic regression
   
-  float[] coefficients = calculate_quadratic_coefficients1(n);
+  float[] coefficients = calculate_quadratic_coefficients2(n);
   float a = coefficients[2];
   float b = coefficients[1];
   float c = coefficients[0];
@@ -448,4 +448,43 @@ float[] calculate_quadratic_coefficients1(int n)
   float[] coefficients = solveLinearSystem(matrix, constants);
   
   return coefficients;
+}
+
+
+float[] calculate_quadratic_coefficients2(int n)
+{
+  float nData = n;
+
+  int startIndex = daily_durations.size() - n;
+
+  float sumX = 0, sumY = 0, sumX2 = 0, sumX3 = 0, sumX4 = 0, sumXY = 0, sumX2Y = 0;
+
+  for (int i = startIndex; i < daily_durations.size(); ++i) 
+  {
+    int x = i - startIndex;
+    int y = daily_durations.get(i);
+
+    sumX += x;
+    sumY += y;
+    sumX2 += pow(x, 2);
+    sumX3 += pow(x, 3);
+    sumX4 += pow(x, 4);
+    sumXY += x * y;
+    sumX2Y += pow(x, 2) * y;
+  }
+
+  float sumXX = sumX2 - pow(sumX, 2) / nData;
+  sumXY = sumXY - (sumX * sumY) / nData;
+  float sumXX2 = sumX3 - (sumX * sumX2) / nData;
+  sumX2Y = sumX2Y - (sumX2 * sumY) / nData;
+  float sumX2X2 = sumX4 - pow(sumX2, 2) / nData;
+
+  float a = (sumX2Y * sumXX - sumXY * sumXX2) / (sumXX * sumX2X2 - pow(sumXX2, 2));
+  float b = (sumXY * sumX2X2 - sumX2Y * sumXX2) / (sumXX * sumX2X2 - pow(sumXX2, 2));
+  float c = (sumY/nData) - (b * sumX/nData) - (a * sumX2/nData);
+
+  float[] coefficients = {c, b, a};
+
+  return coefficients;
+
 }
