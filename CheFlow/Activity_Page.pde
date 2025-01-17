@@ -8,7 +8,7 @@ class Activity_Page extends Page
   ArrayList<GAbstractControl> static_controls = new ArrayList<GAbstractControl>();
   
   GLabel title;
-  GButton prev_button, next_button, back, add_button;
+  GButton prev_button, next_button, back, add_button, search_button;
   GTextField search_bar, time_editor, duration_editor;
 
   /* CONSTRUCTORS */
@@ -79,7 +79,9 @@ class Activity_Page extends Page
     add_button.addEventHandler(parent, "add_button_handler_log");
 
     search_bar = new GTextField(parent, 100, 130, 200, 30);
-    search_bar.addEventHandler(parent, "search_bar_handler");
+    
+    search_button = new GButton(parent, 320, 130, 60, 30, "Search");
+    search_button.addEventHandler(parent, "search_button_handler");
 
     time_editor = new GTextField(parent, 100, 170, 200, 20);
     time_editor.addEventHandler(parent, "time_editor_handler");
@@ -113,6 +115,8 @@ class Activity_Page extends Page
     }
     search_bar.setEnabled(layer == 1 && current_log != null);
     search_bar.setVisible(layer == 1 && current_log != null);
+    search_button.setEnabled(layer == 1 && current_log != null);
+    search_button.setVisible(layer == 1 && current_log != null);
     time_editor.setEnabled(layer == 1 && current_log != null);
     time_editor.setVisible(layer == 1 && current_log != null);
     duration_editor.setEnabled(layer == 1 && current_log != null);
@@ -173,7 +177,7 @@ class Activity_Page extends Page
       time_editor.setText(current_log.time_finished.get_time_str());
       duration_editor.setText(str(current_log.duration));
 
-      current_log.recipe_label = new GLabel(parent, 350, 130, 200, 30);
+      current_log.recipe_label = new GLabel(parent, 420, 130, 200, 30);
       String str = (current_log.recipe == null ? current_log.name : current_log.recipe.name);
       
       current_log.recipe_label.setText(str);

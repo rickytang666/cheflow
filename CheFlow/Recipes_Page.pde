@@ -87,7 +87,9 @@ class Recipes_Page extends Page
     add_button.addEventHandler(parent, "add_button_handler");
 
     search_bar = new GTextField(parent, width/2 - 100, 130, 200, 40, G4P.SCROLLBARS_HORIZONTAL_ONLY);
-    search_bar.addEventHandler(parent, "search_bar_handler");
+    
+    search_button = new GButton(parent, width/2 + 110, 130, 60, 40, "Search");
+    search_button.addEventHandler(parent, "search_button_handler");
 
     search_toggle = new GOption(parent, width - 200, 60, 100, 40);
     search_toggle.addEventHandler(parent, "search_mode_handler");
@@ -118,6 +120,8 @@ class Recipes_Page extends Page
     search_toggle.setEnabled(layer == 0);
     search_bar.setEnabled(layer == 0 && searching);
     search_bar.setVisible(layer == 0 && searching);
+    search_button.setEnabled(layer == 0 && searching);
+    search_button.setVisible(layer == 0 && searching);
   }
 
 
@@ -163,7 +167,6 @@ class Recipes_Page extends Page
 
       int start = page_nums[0] * buttons_per_page;
       int end = min(start + buttons_per_page, to_display.size());
-      
       
       for (int i = start; i < end; i++) 
       {
@@ -305,26 +308,27 @@ public void handleButtonEvents(GButton button, GEvent event)
 }
 
 
-public void search_bar_handler(GTextField source, GEvent event)
+public void search_button_handler(GButton button, GEvent event)
 {
-  if (event == GEvent.CHANGED)
+  if (event == GEvent.CLICKED)
   {
-
-    if (source == ap.search_bar)
+    if (button == rp.search_button)
     {
-      fill_search_results(source.getText());
+      fill_search_results(rp.search_bar.getText());
       page_nums[0] = 0;
-      total_page_nums[0] = max(1, (int) ceil((float) log_records.size() / buttons_per_page));
-      page_nums[0] = constrain(page_nums[0], 0, total_page_nums[0] - 1);
-      ap.set_activity_page();
-    }
-    else if (source == rp.search_bar)
-    {
-      fill_search_results(source.getText());
       total_page_nums[0] = max(1, (int) ceil((float) search_results.size() / buttons_per_page));
       page_nums[0] = constrain(page_nums[0], 0, total_page_nums[0] - 1);
       rp.set_recipes_page();
     }
+    else if (button == ap.search_button)
+    {
+      fill_search_results(ap.search_bar.getText());
+      page_nums[0] = 0;
+      total_page_nums[0] = max(1, (int) ceil((float) search_results.size() / buttons_per_page));
+      page_nums[0] = constrain(page_nums[0], 0, total_page_nums[0] - 1);
+      ap.set_activity_page();
+    }
+
   }
 }
 
