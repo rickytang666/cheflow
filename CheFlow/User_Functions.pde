@@ -31,7 +31,7 @@ void export_recipes()
   try
   {
     saveJSONArray(recipes_array, file_name_recipes);
-    println("Recipes saved successfully");
+    // println("Recipes saved successfully");
   }
   catch (Exception e)
   {
@@ -98,7 +98,7 @@ void export_fridge()
   try
   {
     saveJSONArray(fridge_array, file_name_fridge);
-    println("Fridge saved successfully");
+    // println("Fridge saved successfully");
   }
   catch (Exception e)
   {
@@ -157,7 +157,7 @@ void export_logs()
   try
   {
     saveJSONArray(activities_array, file_name_logs);
-    println("Activities saved successfully");
+    // println("Activities saved successfully");
   }
   catch (Exception e)
   {
@@ -219,6 +219,8 @@ void export_data()
   export_recipes();
   export_fridge();
   export_logs();
+
+  // println("Data saved successfully");
 }
 
 

@@ -403,6 +403,11 @@ public void add_button_handler(GButton button, GEvent event)
       page_nums[1] = 0;
       rp.set_recipes_page();
     }
+
+    if (auto_save)
+    {
+      export_data();
+    }
     
   }
 }
@@ -456,6 +461,11 @@ public void recipe_del_button_handler(GButton button, GEvent event)
         break;
       }
     }
+
+    if (auto_save)
+    {
+      export_data();
+    }
   }
 }
 
@@ -467,6 +477,11 @@ public void recipe_renamer_handler(GTextField textControl, GEvent event)
     if (!is_recipe_repeated(textControl.getText(), recipes))
     {
       current_r.name = textControl.getText();
+
+      if (auto_save)
+      {
+        export_data();
+      }
     }
   }
 }
@@ -486,6 +501,12 @@ public void recipe_duration_handler(GTextField textControl, GEvent event)
       println("Invalid duration");
       current_r.duration = 30;
     }
+
+    if (auto_save)
+    {
+      export_data();
+    }
+
   }
 }
 
@@ -528,6 +549,12 @@ public void ingredient_del_button_handler(GButton button, GEvent event)
         break;
       }
     }
+
+    if (auto_save)
+    {
+      export_data();
+    }
+
   }
 }
 

@@ -82,3 +82,10 @@ void draw()
 
   nb.draw();
 }
+
+void exit()
+{
+  export_data();
+  println("Data saved while exiting");
+  super.exit();
+}

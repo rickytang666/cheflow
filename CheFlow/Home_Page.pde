@@ -8,6 +8,7 @@ class Home_Page extends Page
   ArrayList<GAbstractControl> static_controls = new ArrayList<GAbstractControl>();
   GLabel title, insights;
   GButton export_button, graph_button;
+  GOption autosave_toggle;
   GWindow graph_window;
 
   /* CONSTRUCTORS */
@@ -57,6 +58,10 @@ class Home_Page extends Page
     title.setOpaque(true);
     title.setLocalColor(6, accent_col);
 
+    autosave_toggle = new GOption(parent, 400, 150, 200, 40, "Auto Save");
+    autosave_toggle.setSelected(auto_save);
+    autosave_toggle.addEventHandler(parent, "autosave_toggle_handler");
+
     export_button = new GButton(parent, 400, 200, 200, 40, "Export Data");
     export_button.addEventHandler(parent, "export_button_handler");
 
@@ -75,6 +80,7 @@ class Home_Page extends Page
     insights.setText(str);
 
     static_controls.add(title);
+    static_controls.add(autosave_toggle);
     static_controls.add(export_button);
     static_controls.add(graph_button);
     static_controls.add(insights);
@@ -82,6 +88,21 @@ class Home_Page extends Page
 }
 
 /* EVENT HANDLERS */
+
+public void autosave_toggle_handler(GOption option, GEvent event)
+{
+  println("Event: " + event);
+
+  if (event == GEvent.SELECTED)
+  {
+    auto_save = true;
+  }
+  else if (event == GEvent.DESELECTED)
+  {
+    auto_save = false;
+  }
+}
+
 
 public void export_button_handler(GButton button, GEvent event)
 {

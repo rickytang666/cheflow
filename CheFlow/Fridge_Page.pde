@@ -178,6 +178,11 @@ public void add_button_handler_f(GButton button, GEvent event)
     total_page_nums[0] = max(1, (int) ceil((float) fridge.size() / buttons_per_page));
     page_nums[0] = total_page_nums[0] - 1;
     fp.set_fridge_page();
+
+    if (auto_save)
+    {
+      export_data();
+    }
   }
 }
 
@@ -219,6 +224,11 @@ public void ingredient_del_button_handler_f(GButton button, GEvent event)
         break;
       }
     }
+
+    if (auto_save)
+    {
+      export_data();
+    }
   }
 }
 
@@ -231,6 +241,11 @@ public void ingredient_renamer_handler_f(GTextField source, GEvent event)
     {
       current_ing.name = source.getText();
       current_ing.set_contents();
+
+      if (auto_save)
+      {
+        export_data();
+      }
     }
   }
 }

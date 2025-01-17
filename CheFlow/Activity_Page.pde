@@ -238,6 +238,11 @@ public void log_del_button_handler(GButton button, GEvent event)
         break;
       }
     }
+
+    if (auto_save)
+    {
+      export_data();
+    }
   }
 }
 
@@ -251,6 +256,11 @@ public void add_button_handler_log(GButton button, GEvent event)
     total_page_nums[0] = max(1, (int) ceil((float) log_records.size() / buttons_per_page));
     page_nums[0] = 0;
     ap.set_activity_page();
+
+    if (auto_save)
+    {
+      export_data();
+    }
   }
 }
 
@@ -268,6 +278,11 @@ public void recipe_button_handler_log(GButton button, GEvent event)
         break;
       }
     }
+
+    if (auto_save)
+    {
+      export_data();
+    }
   }
 }
 
@@ -282,6 +297,11 @@ public void time_editor_handler(GTextField source, GEvent event)
     {
       Time new_time = new Time(time_str);
       current_log.time_finished = new_time;
+
+      if (auto_save)
+      {
+        export_data();
+      }
     }
   }
 }
@@ -295,6 +315,11 @@ public void duration_editor_handler(GTextField source, GEvent event)
     {
       int duration = Integer.parseInt(source.getText());
       current_log.duration = constrain(duration, 1, 24 * 60);
+
+      if (auto_save)
+      {
+        export_data();
+      }
     }
     catch (Exception e)
     {
