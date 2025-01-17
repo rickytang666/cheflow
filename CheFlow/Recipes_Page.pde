@@ -236,75 +236,80 @@ class Recipes_Page extends Page
 
 public void handleButtonEvents(GButton button, GEvent event) 
 {
-  
-  if (button == rp.next_button && event == GEvent.CLICKED) 
+
+  if (event = GEvent.CLICKED)
   {
-    page_nums[layer]++;
-    rp.set_recipes_page();
-  }
-  else if (button == rp.prev_button && event == GEvent.CLICKED) 
-  {
-    page_nums[layer]--;
-    rp.set_recipes_page();
-  }
-  else if (button == rp.back && event == GEvent.CLICKED)
-  {
-    page_nums[layer] = 0;
-    total_page_nums[layer] = 0;
-    layer--;
-    
-    rp.set_recipes_page();
-  }
-  else if (button == fp.prev_button && event == GEvent.CLICKED)
-  {
-    if (page_nums[layer] > 0)
-    {
-      page_nums[layer]--;
-      fp.set_fridge_page();
-    }
-  }
-  else if (button == fp.next_button && event == GEvent.CLICKED)
-  {
-    if (page_nums[layer] < total_page_nums[layer] - 1)
+    if (button == rp.next_button) 
     {
       page_nums[layer]++;
+      rp.set_recipes_page();
+    }
+    else if (button == rp.prev_button) 
+    {
+      page_nums[layer]--;
+      rp.set_recipes_page();
+    }
+    else if (button == rp.back)
+    {
+      page_nums[layer] = 0;
+      total_page_nums[layer] = 0;
+      layer--;
+      
+      rp.set_recipes_page();
+    }
+    else if (button == fp.prev_button)
+    {
+      if (page_nums[layer] > 0)
+      {
+        page_nums[layer]--;
+        fp.set_fridge_page();
+      }
+    }
+    else if (button == fp.next_button)
+    {
+      if (page_nums[layer] < total_page_nums[layer] - 1)
+      {
+        page_nums[layer]++;
+        fp.set_fridge_page();
+      }
+    }
+    else if (button == fp.back)
+    {
+      page_nums[layer] = 0;
+      total_page_nums[layer] = 0;
+      layer--;
       fp.set_fridge_page();
     }
+    else if (button == mp.prev_button)
+    {
+      page_nums[layer]--;
+      mp.set_matching_page();
+    }
+    else if (button == mp.next_button)
+    {
+      page_nums[layer]++;
+      mp.set_matching_page();
+    }
+    else if (button == ap.prev_button)
+    {
+      page_nums[layer]--;
+      ap.set_activity_page();
+    }
+    else if (button == ap.next_button)
+    {
+      page_nums[layer]++;
+      ap.set_activity_page();
+    }
+    else if (button == ap.back)
+    {
+      page_nums[layer] = 0;
+      total_page_nums[layer] = 0;
+      layer--;
+      ap.set_activity_page(); 
+    }
   }
-  else if (button == fp.back && event == GEvent.CLICKED)
-  {
-    page_nums[layer] = 0;
-    total_page_nums[layer] = 0;
-    layer--;
-    fp.set_fridge_page();
-  }
-  else if (button == mp.prev_button && event == GEvent.CLICKED)
-  {
-    page_nums[layer]--;
-    mp.set_matching_page();
-  }
-  else if (button == mp.next_button && event == GEvent.CLICKED)
-  {
-    page_nums[layer]++;
-    mp.set_matching_page();
-  }
-  else if (button == ap.prev_button && event == GEvent.CLICKED)
-  {
-    page_nums[layer]--;
-    ap.set_activity_page();
-  }
-  else if (button == ap.next_button && event == GEvent.CLICKED)
-  {
-    page_nums[layer]++;
-    ap.set_activity_page();
-  }
-  else if (button == ap.back && event == GEvent.CLICKED)
-  {
-    page_nums[layer] = 0;
-    total_page_nums[layer] = 0;
-    layer--;
-    ap.set_activity_page(); 
-  }
+  
+  
 }
 
 
@@ -364,7 +369,6 @@ public void add_button_handler(GButton button, GEvent event)
       String name = "Recipe " + recipe_id;
       Recipe r = new Recipe(name);
       recipes.add(0, r);
-      total_page_nums[0] = max(1, (int) ceil((float) recipes.size() / buttons_per_page));
       rp.set_recipes_page();
     }
     else if (layer == 1)
