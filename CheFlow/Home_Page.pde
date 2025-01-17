@@ -70,6 +70,7 @@ class Home_Page extends Page
     str += "You spend " + nf(get_average_duration(7), 0, 2) + " minutes on average cooking in the past 7 days.\n";
     str += "You spend " + nf(get_average_duration(30), 0, 2) + " minutes on average cooking in the past 30 days.\n";
     str += "You spend " + nf(get_average_duration(365), 0, 2) + " minutes on average cooking in the past year.\n";
+    str += "Your longest streak is " + get_longest_streak() + " days.\n";
 
     insights.setText(str);
 

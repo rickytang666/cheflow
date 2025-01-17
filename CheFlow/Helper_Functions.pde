@@ -500,3 +500,49 @@ float[] calculate_exponential_coefficients(int n)
 
   return coefficients;
 }
+
+
+int get_longest_streak()
+{
+  if (log_records.size() == 0)
+  {
+    return 0;
+  }
+
+  ArrayList<Log> data = new ArrayList<Log>();
+  data.addAll(log_records);
+
+  data.sort((a, b) -> a.time_finished.compareTo(b.time_finished));
+
+  int max_streak = 1, current_streak = 1;
+
+  for (int i = 1; i < data.size(); i++)
+  {
+    Log prev = data.get(i - 1);
+    Log curr = data.get(i);
+
+    
+
+    if (curr.time_finished.days_difference(prev.time_finished) == 0)
+    {
+      // println(curr.time_finished.get_date_str(), "the same");
+      continue;
+    }
+    else if (curr.time_finished.days_difference(prev.time_finished) == 1)
+    {
+      // println(curr.time_finished.get_date_str(), "increase");
+      current_streak++;
+    }
+    else
+    {
+      // println(curr.time_finished.get_date_str(), "NOOOOOOOOOO");
+      max_streak = max(max_streak, current_streak);
+      current_streak = 1;
+    }
+  }
+
+  max_streak = max(max_streak, current_streak);
+
+  return max_streak;
+
+}
