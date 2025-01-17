@@ -52,7 +52,12 @@ class Frige_Page extends Page
 
   void set_nav_gui()
   {
-    title = new GLabel(parent, 300, 60, 500, 30, "This is the Fridge Page");
+    title = new GLabel(parent, width/2 - 150, 70, 300, 40, "FRIDGE PAGE");
+    title.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+    title.setTextBold();
+    title.setTextItalic();
+    title.setOpaque(true);
+    title.setLocalColor(6, accent_col);
     
     float navButtonWidth = 100;
     float navButtonHeight = 40;
@@ -129,9 +134,10 @@ class Frige_Page extends Page
     }
     else if (layer == 1)
     {
-      current_ing.label = new GLabel(parent, 350, 200, 900, 400, current_ing.content);
+      current_ing.label = new GLabel(parent, width/2 - 200, 250, 400, 400, current_ing.content);
+      current_ing.label.setTextAlign(GAlign.CENTER, GAlign.TOP);
 
-      current_ing.renamer = new GTextField(parent, 350, 150, 200, 40, G4P.SCROLLBARS_HORIZONTAL_ONLY);
+      current_ing.renamer = new GTextField(parent, width/2 - 100, 150, 200, 40, G4P.SCROLLBARS_HORIZONTAL_ONLY);
       current_ing.renamer.setText(current_ing.name);
       current_ing.renamer.addEventHandler(parent, "ingredient_renamer_handler_f");
     }

@@ -50,7 +50,12 @@ class Home_Page extends Page
 
   void set_static_gui()
   {
-    title = new GLabel(parent, 400, 100, 300, 50, "This is the Home Page");
+    title = new GLabel(parent, width/2 - 150, 70, 300, 40, "HOME PAGE");
+    title.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+    title.setTextBold();
+    title.setTextItalic();
+    title.setOpaque(true);
+    title.setLocalColor(6, accent_col);
 
     export_button = new GButton(parent, 400, 200, 200, 40, "Export Data");
     export_button.addEventHandler(parent, "export_button_handler");

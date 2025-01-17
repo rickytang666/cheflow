@@ -64,7 +64,12 @@ class Matching_Page extends Page
 
   void set_nav_gui()
   {
-    title = new GLabel(parent, 300, 100, 500, 50, "This is the Matching Page");
+    title = new GLabel(parent, width/2 - 150, 70, 300, 40, "MATCHING PAGE");
+    title.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+    title.setTextBold();
+    title.setTextItalic();
+    title.setOpaque(true);
+    title.setLocalColor(6, accent_col);
 
     float navButtonWidth = 100;
     float navButtonHeight = 40;

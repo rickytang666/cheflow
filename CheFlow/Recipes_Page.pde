@@ -11,7 +11,7 @@ class Recipes_Page extends Page
   GTextField search_bar;
   GOption search_toggle;
 
-  GLabel entries_status;
+  GLabel title, entries_status;
 
   Boolean searching = false;
   
@@ -62,6 +62,14 @@ class Recipes_Page extends Page
 
   void set_nav_gui()
   {
+
+    title = new GLabel(parent, width/2 - 150, 70, 300, 40, "RECIPE PAGE");
+    title.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+    title.setTextBold();
+    title.setTextItalic();
+    title.setOpaque(true);
+    title.setLocalColor(6, accent_col);
+
     float navButtonWidth = 100;
     float navButtonHeight = 40;
     float navButtonY = height - 50;
@@ -78,15 +86,16 @@ class Recipes_Page extends Page
     add_button = new GButton(parent, 800, 200, 70, 50, "+Item");
     add_button.addEventHandler(parent, "add_button_handler");
 
-    search_bar = new GTextField(parent, 100, 60, 400, 40, G4P.SCROLLBARS_HORIZONTAL_ONLY);
+    search_bar = new GTextField(parent, width/2 - 100, 130, 200, 40, G4P.SCROLLBARS_HORIZONTAL_ONLY);
     search_bar.addEventHandler(parent, "search_bar_handler");
 
-    search_toggle = new GOption(parent, 600, 60, 100, 40);
+    search_toggle = new GOption(parent, width - 200, 60, 100, 40);
     search_toggle.addEventHandler(parent, "search_mode_handler");
     search_toggle.setText("Search Mode");
 
-    entries_status = new GLabel(parent, 700, 100, 600, 40);
+    entries_status = new GLabel(parent, width - 200, 100, 100, 40);
 
+    static_controls.add(title);
     static_controls.add(prev_button);
     static_controls.add(next_button);
     static_controls.add(back);
@@ -145,10 +154,10 @@ class Recipes_Page extends Page
         
     if (layer == 0)
     {
-
-      total_page_nums[0] = (int) ceil((float) recipes.size() / buttons_per_page);
       
       ArrayList<Recipe> to_display = searching ? search_results : recipes;
+
+      total_page_nums[0] = max(1, (int) ceil((float) to_display.size() / buttons_per_page));
 
       entries_status.setText("Entries: " + to_display.size());
 
@@ -178,11 +187,11 @@ class Recipes_Page extends Page
       int start = page_nums[1] * buttons_per_page;
       int end = min(start + buttons_per_page, current_r.ingredients.size());
       
-      current_r.renamer = new GTextField(parent, 350, 110, 200, 40, G4P.SCROLLBARS_HORIZONTAL_ONLY);
+      current_r.renamer = new GTextField(parent, width/2 - 100, 120, 200, 40, G4P.SCROLLBARS_HORIZONTAL_ONLY);
       current_r.renamer.setText(current_r.name);
       current_r.renamer.addEventHandler(parent, "recipe_renamer_handler");  
 
-      current_r.duration_editor = new GTextField(parent, 350, 160, 200, 30);
+      current_r.duration_editor = new GTextField(parent, width/2 - 50, 170, 100, 20);
       current_r.duration_editor.setText(str(current_r.duration));
       current_r.duration_editor.addEventHandler(parent, "recipe_duration_handler");
       current_r.duration_editor.setNumeric(1, 60 * 24, 30);
@@ -205,9 +214,10 @@ class Recipes_Page extends Page
     }
     else if (layer == 2)
     {
-      current_ing.label = new GLabel(parent, 350, 100, 400, 500, current_ing.content);
+      current_ing.label = new GLabel(parent, width/2 - 200, 250, 400, 400, current_ing.content);
+      current_ing.label.setTextAlign(GAlign.CENTER, GAlign.TOP);
       
-      current_ing.renamer = new GTextField(parent, 350, 150, 200, 40, G4P.SCROLLBARS_HORIZONTAL_ONLY);
+      current_ing.renamer = new GTextField(parent, width/2 - 100, 150, 200, 40, G4P.SCROLLBARS_HORIZONTAL_ONLY);
       current_ing.renamer.setText(current_ing.name);
       current_ing.renamer.addEventHandler(parent, "ingredient_renamer_handler");  
       
@@ -299,6 +309,7 @@ public void search_bar_handler(GTextField source, GEvent event)
 {
   if (event == GEvent.CHANGED)
   {
+
     if (source == ap.search_bar)
     {
       fill_search_results(source.getText());
@@ -322,7 +333,7 @@ public void search_mode_handler(GOption option, GEvent event)
 {
   if (event == GEvent.SELECTED)
   {
-    println("Search mode enabled");
+    // println("Search mode enabled");
     rp.searching = true;
     rp.search_bar.setText("");
     search_results.clear();
@@ -331,7 +342,7 @@ public void search_mode_handler(GOption option, GEvent event)
   }
   else if (event == GEvent.DESELECTED)
   {
-    println("Search mode disabled");
+    // println("Search mode disabled");
     rp.searching = false;
     rp.search_bar.setText("");
     total_page_nums[0] = max(1, (int) ceil((float) recipes.size() / buttons_per_page));
