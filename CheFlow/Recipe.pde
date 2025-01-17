@@ -40,7 +40,7 @@ class Recipe
 
   void add_ingredient(Ingredient ing)
   {
-    this.ingredients.add(ing);
+    this.ingredients.add(0, ing);
   }
 
   void delete_ingredient(int index)

@@ -51,9 +51,9 @@ void sort_recipes(int option)
 }
 
 
-ArrayList<Recipe> get_related_recipes(String name)
+ArrayList<String> get_related_recipes(String name)
 {
-  ArrayList<Recipe> related_recipes = new ArrayList<Recipe>();
+  ArrayList<String> related_recipes = new ArrayList<String>();
 
   // println("Searching for recipes using ingredient: " + name);
   for (Recipe r : recipes)
@@ -65,7 +65,7 @@ ArrayList<Recipe> get_related_recipes(String name)
       if (ing.name.equals(name))
       {
         // println("Found in recipe: " + r.name);
-        related_recipes.add(r);
+        related_recipes.add(r.name);
         break;
       }
     }

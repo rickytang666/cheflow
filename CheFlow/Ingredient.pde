@@ -5,24 +5,26 @@ class Ingredient
   /* FIELDS */
   
   String name;
-  String content;
+
+  ArrayList<String> related_recipes;
 
   GButton button;
   GButton del_button;
   GLabel label;
   GTextField renamer;
+  ArrayList<GLabel> recipe_labels;
 
   /* CONSTRUCTORS */
   
   Ingredient(String n)
   {
-
     this.name = n.toLowerCase(); 
-    this.content = "";
+    this.related_recipes = new ArrayList<String>();
     this.button = null;
     this.del_button = null;
     this.label = null;
     this.renamer = null;
+    this.recipe_labels = new ArrayList<GLabel>();
   }
 
   /* METHODS */
@@ -34,24 +36,7 @@ class Ingredient
 
   void set_contents()
   {
-    this.content = "This ingredient is used in the following recipes:\n\n";
-
-    ArrayList<Recipe> related_recipes = get_related_recipes(this.name);
-
-    if (related_recipes.isEmpty())
-    {
-      this.content += "None\n";
-    }
-
-    for (Recipe r : related_recipes)
-    {
-      this.content += r.name + "\n";
-    }
-
-    if (this.label != null)
-    {
-      this.label.setText(this.content);
-    }
+    this.related_recipes = get_related_recipes(this.name);
   }
 
   void dispose_controls()
@@ -74,6 +59,14 @@ class Ingredient
     if (this.renamer != null)
     {
       this.renamer.dispose();
+    }
+
+    for (GLabel l : this.recipe_labels)
+    {
+      if (l != null)
+      {
+        l.dispose();
+      }
     }
   }
 

@@ -111,8 +111,9 @@ class Recipes_Page extends Page
 
   void update_nav_gui()
   {
-    prev_button.setEnabled(layer < 2 && page_nums[layer] > 0);
-    next_button.setEnabled(layer < 2 && page_nums[layer] < total_page_nums[layer] - 1);
+    prev_button.setEnabled(page_nums[layer] > 0);
+    next_button.setEnabled(page_nums[layer] < total_page_nums[layer] - 1);
+    
     back.setEnabled(layer > 0);
     back.setVisible(layer > 0);
     add_button.setEnabled(layer < 2 && (layer == 0 && !searching) || (layer == 1));
@@ -122,6 +123,8 @@ class Recipes_Page extends Page
     search_bar.setVisible(layer == 0 && searching);
     search_button.setEnabled(layer == 0 && searching);
     search_button.setVisible(layer == 0 && searching);
+
+    entries_status.setVisible(layer < 2);
   }
 
 
@@ -217,13 +220,32 @@ class Recipes_Page extends Page
     }
     else if (layer == 2)
     {
-      current_ing.label = new GLabel(parent, width/2 - 200, 250, 400, 400, current_ing.content);
-      current_ing.label.setTextAlign(GAlign.CENTER, GAlign.TOP);
+      String content = "This ingredient is used in " + current_ing.related_recipes.size() + " recipes\n";   
       
-      current_ing.renamer = new GTextField(parent, width/2 - 100, 150, 200, 40, G4P.SCROLLBARS_HORIZONTAL_ONLY);
+      current_ing.renamer = new GTextField(parent, width/2 - 100, 120, 200, 30, G4P.SCROLLBARS_HORIZONTAL_ONLY);
       current_ing.renamer.setText(current_ing.name);
-      current_ing.renamer.addEventHandler(parent, "ingredient_renamer_handler");  
-      
+      current_ing.renamer.addEventHandler(parent, "ingredient_renamer_handler");
+
+      current_ing.label = new GLabel(parent, width/2 - 200, 180, 400, 20, content);
+      current_ing.label.setTextAlign(GAlign.CENTER, GAlign.TOP);
+
+      int start = page_nums[2] * buttons_per_page;
+      int end = min(start + buttons_per_page, current_ing.related_recipes.size());
+
+      for (int i = start; i < end; i++)
+      {
+        String recipe_name = current_ing.related_recipes.get(i);
+        int index = i - start;
+        float x = button_startX;
+        float y = button_startY + index * (button_height + button_spacing);
+
+        // just a GLabel
+
+        GLabel label = new GLabel(parent, x, y, button_width, button_height, recipe_name);
+        label.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+        label.setOpaque(true);
+        current_ing.recipe_labels.add(label);
+      }
     }
     
     
@@ -237,7 +259,7 @@ class Recipes_Page extends Page
 public void handleButtonEvents(GButton button, GEvent event) 
 {
 
-  if (event = GEvent.CLICKED)
+  if (event == GEvent.CLICKED)
   {
     if (button == rp.next_button) 
     {
@@ -259,19 +281,17 @@ public void handleButtonEvents(GButton button, GEvent event)
     }
     else if (button == fp.prev_button)
     {
-      if (page_nums[layer] > 0)
-      {
-        page_nums[layer]--;
-        fp.set_fridge_page();
-      }
+      
+      page_nums[layer]--;
+      fp.set_fridge_page();
+      
     }
     else if (button == fp.next_button)
     {
-      if (page_nums[layer] < total_page_nums[layer] - 1)
-      {
-        page_nums[layer]++;
-        fp.set_fridge_page();
-      }
+      
+      page_nums[layer]++;
+      fp.set_fridge_page();
+      
     }
     else if (button == fp.back)
     {
@@ -369,6 +389,8 @@ public void add_button_handler(GButton button, GEvent event)
       String name = "Recipe " + recipe_id;
       Recipe r = new Recipe(name);
       recipes.add(0, r);
+      total_page_nums[0] = max(1, (int) ceil((float) recipes.size() / buttons_per_page));
+      page_nums[0] = 0;
       rp.set_recipes_page();
     }
     else if (layer == 1)
@@ -377,8 +399,8 @@ public void add_button_handler(GButton button, GEvent event)
       ++ingredient_id;
       Ingredient ing = new Ingredient(name);
       current_r.add_ingredient(ing);
-      total_page_nums[1] = max(1, (int) ceil((float) current_r.ingredients.size() / buttons_per_page));      
-      page_nums[1] = total_page_nums[1] - 1;
+      total_page_nums[1] = (int) ceil((float) current_r.ingredients.size() / buttons_per_page);
+      page_nums[1] = 0;
       rp.set_recipes_page();
     }
     
@@ -480,6 +502,8 @@ public void ingredient_button_handler(GButton button, GEvent event)
         current_ing = ing;
         layer = 2;
         ing.set_contents();
+        page_nums[2] = 0;
+        total_page_nums[2] = (int) ceil((float) ing.related_recipes.size() / buttons_per_page);
         rp.set_recipes_page();
         break;
       }

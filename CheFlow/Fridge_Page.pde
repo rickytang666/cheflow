@@ -85,8 +85,8 @@ class Frige_Page extends Page
 
   void update_nav_gui()
   {
-    prev_button.setEnabled(layer == 0 && page_nums[0] > 0);
-    next_button.setEnabled(layer == 0 && page_nums[0] < total_page_nums[0] - 1);
+    prev_button.setEnabled(page_nums[layer] > 0);
+    next_button.setEnabled(page_nums[layer] < total_page_nums[layer] - 1);
     back.setEnabled(layer > 0);
     back.setVisible(layer > 0);
     add_button.setEnabled(layer == 0);
@@ -134,12 +134,31 @@ class Frige_Page extends Page
     }
     else if (layer == 1)
     {
-      current_ing.label = new GLabel(parent, width/2 - 200, 250, 400, 400, current_ing.content);
-      current_ing.label.setTextAlign(GAlign.CENTER, GAlign.TOP);
-
-      current_ing.renamer = new GTextField(parent, width/2 - 100, 150, 200, 40, G4P.SCROLLBARS_HORIZONTAL_ONLY);
+      String content = "This ingredient is used in " + current_ing.related_recipes.size() + " recipes\n";
+      
+      current_ing.renamer = new GTextField(parent, width/2 - 100, 120, 200, 30, G4P.SCROLLBARS_HORIZONTAL_ONLY);
       current_ing.renamer.setText(current_ing.name);
       current_ing.renamer.addEventHandler(parent, "ingredient_renamer_handler_f");
+
+      current_ing.label = new GLabel(parent, width/2 - 200, 180, 400, 20, content);
+      current_ing.label.setTextAlign(GAlign.CENTER, GAlign.TOP);
+
+      int start = page_nums[1] * buttons_per_page;
+      int end = min(start + buttons_per_page, current_ing.related_recipes.size());
+
+      for(int i = start; i < end; ++i)
+      {
+        String recipe_name = current_ing.related_recipes.get(i);
+        int index = i - start;
+        float x = button_startX;
+        float y = button_startY + index * (button_height + button_spacing);
+
+        GLabel recipe_label = new GLabel(parent, x, y, button_width, button_height, recipe_name);
+        recipe_label.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+        recipe_label.setOpaque(true);
+        current_ing.recipe_labels.add(recipe_label);
+      }
+
     }
   }
 
@@ -174,6 +193,8 @@ public void ingredient_button_handler_f(GButton button, GEvent event)
         current_ing = ing;
         layer = 1;
         ing.set_contents();
+        page_nums[1] = 0;
+        total_page_nums[1] = (int) ceil((float) ing.related_recipes.size() / buttons_per_page);
         fp.set_fridge_page();
         break;
       }
