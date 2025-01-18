@@ -91,7 +91,6 @@ class Home_Page extends Page
 
 public void autosave_toggle_handler(GOption option, GEvent event)
 {
-  println("Event: " + event);
 
   if (event == GEvent.SELECTED)
   {
@@ -140,7 +139,7 @@ void open_graph_window()
 
 public void graph_window_draw(PApplet appc, GWinData data)
 {
-  draw_scatter_plot(appc, 365);
+  draw_scatter_plot(appc, 14);
 }
 
 

@@ -27,7 +27,7 @@ ArrayList<Integer> daily_durations = new ArrayList<>();
 final String file_name_recipes = "recipes.json";
 final String file_name_fridge = "fridge.json";
 final String file_name_logs = "logs.json";
-Boolean auto_save = false;
+boolean auto_save = false;
 
 final float button_width = 300;
 final float button_height = 40;

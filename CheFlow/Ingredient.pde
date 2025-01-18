@@ -71,3 +71,34 @@ class Ingredient
   }
 
 }
+
+
+class IngredientStatus
+{
+  Ingredient ingredient;
+  boolean is_essential;
+
+  GOption essential_toggle;
+
+  IngredientStatus(Ingredient ing)
+  {
+    this.ingredient = ing;
+    this.is_essential = false;
+  }
+
+  IngredientStatus(Ingredient ing, boolean ess)
+  {
+    this.ingredient = ing;
+    this.is_essential = ess;
+  }
+
+  void dispose_controls()
+  {
+    if (this.essential_toggle != null)
+    {
+      this.essential_toggle.dispose();
+    }
+
+    this.ingredient.dispose_controls();
+  }
+}

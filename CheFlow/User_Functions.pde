@@ -16,10 +16,11 @@ void export_recipes()
     recipe_obj.setInt("duration", r.duration);
 
     JSONArray ingredients_array = new JSONArray();
-    for (Ingredient ing : r.ingredients)
+    for (IngredientStatus ing_status : r.ingredients)
     {
       JSONObject ingredient_obj = new JSONObject();
-      ingredient_obj.setString("name", ing.name);
+      ingredient_obj.setString("name", ing_status.ingredient.name);
+      ingredient_obj.setBoolean("is_essential", ing_status.is_essential);
       ingredients_array.append(ingredient_obj);
     }
 
@@ -69,8 +70,9 @@ void import_recipes()
     {
       JSONObject ingredient_obj = ingredients_array.getJSONObject(j);
       Ingredient ing = new Ingredient(ingredient_obj.getString("name"));
+      boolean is_essential = ingredient_obj.getBoolean("is_essential");
       
-      r.add_ingredient(ing);
+      r.add_ingredient(ing, is_essential);
     }
 
     recipes.add(r);

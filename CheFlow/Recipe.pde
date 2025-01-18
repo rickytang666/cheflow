@@ -6,7 +6,7 @@ class Recipe
   int id;
   String name;
   int duration;
-  ArrayList<Ingredient> ingredients;
+  ArrayList<IngredientStatus> ingredients;
   GButton button;
   GButton del_button;
   GTextField renamer;
@@ -26,7 +26,7 @@ class Recipe
     this.duration = 30;
     this.matching_score = 0;
     
-    this.ingredients = new ArrayList<Ingredient>();
+    this.ingredients = new ArrayList<IngredientStatus>();
     
     this.button = null;
     this.del_button = null;
@@ -40,8 +40,15 @@ class Recipe
 
   void add_ingredient(Ingredient ing)
   {
-    this.ingredients.add(0, ing);
+    this.ingredients.add(0, new IngredientStatus(ing));
   }
+
+
+  void add_ingredient(Ingredient ing, boolean is_essential)
+  {
+    this.ingredients.add(0, new IngredientStatus(ing, is_essential));
+  }
+
 
   void delete_ingredient(int index)
   {
@@ -51,8 +58,8 @@ class Recipe
     }
     else
     {
-      Ingredient ing = this.ingredients.get(index);
-      ing.dispose_controls();
+      IngredientStatus ing_status = this.ingredients.get(index);
+      ing_status.dispose_controls();
       this.ingredients.remove(index);
     }
   }
@@ -61,7 +68,8 @@ class Recipe
   void set_matching_score()
   {
     this.matching_score = 0;
-    int num_matched = 0;
+    int essential_matched = 0, other_matched = 0;
+    int total_essentials = 0, total_others = 0;
 
     if (this.ingredients.size() == 0)
     {
@@ -69,19 +77,47 @@ class Recipe
       return;
     }
 
-    for (Ingredient ing : this.ingredients)
+    for (IngredientStatus ing_status : this.ingredients)
     {
-      for (Ingredient fridge_ing : fridge)
+      if (ing_status.is_essential)
       {
-        if (ing.name.equals(fridge_ing.name))
+        ++total_essentials;
+
+        for (Ingredient fridge_ing : fridge)
         {
-          ++num_matched;
-          break;
+          if (ing_status.ingredient.name.equals(fridge_ing.name))
+          {
+            ++essential_matched;
+            break;
+          }
         }
+
+      }
+      else
+      {
+        ++total_others;
+
+        for (Ingredient fridge_ing : fridge)
+        {
+          if (ing_status.ingredient.name.equals(fridge_ing.name))
+          {
+            ++other_matched;
+            break;
+          }
+        }
+
       }
     }
 
-    this.matching_score = 100.0 * ((float) num_matched / this.ingredients.size());
+    if (total_essentials <= 0)
+    {
+      this.matching_score = 100.0 * (float)other_matched / (float)total_others;
+      return;
+    }
+
+    float essential_score = 100.0 * (float)essential_matched / (float)total_essentials;
+    float other_score = 100.0 * (float)other_matched / (float)total_others;
+    this.matching_score = essential_score * 0.8 + other_score * 0.2;
   }
 
 
@@ -117,6 +153,7 @@ class Recipe
       this.matching_score_label.dispose();
     }
   }
+
 
   void delete()
   {

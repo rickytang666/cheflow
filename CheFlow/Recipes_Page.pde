@@ -137,8 +137,7 @@ class Recipes_Page extends Page
     
     if (current_r != null)
     {
-
-      for (Ingredient i : current_r.ingredients)
+      for (IngredientStatus i : current_r.ingredients)
       {
         i.dispose_controls();
       }
@@ -204,7 +203,8 @@ class Recipes_Page extends Page
       
       for (int i = start; i < end; i++) 
       {
-        Ingredient ing = current_r.ingredients.get(i);
+        IngredientStatus ing_status = current_r.ingredients.get(i);
+        Ingredient ing = ing_status.ingredient;
         int buttonIndex = i - start;
         float x = button_startX;
         float y = button_startY + buttonIndex * (button_height + button_spacing);
@@ -215,6 +215,10 @@ class Recipes_Page extends Page
 
         ing.del_button = new GButton(parent, x + button_width + 10, y, 50, button_height, "Delete");
         ing.del_button.addEventHandler(parent, "ingredient_del_button_handler");
+
+        ing_status.essential_toggle = new GOption(parent, x + button_width + 70, y, 40, 40, "Essen.");
+        ing_status.essential_toggle.setSelected(ing_status.is_essential);
+        ing_status.essential_toggle.addEventHandler(parent, "ingredient_essential_handler");
       }
       
     }
@@ -517,7 +521,7 @@ public void ingredient_button_handler(GButton button, GEvent event)
   {
     for (int i = 0; i < current_r.ingredients.size(); i++)
     {
-      Ingredient ing = current_r.ingredients.get(i);
+      Ingredient ing = current_r.ingredients.get(i).ingredient;
       if (ing.name.equals(button.getText()))
       {
         current_ing = ing;
@@ -539,11 +543,11 @@ public void ingredient_del_button_handler(GButton button, GEvent event)
   {
     for (int i = 0; i < current_r.ingredients.size(); i++)
     {
-      Ingredient ing = current_r.ingredients.get(i);
-      if (ing.del_button == button)
+      IngredientStatus ing_status = current_r.ingredients.get(i);
+      if (ing_status.ingredient.del_button == button)
       {
         current_r.delete_ingredient(i);
-        total_page_nums[1] = (int) ceil((float) current_r.ingredients.size() / buttons_per_page);
+        total_page_nums[1] = max(1, (int) ceil((float) current_r.ingredients.size() / buttons_per_page));
         page_nums[1] = constrain(page_nums[1], 0, total_page_nums[1] - 1);
         rp.set_recipes_page();
         break;
@@ -559,12 +563,33 @@ public void ingredient_del_button_handler(GButton button, GEvent event)
 }
 
 
+public void ingredient_essential_handler(GOption option, GEvent event)
+{
+  if (event == GEvent.SELECTED || event == GEvent.DESELECTED)
+  {
+    for (int i = 0; i < current_r.ingredients.size(); i++)
+    {
+      IngredientStatus ing_status = current_r.ingredients.get(i);
+      if (ing_status.essential_toggle == option)
+      {
+        ing_status.is_essential = option.isSelected();
+        break;
+      }
+    }
+
+    if (auto_save)
+    {
+      export_data();
+    }
+  }
+}
+
+
 public void ingredient_renamer_handler(GTextField source, GEvent event)
 {
   if (event == GEvent.CHANGED && current_ing != null)
   {
-
-    if (!is_ingredient_repeated(source.getText(), current_r.ingredients))
+    if (!is_ingredient_repeated(source.getText(), 1))
     {
       current_ing.set_name(source.getText());
       current_ing.set_contents();

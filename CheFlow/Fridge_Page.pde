@@ -174,9 +174,9 @@ public void add_button_handler_f(GButton button, GEvent event)
     String name = "ingredient " + ingredient_id;
     ++ingredient_id;
     Ingredient ing = new Ingredient(name);
-    fridge.add(ing);
+    fridge.add(0, ing);
     total_page_nums[0] = max(1, (int) ceil((float) fridge.size() / buttons_per_page));
-    page_nums[0] = total_page_nums[0] - 1;
+    page_nums[0] = 0;
     fp.set_fridge_page();
 
     if (auto_save)
@@ -237,7 +237,7 @@ public void ingredient_renamer_handler_f(GTextField source, GEvent event)
 {
   if (event == GEvent.CHANGED && current_ing != null)
   {
-    if (!is_ingredient_repeated(source.getText(), fridge))
+    if (!is_ingredient_repeated(source.getText(), 2))
     {
       current_ing.name = source.getText();
       current_ing.set_contents();

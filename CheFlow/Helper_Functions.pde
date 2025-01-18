@@ -13,16 +13,30 @@ Boolean is_recipe_repeated(String name, ArrayList<Recipe> arr)
 }
 
 
-Boolean is_ingredient_repeated(String name, ArrayList<Ingredient> arr)
+Boolean is_ingredient_repeated(String name, int option)
 {
-  for (Ingredient i : arr)
+  
+  if (option == 1)
   {
-    if (i.name.equals(name))
+    for (IngredientStatus ing_status : current_r.ingredients)
     {
-      return true;
+      if (ing_status.ingredient.name.equals(name))
+      {
+        return true;
+      }
     }
   }
-
+  else if (option == 2)
+  {
+    for (Ingredient ing : fridge)
+    {
+      if (ing.name.equals(name))
+      {
+        return true;
+      }
+    }
+  }
+  
   return false;
 
 }
@@ -59,10 +73,10 @@ ArrayList<String> get_related_recipes(String name)
   for (Recipe r : recipes)
   {
     // println("Checking recipe: " + r.name);
-    for (Ingredient ing : r.ingredients)
+    for (IngredientStatus ing_status : r.ingredients)
     {
       // println("Checking ingredient: " + ing.name);
-      if (ing.name.equals(name))
+      if (ing_status.ingredient.name.equals(name))
       {
         // println("Found in recipe: " + r.name);
         related_recipes.add(r.name);
@@ -277,7 +291,7 @@ void draw_scatter_plot(PApplet appc, int n)
   appc.fill(0);
 
   // Draw axes
-  int xAxis = 50; // Left margin
+  int xAxis = 100; // Left margin
   int yAxis = appc.height - 50; // Bottom margin
 
   // X-axis
@@ -303,6 +317,32 @@ void draw_scatter_plot(PApplet appc, int n)
     float y = map(duration, 0, maxDuration, yAxis, 50);
     appc.circle(x, y, circle_size);
   }
+
+  // Label axes
+
+  appc.fill(0);
+  appc.textAlign(CENTER, CENTER);
+  appc.textSize(12);
+
+  // X-axis labels
+
+  Time now = new Time();
+  Time start = now.subtract_days(n - 1);
+
+  String str1 = start.get_date_str();
+  String str2 = now.get_date_str();
+
+  appc.text(str1, xAxis, yAxis + 20);
+  appc.text(str2, appc.width - 50, yAxis + 20);
+  appc.textAlign(CENTER);
+  appc.text("Date", (appc.width - 50 + xAxis) / 2, yAxis + 30);
+
+  // Y-axis labels
+  
+  appc.textAlign(RIGHT);
+  appc.text("0", xAxis - 10, yAxis);
+  appc.text((int) maxDuration, xAxis - 10, 50);
+  appc.text("Duration (min)", xAxis - 10, (yAxis + 50) / 2);
 
   // Draw regression
 
@@ -469,6 +509,8 @@ float[] calculate_exponential_coefficients(int n)
   int startIndex = daily_durations.size() - n;
 
   float sumX = 0, sumY = 0, sumXY = 0, sumX2 = 0;
+  int valid_points = 0;
+
   for (int i = startIndex; i < daily_durations.size(); ++i) 
   {
     float x = i - startIndex;
@@ -477,6 +519,8 @@ float[] calculate_exponential_coefficients(int n)
     if (y <= 0) {
       continue; // Skip non-positive values
     }
+
+    valid_points++;
 
     float log_y = log(y); // Transform y to ln(y)
 
@@ -487,14 +531,16 @@ float[] calculate_exponential_coefficients(int n)
   }
 
   // Avoid divide-by-zero errors by adding a check
-  float denominator = (n * sumX2 - sumX * sumX);
-  if (denominator == 0) {
+  float denominator = (valid_points * sumX2 - sumX * sumX);
+  float tolerance = 1e-6; // A small value to avoid division by zero
+  if (abs(denominator) < tolerance) 
+  {
     println("Error: Denominator in slope calculation is zero.");
     return new float[]{0, 0}; // Return zero coefficients as a fallback
   }
 
-  float slope = (n * sumXY - sumX * sumY) / denominator; // B = slope
-  float intercept = (sumY - slope * sumX) / n; // A = intercept
+  float slope = (valid_points * sumXY - sumX * sumY) / denominator; // B = slope
+  float intercept = (sumY - slope * sumX) / valid_points; // A = intercept
 
   float[] coefficients = {slope, intercept};
 

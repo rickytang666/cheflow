@@ -1,4 +1,6 @@
 [
+  {"name": "lamb"},
+  {"name": "cocoa"},
   {"name": "milk"},
   {"name": "flour"},
   {"name": "egg"},
@@ -28,5 +30,6 @@
   {"name": "olive oil"},
   {"name": "spices"},
   {"name": "water"},
-  {"name": "tortilla"}
+  {"name": "tortilla"},
+  {"name": "beef"}
 ]
