@@ -41,14 +41,25 @@ class Home_Page extends Page
 
   void die()
   {
-    // println(controls.size());
+    // println(static_controls.size());
+
     for (GAbstractControl c : static_controls)
     {
       if (c != null)
       {
         c.dispose();
+        c = null;
       }
     }
+
+    // the droplists need special processes
+
+    days_droplist.setEnabled(false);
+    days_droplist.setVisible(false);
+    regression_droplist.setEnabled(false);
+    regression_droplist.setVisible(false);
+
+    static_controls.clear();
   }
 
   /* ADDITIONAL METHODS */
@@ -72,12 +83,14 @@ class Home_Page extends Page
     graph_button = new GButton(parent, 400, 250, 200, 40, "View Graph");
     graph_button.addEventHandler(parent, "graph_button_handler");
 
-    days_droplist = new GDropList(parent, 650, 250, 150, 150, 3);
+    // problem: when we are back from other pages, the droplists' expand buttons are not responsive
+
+    days_droplist = new GDropList(parent, 650, 250, 150, 150, 3, 20);
     String[] items = {"Past 7 days", "Past 14 Days", "Past 30 days", "Past 100 days", "Past 365 days"};
     days_droplist.setItems(items, 1);
     days_droplist.addEventHandler(parent, "days_droplist_handler");
 
-    regression_droplist = new GDropList(parent, 820, 250, 150, 150, 3);
+    regression_droplist = new GDropList(parent, 820, 250, 150, 150, 3, 20);
     String[] items2 = {"linear", "quadratic", "exponential"};
     regression_droplist.setItems(items2, 0);
     regression_droplist.addEventHandler(parent, "regression_droplist_handler");
@@ -100,8 +113,8 @@ class Home_Page extends Page
     static_controls.add(autosave_toggle);
     static_controls.add(export_button);
     static_controls.add(graph_button);
-    static_controls.add(days_droplist);
-    static_controls.add(regression_droplist);
+    // static_controls.add(days_droplist);
+    // static_controls.add(regression_droplist);
     static_controls.add(heatmap_button);
     static_controls.add(insights);
   }
@@ -172,6 +185,7 @@ public void graph_window_close(GWindow window)
 
 public void days_droplist_handler(GDropList droplist, GEvent event)
 {
+
   if (event == GEvent.SELECTED)
   {
     String selected = droplist.getSelectedText();

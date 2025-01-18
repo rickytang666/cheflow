@@ -96,6 +96,7 @@ class Activity_Page extends Page
     static_controls.add(back);
     static_controls.add(add_button);
     static_controls.add(search_bar);
+    static_controls.add(search_button);
     static_controls.add(time_editor);
     static_controls.add(duration_editor);
   }

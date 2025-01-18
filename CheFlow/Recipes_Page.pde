@@ -55,6 +55,8 @@ class Recipes_Page extends Page
       }
     }
 
+    static_controls.clear();
+
     clear_variable_controls();
   }
 

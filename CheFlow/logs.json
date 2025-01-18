@@ -1,5 +1,10 @@
 [
   {
+    "duration": 32,
+    "name": "beef burger",
+    "time finished": "2025-01-18 13:57"
+  },
+  {
     "duration": 40,
     "name": "pancakes",
     "time finished": "2025-01-18 11:49"
