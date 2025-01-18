@@ -7,9 +7,9 @@ class Home_Page extends Page
 
   ArrayList<GAbstractControl> static_controls = new ArrayList<GAbstractControl>();
   GLabel title, insights;
-  GButton export_button, graph_button;
+  GButton export_button, graph_button, heatmap_button;
   GOption autosave_toggle;
-  GWindow graph_window;
+  GWindow graph_window, heatmap_window;
 
   /* CONSTRUCTORS */
 
@@ -67,6 +67,9 @@ class Home_Page extends Page
 
     graph_button = new GButton(parent, 400, 250, 200, 40, "View Graph");
     graph_button.addEventHandler(parent, "graph_button_handler");
+
+    heatmap_button = new GButton(parent, 400, 300, 200, 40, "View Heatmap");
+    heatmap_button.addEventHandler(parent, "heatmap_button_handler");
 
     insights = new GLabel(parent, 300, 300, 500, 300);
 
@@ -147,4 +150,42 @@ public void graph_window_close(GWindow window)
 {
   hp.graph_window.dispose();
   hp.graph_window = null;
+}
+
+
+public void heatmap_button_handler(GButton button, GEvent event)
+{
+  if (event == GEvent.CLICKED)
+  {
+    if (hp.heatmap_window == null)
+    {
+      open_heatmap_window();
+    }
+    else
+    {
+      println("Heatmap window already open");
+    }
+  }
+}
+
+
+public void open_heatmap_window()
+{
+  hp.heatmap_window = GWindow.getWindow(this, "Heatmap", 200, 300, 1200, 200, JAVA2D);
+  hp.heatmap_window.addDrawHandler(this, "heatmap_window_draw");
+  hp.heatmap_window.addOnCloseHandler(this, "heatmap_window_close");
+  hp.heatmap_window.setActionOnClose(G4P.CLOSE_WINDOW);
+}
+
+
+public void heatmap_window_draw(PApplet appc, GWinData data)
+{
+  drawHeatMap(appc);
+}
+
+
+public void heatmap_window_close(GWindow window)
+{
+  hp.heatmap_window.dispose();
+  hp.heatmap_window = null;
 }
