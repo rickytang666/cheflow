@@ -18,6 +18,9 @@ import java.time.format.DateTimeFormatter;
 /* GLOBAL VARIABLES OR CONSTANTS */
 
 final color accent_col = #6be76b;
+PImage logo;
+
+
 ArrayList<Recipe> recipes = new ArrayList<Recipe>();
 ArrayList<Recipe> search_results = new ArrayList<Recipe>();
 ArrayList<Recipe> matching_results = new ArrayList<Recipe>();
@@ -83,6 +86,10 @@ void draw()
   background(220);
 
   nb.draw();
+
+  logo = loadImage("logo.png");
+  logo.resize(0, 50);
+  image(logo, 10, 5);
 }
 
 void exit()
