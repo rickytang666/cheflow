@@ -11,7 +11,7 @@ class Recipes_Page extends Page
   GTextField search_bar;
   GOption search_toggle;
 
-  GLabel title, entries_status;
+  GLabel title, entries_status, page_indicator;
 
   Boolean searching = false;
   
@@ -99,6 +99,8 @@ class Recipes_Page extends Page
 
     entries_status = new GLabel(parent, width - 200, 100, 100, 40);
 
+    page_indicator = new GLabel(parent, width - 150, navButtonY, 100, navButtonHeight);
+
     static_controls.add(title);
     static_controls.add(prev_button);
     static_controls.add(next_button);
@@ -108,6 +110,7 @@ class Recipes_Page extends Page
     static_controls.add(search_toggle);
     static_controls.add(add_button);
     static_controls.add(entries_status);
+    static_controls.add(page_indicator);
   }
 
 
@@ -167,6 +170,8 @@ class Recipes_Page extends Page
 
       total_page_nums[0] = max(1, (int) ceil((float) to_display.size() / buttons_per_page));
 
+      page_indicator.setText("Page " + (page_nums[0] + 1) + " of " + total_page_nums[0]);
+
       entries_status.setText("Entries: " + to_display.size());
 
       int start = page_nums[0] * buttons_per_page;
@@ -190,6 +195,8 @@ class Recipes_Page extends Page
     else if (layer == 1)
     {
       entries_status.setText("Ingredients: " + current_r.ingredients.size());
+
+      page_indicator.setText("Page " + (page_nums[1] + 1) + " of " + total_page_nums[1]);
 
       int start = page_nums[1] * buttons_per_page;
       int end = min(start + buttons_per_page, current_r.ingredients.size());
@@ -226,7 +233,9 @@ class Recipes_Page extends Page
     }
     else if (layer == 2)
     {
-      String content = "This ingredient is used in " + current_ing.related_recipes.size() + " recipes\n";   
+      String content = "This ingredient is used in " + current_ing.related_recipes.size() + " recipes\n";
+
+      page_indicator.setText("Page " + (page_nums[2] + 1) + " of " + total_page_nums[2]);   
       
       current_ing.renamer = new GTextField(parent, width/2 - 100, 120, 200, 30, G4P.SCROLLBARS_HORIZONTAL_ONLY);
       current_ing.renamer.setText(current_ing.name);

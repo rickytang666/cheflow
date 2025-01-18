@@ -7,7 +7,7 @@ class Matching_Page extends Page
 
   ArrayList<GAbstractControl> static_controls = new ArrayList<GAbstractControl>();
   
-  GLabel title;
+  GLabel title, page_indicator;
   GButton prev_button, next_button;
 
   /* CONSTRUCTORS */
@@ -81,9 +81,12 @@ class Matching_Page extends Page
     next_button = new GButton(parent, width / 2 + 20, navButtonY, navButtonWidth, navButtonHeight, "Next");
     next_button.addEventHandler(parent, "handleButtonEvents");
 
+    page_indicator = new GLabel(parent, width - 150, navButtonY, 100, navButtonHeight);
+
     static_controls.add(title);
     static_controls.add(prev_button);
     static_controls.add(next_button);
+    static_controls.add(page_indicator);
   }
 
 
@@ -108,6 +111,8 @@ class Matching_Page extends Page
     clear_variable_controls();
 
     update_nav_gui();
+
+    page_indicator.setText("Page " + (page_nums[0] + 1) + " of " + total_page_nums[0]);
     
     int start = page_nums[0] * buttons_per_page;
     int end = min(matching_results.size(), start + buttons_per_page);

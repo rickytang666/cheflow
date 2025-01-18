@@ -7,7 +7,7 @@ class Activity_Page extends Page
 
   ArrayList<GAbstractControl> static_controls = new ArrayList<GAbstractControl>();
   
-  GLabel title;
+  GLabel title, page_indicator;
   GButton prev_button, next_button, back, add_button, search_button;
   GTextField search_bar, time_editor, duration_editor;
 
@@ -78,6 +78,8 @@ class Activity_Page extends Page
     add_button = new GButton(parent, 800, 200, 70, 50, "+Log");
     add_button.addEventHandler(parent, "add_button_handler_log");
 
+    page_indicator = new GLabel(parent, width - 150, navButtonY, 100, navButtonHeight);
+
     search_bar = new GTextField(parent, 100, 130, 200, 30);
     
     search_button = new GButton(parent, 320, 130, 60, 30, "Search");
@@ -95,6 +97,7 @@ class Activity_Page extends Page
     static_controls.add(next_button);
     static_controls.add(back);
     static_controls.add(add_button);
+    static_controls.add(page_indicator);
     static_controls.add(search_bar);
     static_controls.add(search_button);
     static_controls.add(time_editor);
@@ -149,7 +152,9 @@ class Activity_Page extends Page
     {
       sort_log_records();
 
-      total_page_nums[0] = (int) ceil((float) log_records.size() / buttons_per_page);
+      total_page_nums[0] = max(1, (int) ceil((float) log_records.size() / buttons_per_page));
+
+      page_indicator.setText("Page " + (page_nums[0] + 1) + " of " + total_page_nums[0]);
 
       int start = page_nums[0] * buttons_per_page;
       int end = min(log_records.size(), start + buttons_per_page);
@@ -172,6 +177,8 @@ class Activity_Page extends Page
     }
     else if (layer == 1)
     {
+      page_indicator.setText("Page " + (page_nums[1] + 1) + " of " + total_page_nums[1]);
+
       int start = page_nums[1] * buttons_per_page;
       int end = min(search_results.size(), start + buttons_per_page);
 
@@ -216,6 +223,7 @@ public void log_button_handler(GButton button, GEvent event)
         layer = 1;
         fill_search_results("");
         total_page_nums[layer] = max(1, (int) ceil((float) search_results.size() / buttons_per_page));
+        page_nums[layer] = 0;
         ap.set_activity_page();
         break;
       }

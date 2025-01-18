@@ -7,7 +7,7 @@ class Frige_Page extends Page
 
   ArrayList<GAbstractControl> static_controls = new ArrayList<GAbstractControl>();
   
-  GLabel title;
+  GLabel title, page_indicator;
   GButton prev_button, next_button, back, add_button;
   
   /* CONSTRUCTORS */
@@ -74,12 +74,15 @@ class Frige_Page extends Page
 
     add_button = new GButton(parent, 800, 200, 70, 50, "+Item");
     add_button.addEventHandler(parent, "add_button_handler_f");
+
+    page_indicator = new GLabel(parent, width - 150, navButtonY, 100, navButtonHeight);
     
     static_controls.add(title);
     static_controls.add(prev_button);
     static_controls.add(next_button);
     static_controls.add(back);
     static_controls.add(add_button);
+    static_controls.add(page_indicator);
   }
 
 
@@ -113,6 +116,8 @@ class Frige_Page extends Page
     {
       total_page_nums[0] = (int) ceil((float) fridge.size() / buttons_per_page);
 
+      page_indicator.setText("Page " + (page_nums[0] + 1) + " of " + total_page_nums[0]);
+
       int start = page_nums[0] * buttons_per_page;
       int end = min(fridge.size(), start + buttons_per_page);
 
@@ -142,6 +147,8 @@ class Frige_Page extends Page
 
       current_ing.label = new GLabel(parent, width/2 - 200, 180, 400, 20, content);
       current_ing.label.setTextAlign(GAlign.CENTER, GAlign.TOP);
+
+      page_indicator.setText("Page " + (page_nums[1] + 1) + " of " + total_page_nums[1]);
 
       int start = page_nums[1] * buttons_per_page;
       int end = min(start + buttons_per_page, current_ing.related_recipes.size());
@@ -199,7 +206,7 @@ public void ingredient_button_handler_f(GButton button, GEvent event)
         layer = 1;
         ing.set_contents();
         page_nums[1] = 0;
-        total_page_nums[1] = (int) ceil((float) ing.related_recipes.size() / buttons_per_page);
+        total_page_nums[1] = max(1, (int) ceil((float) current_ing.related_recipes.size() / buttons_per_page));
         fp.set_fridge_page();
         break;
       }
