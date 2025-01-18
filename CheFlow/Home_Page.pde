@@ -9,7 +9,11 @@ class Home_Page extends Page
   GLabel title, insights;
   GButton export_button, graph_button, heatmap_button;
   GOption autosave_toggle;
+  GDropList days_droplist, regression_droplist;
   GWindow graph_window, heatmap_window;
+
+  int num_past_days = 14;
+  String regression_type = "linear";
 
   /* CONSTRUCTORS */
 
@@ -68,6 +72,16 @@ class Home_Page extends Page
     graph_button = new GButton(parent, 400, 250, 200, 40, "View Graph");
     graph_button.addEventHandler(parent, "graph_button_handler");
 
+    days_droplist = new GDropList(parent, 650, 250, 150, 150, 3);
+    String[] items = {"Past 7 days", "Past 14 Days", "Past 30 days", "Past 100 days", "Past 365 days"};
+    days_droplist.setItems(items, 1);
+    days_droplist.addEventHandler(parent, "days_droplist_handler");
+
+    regression_droplist = new GDropList(parent, 820, 250, 150, 150, 3);
+    String[] items2 = {"linear", "quadratic", "exponential"};
+    regression_droplist.setItems(items2, 0);
+    regression_droplist.addEventHandler(parent, "regression_droplist_handler");
+
     heatmap_button = new GButton(parent, 400, 300, 200, 40, "View Heatmap");
     heatmap_button.addEventHandler(parent, "heatmap_button_handler");
 
@@ -86,6 +100,9 @@ class Home_Page extends Page
     static_controls.add(autosave_toggle);
     static_controls.add(export_button);
     static_controls.add(graph_button);
+    static_controls.add(days_droplist);
+    static_controls.add(regression_droplist);
+    static_controls.add(heatmap_button);
     static_controls.add(insights);
   }
 }
@@ -142,7 +159,7 @@ void open_graph_window()
 
 public void graph_window_draw(PApplet appc, GWinData data)
 {
-  draw_scatter_plot(appc, 14);
+  draw_scatter_plot(appc, hp.num_past_days, hp.regression_type);
 }
 
 
@@ -150,6 +167,45 @@ public void graph_window_close(GWindow window)
 {
   hp.graph_window.dispose();
   hp.graph_window = null;
+}
+
+
+public void days_droplist_handler(GDropList droplist, GEvent event)
+{
+  if (event == GEvent.SELECTED)
+  {
+    String selected = droplist.getSelectedText();
+    if (selected.equals("Past 7 days"))
+    {
+      hp.num_past_days = 7;
+    }
+    else if (selected.equals("Past 14 Days"))
+    {
+      hp.num_past_days = 14;
+    }
+    else if (selected.equals("Past 30 days"))
+    {
+      hp.num_past_days = 30;
+    }
+    else if (selected.equals("Past 100 days"))
+    {
+      hp.num_past_days = 100;
+    }
+    else if (selected.equals("Past 365 days"))
+    {
+      hp.num_past_days = 365;
+    }
+  }
+}
+
+
+public void regression_droplist_handler(GDropList droplist, GEvent event)
+{
+  if (event == GEvent.SELECTED)
+  {
+    String selected = droplist.getSelectedText();
+    hp.regression_type = selected;
+  }
 }
 
 

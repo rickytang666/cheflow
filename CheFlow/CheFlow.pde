@@ -13,7 +13,6 @@
 import g4p_controls.*;
 import java.util.*;
 import java.time.LocalDate;
-// import java.time.format.TextStyle;
 import java.time.format.DateTimeFormatter;
 
 /* GLOBAL VARIABLES OR CONSTANTS */

@@ -277,21 +277,21 @@ float get_average_duration(int days)
 }
 
 
-void draw_scatter_plot(PApplet appc, int n) 
+void draw_scatter_plot(PApplet appc, int n, String option) 
 {
   // Constrain n between 7 and 365
   n = constrain(n, 7, 365);
   
-  float circle_size = map(float(n), 7, 365, 5, 2);
+  float circle_size = map(float(n), 7, 365, 8, 3);
 
   // Background and axis setup
-  appc.background(255);
-  appc.stroke(0);
-  appc.strokeWeight(1);
-  appc.fill(0);
+  appc.background(30);
+  appc.stroke(255);
+  appc.strokeWeight(2);
+  appc.fill(255);
 
   // Draw axes
-  int xAxis = 100; // Left margin
+  int xAxis = 90; // Left margin
   int yAxis = appc.height - 50; // Bottom margin
 
   // X-axis
@@ -306,9 +306,8 @@ void draw_scatter_plot(PApplet appc, int n)
   }
 
   // Draw scatter plot
-  appc.fill(0, 0, 255);
-  appc.stroke(0, 0, 255);
-  appc.strokeWeight(2);
+  appc.fill(#00FFFF);
+  appc.noStroke();
   for (int i = daily_durations.size() - n; i < daily_durations.size(); ++i) {
     float duration = daily_durations.get(i);
     //if (duration == 0) continue;
@@ -318,9 +317,26 @@ void draw_scatter_plot(PApplet appc, int n)
     appc.circle(x, y, circle_size);
   }
 
+  
+  // Draw regression
+
+  if (option.equals("quadratic"))
+  {
+    quadratic_regression(appc, n, maxDuration, xAxis, yAxis);
+  }
+  else if (option.equals("exponential"))
+  {
+    exponential_regression(appc, n, maxDuration, xAxis, yAxis);
+  }
+  else
+  {
+    linear_regression(appc, n, maxDuration, xAxis, yAxis);
+  }
+
+
   // Label axes
 
-  appc.fill(0);
+  appc.fill(255);
   appc.textAlign(CENTER, CENTER);
   appc.textSize(12);
 
@@ -343,12 +359,6 @@ void draw_scatter_plot(PApplet appc, int n)
   appc.text("0", xAxis - 10, yAxis);
   appc.text((int) maxDuration, xAxis - 10, 50);
   appc.text("Duration (min)", xAxis - 10, (yAxis + 50) / 2);
-
-  // Draw regression
-
-  linear_regression(appc, n, maxDuration, xAxis, yAxis);
-  quadratic_regression(appc, n, maxDuration, xAxis, yAxis);
-  exponential_regression(appc, n, maxDuration, xAxis, yAxis);
   
 }
 

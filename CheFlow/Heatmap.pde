@@ -64,12 +64,12 @@ void drawHeatMap(PApplet appc)
 // Determine color based on activity level
 color getColor(int value) 
 {
-  float val = constrain(value, 0, 360);
+  float val = constrain(value, 0, 300);
 
   color startColor = #fff5f5;
   color endColor = #ff2222;
 
-  float t = val/360;
+  float t = val/300;
 
   return lerpColor(startColor, endColor, t);
 }
