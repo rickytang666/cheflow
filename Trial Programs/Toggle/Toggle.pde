@@ -27,5 +27,8 @@ void draw() {
   fill(0);
   textSize(20);
   textAlign(CENTER);
+  textFont(createFont("Inter bold italic", 32));
   text("Button State: " + (isOn ? "ON" : "OFF"), width / 2, height - 20);
+  
+  printArray(PFont.list());
 }
