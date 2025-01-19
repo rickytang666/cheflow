@@ -29,8 +29,7 @@ class Nav_Bar
   
   void draw()
   {
-    color col = color(246, 200, 219);
-    fill(col);
+    fill( #cdfbf2);
     noStroke();
     rect(0, 0, width, 60);
   }

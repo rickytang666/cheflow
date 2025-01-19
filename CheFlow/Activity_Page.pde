@@ -55,7 +55,7 @@ class Activity_Page extends Page
   void set_nav_gui()
   {
 
-    title = new GLabel(parent, width/2 - 150, 70, 300, 40, "ACTIVITIES PAGE");
+    title = new GLabel(parent, 20, 70, 200, 40, "ACTIVITIES PAGE");
     title.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
     title.setTextBold();
     title.setTextItalic();
@@ -79,17 +79,21 @@ class Activity_Page extends Page
     add_button.addEventHandler(parent, "add_button_handler_log");
 
     page_indicator = new GLabel(parent, width - 150, navButtonY, 100, navButtonHeight);
+    page_indicator.setOpaque(true);
 
-    search_bar = new GTextField(parent, 100, 130, 200, 30);
+    search_bar = new GTextField(parent, 230, 100, 150, 30);
+    search_bar.setFont(UI_font);
     
-    search_button = new GButton(parent, 320, 130, 60, 30, "Search");
+    search_button = new GButton(parent, 400, 100, 70, 30, "Search");
     search_button.addEventHandler(parent, "search_button_handler");
 
-    time_editor = new GTextField(parent, 100, 170, 200, 20);
+    time_editor = new GTextField(parent, 200, 150, 200, 30);
     time_editor.addEventHandler(parent, "time_editor_handler");
+    time_editor.setFont(UI_font);
 
-    duration_editor = new GTextField(parent, 320, 170, 70, 20);
+    duration_editor = new GTextField(parent, 450, 150, 70, 30);
     duration_editor.addEventHandler(parent, "duration_editor_handler");
+    duration_editor.setFont(UI_font);
     duration_editor.setNumeric(1, 24 * 60, 1);
 
     static_controls.add(title);
@@ -185,7 +189,8 @@ class Activity_Page extends Page
       time_editor.setText(current_log.time_finished.get_time_str());
       duration_editor.setText(str(current_log.duration));
 
-      current_log.recipe_label = new GLabel(parent, 420, 130, 200, 30);
+      current_log.recipe_label = new GLabel(parent, 550, 100, 200, 30);
+      current_log.recipe_label.setOpaque(true);
       String str = (current_log.recipe == null ? current_log.name : current_log.recipe.name);
       
       current_log.recipe_label.setText(str);

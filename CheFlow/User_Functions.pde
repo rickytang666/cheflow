@@ -253,4 +253,18 @@ void update_daily_durations()
 }
 
 
+void initialize_fonts()
+{
+  G4P.setDisplayFont("Inter", G4P.PLAIN, 16);
+  UI_font = new Font("Inter", Font.PLAIN, 16);
+}
+
+
+void initialize_UI_colors()
+{
+  GCScheme.makeColorSchemes();
+  GCScheme.changePaletteColor(GCScheme.BLUE_SCHEME, 2, #000000);
+}
+
+
 /* EVENT HANDLERS */

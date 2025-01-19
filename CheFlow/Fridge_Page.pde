@@ -52,7 +52,7 @@ class Frige_Page extends Page
 
   void set_nav_gui()
   {
-    title = new GLabel(parent, width/2 - 150, 70, 300, 40, "FRIDGE PAGE");
+    title = new GLabel(parent, 20, 70, 200, 40, "FRIDGE PAGE");
     title.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
     title.setTextBold();
     title.setTextItalic();
@@ -76,6 +76,7 @@ class Frige_Page extends Page
     add_button.addEventHandler(parent, "add_button_handler_f");
 
     page_indicator = new GLabel(parent, width - 150, navButtonY, 100, navButtonHeight);
+    page_indicator.setOpaque(true);
     
     static_controls.add(title);
     static_controls.add(prev_button);
@@ -141,11 +142,13 @@ class Frige_Page extends Page
     {
       String content = "This ingredient is used in " + current_ing.related_recipes.size() + " recipes\n";
       
-      current_ing.renamer = new GTextField(parent, width/2 - 100, 120, 200, 30, G4P.SCROLLBARS_HORIZONTAL_ONLY);
+      current_ing.renamer = new GTextField(parent, width/2 - 100, 120, 200, 40, G4P.SCROLLBARS_HORIZONTAL_ONLY);
+      current_ing.renamer.setFont(UI_font);
       current_ing.renamer.setText(current_ing.name);
       current_ing.renamer.addEventHandler(parent, "ingredient_renamer_handler_f");
 
       current_ing.label = new GLabel(parent, width/2 - 200, 180, 400, 20, content);
+      current_ing.label.setLocalColor(2, text_col);
       current_ing.label.setTextAlign(GAlign.CENTER, GAlign.TOP);
 
       page_indicator.setText("Page " + (page_nums[1] + 1) + " of " + total_page_nums[1]);

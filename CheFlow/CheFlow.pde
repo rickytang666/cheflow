@@ -12,12 +12,18 @@
 
 import g4p_controls.*;
 import java.util.*;
+import java.awt.Font;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /* GLOBAL VARIABLES OR CONSTANTS */
 
-final color accent_col = #6be76b;
+final color accent_col = #9eef7b;
+final color accent_col2 = #ff2984;
+final color accent_col3 = #a5ff01;
+final color dark_col = #1C1C1E;
+final color text_col = #e4e4e4;
+Font UI_font;
 PImage logo;
 
 
@@ -67,6 +73,8 @@ void setup()
   size(1000, 700);
   G4P.messagesEnabled(false);
   import_data();
+  initialize_fonts();
+  initialize_UI_colors();
   
   nb = new Nav_Bar(this);
   rp = new Recipes_Page(this);
@@ -83,7 +91,7 @@ void setup()
 
 void draw()
 {
-  background(220);
+  background(dark_col);
 
   nb.draw();
 

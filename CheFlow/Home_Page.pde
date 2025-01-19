@@ -66,7 +66,7 @@ class Home_Page extends Page
 
   void set_static_gui()
   {
-    title = new GLabel(parent, width/2 - 150, 70, 300, 40, "HOME PAGE");
+    title = new GLabel(parent, 20, 70, 200, 40, "HOME PAGE");
     title.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
     title.setTextBold();
     title.setTextItalic();
@@ -74,6 +74,7 @@ class Home_Page extends Page
     title.setLocalColor(6, accent_col);
 
     autosave_toggle = new GOption(parent, 400, 150, 200, 40, "Auto Save");
+    autosave_toggle.setOpaque(true);
     autosave_toggle.setSelected(auto_save);
     autosave_toggle.addEventHandler(parent, "autosave_toggle_handler");
 
@@ -98,7 +99,9 @@ class Home_Page extends Page
     heatmap_button = new GButton(parent, 400, 300, 200, 40, "View Heatmap");
     heatmap_button.addEventHandler(parent, "heatmap_button_handler");
 
-    insights = new GLabel(parent, 300, 300, 500, 300);
+    insights = new GLabel(parent, width/2 - 250, 400, 500, 200);
+    insights.setTextAlign(GAlign.CENTER, GAlign.TOP);
+    insights.setOpaque(true);
 
     String str = "Insights:\n";
 

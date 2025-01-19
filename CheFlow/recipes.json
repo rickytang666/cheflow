@@ -4,7 +4,7 @@
     "name": "Tin Tin Chow Mein",
     "ingredients": [
       {
-        "is_essential": true,
+        "is_essential": false,
         "name": "noodles"
       },
       {
