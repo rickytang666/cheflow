@@ -51,7 +51,7 @@ void drawHeatMap(PApplet appc)
     appc.rect(x, y, cellSize, cellSize, cellSize * 0.3);
 
     // Label the first cell of every 4th column with the date
-    if (col % 4 == 0 && (col == 0 || row == 0)) 
+    if ((i == 0) || (col % 4 == 0 && row == 0))
     {
       appc.fill(255);
       appc.textAlign(CENTER, BOTTOM);
