@@ -7,8 +7,10 @@ class Matching_Page extends Page
 
   ArrayList<GAbstractControl> static_controls = new ArrayList<GAbstractControl>();
   
-  GLabel title, page_indicator;
+  GLabel title, page_indicator, duration_hint, time_priority_hint;
   GButton prev_button, next_button;
+  GImageToggleButton time_priority_toggle;
+  GTextField duration_editor;
 
   /* CONSTRUCTORS */
 
@@ -27,18 +29,6 @@ class Matching_Page extends Page
     {
       page_nums[i] = 0;
     }
-
-    matching_results.clear();
-    matching_results.addAll(recipes);
-
-    total_page_nums[0] = (int) ceil((float) matching_results.size() / buttons_per_page);
-
-    for (Recipe r : matching_results)
-    {
-      r.set_matching_score();
-    }
-
-    matching_results.sort((a, b) -> Float.compare(b.matching_score, a.matching_score));
 
 
     set_nav_gui();
@@ -84,10 +74,33 @@ class Matching_Page extends Page
     page_indicator = new GLabel(parent, width - 150, navButtonY, 100, navButtonHeight);
     page_indicator.setOpaque(true);
 
+    duration_hint = new GLabel(parent, width/2 - 150, 100, 300, 30, "Duration demand (minutes)");
+    duration_hint.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+    duration_hint.setLocalColor(2, text_col);
+
+    duration_editor = new GTextField(parent, width/2 - 50, 150, 100, 30);
+    duration_editor.setFont(UI_font);
+    duration_editor.setOpaque(true);
+    duration_editor.setText(str(duration_demand));
+    duration_editor.setNumeric(1, 24 * 60, 30);
+    duration_editor.addEventHandler(parent, "duration_editor_handler_m");
+
+    time_priority_hint = new GLabel(parent, width/2 - 100, 200, 200, 30, "Time priority toggle");
+    time_priority_hint.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+    time_priority_hint.setLocalColor(2, text_col);
+
+    time_priority_toggle = new GImageToggleButton(parent, width/2 + 100, 200, "toggle.png", 1, 2);
+    time_priority_toggle.setState(time_priority ? 1 : 0);
+    time_priority_toggle.addEventHandler(parent, "time_priority_toggle_handler");
+
     static_controls.add(title);
     static_controls.add(prev_button);
     static_controls.add(next_button);
     static_controls.add(page_indicator);
+    static_controls.add(duration_editor);
+    static_controls.add(duration_hint);
+    static_controls.add(time_priority_hint);
+    static_controls.add(time_priority_toggle);
   }
 
 
@@ -113,6 +126,10 @@ class Matching_Page extends Page
 
     update_nav_gui();
 
+    fill_matching_results();
+
+    total_page_nums[0] = max(1, (int)ceil((float)matching_results.size() / buttons_per_page));
+
     page_indicator.setText("Page " + (page_nums[0] + 1) + " of " + total_page_nums[0]);
     
     int start = page_nums[0] * buttons_per_page;
@@ -137,5 +154,37 @@ class Matching_Page extends Page
       r.matching_score_label.setTextBold();
     }
 
+  }
+}
+
+
+/* EVENT HANDLERS */
+
+public void duration_editor_handler_m(GTextField tf, GEvent e)
+{
+  if (e == GEvent.CHANGED)
+  {
+    try 
+    {
+      duration_demand = int(tf.getText());
+      duration_demand = max(1, min(24 * 60, duration_demand));
+    }
+    catch (Exception ex)
+    {
+      duration_demand = 30;
+    }
+
+    mp.set_matching_page();
+    
+  }
+}
+
+
+public void time_priority_toggle_handler(GImageToggleButton toggle, GEvent e)
+{
+  if (e == GEvent.CLICKED)
+  {
+    time_priority = toggle.getState() == 1;
+    mp.set_matching_page();
   }
 }

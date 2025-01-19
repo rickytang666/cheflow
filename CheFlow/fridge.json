@@ -1,4 +1,5 @@
 [
+  {"name": "beef"},
   {"name": "lamb"},
   {"name": "milk"},
   {"name": "flour"},
@@ -29,6 +30,5 @@
   {"name": "olive oil"},
   {"name": "spices"},
   {"name": "water"},
-  {"name": "tortilla"},
-  {"name": "beef"}
+  {"name": "tortilla"}
 ]

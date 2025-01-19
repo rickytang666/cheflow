@@ -174,7 +174,7 @@ class Activity_Page extends Page
         l.button = new GButton(parent, x, y, button_width, button_height, l.time_finished.get_time_str() + " - " + (l.recipe == null ? l.name : l.recipe.name));
         l.button.addEventHandler(parent, "log_button_handler");
 
-        l.del_button = new GButton(parent, x + button_width + button_spacing, y, 50, button_height, "Delete");
+        l.del_button = new GImageButton(parent, x + button_width + button_spacing, y, button_height, button_height, new String[] {"delete1.png", "delete2.png"});
         l.del_button.addEventHandler(parent, "log_del_button_handler");
 
       }
@@ -237,7 +237,7 @@ public void log_button_handler(GButton button, GEvent event)
 }
 
 
-public void log_del_button_handler(GButton button, GEvent event)
+public void log_del_button_handler(GImageButton button, GEvent event)
 {
   if (event == GEvent.CLICKED)
   {

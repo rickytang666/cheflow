@@ -9,7 +9,7 @@ class Ingredient
   ArrayList<String> related_recipes;
 
   GButton button;
-  GButton del_button;
+  GImageButton del_button;
   GLabel label;
   GTextField renamer;
   ArrayList<GLabel> recipe_labels;

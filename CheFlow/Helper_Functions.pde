@@ -117,6 +117,20 @@ void fill_search_results(String search)
 }
 
 
+void fill_matching_results()
+{
+  matching_results.clear();
+  matching_results.addAll(recipes);
+
+  for (Recipe r : matching_results)
+  {
+    r.set_matching_score();
+  }
+
+  matching_results.sort((a, b) -> Float.compare(b.matching_score, a.matching_score));
+}
+
+
 color get_color_from_value(float value)
 {
 

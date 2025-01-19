@@ -41,22 +41,25 @@ final String file_name_fridge = "fridge.json";
 final String file_name_logs = "logs.json";
 boolean auto_save = false;
 
+final int buttons_per_page = 8;
 final float button_width = 300;
 final float button_height = 40;
 final float button_spacing = 10;
 final float button_startX = 350;
-final float button_startY = 200;
+final float button_startY = 700 - (button_height + button_spacing) * (buttons_per_page + 1);
 
 int layer = 0;
 int[] page_nums = {0, 0, 0}; 
 int[] total_page_nums = {0, 0, 0};
-int buttons_per_page = 9;
+
 
 Recipe current_r;
 Ingredient current_ing;
 Log current_log;
 
 int recipe_id = 1, ingredient_id = 1;
+int duration_demand = 30;
+boolean time_priority = false;
 
 Nav_Bar nb;
 Page current_Page;

@@ -8,7 +8,8 @@ class Log
   Time time_finished;
   int duration;
 
-  GButton button, del_button;
+  GButton button;
+  GImageButton del_button;
   GLabel recipe_label;
 
   /* CONSTRUCTORS */

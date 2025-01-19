@@ -9,9 +9,9 @@ class Recipes_Page extends Page
 
   GButton prev_button, next_button, back, search_button, add_button;
   GTextField search_bar;
-  GOption search_toggle;
+  GImageToggleButton search_toggle;
 
-  GLabel title, entries_status, page_indicator;
+  GLabel title, search_toggle_hint, entries_status, page_indicator;
 
   Boolean searching = false;
   
@@ -95,10 +95,14 @@ class Recipes_Page extends Page
     search_button = new GButton(parent, width/2 + 110, 130, 60, 40, "Search");
     search_button.addEventHandler(parent, "search_button_handler");
 
-    search_toggle = new GOption(parent, width - 200, 80, 150, 40);
+    search_toggle = new GImageToggleButton(parent, width - 80, 100, "toggle.png", 1, 2);
+    search_toggle.setState(searching ? 1 : 0);
     search_toggle.addEventHandler(parent, "search_mode_handler");
-    search_toggle.setText("Search Mode");
-    search_toggle.setOpaque(true);
+
+    search_toggle_hint = new GLabel(parent, width - 200, 100, 120, 40, "Search mode");
+    search_toggle_hint.setLocalColor(2, text_col);
+    search_toggle_hint.setTextBold();
+    search_toggle_hint.setTextAlign(GAlign.RIGHT, GAlign.MIDDLE);
 
     entries_status = new GLabel(parent, width - 200, 140, 150, 40);
     entries_status.setOpaque(true);
@@ -113,6 +117,7 @@ class Recipes_Page extends Page
     static_controls.add(search_bar);
     static_controls.add(search_button);
     static_controls.add(search_toggle);
+    static_controls.add(search_toggle_hint);
     static_controls.add(add_button);
     static_controls.add(entries_status);
     static_controls.add(page_indicator);
@@ -194,7 +199,7 @@ class Recipes_Page extends Page
         r.button.addEventHandler(parent, "recipe_button_handler");
 
         
-        r.del_button = new GButton(parent, x + button_width + 10, y, 50, button_height, "Delete");
+        r.del_button = new GImageButton(parent, x + button_width + 10, y, button_height, button_height, new String[] {"delete1.png", "delete2.png"});
         r.del_button.addEventHandler(parent, "recipe_del_button_handler");
       }
     }
@@ -230,7 +235,7 @@ class Recipes_Page extends Page
         ing.button.addEventHandler(parent, "ingredient_button_handler"); // Add event handler
         ing.button.setEnabled(true); // Enable the button
 
-        ing.del_button = new GButton(parent, x + button_width + 10, y, 50, button_height, "Delete");
+        ing.del_button = new GImageButton(parent, x + button_width + 10, y, button_height, button_height, new String[] {"delete1.png", "delete2.png"});
         ing.del_button.addEventHandler(parent, "ingredient_del_button_handler");
 
         ing_status.essential_toggle = new GOption(parent, x + button_width + 70, y, 80, 40, "Essen.");
@@ -387,9 +392,9 @@ public void search_button_handler(GButton button, GEvent event)
 }
 
 
-public void search_mode_handler(GOption option, GEvent event)
+public void search_mode_handler(GImageToggleButton button, GEvent event)
 {
-  if (event == GEvent.SELECTED)
+  if (button.getState() == 1)
   {
     // println("Search mode enabled");
     rp.searching = true;
@@ -398,7 +403,7 @@ public void search_mode_handler(GOption option, GEvent event)
     search_results.addAll(recipes);
     rp.set_recipes_page();
   }
-  else if (event == GEvent.DESELECTED)
+  else if (button.getState() == 0)
   {
     // println("Search mode disabled");
     rp.searching = false;
@@ -463,7 +468,7 @@ public void recipe_button_handler(GButton button, GEvent event)
 }
 
 
-public void recipe_del_button_handler(GButton button, GEvent event)
+public void recipe_del_button_handler(GImageButton button, GEvent event)
 {
   if (event == GEvent.CLICKED)
   {
@@ -561,7 +566,7 @@ public void ingredient_button_handler(GButton button, GEvent event)
 }
 
 
-public void ingredient_del_button_handler(GButton button, GEvent event)
+public void ingredient_del_button_handler(GImageButton button, GEvent event)
 {
   if (event == GEvent.CLICKED)
   {

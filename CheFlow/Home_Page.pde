@@ -115,10 +115,9 @@ class Home_Page extends Page
 
     static_controls.add(title);
     static_controls.add(autosave_toggle);
+    static_controls.add(autosave_hint);
     static_controls.add(export_button);
     static_controls.add(graph_button);
-    // static_controls.add(days_droplist);
-    // static_controls.add(regression_droplist);
     static_controls.add(heatmap_button);
     static_controls.add(insights);
   }

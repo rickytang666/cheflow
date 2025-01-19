@@ -8,7 +8,7 @@ class Recipe
   int duration;
   ArrayList<IngredientStatus> ingredients;
   GButton button;
-  GButton del_button;
+  GImageButton del_button;
   GTextField renamer;
   GTextField duration_editor;
 
@@ -109,15 +109,44 @@ class Recipe
       }
     }
 
-    if (total_essentials <= 0)
+    if (essential_matched == 0 && other_matched == 0)
     {
-      this.matching_score = 100.0 * (float)other_matched / (float)total_others;
+      this.matching_score = 0;
       return;
     }
 
-    float essential_score = 100.0 * (float)essential_matched / (float)total_essentials;
-    float other_score = 100.0 * (float)other_matched / (float)total_others;
-    this.matching_score = essential_score * 0.8 + other_score * 0.2;
+    float time_score = 100;
+
+    if (this.duration > duration_demand)
+    {
+      time_score -= 2 * (this.duration - duration_demand);
+    }
+
+    time_score = max(0, time_score);
+    
+    float completion_score = 50;
+
+    if (total_essentials <= 0)
+    {
+      completion_score = 100.0 * (float)other_matched / (float)total_others;
+    }
+    else
+    {
+      float essential_score = 100.0 * (float)essential_matched / (float)total_essentials;
+      float other_score = 100.0 * (float)other_matched / (float)total_others;
+      completion_score = essential_score * 0.8 + other_score * 0.2;
+    }
+
+
+    if (time_priority)
+    {
+      this.matching_score = time_score * 0.8 + completion_score * 0.2;
+    }
+    else
+    {
+      this.matching_score = completion_score * 0.8 + time_score * 0.2;
+    }
+    
   }
 
 

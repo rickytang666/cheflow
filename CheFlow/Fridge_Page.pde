@@ -132,7 +132,7 @@ class Frige_Page extends Page
         ing.button = new GButton(parent, x, y, button_width, button_height, ing.name);
         ing.button.addEventHandler(parent, "ingredient_button_handler_f");
 
-        ing.del_button = new GButton(parent, x + button_width + button_spacing, y, 50, button_height, "Delete");
+        ing.del_button = new GImageButton(parent, x + button_width + button_spacing, y, button_height, button_height, new String[] {"delete1.png", "delete2.png"});
         ing.del_button.addEventHandler(parent, "ingredient_del_button_handler_f");
 
       }
@@ -218,7 +218,7 @@ public void ingredient_button_handler_f(GButton button, GEvent event)
 }
 
 
-public void ingredient_del_button_handler_f(GButton button, GEvent event)
+public void ingredient_del_button_handler_f(GImageButton button, GEvent event)
 {
   if (event == GEvent.CLICKED)
   {
