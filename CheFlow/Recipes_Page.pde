@@ -67,7 +67,7 @@ class Recipes_Page extends Page
 
     title = new GLabel(parent, 10, 70, 200, 40, "RECIPE PAGE");
     title.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
-    title.setTextBold();
+    title.setFont(new Font("Inter Display SemiBold Italic", Font.PLAIN, 20));
     title.setTextItalic();
     title.setOpaque(true);
     title.setLocalColor(6, accent_col);

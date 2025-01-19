@@ -21,23 +21,30 @@ class Nav_Bar
 
     color col = #EBA3FF;
 
+    Font font = new Font("Inter Display SemiBold", Font.PLAIN, 20);
+
     home_button = new GButton(parent, start_x + spacing, 5, btn_width, 50, "Home");
+    home_button.setFont(font);
     home_button.setLocalColor(3, col);
     home_button.setLocalColor(4, col);
     home_button.setLocalColor(6, #67CBFD);
     recipes_button = new GButton(parent, start_x + btn_width + 2 * spacing, 5, btn_width, 50, "Recipes");
+    recipes_button.setFont(font);
     recipes_button.setLocalColor(3, col);
     recipes_button.setLocalColor(4, col);
     recipes_button.setLocalColor(6, #67CBFD);
     fridge_button = new GButton(parent, start_x + 2 * btn_width + 3 * spacing, 5, btn_width, 50, "Fridge");
+    fridge_button.setFont(font);
     fridge_button.setLocalColor(3, col);
     fridge_button.setLocalColor(4, col);
     fridge_button.setLocalColor(6, #67CBFD);
     matching_button = new GButton(parent, start_x + 3 * btn_width + 4 * spacing, 5, btn_width, 50, "Matching");
+    matching_button.setFont(font);
     matching_button.setLocalColor(3, col);
     matching_button.setLocalColor(4, col);
     matching_button.setLocalColor(6, #67CBFD);
     activity_button = new GButton(parent, start_x + 4 * btn_width + 5 * spacing, 5, btn_width, 50, "Activity");
+    activity_button.setFont(font);
     activity_button.setLocalColor(3, col);
     activity_button.setLocalColor(4, col);
     activity_button.setLocalColor(6, #67CBFD);
