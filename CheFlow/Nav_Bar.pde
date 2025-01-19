@@ -25,6 +25,15 @@ class Nav_Bar
     matching_button.addEventHandler(parent, "nav_bar_buttons_handler");
     activity_button.addEventHandler(parent, "nav_bar_buttons_handler");
   }
+
+  
+  void draw()
+  {
+    color col = color(246, 200, 219);
+    fill(col);
+    noStroke();
+    rect(0, 0, width, 60);
+  }
 }
 
 /** GLOBAL FUNCTIONS **/

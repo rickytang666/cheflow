@@ -7,8 +7,8 @@ class Activity_Page extends Page
 
   ArrayList<GAbstractControl> static_controls = new ArrayList<GAbstractControl>();
   
-  GLabel title;
-  GButton prev_button, next_button, back, add_button;
+  GLabel title, page_indicator;
+  GButton prev_button, next_button, back, add_button, search_button;
   GTextField search_bar, time_editor, duration_editor;
 
   /* CONSTRUCTORS */
@@ -55,7 +55,12 @@ class Activity_Page extends Page
   void set_nav_gui()
   {
 
-    title = new GLabel(parent, 300, 60, 500, 50, "This is the Activity Page");
+    title = new GLabel(parent, width/2 - 150, 70, 300, 40, "ACTIVITIES PAGE");
+    title.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+    title.setTextBold();
+    title.setTextItalic();
+    title.setOpaque(true);
+    title.setLocalColor(6, accent_col);
     
     float navButtonWidth = 100;
     float navButtonHeight = 40;
@@ -73,13 +78,17 @@ class Activity_Page extends Page
     add_button = new GButton(parent, 800, 200, 70, 50, "+Log");
     add_button.addEventHandler(parent, "add_button_handler_log");
 
-    search_bar = new GTextField(parent, 100, 100, 200, 30);
-    search_bar.addEventHandler(parent, "search_bar_handler");
+    page_indicator = new GLabel(parent, width - 150, navButtonY, 100, navButtonHeight);
 
-    time_editor = new GTextField(parent, 100, 150, 200, 30);
+    search_bar = new GTextField(parent, 100, 130, 200, 30);
+    
+    search_button = new GButton(parent, 320, 130, 60, 30, "Search");
+    search_button.addEventHandler(parent, "search_button_handler");
+
+    time_editor = new GTextField(parent, 100, 170, 200, 20);
     time_editor.addEventHandler(parent, "time_editor_handler");
 
-    duration_editor = new GTextField(parent, 320, 150, 70, 30);
+    duration_editor = new GTextField(parent, 320, 170, 70, 20);
     duration_editor.addEventHandler(parent, "duration_editor_handler");
     duration_editor.setNumeric(1, 24 * 60, 1);
 
@@ -88,7 +97,9 @@ class Activity_Page extends Page
     static_controls.add(next_button);
     static_controls.add(back);
     static_controls.add(add_button);
+    static_controls.add(page_indicator);
     static_controls.add(search_bar);
+    static_controls.add(search_button);
     static_controls.add(time_editor);
     static_controls.add(duration_editor);
   }
@@ -108,6 +119,8 @@ class Activity_Page extends Page
     }
     search_bar.setEnabled(layer == 1 && current_log != null);
     search_bar.setVisible(layer == 1 && current_log != null);
+    search_button.setEnabled(layer == 1 && current_log != null);
+    search_button.setVisible(layer == 1 && current_log != null);
     time_editor.setEnabled(layer == 1 && current_log != null);
     time_editor.setVisible(layer == 1 && current_log != null);
     duration_editor.setEnabled(layer == 1 && current_log != null);
@@ -139,7 +152,9 @@ class Activity_Page extends Page
     {
       sort_log_records();
 
-      total_page_nums[0] = (int) ceil((float) log_records.size() / buttons_per_page);
+      total_page_nums[0] = max(1, (int) ceil((float) log_records.size() / buttons_per_page));
+
+      page_indicator.setText("Page " + (page_nums[0] + 1) + " of " + total_page_nums[0]);
 
       int start = page_nums[0] * buttons_per_page;
       int end = min(log_records.size(), start + buttons_per_page);
@@ -162,13 +177,15 @@ class Activity_Page extends Page
     }
     else if (layer == 1)
     {
+      page_indicator.setText("Page " + (page_nums[1] + 1) + " of " + total_page_nums[1]);
+
       int start = page_nums[1] * buttons_per_page;
       int end = min(search_results.size(), start + buttons_per_page);
 
       time_editor.setText(current_log.time_finished.get_time_str());
       duration_editor.setText(str(current_log.duration));
 
-      current_log.recipe_label = new GLabel(parent, 350, 100, 200, 30);
+      current_log.recipe_label = new GLabel(parent, 420, 130, 200, 30);
       String str = (current_log.recipe == null ? current_log.name : current_log.recipe.name);
       
       current_log.recipe_label.setText(str);
@@ -206,6 +223,7 @@ public void log_button_handler(GButton button, GEvent event)
         layer = 1;
         fill_search_results("");
         total_page_nums[layer] = max(1, (int) ceil((float) search_results.size() / buttons_per_page));
+        page_nums[layer] = 0;
         ap.set_activity_page();
         break;
       }
@@ -229,6 +247,11 @@ public void log_del_button_handler(GButton button, GEvent event)
         break;
       }
     }
+
+    if (auto_save)
+    {
+      export_data();
+    }
   }
 }
 
@@ -240,20 +263,13 @@ public void add_button_handler_log(GButton button, GEvent event)
     Log l = new Log();
     log_records.add(0, l);
     total_page_nums[0] = max(1, (int) ceil((float) log_records.size() / buttons_per_page));
-    ap.set_activity_page();
-  }
-}
-
-
-public void search_bar_handler(GTextField source, GEvent event)
-{
-  if (event == GEvent.CHANGED)
-  {
-    fill_search_results(source.getText());
     page_nums[0] = 0;
-    total_page_nums[0] = max(1, (int) ceil((float) log_records.size() / buttons_per_page));
-    page_nums[0] = constrain(page_nums[0], 0, total_page_nums[0] - 1);
     ap.set_activity_page();
+
+    if (auto_save)
+    {
+      export_data();
+    }
   }
 }
 
@@ -271,6 +287,11 @@ public void recipe_button_handler_log(GButton button, GEvent event)
         break;
       }
     }
+
+    if (auto_save)
+    {
+      export_data();
+    }
   }
 }
 
@@ -285,6 +306,11 @@ public void time_editor_handler(GTextField source, GEvent event)
     {
       Time new_time = new Time(time_str);
       current_log.time_finished = new_time;
+
+      if (auto_save)
+      {
+        export_data();
+      }
     }
   }
 }
@@ -298,6 +324,11 @@ public void duration_editor_handler(GTextField source, GEvent event)
     {
       int duration = Integer.parseInt(source.getText());
       current_log.duration = constrain(duration, 1, 24 * 60);
+
+      if (auto_save)
+      {
+        export_data();
+      }
     }
     catch (Exception e)
     {

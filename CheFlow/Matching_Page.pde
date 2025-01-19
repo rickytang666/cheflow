@@ -7,7 +7,7 @@ class Matching_Page extends Page
 
   ArrayList<GAbstractControl> static_controls = new ArrayList<GAbstractControl>();
   
-  GLabel title;
+  GLabel title, page_indicator;
   GButton prev_button, next_button;
 
   /* CONSTRUCTORS */
@@ -64,7 +64,12 @@ class Matching_Page extends Page
 
   void set_nav_gui()
   {
-    title = new GLabel(parent, 300, 100, 500, 50, "This is the Matching Page");
+    title = new GLabel(parent, width/2 - 150, 70, 300, 40, "MATCHING PAGE");
+    title.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+    title.setTextBold();
+    title.setTextItalic();
+    title.setOpaque(true);
+    title.setLocalColor(6, accent_col);
 
     float navButtonWidth = 100;
     float navButtonHeight = 40;
@@ -76,9 +81,12 @@ class Matching_Page extends Page
     next_button = new GButton(parent, width / 2 + 20, navButtonY, navButtonWidth, navButtonHeight, "Next");
     next_button.addEventHandler(parent, "handleButtonEvents");
 
+    page_indicator = new GLabel(parent, width - 150, navButtonY, 100, navButtonHeight);
+
     static_controls.add(title);
     static_controls.add(prev_button);
     static_controls.add(next_button);
+    static_controls.add(page_indicator);
   }
 
 
@@ -103,6 +111,8 @@ class Matching_Page extends Page
     clear_variable_controls();
 
     update_nav_gui();
+
+    page_indicator.setText("Page " + (page_nums[0] + 1) + " of " + total_page_nums[0]);
     
     int start = page_nums[0] * buttons_per_page;
     int end = min(matching_results.size(), start + buttons_per_page);
@@ -118,8 +128,9 @@ class Matching_Page extends Page
       r.title_label.setLocalColor(6,color(240, 147, 195));
       r.title_label.setOpaque(true);
 
-      r.matching_score_label = new GLabel(parent, x + button_width + 10, y, 100, button_height, str(r.matching_score));
-      r.matching_score_label.setLocalColor(2, get_color_from_value(r.matching_score));
+      r.matching_score_label = new GLabel(parent, x + button_width + 10, y, 100, button_height, nf(r.matching_score, 0, 2));
+      r.matching_score_label.setOpaque(true);
+      r.matching_score_label.setLocalColor(6, get_color_from_value(r.matching_score));
       r.matching_score_label.setTextBold();
     }
 

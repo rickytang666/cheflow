@@ -16,10 +16,11 @@ void export_recipes()
     recipe_obj.setInt("duration", r.duration);
 
     JSONArray ingredients_array = new JSONArray();
-    for (Ingredient ing : r.ingredients)
+    for (IngredientStatus ing_status : r.ingredients)
     {
       JSONObject ingredient_obj = new JSONObject();
-      ingredient_obj.setString("name", ing.name);
+      ingredient_obj.setString("name", ing_status.ingredient.name);
+      ingredient_obj.setBoolean("is_essential", ing_status.is_essential);
       ingredients_array.append(ingredient_obj);
     }
 
@@ -31,7 +32,7 @@ void export_recipes()
   try
   {
     saveJSONArray(recipes_array, file_name_recipes);
-    println("Recipes saved successfully");
+    // println("Recipes saved successfully");
   }
   catch (Exception e)
   {
@@ -69,8 +70,9 @@ void import_recipes()
     {
       JSONObject ingredient_obj = ingredients_array.getJSONObject(j);
       Ingredient ing = new Ingredient(ingredient_obj.getString("name"));
+      boolean is_essential = ingredient_obj.getBoolean("is_essential");
       
-      r.add_ingredient(ing);
+      r.add_ingredient(ing, is_essential);
     }
 
     recipes.add(r);
@@ -98,7 +100,7 @@ void export_fridge()
   try
   {
     saveJSONArray(fridge_array, file_name_fridge);
-    println("Fridge saved successfully");
+    // println("Fridge saved successfully");
   }
   catch (Exception e)
   {
@@ -157,7 +159,7 @@ void export_logs()
   try
   {
     saveJSONArray(activities_array, file_name_logs);
-    println("Activities saved successfully");
+    // println("Activities saved successfully");
   }
   catch (Exception e)
   {
@@ -203,11 +205,13 @@ void import_logs()
       l.time_finished = new Time(log_obj.getString("time finished"));
     }
     
-    l.duration = log_obj.getInt("duration");
+    l.duration = constrain(log_obj.getInt("duration"), 1, 24 * 60);
 
     log_records.add(l);
   }
 
+  sort_log_records();
+  
   println(log_records.size() + " activities loaded successfully");
 }
 
@@ -217,6 +221,8 @@ void export_data()
   export_recipes();
   export_fridge();
   export_logs();
+
+  // println("Data saved successfully");
 }
 
 
@@ -225,6 +231,25 @@ void import_data()
   import_recipes();
   import_fridge();
   import_logs();
+}
+
+
+void update_daily_durations()
+{
+  Time now = new Time();
+
+  daily_durations = new ArrayList<>(Collections.nCopies(365, 0));
+
+  for (Log l : log_records)
+  {
+    Time time = l.time_finished;
+    int days_ago = now.days_difference(time);
+
+    if (days_ago >= 0 && days_ago < 365) 
+    {
+      daily_durations.set(365 - days_ago - 1, daily_durations.get(365 - days_ago - 1) + l.duration);
+    }
+  }
 }
 
 

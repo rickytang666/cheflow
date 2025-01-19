@@ -11,19 +11,28 @@
 /* PACKAGES */
 
 import g4p_controls.*;
+import java.util.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /* GLOBAL VARIABLES OR CONSTANTS */
 
 final color accent_col = #6be76b;
+PImage logo;
+
+
 ArrayList<Recipe> recipes = new ArrayList<Recipe>();
 ArrayList<Recipe> search_results = new ArrayList<Recipe>();
 ArrayList<Recipe> matching_results = new ArrayList<Recipe>();
 ArrayList<Ingredient> fridge = new ArrayList<Ingredient>();
 ArrayList<Log> log_records = new ArrayList<Log>();
 
+ArrayList<Integer> daily_durations = new ArrayList<>();
+
 final String file_name_recipes = "recipes.json";
 final String file_name_fridge = "fridge.json";
 final String file_name_logs = "logs.json";
+boolean auto_save = false;
 
 final float button_width = 300;
 final float button_height = 40;
@@ -75,4 +84,17 @@ void setup()
 void draw()
 {
   background(220);
+
+  nb.draw();
+
+  logo = loadImage("logo.png");
+  logo.resize(0, 50);
+  image(logo, 10, 5);
+}
+
+void exit()
+{
+  export_data();
+  println("Data saved while exiting");
+  super.exit();
 }
