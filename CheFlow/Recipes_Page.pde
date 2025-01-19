@@ -126,6 +126,7 @@ class Recipes_Page extends Page
     search_toggle.setEnabled(layer == 0);
     search_bar.setEnabled(layer == 0 && searching);
     search_bar.setVisible(layer == 0 && searching);
+    search_bar.setFocus(layer == 0 && searching);
     search_button.setEnabled(layer == 0 && searching);
     search_button.setVisible(layer == 0 && searching);
 
@@ -263,7 +264,6 @@ class Recipes_Page extends Page
       }
     }
     
-    
   }
   
 }
@@ -388,7 +388,6 @@ public void search_mode_handler(GOption option, GEvent event)
   {
     // println("Search mode disabled");
     rp.searching = false;
-    rp.search_bar.setText("");
     total_page_nums[0] = max(1, (int) ceil((float) recipes.size() / buttons_per_page));
     rp.set_recipes_page();
   }
