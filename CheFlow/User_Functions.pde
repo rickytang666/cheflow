@@ -255,8 +255,8 @@ void update_daily_durations()
 
 void initialize_fonts()
 {
-  G4P.setDisplayFont("Segoe UI Semibold", G4P.PLAIN, 16);
-  UI_font = new Font("Segoe UI Semibold", Font.PLAIN, 16);
+  G4P.setDisplayFont("Segoe UI Semibold", G4P.PLAIN, 17);
+  UI_font = new Font("Segoe UI Semibold", Font.PLAIN, 17);
   drawing_font = createFont("Segoe UI", 16);
 }
 
