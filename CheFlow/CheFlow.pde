@@ -127,7 +127,7 @@ void draw()
     }
 
     fill(text_col);
-    textFont(createFont("Inter Display SemiBold", 60));
+    textFont(createFont("Segoe UI Bold", 60));
     textAlign(CENTER, TOP);
     text(greeting_text, width/2, 80);
   }

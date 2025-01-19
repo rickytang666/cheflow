@@ -21,7 +21,7 @@ class Nav_Bar
 
     color col = #EBA3FF;
 
-    Font font = new Font("Inter Display SemiBold", Font.PLAIN, 20);
+    Font font = new Font("Segoe UI SemiBold", Font.PLAIN, 20);
 
     home_button = new GButton(parent, start_x + spacing, 5, btn_width, 50, "Home");
     home_button.setFont(font);

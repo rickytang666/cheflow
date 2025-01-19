@@ -68,8 +68,7 @@ class Home_Page extends Page
   {
     title = new GLabel(parent, 10, 70, 200, 40, "HOME PAGE");
     title.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
-    title.setFont(new Font("Inter Display SemiBold Italic", Font.PLAIN, 20));
-    title.setTextItalic();
+    title.setFont(new Font("Segoe UI Semibold", Font.ITALIC, 20));
     title.setOpaque(true);
     title.setLocalColor(6, accent_col);
 
@@ -81,9 +80,9 @@ class Home_Page extends Page
     autosave_hint.setTextAlign(GAlign.RIGHT, GAlign.MIDDLE);
     autosave_hint.setLocalColor(2, text_col);
     
-    insights = new GLabel(parent, width/2 - 300, 200, 600, 120);
+    insights = new GLabel(parent, width/2 - 300, 200, 600, 150);
     insights.setTextAlign(GAlign.CENTER, GAlign.TOP);
-    Font f = new Font("Inter Display Medium", Font.PLAIN, 20);
+    Font f = new Font("Segoe UI", Font.PLAIN, 20);
     insights.setFont(f);
     insights.setOpaque(true);
 
@@ -316,7 +315,7 @@ public void notice_window_draw(PApplet appc, GWinData data)
 {
   appc.background(dark_col);
   fill(text_col);
-  appc.textFont(createFont("Inter Display SemiBold", 30));
+  appc.textFont(createFont("Segoe UI Bold", 30));
   appc.textAlign(CENTER, TOP);
   appc.text("User Notice", appc.width/2, 10);
 }
