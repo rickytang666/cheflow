@@ -13,11 +13,17 @@ class Nav_Bar
 
   void setup()
   {
-    home_button = new GButton(parent, 200, 5, 100, 50, "Home");
-    recipes_button = new GButton(parent, 350, 5, 100, 50, "Recipes");
-    fridge_button = new GButton(parent, 500, 5, 100, 50, "Fridge");
-    matching_button = new GButton(parent, 650, 5, 100, 50, "Matching");
-    activity_button = new GButton(parent, 800, 5, 100, 50, "Activity");
+    float start_x = 140;
+
+    float spacing = 20;
+
+    float btn_width = (width - start_x - 6 * spacing) / 5.0;
+
+    home_button = new GButton(parent, start_x + spacing, 5, btn_width, 50, "Home");
+    recipes_button = new GButton(parent, start_x + btn_width + 2 * spacing, 5, btn_width, 50, "Recipes");
+    fridge_button = new GButton(parent, start_x + 2 * btn_width + 3 * spacing, 5, btn_width, 50, "Fridge");
+    matching_button = new GButton(parent, start_x + 3 * btn_width + 4 * spacing, 5, btn_width, 50, "Matching");
+    activity_button = new GButton(parent, start_x + 4 * btn_width + 5 * spacing, 5, btn_width, 50, "Activity");
 
     home_button.addEventHandler(parent, "nav_bar_buttons_handler");
     recipes_button.addEventHandler(parent, "nav_bar_buttons_handler");

@@ -39,6 +39,7 @@ ArrayList<Integer> daily_durations = new ArrayList<>();
 final String file_name_recipes = "recipes.json";
 final String file_name_fridge = "fridge.json";
 final String file_name_logs = "logs.json";
+final String file_name_user_notice = "user notice.txt";
 boolean auto_save = false;
 
 final int buttons_per_page = 8;
@@ -101,7 +102,7 @@ void draw()
 
   logo = loadImage("logo.png");
   logo.resize(0, 50);
-  image(logo, 10, 5);
+  image(logo, 5, 5);
 
   if (current_Page == hp)
   {

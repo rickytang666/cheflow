@@ -7,10 +7,10 @@ class Home_Page extends Page
 
   ArrayList<GAbstractControl> static_controls = new ArrayList<GAbstractControl>();
   GLabel title, autosave_hint, insights;
-  GButton export_button, graph_button, heatmap_button;
+  GButton export_button, graph_button, heatmap_button, notice_button;
   GImageToggleButton autosave_toggle;
   GDropList days_droplist, regression_droplist;
-  GWindow graph_window, heatmap_window;
+  GWindow graph_window, heatmap_window, notice_window;
 
   int num_past_days = 14;
   String regression_type = "linear";
@@ -80,7 +80,19 @@ class Home_Page extends Page
     autosave_hint = new GLabel(parent, 20, 150, 100, 40, "Autosave: ");
     autosave_hint.setTextAlign(GAlign.RIGHT, GAlign.MIDDLE);
     autosave_hint.setLocalColor(2, text_col);
+    
+    insights = new GLabel(parent, width/2 - 300, 200, 600, 120);
+    insights.setTextAlign(GAlign.CENTER, GAlign.TOP);
+    insights.setOpaque(true);
 
+    String str = "\n";
+
+    str += "You spent " + nf(get_average_duration(7), 0, 2) + " minutes on average cooking in the past 7 days.\n";
+    str += "You spent " + nf(get_average_duration(30), 0, 2) + " minutes on average cooking in the past 30 days.\n";
+    str += "You spent " + nf(get_average_duration(365), 0, 2) + " minutes on average cooking in the past year.\n";
+    str += "Your longest streak is " + get_longest_streak() + " days.\n";
+
+    insights.setText(str);
     export_button = new GButton(parent, 400, 400, 200, 40, "Export Data");
     export_button.addEventHandler(parent, "export_button_handler");
 
@@ -100,18 +112,8 @@ class Home_Page extends Page
     heatmap_button = new GButton(parent, 400, 500, 200, 40, "View Heatmap");
     heatmap_button.addEventHandler(parent, "heatmap_button_handler");
 
-    insights = new GLabel(parent, width/2 - 300, 200, 600, 120);
-    insights.setTextAlign(GAlign.CENTER, GAlign.TOP);
-    insights.setOpaque(true);
-
-    String str = "\n";
-
-    str += "You spent " + nf(get_average_duration(7), 0, 2) + " minutes on average cooking in the past 7 days.\n";
-    str += "You spent " + nf(get_average_duration(30), 0, 2) + " minutes on average cooking in the past 30 days.\n";
-    str += "You spent " + nf(get_average_duration(365), 0, 2) + " minutes on average cooking in the past year.\n";
-    str += "Your longest streak is " + get_longest_streak() + " days.\n";
-
-    insights.setText(str);
+    notice_button = new GButton(parent, 400, 550, 200, 40, "User Notice");
+    notice_button.addEventHandler(parent, "notice_button_handler");
 
     static_controls.add(title);
     static_controls.add(autosave_toggle);
@@ -253,4 +255,60 @@ public void heatmap_window_close(GWindow window)
 {
   hp.heatmap_window.dispose();
   hp.heatmap_window = null;
+}
+
+
+public void notice_button_handler(GButton button, GEvent event)
+{
+  if (event == GEvent.CLICKED)
+  {
+    if (hp.notice_window == null)
+    {
+      open_notice_window();
+    }
+    else
+    {
+      println("User Notice window already open");
+    }
+  }
+}
+
+
+public void open_notice_window()
+{
+  hp.notice_window = GWindow.getWindow(this, "User Notice", 200, 200, 600, 400, JAVA2D);
+  hp.notice_window.addDrawHandler(this, "notice_window_draw");
+  hp.notice_window.addOnCloseHandler(this, "notice_window_close");
+  hp.notice_window.setActionOnClose(G4P.CLOSE_WINDOW);
+
+  GTextArea display = new GTextArea(hp.notice_window, 10, 50, 580, 300, G4P.SCROLLBARS_BOTH | G4P.SCROLLBARS_AUTOHIDE);
+  display.setFont(UI_font);
+  display.setTextEditEnabled(false);
+  
+  String[] contents = loadStrings(file_name_user_notice);
+  String str = "";
+
+  for (String s : contents)
+  {
+    str += s + "\n";
+  }
+
+  display.setText(str);
+}
+
+
+public void notice_window_draw(PApplet appc, GWinData data)
+{
+  appc.background(dark_col);
+  fill(text_col);
+  appc.textFont(createFont("Inter Display SemiBold", 30));
+  appc.textAlign(CENTER, TOP);
+  appc.text("User Notice", appc.width/2, 10);
+}
+
+
+public void notice_window_close(GWindow window)
+{
+  hp.notice_window.dispose();
+  hp.notice_window = null;
 }
