@@ -26,7 +26,7 @@ final color text_col = #e4e4e4;
 Font UI_font;
 PFont drawing_font;
 PImage logo;
-
+String greeting_text = "Good Morning";
 
 ArrayList<Recipe> recipes = new ArrayList<Recipe>();
 ArrayList<Recipe> search_results = new ArrayList<Recipe>();
@@ -99,6 +99,35 @@ void draw()
   logo = loadImage("logo.png");
   logo.resize(0, 50);
   image(logo, 10, 5);
+
+  if (current_Page == hp)
+  {
+    // decide if it's morning, afternoon, evening, or night
+
+    int hour = hour();
+    if (hour >= 6 && hour < 12)
+    {
+      greeting_text = "Good Morning";
+    }
+    else if (hour >= 12 && hour < 18)
+    {
+      greeting_text = "Good Afternoon";
+    }
+    else if (hour >= 18 && hour < 21)
+    {
+      greeting_text = "Good Evening";
+    }
+    else
+    {
+      greeting_text = "Good Night";
+    }
+
+    fill(text_col);
+    textFont(createFont("Inter Display SemiBold", 60));
+    textAlign(CENTER, TOP);
+    text(greeting_text, width/2, 80);
+  }
+  
 }
 
 void exit()

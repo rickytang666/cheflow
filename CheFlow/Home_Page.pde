@@ -6,9 +6,9 @@ class Home_Page extends Page
   /* FIELDS */
 
   ArrayList<GAbstractControl> static_controls = new ArrayList<GAbstractControl>();
-  GLabel title, insights;
+  GLabel title, autosave_hint, insights;
   GButton export_button, graph_button, heatmap_button;
-  GOption autosave_toggle;
+  GImageToggleButton autosave_toggle;
   GDropList days_droplist, regression_droplist;
   GWindow graph_window, heatmap_window;
 
@@ -73,41 +73,42 @@ class Home_Page extends Page
     title.setOpaque(true);
     title.setLocalColor(6, accent_col);
 
-    autosave_toggle = new GOption(parent, 400, 150, 200, 40, "Auto Save");
-    autosave_toggle.setOpaque(true);
-    autosave_toggle.setSelected(auto_save);
+    autosave_toggle = new GImageToggleButton(parent, 120, 150, "toggle.png", 1, 2);
+    autosave_toggle.setState(auto_save ? 1 : 0);
     autosave_toggle.addEventHandler(parent, "autosave_toggle_handler");
 
-    export_button = new GButton(parent, 400, 200, 200, 40, "Export Data");
+    autosave_hint = new GLabel(parent, 20, 150, 100, 40, "Autosave: ");
+    autosave_hint.setTextAlign(GAlign.RIGHT, GAlign.MIDDLE);
+    autosave_hint.setLocalColor(2, text_col);
+
+    export_button = new GButton(parent, 400, 400, 200, 40, "Export Data");
     export_button.addEventHandler(parent, "export_button_handler");
 
-    graph_button = new GButton(parent, 400, 250, 200, 40, "View Graph");
+    graph_button = new GButton(parent, 400, 450, 200, 40, "View Graph");
     graph_button.addEventHandler(parent, "graph_button_handler");
 
-    // problem: when we are back from other pages, the droplists' expand buttons are not responsive
-
-    days_droplist = new GDropList(parent, 650, 250, 150, 150, 3, 20);
+    days_droplist = new GDropList(parent, 650, 450, 150, 150, 3, 20);
     String[] items = {"Past 7 days", "Past 14 Days", "Past 30 days", "Past 100 days", "Past 365 days"};
     days_droplist.setItems(items, 1);
     days_droplist.addEventHandler(parent, "days_droplist_handler");
 
-    regression_droplist = new GDropList(parent, 820, 250, 150, 150, 3, 20);
+    regression_droplist = new GDropList(parent, 820, 450, 150, 150, 3, 20);
     String[] items2 = {"linear", "quadratic", "exponential"};
     regression_droplist.setItems(items2, 0);
     regression_droplist.addEventHandler(parent, "regression_droplist_handler");
 
-    heatmap_button = new GButton(parent, 400, 300, 200, 40, "View Heatmap");
+    heatmap_button = new GButton(parent, 400, 500, 200, 40, "View Heatmap");
     heatmap_button.addEventHandler(parent, "heatmap_button_handler");
 
-    insights = new GLabel(parent, width/2 - 250, 400, 500, 200);
+    insights = new GLabel(parent, width/2 - 300, 200, 600, 120);
     insights.setTextAlign(GAlign.CENTER, GAlign.TOP);
     insights.setOpaque(true);
 
-    String str = "Insights:\n";
+    String str = "\n";
 
-    str += "You spend " + nf(get_average_duration(7), 0, 2) + " minutes on average cooking in the past 7 days.\n";
-    str += "You spend " + nf(get_average_duration(30), 0, 2) + " minutes on average cooking in the past 30 days.\n";
-    str += "You spend " + nf(get_average_duration(365), 0, 2) + " minutes on average cooking in the past year.\n";
+    str += "You spent " + nf(get_average_duration(7), 0, 2) + " minutes on average cooking in the past 7 days.\n";
+    str += "You spent " + nf(get_average_duration(30), 0, 2) + " minutes on average cooking in the past 30 days.\n";
+    str += "You spent " + nf(get_average_duration(365), 0, 2) + " minutes on average cooking in the past year.\n";
     str += "Your longest streak is " + get_longest_streak() + " days.\n";
 
     insights.setText(str);
@@ -125,17 +126,9 @@ class Home_Page extends Page
 
 /* EVENT HANDLERS */
 
-public void autosave_toggle_handler(GOption option, GEvent event)
+public void autosave_toggle_handler(GImageToggleButton button, GEvent event)
 {
-
-  if (event == GEvent.SELECTED)
-  {
-    auto_save = true;
-  }
-  else if (event == GEvent.DESELECTED)
-  {
-    auto_save = false;
-  }
+  auto_save = (button.getState() == 1);
 }
 
 
