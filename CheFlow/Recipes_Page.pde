@@ -263,6 +263,10 @@ class Recipes_Page extends Page
         current_ing.recipe_labels.add(label);
       }
     }
+
+    // Sometimes this thing is inactive
+
+    search_bar.setFocus(true);
     
   }
   
