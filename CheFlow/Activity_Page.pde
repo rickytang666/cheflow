@@ -170,6 +170,10 @@ class Activity_Page extends Page
         float y = button_startY + button_index * (button_height + button_spacing);
 
         l.button = new GButton(parent, x, y, button_width, button_height, l.time_finished.get_time_str() + " - " + (l.recipe == null ? l.name : l.recipe.name));
+        l.button.setLocalColor(3, #48bcb2);
+        l.button.setLocalColor(4, #48bcb2);
+        l.button.setLocalColor(6, #7995fd);
+        l.button.setLocalColor(14, #ff93e0);
         l.button.addEventHandler(parent, "log_button_handler");
 
         l.del_button = new GImageButton(parent, x + button_width + button_spacing, y, button_height, button_height, new String[] {"delete1.png", "delete2.png"});
@@ -189,7 +193,7 @@ class Activity_Page extends Page
 
       current_log.recipe_label = new GLabel(parent, 550, 100, 200, 30);
       current_log.recipe_label.setOpaque(true);
-      String str = (current_log.recipe == null ? current_log.name : current_log.recipe.name);
+      String str = "Selected: " + (current_log.recipe == null ? current_log.name : current_log.recipe.name);
       
       current_log.recipe_label.setText(str);
       
@@ -203,6 +207,11 @@ class Activity_Page extends Page
         float y = button_startY + button_index * (button_height + button_spacing);
 
         r.button = new GButton(parent, x, y, button_width, button_height, r.name);
+        r.button.setLocalColor(3, accent_col2);
+        r.button.setLocalColor(4, accent_col2);
+        r.button.setLocalColor(6, #274097);
+        r.button.setLocalColor(14, #098d8d);
+        r.button.setLocalColor(2, #ffffff);
         r.button.addEventHandler(parent, "recipe_button_handler_log");
       }
     }

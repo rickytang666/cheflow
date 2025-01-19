@@ -66,7 +66,7 @@ class Home_Page extends Page
 
   void set_static_gui()
   {
-    title = new GLabel(parent, 20, 70, 200, 40, "HOME PAGE");
+    title = new GLabel(parent, 10, 70, 200, 40, "HOME PAGE");
     title.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
     title.setTextBold();
     title.setTextItalic();
@@ -83,6 +83,8 @@ class Home_Page extends Page
     
     insights = new GLabel(parent, width/2 - 300, 200, 600, 120);
     insights.setTextAlign(GAlign.CENTER, GAlign.TOP);
+    Font f = new Font("Inter Display Medium", Font.PLAIN, 20);
+    insights.setFont(f);
     insights.setOpaque(true);
 
     String str = "\n";
@@ -102,11 +104,23 @@ class Home_Page extends Page
     days_droplist = new GDropList(parent, 650, 450, 150, 150, 3, 20);
     String[] items = {"Past 7 days", "Past 14 Days", "Past 30 days", "Past 100 days", "Past 365 days"};
     days_droplist.setItems(items, 1);
+    days_droplist.setLocalColorScheme(GCScheme.RED_SCHEME);
+    days_droplist.setLocalColor(5, accent_col3);
+    days_droplist.setLocalColor(3, #000000);
+    days_droplist.setLocalColor(4, accent_col2);
+    days_droplist.setLocalColor(6, #d1ffbd);
+    days_droplist.setLocalColor(15, accent_col2);
     days_droplist.addEventHandler(parent, "days_droplist_handler");
 
     regression_droplist = new GDropList(parent, 820, 450, 150, 150, 3, 20);
     String[] items2 = {"linear", "quadratic", "exponential"};
     regression_droplist.setItems(items2, 0);
+    regression_droplist.setLocalColorScheme(GCScheme.PURPLE_SCHEME);
+    regression_droplist.setLocalColor(5, accent_col3);
+    regression_droplist.setLocalColor(3, #000000);
+    regression_droplist.setLocalColor(4, accent_col2);
+    regression_droplist.setLocalColor(6, #d1ffbd);
+    regression_droplist.setLocalColor(15, accent_col2);
     regression_droplist.addEventHandler(parent, "regression_droplist_handler");
 
     heatmap_button = new GButton(parent, 400, 500, 200, 40, "View Heatmap");
@@ -122,6 +136,7 @@ class Home_Page extends Page
     static_controls.add(graph_button);
     static_controls.add(heatmap_button);
     static_controls.add(insights);
+    static_controls.add(notice_button);
   }
 }
 

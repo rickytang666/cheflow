@@ -19,11 +19,28 @@ class Nav_Bar
 
     float btn_width = (width - start_x - 6 * spacing) / 5.0;
 
+    color col = #EBA3FF;
+
     home_button = new GButton(parent, start_x + spacing, 5, btn_width, 50, "Home");
+    home_button.setLocalColor(3, col);
+    home_button.setLocalColor(4, col);
+    home_button.setLocalColor(6, #67CBFD);
     recipes_button = new GButton(parent, start_x + btn_width + 2 * spacing, 5, btn_width, 50, "Recipes");
+    recipes_button.setLocalColor(3, col);
+    recipes_button.setLocalColor(4, col);
+    recipes_button.setLocalColor(6, #67CBFD);
     fridge_button = new GButton(parent, start_x + 2 * btn_width + 3 * spacing, 5, btn_width, 50, "Fridge");
+    fridge_button.setLocalColor(3, col);
+    fridge_button.setLocalColor(4, col);
+    fridge_button.setLocalColor(6, #67CBFD);
     matching_button = new GButton(parent, start_x + 3 * btn_width + 4 * spacing, 5, btn_width, 50, "Matching");
+    matching_button.setLocalColor(3, col);
+    matching_button.setLocalColor(4, col);
+    matching_button.setLocalColor(6, #67CBFD);
     activity_button = new GButton(parent, start_x + 4 * btn_width + 5 * spacing, 5, btn_width, 50, "Activity");
+    activity_button.setLocalColor(3, col);
+    activity_button.setLocalColor(4, col);
+    activity_button.setLocalColor(6, #67CBFD);
 
     home_button.addEventHandler(parent, "nav_bar_buttons_handler");
     recipes_button.addEventHandler(parent, "nav_bar_buttons_handler");
@@ -35,7 +52,7 @@ class Nav_Bar
   
   void draw()
   {
-    fill( #cdfbf2);
+    fill( #fffcb1);
     noStroke();
     rect(0, 0, width, 60);
   }

@@ -194,6 +194,11 @@ class Recipes_Page extends Page
         float y = button_startY + buttonIndex * (button_height + button_spacing);
 
         r.button = new GButton(parent, x, y, button_width, button_height, r.name);
+        r.button.setLocalColor(3, accent_col2);
+        r.button.setLocalColor(4, accent_col2);
+        r.button.setLocalColor(6, #274097);
+        r.button.setLocalColor(14, #098d8d);
+        r.button.setLocalColor(2, #ffffff);
         r.button.addEventHandler(parent, "recipe_button_handler");
 
         
@@ -230,8 +235,11 @@ class Recipes_Page extends Page
         float y = button_startY + buttonIndex * (button_height + button_spacing);
 
         ing.button = new GButton(parent, x, y, button_width, button_height, ing.name);
-        ing.button.addEventHandler(parent, "ingredient_button_handler"); // Add event handler
-        ing.button.setEnabled(true); // Enable the button
+        ing.button.setLocalColor(4, accent_col3);
+        ing.button.setLocalColor(3, accent_col3);
+        ing.button.setLocalColor(6, #edde32);
+        ing.button.setLocalColor(14, #30c5c5);
+        ing.button.addEventHandler(parent, "ingredient_button_handler");
 
         ing.del_button = new GImageButton(parent, x + button_width + 10, y, button_height, button_height, new String[] {"delete1.png", "delete2.png"});
         ing.del_button.addEventHandler(parent, "ingredient_del_button_handler");

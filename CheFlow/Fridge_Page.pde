@@ -52,7 +52,7 @@ class Frige_Page extends Page
 
   void set_nav_gui()
   {
-    title = new GLabel(parent, 20, 70, 200, 40, "FRIDGE PAGE");
+    title = new GLabel(parent, 10, 70, 200, 40, "FRIDGE PAGE");
     title.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
     title.setTextBold();
     title.setTextItalic();
@@ -128,6 +128,10 @@ class Frige_Page extends Page
         float y = button_startY + button_index * (button_height + button_spacing);
 
         ing.button = new GButton(parent, x, y, button_width, button_height, ing.name);
+        ing.button.setLocalColor(4, accent_col3);
+        ing.button.setLocalColor(3, accent_col3);
+        ing.button.setLocalColor(6, #edde32);
+        ing.button.setLocalColor(14, #30c5c5);
         ing.button.addEventHandler(parent, "ingredient_button_handler_f");
 
         ing.del_button = new GImageButton(parent, x + button_width + button_spacing, y, button_height, button_height, new String[] {"delete1.png", "delete2.png"});

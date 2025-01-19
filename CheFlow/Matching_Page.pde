@@ -54,7 +54,7 @@ class Matching_Page extends Page
 
   void set_nav_gui()
   {
-    title = new GLabel(parent, 20, 70, 200, 40, "MATCHING PAGE");
+    title = new GLabel(parent, 10, 70, 200, 40, "MATCHING PAGE");
     title.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
     title.setTextBold();
     title.setTextItalic();
@@ -142,7 +142,6 @@ class Matching_Page extends Page
 
       r.title_label = new GLabel(parent, x, y, button_width, button_height, r.name);
       r.title_label.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
-      r.title_label.setLocalColor(6, color(240, 147, 195));
       r.title_label.setOpaque(true);
 
       r.matching_score_label = new GLabel(parent, x + button_width + 10, y, 100, button_height, nf(r.matching_score, 0, 2));
