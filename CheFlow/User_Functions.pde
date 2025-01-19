@@ -255,9 +255,9 @@ void update_daily_durations()
 
 void initialize_fonts()
 {
-  G4P.setDisplayFont("Inter Display Medium", G4P.PLAIN, 16);
-  UI_font = new Font("Inter Diaplay Medium", Font.PLAIN, 16);
-  drawing_font = createFont("Inter Display Medium", 16);
+  G4P.setDisplayFont("Inter", G4P.PLAIN, 16);
+  UI_font = new Font("Inter Display Medium", Font.PLAIN, 16);
+  drawing_font = createFont("Inter Medium", 16);
 }
 
 
