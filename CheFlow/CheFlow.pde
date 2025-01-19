@@ -24,6 +24,7 @@ final color accent_col3 = #a5ff01;
 final color dark_col = #1C1C1E;
 final color text_col = #e4e4e4;
 Font UI_font;
+PFont drawing_font;
 PImage logo;
 
 

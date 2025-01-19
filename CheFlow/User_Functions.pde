@@ -257,6 +257,7 @@ void initialize_fonts()
 {
   G4P.setDisplayFont("Inter", G4P.PLAIN, 16);
   UI_font = new Font("Inter", Font.PLAIN, 16);
+  drawing_font = createFont("Inter Display Medium", 16);
 }
 
 

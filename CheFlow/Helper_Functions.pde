@@ -265,10 +265,16 @@ void sort_log_records()
 
 float get_average_duration(int days)
 {
+  if (days <= 0)
+  {
+    return 0;
+  }
+
+  update_daily_durations();
 
   float sum = 0.0;
 
-  for (int i = 0; i < days; i++)
+  for (int i = daily_durations.size() - days; i < daily_durations.size(); i++)
   {
     sum += daily_durations.get(i);
   }
@@ -285,34 +291,37 @@ void draw_scatter_plot(PApplet appc, int n, String option)
   float circle_size = map(float(n), 7, 365, 8, 3);
 
   // Background and axis setup
+  final float right_margin = 70;
   appc.background(30);
   appc.stroke(255);
   appc.strokeWeight(2);
   appc.fill(255);
 
   // Draw axes
-  int xAxis = 90; // Left margin
+  int xAxis = 60; // Left margin
   int yAxis = appc.height - 50; // Bottom margin
 
   // X-axis
-  appc.line(xAxis, yAxis, appc.width - 50, yAxis);
+  appc.line(xAxis, yAxis, appc.width - right_margin, yAxis);
   // Y-axis
   appc.line(xAxis, yAxis, xAxis, 50);
 
   // Calculate max duration for mapping
   float maxDuration = 0;
-  for (int i = daily_durations.size() - n; i < daily_durations.size(); ++i) {
+  for (int i = daily_durations.size() - n; i < daily_durations.size(); ++i) 
+  {
     maxDuration = max(maxDuration, daily_durations.get(i));
   }
 
   // Draw scatter plot
   appc.fill(#00FFFF);
   appc.noStroke();
-  for (int i = daily_durations.size() - n; i < daily_durations.size(); ++i) {
+  for (int i = daily_durations.size() - n; i < daily_durations.size(); ++i) 
+  {
     float duration = daily_durations.get(i);
     //if (duration == 0) continue;
 
-    float x = map(i - (daily_durations.size() - n), 0, n - 1, xAxis, appc.width - 50);
+    float x = map(i - (daily_durations.size() - n), 0, n - 1, xAxis, appc.width - right_margin);
     float y = map(duration, 0, maxDuration, yAxis, 50);
     appc.circle(x, y, circle_size);
   }
@@ -336,9 +345,10 @@ void draw_scatter_plot(PApplet appc, int n, String option)
 
   // Label axes
 
+  appc.textFont(drawing_font);
   appc.fill(255);
   appc.textAlign(CENTER, CENTER);
-  appc.textSize(12);
+  appc.textSize(20);
 
   // X-axis labels
 
@@ -349,16 +359,22 @@ void draw_scatter_plot(PApplet appc, int n, String option)
   String str2 = now.get_date_str();
 
   appc.text(str1, xAxis, yAxis + 20);
-  appc.text(str2, appc.width - 50, yAxis + 20);
+  appc.text(str2, appc.width - right_margin, yAxis + 20);
   appc.textAlign(CENTER);
-  appc.text("Date", (appc.width - 50 + xAxis) / 2, yAxis + 30);
+  appc.text("Date", (appc.width - right_margin + xAxis) / 2, yAxis + 30);
 
   // Y-axis labels
   
   appc.textAlign(RIGHT);
   appc.text("0", xAxis - 10, yAxis);
   appc.text((int) maxDuration, xAxis - 10, 50);
-  appc.text("Duration (min)", xAxis - 10, (yAxis + 50) / 2);
+
+  appc.pushMatrix();
+  appc.translate(xAxis - 40, yAxis/2);
+  appc.rotate(-PI/2);
+  appc.textAlign(CENTER, CENTER);
+  appc.text("Duration (minutes)", 0, 0);
+  appc.popMatrix();
   
 }
 
