@@ -7,7 +7,7 @@ class Recipes_Page extends Page
 
   ArrayList<GAbstractControl> static_controls = new ArrayList<GAbstractControl>();
 
-  GButton prev_button, next_button, back, search_button, add_button;
+  GImageButton prev_button, next_button, back, add_button, search_button;
   GTextField search_bar;
   GImageToggleButton search_toggle;
 
@@ -65,34 +65,32 @@ class Recipes_Page extends Page
   void set_nav_gui()
   {
 
-    title = new GLabel(parent, 20, 70, 200, 40, "RECIPE PAGE");
+    title = new GLabel(parent, 10, 70, 200, 40, "RECIPE PAGE");
     title.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
     title.setTextBold();
     title.setTextItalic();
     title.setOpaque(true);
     title.setLocalColor(6, accent_col);
-
-    float navButtonWidth = 100;
-    float navButtonHeight = 40;
+    
     float navButtonY = height - 50;
     
-    prev_button = new GButton(parent, width / 2 - navButtonWidth - 20, navButtonY, navButtonWidth, navButtonHeight, "Previous");
+    prev_button = new GImageButton(parent, width / 2 - 60, navButtonY,  button_height, button_height, new String[] {"previous 1.png", "previous 2.png"});
     prev_button.addEventHandler(parent, "handleButtonEvents");
 
-    next_button = new GButton(parent, width / 2 + 20, navButtonY, navButtonWidth, navButtonHeight, "Next");
+    next_button = new GImageButton(parent, width / 2 + 60, navButtonY, button_height, button_height, new String[] {"next 1.png", "next 2.png"});
     next_button.addEventHandler(parent, "handleButtonEvents");
     
-    back = new GButton(parent, 100, 200, 70, 50, "back");
+    back = new GImageButton(parent, 20, 150, 60, 60, new String[] {"back button 1.png", "back button 2.png"});
     back.addEventHandler(parent, "handleButtonEvents");
 
-    add_button = new GButton(parent, width - 100, 200, 70, 50, "+Item");
+    add_button = new GImageButton(parent, 20, 300, 60, 60, new String[] {"add 1.png", "add 2.png"});
     add_button.addEventHandler(parent, "add_button_handler");
 
     search_bar = new GTextField(parent, width/2 - 100, 130, 200, 40, G4P.SCROLLBARS_HORIZONTAL_ONLY);
     search_bar.setOpaque(true);
     search_bar.setFont(UI_font);
     
-    search_button = new GButton(parent, width/2 + 110, 130, 60, 40, "Search");
+    search_button = new GImageButton(parent, width/2 + 110, 130, 40, 40, new String[] {"search 1.png", "search 2.png"});
     search_button.addEventHandler(parent, "search_button_handler");
 
     search_toggle = new GImageToggleButton(parent, width - 80, 100, "toggle.png", 1, 2);
@@ -107,7 +105,7 @@ class Recipes_Page extends Page
     entries_status = new GLabel(parent, width - 200, 140, 150, 40);
     entries_status.setOpaque(true);
 
-    page_indicator = new GLabel(parent, width - 150, navButtonY, 100, navButtonHeight);
+    page_indicator = new GLabel(parent, width - 150, navButtonY, 100, button_height);
     page_indicator.setOpaque(true);
 
     static_controls.add(title);
@@ -290,7 +288,7 @@ class Recipes_Page extends Page
 
 /* EVENT HANDLERS */
 
-public void handleButtonEvents(GButton button, GEvent event) 
+public void handleButtonEvents(GImageButton button, GEvent event) 
 {
 
   if (event == GEvent.CLICKED)
@@ -367,7 +365,7 @@ public void handleButtonEvents(GButton button, GEvent event)
 }
 
 
-public void search_button_handler(GButton button, GEvent event)
+public void search_button_handler(GImageButton button, GEvent event)
 {
   if (event == GEvent.CLICKED)
   {
@@ -413,7 +411,7 @@ public void search_mode_handler(GImageToggleButton button, GEvent event)
 }
 
 
-public void add_button_handler(GButton button, GEvent event) 
+public void add_button_handler(GImageButton button, GEvent event) 
 {
   if (event == GEvent.CLICKED) 
   {

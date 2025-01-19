@@ -1,5 +1,10 @@
 [
   {
+    "duration": 1,
+    "name": "fried egg",
+    "time finished": "2025-01-19 15:37"
+  },
+  {
     "duration": 2,
     "name": "Custom cooking",
     "time finished": "2025-01-18 13:57"

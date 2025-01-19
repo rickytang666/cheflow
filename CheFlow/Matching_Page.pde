@@ -8,7 +8,7 @@ class Matching_Page extends Page
   ArrayList<GAbstractControl> static_controls = new ArrayList<GAbstractControl>();
   
   GLabel title, page_indicator, duration_hint, time_priority_hint;
-  GButton prev_button, next_button;
+  GImageButton prev_button, next_button;
   GImageToggleButton time_priority_toggle;
   GTextField duration_editor;
 
@@ -61,17 +61,15 @@ class Matching_Page extends Page
     title.setOpaque(true);
     title.setLocalColor(6, accent_col);
 
-    float navButtonWidth = 100;
-    float navButtonHeight = 40;
     float navButtonY = height - 50;
 
-    prev_button = new GButton(parent, width / 2 - navButtonWidth - 20, navButtonY, navButtonWidth, navButtonHeight, "Previous");
+    prev_button = new GImageButton(parent, width / 2 - 60, navButtonY, button_height, button_height, new String[] {"previous 1.png", "previous 2.png"});
     prev_button.addEventHandler(parent, "handleButtonEvents");
 
-    next_button = new GButton(parent, width / 2 + 20, navButtonY, navButtonWidth, navButtonHeight, "Next");
+    next_button = new GImageButton(parent, width / 2 + 60, navButtonY, button_height, button_height, new String[] {"next 1.png", "next 2.png"});
     next_button.addEventHandler(parent, "handleButtonEvents");
 
-    page_indicator = new GLabel(parent, width - 150, navButtonY, 100, navButtonHeight);
+    page_indicator = new GLabel(parent, width - 150, navButtonY, 100, button_height);
     page_indicator.setOpaque(true);
 
     duration_hint = new GLabel(parent, width/2 - 150, 100, 300, 30, "Duration demand (minutes)");

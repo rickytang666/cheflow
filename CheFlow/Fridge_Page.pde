@@ -8,7 +8,7 @@ class Frige_Page extends Page
   ArrayList<GAbstractControl> static_controls = new ArrayList<GAbstractControl>();
   
   GLabel title, page_indicator;
-  GButton prev_button, next_button, back, add_button;
+  GImageButton prev_button, next_button, back, add_button;
   
   /* CONSTRUCTORS */
 
@@ -58,24 +58,22 @@ class Frige_Page extends Page
     title.setTextItalic();
     title.setOpaque(true);
     title.setLocalColor(6, accent_col);
-    
-    float navButtonWidth = 100;
-    float navButtonHeight = 40;
+
     float navButtonY = height - 50;
     
-    prev_button = new GButton(parent, width / 2 - navButtonWidth - 20, navButtonY, navButtonWidth, navButtonHeight, "Previous");
+    prev_button = new GImageButton(parent, width / 2 - 60, navButtonY, button_height, button_height, new String[] {"previous 1.png", "previous 2.png"});
     prev_button.addEventHandler(parent, "handleButtonEvents");
 
-    next_button = new GButton(parent, width / 2 + 20, navButtonY, navButtonWidth, navButtonHeight, "Next");
+    next_button = new GImageButton(parent, width / 2 + 60, navButtonY, button_height, button_height, new String[] {"next 1.png", "next 2.png"});
     next_button.addEventHandler(parent, "handleButtonEvents");
     
-    back = new GButton(parent, 100, 200, 70, 50, "back");
+    back = new GImageButton(parent, 20, 150, 60, 60, new String[] {"back button 1.png", "back button 2.png"});
     back.addEventHandler(parent, "handleButtonEvents");
 
-    add_button = new GButton(parent, 800, 200, 70, 50, "+Item");
+    add_button = new GImageButton(parent, 20, 300, 60, 60, new String[] {"add 1.png", "add 2.png"});
     add_button.addEventHandler(parent, "add_button_handler_f");
 
-    page_indicator = new GLabel(parent, width - 150, navButtonY, 100, navButtonHeight);
+    page_indicator = new GLabel(parent, width - 150, navButtonY, 100, button_height);
     page_indicator.setOpaque(true);
     
     static_controls.add(title);
@@ -177,7 +175,7 @@ class Frige_Page extends Page
 
 /* EVENT HANDLERS */
 
-public void add_button_handler_f(GButton button, GEvent event)
+public void add_button_handler_f(GImageButton button, GEvent event)
 {
   if (event == GEvent.CLICKED)
   {

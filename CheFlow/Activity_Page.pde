@@ -8,7 +8,7 @@ class Activity_Page extends Page
   ArrayList<GAbstractControl> static_controls = new ArrayList<GAbstractControl>();
   
   GLabel title, page_indicator;
-  GButton prev_button, next_button, back, add_button, search_button;
+  GImageButton prev_button, next_button, back, add_button, search_button;
   GTextField search_bar, time_editor, duration_editor;
 
   /* CONSTRUCTORS */
@@ -55,36 +55,34 @@ class Activity_Page extends Page
   void set_nav_gui()
   {
 
-    title = new GLabel(parent, 20, 70, 200, 40, "ACTIVITIES PAGE");
+    title = new GLabel(parent, 10, 70, 200, 40, "ACTIVITIES PAGE");
     title.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
     title.setTextBold();
     title.setTextItalic();
     title.setOpaque(true);
     title.setLocalColor(6, accent_col);
     
-    float navButtonWidth = 100;
-    float navButtonHeight = 40;
-    float navButtonY = height - navButtonHeight - 10;
+    float navButtonY = height - 50;
 
-    prev_button = new GButton(parent, width / 2 - navButtonWidth - 20, navButtonY, navButtonWidth, navButtonHeight, "Previous");
+    prev_button = new GImageButton(parent, width / 2 - 60, navButtonY, button_height, button_height, new String[] {"previous 1.png", "previous 2.png"});
     prev_button.addEventHandler(parent, "handleButtonEvents");
 
-    next_button = new GButton(parent, width / 2 + 20, navButtonY, navButtonWidth, navButtonHeight, "Next");
+    next_button = new GImageButton(parent, width / 2 + 60, navButtonY, button_height, button_height, new String[] {"next 1.png", "next 2.png"});
     next_button.addEventHandler(parent, "handleButtonEvents");
     
-    back = new GButton(parent, 100, 200, 70, 50, "back");
+    back = new GImageButton(parent, 20, 150, 60, 60, new String[] {"back button 1.png", "back button 2.png"});
     back.addEventHandler(parent, "handleButtonEvents");
 
-    add_button = new GButton(parent, 800, 200, 70, 50, "+Log");
+    add_button = new GImageButton(parent, 20, 300, 60, 60, new String[] {"add 1.png", "add 2.png"});
     add_button.addEventHandler(parent, "add_button_handler_log");
 
-    page_indicator = new GLabel(parent, width - 150, navButtonY, 100, navButtonHeight);
+    page_indicator = new GLabel(parent, width - 150, navButtonY, 100, button_height);
     page_indicator.setOpaque(true);
 
     search_bar = new GTextField(parent, 230, 100, 150, 30);
     search_bar.setFont(UI_font);
     
-    search_button = new GButton(parent, 400, 100, 70, 30, "Search");
+    search_button = new GImageButton(parent, 400, 100, 40, 40, new String[] {"search 1.png", "search 2.png"});
     search_button.addEventHandler(parent, "search_button_handler");
 
     time_editor = new GTextField(parent, 200, 150, 200, 30);
@@ -261,7 +259,7 @@ public void log_del_button_handler(GImageButton button, GEvent event)
 }
 
 
-public void add_button_handler_log(GButton button, GEvent event)
+public void add_button_handler_log(GImageButton button, GEvent event)
 {
   if (event == GEvent.CLICKED)
   {
