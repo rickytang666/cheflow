@@ -68,7 +68,8 @@ class Matching_Page extends Page
     next_button = new GImageButton(parent, width / 2 + 60, navButtonY, button_height, button_height, new String[] {"next 1.png", "next 2.png"});
     next_button.addEventHandler(parent, "handleButtonEvents");
 
-    page_indicator = new GLabel(parent, width - 150, navButtonY, 100, button_height);
+    page_indicator = new GLabel(parent, width - 150, navButtonY, 150, button_height);
+    page_indicator.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
     page_indicator.setOpaque(true);
 
     duration_hint = new GLabel(parent, width/2 - 150, 100, 300, 30, "Duration demand (minutes)");

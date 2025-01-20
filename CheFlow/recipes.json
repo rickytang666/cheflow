@@ -2,10 +2,16 @@
   {
     "duration": 30,
     "name": "Tin Tin Chow Mein",
-    "ingredients": [{
-      "is_essential": false,
-      "name": "noodles"
-    }],
+    "ingredients": [
+      {
+        "is_essential": true,
+        "name": "noodles"
+      },
+      {
+        "is_essential": false,
+        "name": "sausage"
+      }
+    ],
     "id": 125
   },
   {
@@ -13,12 +19,12 @@
     "name": "fried egg",
     "ingredients": [
       {
-        "is_essential": true,
-        "name": "egg"
-      },
-      {
         "is_essential": false,
         "name": "salt"
+      },
+      {
+        "is_essential": true,
+        "name": "egg"
       }
     ],
     "id": 48
@@ -28,12 +34,8 @@
     "name": "beef stir fry",
     "ingredients": [
       {
-        "is_essential": true,
-        "name": "oil"
-      },
-      {
         "is_essential": false,
-        "name": "soy sauce"
+        "name": "garlic"
       },
       {
         "is_essential": true,
@@ -41,7 +43,11 @@
       },
       {
         "is_essential": false,
-        "name": "garlic"
+        "name": "soy sauce"
+      },
+      {
+        "is_essential": true,
+        "name": "oil"
       }
     ],
     "id": 24
@@ -51,8 +57,8 @@
     "name": "grilled cheese",
     "ingredients": [
       {
-        "is_essential": true,
-        "name": "cheese"
+        "is_essential": false,
+        "name": "salt"
       },
       {
         "is_essential": false,
@@ -60,7 +66,7 @@
       },
       {
         "is_essential": false,
-        "name": "salt"
+        "name": "cheese"
       }
     ],
     "id": 23
@@ -71,23 +77,7 @@
     "ingredients": [
       {
         "is_essential": false,
-        "name": "chicken"
-      },
-      {
-        "is_essential": false,
-        "name": "curry powder"
-      },
-      {
-        "is_essential": false,
-        "name": "coconut milk"
-      },
-      {
-        "is_essential": false,
-        "name": "onion"
-      },
-      {
-        "is_essential": false,
-        "name": "garlic"
+        "name": "salt"
       },
       {
         "is_essential": false,
@@ -95,7 +85,23 @@
       },
       {
         "is_essential": false,
-        "name": "salt"
+        "name": "garlic"
+      },
+      {
+        "is_essential": false,
+        "name": "onion"
+      },
+      {
+        "is_essential": false,
+        "name": "coconut milk"
+      },
+      {
+        "is_essential": false,
+        "name": "curry powder"
+      },
+      {
+        "is_essential": false,
+        "name": "chicken"
       }
     ],
     "id": 22
@@ -106,19 +112,7 @@
     "ingredients": [
       {
         "is_essential": false,
-        "name": "pasta"
-      },
-      {
-        "is_essential": false,
-        "name": "eggs"
-      },
-      {
-        "is_essential": false,
-        "name": "bacon"
-      },
-      {
-        "is_essential": false,
-        "name": "cheese"
+        "name": "salt"
       },
       {
         "is_essential": false,
@@ -126,7 +120,19 @@
       },
       {
         "is_essential": false,
-        "name": "salt"
+        "name": "cheese"
+      },
+      {
+        "is_essential": false,
+        "name": "bacon"
+      },
+      {
+        "is_essential": false,
+        "name": "eggs"
+      },
+      {
+        "is_essential": false,
+        "name": "pasta"
       }
     ],
     "id": 21
@@ -137,15 +143,7 @@
     "ingredients": [
       {
         "is_essential": false,
-        "name": "eggs"
-      },
-      {
-        "is_essential": false,
-        "name": "milk"
-      },
-      {
-        "is_essential": false,
-        "name": "butter"
+        "name": "black pepper"
       },
       {
         "is_essential": false,
@@ -153,7 +151,15 @@
       },
       {
         "is_essential": false,
-        "name": "black pepper"
+        "name": "butter"
+      },
+      {
+        "is_essential": false,
+        "name": "milk"
+      },
+      {
+        "is_essential": false,
+        "name": "eggs"
       }
     ],
     "id": 20
@@ -164,23 +170,7 @@
     "ingredients": [
       {
         "is_essential": false,
-        "name": "ground beef"
-      },
-      {
-        "is_essential": false,
-        "name": "taco seasoning"
-      },
-      {
-        "is_essential": false,
-        "name": "tortillas"
-      },
-      {
-        "is_essential": false,
-        "name": "cheese"
-      },
-      {
-        "is_essential": false,
-        "name": "lettuce"
+        "name": "salt"
       },
       {
         "is_essential": false,
@@ -188,7 +178,23 @@
       },
       {
         "is_essential": false,
-        "name": "salt"
+        "name": "lettuce"
+      },
+      {
+        "is_essential": false,
+        "name": "cheese"
+      },
+      {
+        "is_essential": false,
+        "name": "tortillas"
+      },
+      {
+        "is_essential": false,
+        "name": "taco seasoning"
+      },
+      {
+        "is_essential": false,
+        "name": "ground beef"
       }
     ],
     "id": 19
@@ -199,19 +205,7 @@
     "ingredients": [
       {
         "is_essential": false,
-        "name": "tuna"
-      },
-      {
-        "is_essential": false,
-        "name": "mayonnaise"
-      },
-      {
-        "is_essential": false,
-        "name": "bread"
-      },
-      {
-        "is_essential": false,
-        "name": "lettuce"
+        "name": "black pepper"
       },
       {
         "is_essential": false,
@@ -219,7 +213,19 @@
       },
       {
         "is_essential": false,
-        "name": "black pepper"
+        "name": "lettuce"
+      },
+      {
+        "is_essential": false,
+        "name": "bread"
+      },
+      {
+        "is_essential": false,
+        "name": "mayonnaise"
+      },
+      {
+        "is_essential": false,
+        "name": "tuna"
       }
     ],
     "id": 18
@@ -230,19 +236,7 @@
     "ingredients": [
       {
         "is_essential": false,
-        "name": "vegetables"
-      },
-      {
-        "is_essential": false,
-        "name": "broth"
-      },
-      {
-        "is_essential": false,
-        "name": "garlic"
-      },
-      {
-        "is_essential": false,
-        "name": "onion"
+        "name": "salt"
       },
       {
         "is_essential": false,
@@ -250,7 +244,19 @@
       },
       {
         "is_essential": false,
-        "name": "salt"
+        "name": "onion"
+      },
+      {
+        "is_essential": false,
+        "name": "garlic"
+      },
+      {
+        "is_essential": false,
+        "name": "broth"
+      },
+      {
+        "is_essential": false,
+        "name": "vegetables"
       }
     ],
     "id": 17
@@ -261,19 +267,7 @@
     "ingredients": [
       {
         "is_essential": false,
-        "name": "flour"
-      },
-      {
-        "is_essential": false,
-        "name": "eggs"
-      },
-      {
-        "is_essential": false,
-        "name": "milk"
-      },
-      {
-        "is_essential": false,
-        "name": "butter"
+        "name": "salt"
       },
       {
         "is_essential": false,
@@ -281,7 +275,19 @@
       },
       {
         "is_essential": false,
-        "name": "salt"
+        "name": "butter"
+      },
+      {
+        "is_essential": false,
+        "name": "milk"
+      },
+      {
+        "is_essential": false,
+        "name": "eggs"
+      },
+      {
+        "is_essential": false,
+        "name": "flour"
       }
     ],
     "id": 16
@@ -292,19 +298,7 @@
     "ingredients": [
       {
         "is_essential": false,
-        "name": "salmon"
-      },
-      {
-        "is_essential": false,
-        "name": "lemon"
-      },
-      {
-        "is_essential": false,
-        "name": "herbs"
-      },
-      {
-        "is_essential": false,
-        "name": "garlic"
+        "name": "salt"
       },
       {
         "is_essential": false,
@@ -312,7 +306,19 @@
       },
       {
         "is_essential": false,
-        "name": "salt"
+        "name": "garlic"
+      },
+      {
+        "is_essential": false,
+        "name": "herbs"
+      },
+      {
+        "is_essential": false,
+        "name": "lemon"
+      },
+      {
+        "is_essential": false,
+        "name": "salmon"
       }
     ],
     "id": 15
@@ -323,19 +329,7 @@
     "ingredients": [
       {
         "is_essential": false,
-        "name": "lettuce"
-      },
-      {
-        "is_essential": false,
-        "name": "chicken"
-      },
-      {
-        "is_essential": false,
-        "name": "croutons"
-      },
-      {
-        "is_essential": false,
-        "name": "caesar dressing"
+        "name": "black pepper"
       },
       {
         "is_essential": false,
@@ -343,7 +337,19 @@
       },
       {
         "is_essential": false,
-        "name": "black pepper"
+        "name": "caesar dressing"
+      },
+      {
+        "is_essential": false,
+        "name": "croutons"
+      },
+      {
+        "is_essential": false,
+        "name": "chicken"
+      },
+      {
+        "is_essential": false,
+        "name": "lettuce"
       }
     ],
     "id": 14
@@ -354,19 +360,7 @@
     "ingredients": [
       {
         "is_essential": false,
-        "name": "pizza dough"
-      },
-      {
-        "is_essential": false,
-        "name": "tomato sauce"
-      },
-      {
-        "is_essential": false,
-        "name": "cheese"
-      },
-      {
-        "is_essential": false,
-        "name": "basil"
+        "name": "salt"
       },
       {
         "is_essential": false,
@@ -374,7 +368,19 @@
       },
       {
         "is_essential": false,
-        "name": "salt"
+        "name": "basil"
+      },
+      {
+        "is_essential": false,
+        "name": "cheese"
+      },
+      {
+        "is_essential": false,
+        "name": "tomato sauce"
+      },
+      {
+        "is_essential": false,
+        "name": "pizza dough"
       }
     ],
     "id": 13
@@ -385,15 +391,7 @@
     "ingredients": [
       {
         "is_essential": false,
-        "name": "bread"
-      },
-      {
-        "is_essential": false,
-        "name": "avocado"
-      },
-      {
-        "is_essential": false,
-        "name": "eggs"
+        "name": "black pepper"
       },
       {
         "is_essential": false,
@@ -401,7 +399,15 @@
       },
       {
         "is_essential": false,
-        "name": "black pepper"
+        "name": "eggs"
+      },
+      {
+        "is_essential": false,
+        "name": "avocado"
+      },
+      {
+        "is_essential": false,
+        "name": "bread"
       }
     ],
     "id": 12
@@ -412,23 +418,7 @@
     "ingredients": [
       {
         "is_essential": false,
-        "name": "rice"
-      },
-      {
-        "is_essential": false,
-        "name": "mushrooms"
-      },
-      {
-        "is_essential": false,
-        "name": "broth"
-      },
-      {
-        "is_essential": false,
-        "name": "onion"
-      },
-      {
-        "is_essential": false,
-        "name": "cheese"
+        "name": "salt"
       },
       {
         "is_essential": false,
@@ -436,7 +426,23 @@
       },
       {
         "is_essential": false,
-        "name": "salt"
+        "name": "cheese"
+      },
+      {
+        "is_essential": false,
+        "name": "onion"
+      },
+      {
+        "is_essential": false,
+        "name": "broth"
+      },
+      {
+        "is_essential": false,
+        "name": "mushrooms"
+      },
+      {
+        "is_essential": false,
+        "name": "rice"
       }
     ],
     "id": 11
@@ -447,19 +453,7 @@
     "ingredients": [
       {
         "is_essential": false,
-        "name": "cucumber"
-      },
-      {
-        "is_essential": false,
-        "name": "tomatoes"
-      },
-      {
-        "is_essential": false,
-        "name": "olives"
-      },
-      {
-        "is_essential": false,
-        "name": "cheese"
+        "name": "salt"
       },
       {
         "is_essential": false,
@@ -467,7 +461,19 @@
       },
       {
         "is_essential": false,
-        "name": "salt"
+        "name": "cheese"
+      },
+      {
+        "is_essential": false,
+        "name": "olives"
+      },
+      {
+        "is_essential": false,
+        "name": "tomatoes"
+      },
+      {
+        "is_essential": false,
+        "name": "cucumber"
       }
     ],
     "id": 10
@@ -478,23 +484,7 @@
     "ingredients": [
       {
         "is_essential": false,
-        "name": "ground beef"
-      },
-      {
-        "is_essential": false,
-        "name": "bun"
-      },
-      {
-        "is_essential": false,
-        "name": "cheese"
-      },
-      {
-        "is_essential": false,
-        "name": "lettuce"
-      },
-      {
-        "is_essential": false,
-        "name": "tomatoes"
+        "name": "salt"
       },
       {
         "is_essential": false,
@@ -502,7 +492,23 @@
       },
       {
         "is_essential": false,
-        "name": "salt"
+        "name": "tomatoes"
+      },
+      {
+        "is_essential": false,
+        "name": "lettuce"
+      },
+      {
+        "is_essential": false,
+        "name": "cheese"
+      },
+      {
+        "is_essential": false,
+        "name": "bun"
+      },
+      {
+        "is_essential": false,
+        "name": "ground beef"
       }
     ],
     "id": 9
@@ -513,19 +519,7 @@
     "ingredients": [
       {
         "is_essential": false,
-        "name": "chicken"
-      },
-      {
-        "is_essential": false,
-        "name": "bread"
-      },
-      {
-        "is_essential": false,
-        "name": "mayonnaise"
-      },
-      {
-        "is_essential": false,
-        "name": "lettuce"
+        "name": "salt"
       },
       {
         "is_essential": false,
@@ -533,7 +527,19 @@
       },
       {
         "is_essential": false,
-        "name": "salt"
+        "name": "lettuce"
+      },
+      {
+        "is_essential": false,
+        "name": "mayonnaise"
+      },
+      {
+        "is_essential": false,
+        "name": "bread"
+      },
+      {
+        "is_essential": false,
+        "name": "chicken"
       }
     ],
     "id": 8
@@ -544,19 +550,7 @@
     "ingredients": [
       {
         "is_essential": false,
-        "name": "lettuce"
-      },
-      {
-        "is_essential": false,
-        "name": "tomatoes"
-      },
-      {
-        "is_essential": false,
-        "name": "cucumber"
-      },
-      {
-        "is_essential": false,
-        "name": "carrots"
+        "name": "salt"
       },
       {
         "is_essential": false,
@@ -564,7 +558,19 @@
       },
       {
         "is_essential": false,
-        "name": "salt"
+        "name": "carrots"
+      },
+      {
+        "is_essential": false,
+        "name": "cucumber"
+      },
+      {
+        "is_essential": false,
+        "name": "tomatoes"
+      },
+      {
+        "is_essential": false,
+        "name": "lettuce"
       }
     ],
     "id": 7
@@ -575,23 +581,7 @@
     "ingredients": [
       {
         "is_essential": false,
-        "name": "pasta"
-      },
-      {
-        "is_essential": false,
-        "name": "ground beef"
-      },
-      {
-        "is_essential": false,
-        "name": "tomato sauce"
-      },
-      {
-        "is_essential": false,
-        "name": "onion"
-      },
-      {
-        "is_essential": false,
-        "name": "garlic"
+        "name": "salt"
       },
       {
         "is_essential": false,
@@ -599,7 +589,23 @@
       },
       {
         "is_essential": false,
-        "name": "salt"
+        "name": "garlic"
+      },
+      {
+        "is_essential": false,
+        "name": "onion"
+      },
+      {
+        "is_essential": false,
+        "name": "tomato sauce"
+      },
+      {
+        "is_essential": false,
+        "name": "ground beef"
+      },
+      {
+        "is_essential": false,
+        "name": "pasta"
       }
     ],
     "id": 6
@@ -610,19 +616,7 @@
     "ingredients": [
       {
         "is_essential": false,
-        "name": "eggs"
-      },
-      {
-        "is_essential": false,
-        "name": "cheese"
-      },
-      {
-        "is_essential": false,
-        "name": "butter"
-      },
-      {
-        "is_essential": false,
-        "name": "herbs"
+        "name": "black pepper"
       },
       {
         "is_essential": false,
@@ -630,7 +624,19 @@
       },
       {
         "is_essential": false,
-        "name": "black pepper"
+        "name": "herbs"
+      },
+      {
+        "is_essential": false,
+        "name": "butter"
+      },
+      {
+        "is_essential": false,
+        "name": "cheese"
+      },
+      {
+        "is_essential": false,
+        "name": "eggs"
       }
     ],
     "id": 5
@@ -641,19 +647,7 @@
     "ingredients": [
       {
         "is_essential": false,
-        "name": "bread"
-      },
-      {
-        "is_essential": false,
-        "name": "eggs"
-      },
-      {
-        "is_essential": false,
-        "name": "milk"
-      },
-      {
-        "is_essential": false,
-        "name": "butter"
+        "name": "salt"
       },
       {
         "is_essential": false,
@@ -661,7 +655,19 @@
       },
       {
         "is_essential": false,
-        "name": "salt"
+        "name": "butter"
+      },
+      {
+        "is_essential": false,
+        "name": "milk"
+      },
+      {
+        "is_essential": false,
+        "name": "eggs"
+      },
+      {
+        "is_essential": false,
+        "name": "bread"
       }
     ],
     "id": 4
@@ -672,19 +678,7 @@
     "ingredients": [
       {
         "is_essential": false,
-        "name": "chicken"
-      },
-      {
-        "is_essential": false,
-        "name": "mayonnaise"
-      },
-      {
-        "is_essential": false,
-        "name": "celery"
-      },
-      {
-        "is_essential": false,
-        "name": "onion"
+        "name": "salt"
       },
       {
         "is_essential": false,
@@ -692,7 +686,19 @@
       },
       {
         "is_essential": false,
-        "name": "salt"
+        "name": "onion"
+      },
+      {
+        "is_essential": false,
+        "name": "celery"
+      },
+      {
+        "is_essential": false,
+        "name": "mayonnaise"
+      },
+      {
+        "is_essential": false,
+        "name": "chicken"
       }
     ],
     "id": 3
@@ -703,19 +709,7 @@
     "ingredients": [
       {
         "is_essential": false,
-        "name": "vegetables"
-      },
-      {
-        "is_essential": false,
-        "name": "soy sauce"
-      },
-      {
-        "is_essential": false,
-        "name": "garlic"
-      },
-      {
-        "is_essential": false,
-        "name": "ginger"
+        "name": "salt"
       },
       {
         "is_essential": false,
@@ -723,7 +717,19 @@
       },
       {
         "is_essential": false,
-        "name": "salt"
+        "name": "ginger"
+      },
+      {
+        "is_essential": false,
+        "name": "garlic"
+      },
+      {
+        "is_essential": false,
+        "name": "soy sauce"
+      },
+      {
+        "is_essential": false,
+        "name": "vegetables"
       }
     ],
     "id": 2
@@ -734,15 +740,7 @@
     "ingredients": [
       {
         "is_essential": false,
-        "name": "banana"
-      },
-      {
-        "is_essential": false,
-        "name": "berries"
-      },
-      {
-        "is_essential": false,
-        "name": "yogurt"
+        "name": "honey"
       },
       {
         "is_essential": false,
@@ -750,7 +748,15 @@
       },
       {
         "is_essential": false,
-        "name": "honey"
+        "name": "yogurt"
+      },
+      {
+        "is_essential": false,
+        "name": "berries"
+      },
+      {
+        "is_essential": false,
+        "name": "banana"
       }
     ],
     "id": 1

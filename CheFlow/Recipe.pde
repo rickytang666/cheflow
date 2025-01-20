@@ -13,7 +13,7 @@ class Recipe
   GTextField duration_editor;
 
   float matching_score;
-  GLabel title_label, matching_score_label;
+  GLabel title_label, matching_score_label, duration_hint;
 
   /* CONSTRUCTORS */
   
@@ -180,6 +180,11 @@ class Recipe
     if (this.matching_score_label != null)
     {
       this.matching_score_label.dispose();
+    }
+
+    if (this.duration_hint != null)
+    {
+      this.duration_hint.dispose();
     }
   }
 

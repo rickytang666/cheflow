@@ -85,7 +85,7 @@ class Recipes_Page extends Page
     add_button = new GImageButton(parent, 20, 300, 60, 60, new String[] {"add 1.png", "add 2.png"});
     add_button.addEventHandler(parent, "add_button_handler");
 
-    search_bar = new GTextField(parent, width/2 - 100, 130, 200, 40, G4P.SCROLLBARS_HORIZONTAL_ONLY);
+    search_bar = new GTextField(parent, width/2 - 100, 130, 200, 40);
     search_bar.setOpaque(true);
     search_bar.setFont(UI_font2);
     
@@ -101,10 +101,12 @@ class Recipes_Page extends Page
     search_toggle_hint.setTextBold();
     search_toggle_hint.setTextAlign(GAlign.RIGHT, GAlign.MIDDLE);
 
-    entries_status = new GLabel(parent, width - 200, 140, 150, 40);
+    entries_status = new GLabel(parent, width - 200, 140, 180, 40);
+    entries_status.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
     entries_status.setOpaque(true);
 
-    page_indicator = new GLabel(parent, width - 150, navButtonY, 100, button_height);
+    page_indicator = new GLabel(parent, width - 150, navButtonY, 150, button_height);
+    page_indicator.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
     page_indicator.setOpaque(true);
 
     static_controls.add(title);
@@ -215,12 +217,16 @@ class Recipes_Page extends Page
       int start = page_nums[1] * buttons_per_page;
       int end = min(start + buttons_per_page, current_r.ingredients.size());
       
-      current_r.renamer = new GTextField(parent, width/2 - 100, 100, 200, 40, G4P.SCROLLBARS_HORIZONTAL_ONLY);
+      current_r.renamer = new GTextField(parent, width/2 - 100, 100, 200, 40);
       current_r.renamer.setText(current_r.name);
       current_r.renamer.setFont(UI_font2);
       current_r.renamer.addEventHandler(parent, "recipe_renamer_handler");  
 
-      current_r.duration_editor = new GTextField(parent, width/2 - 50, 150, 100, 30);
+      current_r.duration_hint = new GLabel(parent, width/2 - 100, 150, 200, 30, "Duration (minutes)");
+      current_r.duration_hint.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+      current_r.duration_hint.setLocalColor(2, text_col);
+
+      current_r.duration_editor = new GTextField(parent, width/2 - 50, 190, 100, 30);
       current_r.duration_editor.setText(str(current_r.duration));
       current_r.duration_editor.setFont(UI_font2);
       current_r.duration_editor.addEventHandler(parent, "recipe_duration_handler");
@@ -244,9 +250,11 @@ class Recipes_Page extends Page
         ing.del_button = new GImageButton(parent, x + button_width + 10, y, button_height, button_height, new String[] {"delete1.png", "delete2.png"});
         ing.del_button.addEventHandler(parent, "ingredient_del_button_handler");
 
-        ing_status.essential_toggle = new GOption(parent, x + button_width + 70, y, 80, 40, "Essen.");
+        ing_status.essential_toggle = new GOption(parent, x + button_width + 70, y, 100, 40, "Essential");
         ing_status.essential_toggle.setLocalColor(2, text_col);
         ing_status.essential_toggle.setSelected(ing_status.is_essential);
+        ing_status.essential_toggle.setOpaque(ing_status.is_essential);
+        ing_status.essential_toggle.setLocalColor(2, ing_status.is_essential ? #000000 : text_col);
         ing_status.essential_toggle.addEventHandler(parent, "ingredient_essential_handler");
       }
       
@@ -257,7 +265,7 @@ class Recipes_Page extends Page
 
       page_indicator.setText("Page " + (page_nums[2] + 1) + " of " + total_page_nums[2]);   
       
-      current_ing.renamer = new GTextField(parent, width/2 - 100, 120, 200, 40, G4P.SCROLLBARS_HORIZONTAL_ONLY);
+      current_ing.renamer = new GTextField(parent, width/2 - 100, 120, 200, 40);
       current_ing.renamer.setFont(UI_font2);
       current_ing.renamer.setText(current_ing.name);
       current_ing.renamer.addEventHandler(parent, "ingredient_renamer_handler");
@@ -614,6 +622,8 @@ public void ingredient_essential_handler(GOption option, GEvent event)
       if (ing_status.essential_toggle == option)
       {
         ing_status.is_essential = option.isSelected();
+        option.setOpaque(option.isSelected());
+        option.setLocalColor(2, option.isSelected() ? #000000 : text_col);
         break;
       }
     }

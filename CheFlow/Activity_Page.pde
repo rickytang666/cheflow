@@ -7,7 +7,7 @@ class Activity_Page extends Page
 
   ArrayList<GAbstractControl> static_controls = new ArrayList<GAbstractControl>();
   
-  GLabel title, page_indicator;
+  GLabel title, page_indicator, time_hint, duration_hint;
   GImageButton prev_button, next_button, back, add_button, search_button;
   GTextField search_bar, time_editor, duration_editor;
 
@@ -75,20 +75,29 @@ class Activity_Page extends Page
     add_button = new GImageButton(parent, 20, 300, 60, 60, new String[] {"add 1.png", "add 2.png"});
     add_button.addEventHandler(parent, "add_button_handler_log");
 
-    page_indicator = new GLabel(parent, width - 150, navButtonY, 100, button_height);
+    page_indicator = new GLabel(parent, width - 150, navButtonY, 150, button_height);
+    page_indicator.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
     page_indicator.setOpaque(true);
 
-    search_bar = new GTextField(parent, 230, 100, 150, 30);
+    search_bar = new GTextField(parent, width/2 - 75, 100, 150, 40);
     search_bar.setFont(UI_font2);
     
-    search_button = new GImageButton(parent, 400, 100, 40, 40, new String[] {"search 1.png", "search 2.png"});
+    search_button = new GImageButton(parent, width/2 + 90, 100, 40, 40, new String[] {"search 1.png", "search 2.png"});
     search_button.addEventHandler(parent, "search_button_handler");
 
-    time_editor = new GTextField(parent, 200, 150, 200, 30);
+    time_hint = new GLabel(parent, width/2 - 400, 160, 350, 30, "Time finished (yyyy-mm-dd hh:mm)");
+    time_hint.setLocalColor(2, text_col);
+    time_hint.setTextAlign(GAlign.RIGHT, GAlign.MIDDLE);
+
+    time_editor = new GTextField(parent, width/2 - 250, 200, 200, 30);
     time_editor.addEventHandler(parent, "time_editor_handler");
     time_editor.setFont(UI_font2);
 
-    duration_editor = new GTextField(parent, 450, 150, 70, 30);
+    duration_hint = new GLabel(parent, width/2 + 50, 160, 200, 30, "Duration (minutes)");
+    duration_hint.setLocalColor(2, text_col);
+    duration_hint.setTextAlign(GAlign.LEFT, GAlign.MIDDLE);
+
+    duration_editor = new GTextField(parent, width/2 + 50, 200, 100, 30);
     duration_editor.addEventHandler(parent, "duration_editor_handler");
     duration_editor.setFont(UI_font2);
     duration_editor.setNumeric(1, 24 * 60, 1);
@@ -101,7 +110,9 @@ class Activity_Page extends Page
     static_controls.add(page_indicator);
     static_controls.add(search_bar);
     static_controls.add(search_button);
+    static_controls.add(time_hint);
     static_controls.add(time_editor);
+    static_controls.add(duration_hint);
     static_controls.add(duration_editor);
   }
 
@@ -122,8 +133,12 @@ class Activity_Page extends Page
     search_bar.setVisible(layer == 1 && current_log != null);
     search_button.setEnabled(layer == 1 && current_log != null);
     search_button.setVisible(layer == 1 && current_log != null);
+    time_hint.setEnabled(layer == 1 && current_log != null);
+    time_hint.setVisible(layer == 1 && current_log != null);
     time_editor.setEnabled(layer == 1 && current_log != null);
     time_editor.setVisible(layer == 1 && current_log != null);
+    duration_hint.setEnabled(layer == 1 && current_log != null);
+    duration_hint.setVisible(layer == 1 && current_log != null);
     duration_editor.setEnabled(layer == 1 && current_log != null);
     duration_editor.setVisible(layer == 1 && current_log != null);
   }
@@ -190,7 +205,7 @@ class Activity_Page extends Page
       time_editor.setText(current_log.time_finished.get_time_str());
       duration_editor.setText(str(current_log.duration));
 
-      current_log.recipe_label = new GLabel(parent, 550, 100, 200, 30);
+      current_log.recipe_label = new GLabel(parent, width - 300, 100, 250, 30);
       current_log.recipe_label.setOpaque(true);
       String str = "Selected: " + (current_log.recipe == null ? current_log.name : current_log.recipe.name);
       

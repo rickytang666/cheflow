@@ -72,7 +72,8 @@ class Frige_Page extends Page
     add_button = new GImageButton(parent, 20, 300, 60, 60, new String[] {"add 1.png", "add 2.png"});
     add_button.addEventHandler(parent, "add_button_handler_f");
 
-    page_indicator = new GLabel(parent, width - 150, navButtonY, 100, button_height);
+    page_indicator = new GLabel(parent, width - 150, navButtonY, 150, button_height);
+    page_indicator.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
     page_indicator.setOpaque(true);
     
     static_controls.add(title);

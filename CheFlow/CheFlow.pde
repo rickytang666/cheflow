@@ -45,10 +45,10 @@ final String file_name_user_notice = "user notice.txt";
 boolean auto_save = false;
 
 final int buttons_per_page = 8;
-final float button_width = 300;
+final float button_width = 400;
 final float button_height = 40;
 final float button_spacing = 10;
-final float button_startX = 350;
+final float button_startX = 1000/2 - button_width/2;
 final float button_startY = 700 - (button_height + button_spacing) * (buttons_per_page + 1);
 
 int layer = 0;
