@@ -297,76 +297,86 @@ class Recipes_Page extends Page
 
 public void handleButtonEvents(GImageButton button, GEvent event) 
 {
-
-  if (event == GEvent.CLICKED)
+  try 
   {
-    if (button == rp.next_button) 
+    if (event == GEvent.CLICKED)
     {
-      page_nums[layer]++;
-      rp.set_recipes_page();
+      if (button == rp.next_button) 
+      {
+        page_nums[layer]++;
+        rp.set_recipes_page();
+      }
+      else if (button == rp.prev_button) 
+      {
+        page_nums[layer]--;
+        rp.set_recipes_page();
+      }
+      else if (button == rp.back)
+      {
+        page_nums[layer] = 0;
+        total_page_nums[layer] = 0;
+        layer--;
+        
+        rp.set_recipes_page();
+      }
+      else if (button == fp.prev_button)
+      {
+        
+        page_nums[layer]--;
+        fp.set_fridge_page();
+        
+      }
+      else if (button == fp.next_button)
+      {
+        
+        page_nums[layer]++;
+        fp.set_fridge_page();
+        
+      }
+      else if (button == fp.back)
+      {
+        page_nums[layer] = 0;
+        total_page_nums[layer] = 0;
+        layer--;
+        fp.set_fridge_page();
+      }
+      else if (button == mp.prev_button)
+      {
+        page_nums[layer]--;
+        mp.set_matching_page();
+      }
+      else if (button == mp.next_button)
+      {
+        page_nums[layer]++;
+        mp.set_matching_page();
+      }
+      else if (button == ap.prev_button)
+      {
+        page_nums[layer]--;
+        ap.set_activity_page();
+      }
+      else if (button == ap.next_button)
+      {
+        page_nums[layer]++;
+        ap.set_activity_page();
+      }
+      else if (button == ap.back)
+      {
+        page_nums[layer] = 0;
+        total_page_nums[layer] = 0;
+        layer--;
+        ap.set_activity_page(); 
+      }
     }
-    else if (button == rp.prev_button) 
-    {
-      page_nums[layer]--;
-      rp.set_recipes_page();
-    }
-    else if (button == rp.back)
-    {
-      page_nums[layer] = 0;
-      total_page_nums[layer] = 0;
-      layer--;
-      
-      rp.set_recipes_page();
-    }
-    else if (button == fp.prev_button)
-    {
-      
-      page_nums[layer]--;
-      fp.set_fridge_page();
-      
-    }
-    else if (button == fp.next_button)
-    {
-      
-      page_nums[layer]++;
-      fp.set_fridge_page();
-      
-    }
-    else if (button == fp.back)
-    {
-      page_nums[layer] = 0;
-      total_page_nums[layer] = 0;
-      layer--;
-      fp.set_fridge_page();
-    }
-    else if (button == mp.prev_button)
-    {
-      page_nums[layer]--;
-      mp.set_matching_page();
-    }
-    else if (button == mp.next_button)
-    {
-      page_nums[layer]++;
-      mp.set_matching_page();
-    }
-    else if (button == ap.prev_button)
-    {
-      page_nums[layer]--;
-      ap.set_activity_page();
-    }
-    else if (button == ap.next_button)
-    {
-      page_nums[layer]++;
-      ap.set_activity_page();
-    }
-    else if (button == ap.back)
-    {
-      page_nums[layer] = 0;
-      total_page_nums[layer] = 0;
-      layer--;
-      ap.set_activity_page(); 
-    }
+  } 
+  catch (NullPointerException e) 
+  {
+    println("Button event ignored - transition in progress");
+    // Optionally reset page state if needed
   }
+
+
+  
   
   
 }
