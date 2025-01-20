@@ -80,20 +80,26 @@ class Home_Page extends Page
     autosave_hint.setTextAlign(GAlign.RIGHT, GAlign.MIDDLE);
     autosave_hint.setLocalColor(2, text_col);
     
-    insights = new GLabel(parent, width/2 - 300, 200, 600, 150);
+    insights = new GLabel(parent, width/2 - 300, 150, 600, 150);
+    PImage img = loadImage("insights.png");
+    img.resize(0, 75);
+    insights.setIcon(img, 1, GAlign.NORTH, GAlign.CENTER, GAlign.TOP);
     insights.setTextAlign(GAlign.CENTER, GAlign.TOP);
-    Font f = new Font("Segoe UI", Font.PLAIN, 20);
-    insights.setFont(f);
     insights.setOpaque(true);
-
+    
+    insights.setFont(UI_font2.deriveFont(20.0));
+    
     String str = "\n";
 
     str += "You spent " + nf(get_average_duration(7), 0, 2) + " minutes on average cooking in the past 7 days.\n";
     str += "You spent " + nf(get_average_duration(30), 0, 2) + " minutes on average cooking in the past 30 days.\n";
     str += "You spent " + nf(get_average_duration(365), 0, 2) + " minutes on average cooking in the past year.\n";
-    str += "Your longest streak is " + get_longest_streak() + " days.\n";
+    str += "Your longest streak is " + get_longest_streak() + " days.\n \n";
 
     insights.setText(str);
+
+    insights.resizeToFit(true, true);
+
     export_button = new GButton(parent, 400, 400, 200, 40, "Export Data");
     export_button.addEventHandler(parent, "export_button_handler");
 

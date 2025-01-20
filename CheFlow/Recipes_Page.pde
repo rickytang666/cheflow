@@ -375,10 +375,6 @@ public void handleButtonEvents(GImageButton button, GEvent event)
     println("Button event ignored - transition in progress");
     // Optionally reset page state if needed
   }
-
-
-  
-  
   
 }
 
