@@ -148,6 +148,9 @@ class Activity_Page extends Page
     clear_variable_controls();
 
     update_nav_gui();
+    
+    prev_button.setEnabled(false);
+    next_button.setEnabled(false);
 
     if (layer == 0)
     {
@@ -214,6 +217,9 @@ class Activity_Page extends Page
         r.button.addEventHandler(parent, "recipe_button_handler_log");
       }
     }
+    
+    prev_button.setEnabled(page_nums[layer] > 0);
+    next_button.setEnabled(page_nums[layer] < total_page_nums[layer] - 1);
 
   }
 
