@@ -296,7 +296,7 @@ public void open_notice_window()
   hp.notice_window.setActionOnClose(G4P.CLOSE_WINDOW);
 
   GTextArea display = new GTextArea(hp.notice_window, 10, 50, 580, 300, G4P.SCROLLBARS_BOTH | G4P.SCROLLBARS_AUTOHIDE);
-  display.setFont(UI_font);
+  display.setFont(UI_font2);
   display.setTextEditEnabled(false);
   
   String[] contents = loadStrings(file_name_user_notice);

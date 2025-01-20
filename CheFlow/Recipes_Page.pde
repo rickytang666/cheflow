@@ -87,7 +87,7 @@ class Recipes_Page extends Page
 
     search_bar = new GTextField(parent, width/2 - 100, 130, 200, 40, G4P.SCROLLBARS_HORIZONTAL_ONLY);
     search_bar.setOpaque(true);
-    search_bar.setFont(UI_font);
+    search_bar.setFont(UI_font2);
     
     search_button = new GImageButton(parent, width/2 + 110, 130, 40, 40, new String[] {"search 1.png", "search 2.png"});
     search_button.addEventHandler(parent, "search_button_handler");
@@ -193,6 +193,7 @@ class Recipes_Page extends Page
         float y = button_startY + buttonIndex * (button_height + button_spacing);
 
         r.button = new GButton(parent, x, y, button_width, button_height, r.name);
+        r.button.setFont(UI_font1);
         r.button.setLocalColor(3, accent_col2);
         r.button.setLocalColor(4, accent_col2);
         r.button.setLocalColor(6, #274097);
@@ -216,12 +217,12 @@ class Recipes_Page extends Page
       
       current_r.renamer = new GTextField(parent, width/2 - 100, 100, 200, 40, G4P.SCROLLBARS_HORIZONTAL_ONLY);
       current_r.renamer.setText(current_r.name);
-      current_r.renamer.setFont(UI_font);
+      current_r.renamer.setFont(UI_font2);
       current_r.renamer.addEventHandler(parent, "recipe_renamer_handler");  
 
       current_r.duration_editor = new GTextField(parent, width/2 - 50, 150, 100, 30);
       current_r.duration_editor.setText(str(current_r.duration));
-      current_r.duration_editor.setFont(UI_font);
+      current_r.duration_editor.setFont(UI_font2);
       current_r.duration_editor.addEventHandler(parent, "recipe_duration_handler");
       current_r.duration_editor.setNumeric(1, 60 * 24, 30);
       
@@ -257,7 +258,7 @@ class Recipes_Page extends Page
       page_indicator.setText("Page " + (page_nums[2] + 1) + " of " + total_page_nums[2]);   
       
       current_ing.renamer = new GTextField(parent, width/2 - 100, 120, 200, 40, G4P.SCROLLBARS_HORIZONTAL_ONLY);
-      current_ing.renamer.setFont(UI_font);
+      current_ing.renamer.setFont(UI_font2);
       current_ing.renamer.setText(current_ing.name);
       current_ing.renamer.addEventHandler(parent, "ingredient_renamer_handler");
 

@@ -24,7 +24,8 @@ final color accent_col2 = #ff2984;
 final color accent_col3 = #a5ff01;
 final color dark_col = #1C1C1E;
 final color text_col = #e4e4e4;
-Font UI_font;
+Font UI_font1; // normal font weight one
+Font UI_font2; // slighly bolder one
 PFont drawing_font;
 PImage logo;
 String greeting_text = "Good Morning";

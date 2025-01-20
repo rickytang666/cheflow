@@ -144,7 +144,7 @@ class Frige_Page extends Page
       String content = "This ingredient is used in " + current_ing.related_recipes.size() + " recipes\n";
       
       current_ing.renamer = new GTextField(parent, width/2 - 100, 120, 200, 40, G4P.SCROLLBARS_HORIZONTAL_ONLY);
-      current_ing.renamer.setFont(UI_font);
+      current_ing.renamer.setFont(UI_font2);
       current_ing.renamer.setText(current_ing.name);
       current_ing.renamer.addEventHandler(parent, "ingredient_renamer_handler_f");
 

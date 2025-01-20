@@ -76,7 +76,7 @@ class Matching_Page extends Page
     duration_hint.setLocalColor(2, text_col);
 
     duration_editor = new GTextField(parent, width/2 - 50, 150, 100, 30);
-    duration_editor.setFont(UI_font);
+    duration_editor.setFont(UI_font2);
     duration_editor.setOpaque(true);
     duration_editor.setText(str(duration_demand));
     duration_editor.setNumeric(1, 24 * 60, 30);

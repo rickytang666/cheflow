@@ -79,18 +79,18 @@ class Activity_Page extends Page
     page_indicator.setOpaque(true);
 
     search_bar = new GTextField(parent, 230, 100, 150, 30);
-    search_bar.setFont(UI_font);
+    search_bar.setFont(UI_font2);
     
     search_button = new GImageButton(parent, 400, 100, 40, 40, new String[] {"search 1.png", "search 2.png"});
     search_button.addEventHandler(parent, "search_button_handler");
 
     time_editor = new GTextField(parent, 200, 150, 200, 30);
     time_editor.addEventHandler(parent, "time_editor_handler");
-    time_editor.setFont(UI_font);
+    time_editor.setFont(UI_font2);
 
     duration_editor = new GTextField(parent, 450, 150, 70, 30);
     duration_editor.addEventHandler(parent, "duration_editor_handler");
-    duration_editor.setFont(UI_font);
+    duration_editor.setFont(UI_font2);
     duration_editor.setNumeric(1, 24 * 60, 1);
 
     static_controls.add(title);
