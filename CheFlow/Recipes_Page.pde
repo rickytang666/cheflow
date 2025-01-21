@@ -309,8 +309,6 @@ class Recipes_Page extends Page
 
 public void handleButtonEvents(GImageButton button, GEvent event) 
 {
-  println(rp.next_button != null ? "Next button initialized" : "Next button not initialized");
-  println(button == null);
   
   if (event == GEvent.CLICKED)
   {

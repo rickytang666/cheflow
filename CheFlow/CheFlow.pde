@@ -93,14 +93,13 @@ void setup()
   nb.setup();
   current_Page = hp;
   current_Page.setup();
+
   
 }
 
 void draw()
 {
   background(dark_col);
-
-
   nb.draw();
 
   logo = loadImage("logo.png");
