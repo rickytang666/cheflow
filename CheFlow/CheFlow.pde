@@ -100,6 +100,7 @@ void draw()
 {
   background(dark_col);
 
+
   nb.draw();
 
   logo = loadImage("logo.png");
