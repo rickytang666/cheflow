@@ -1,6 +1,9 @@
 // Common GUIs
 
 GImageButton prev_button, next_button;
+boolean safe_mode = true;
+int next_btn_cooldown = 0, prev_btn_cooldown = 0;
+final int COOLDOWN_FRAMES = 15;
 
 public void createGUI()
 {
@@ -20,30 +23,77 @@ public void page_button_handler(GImageButton button, GEvent event)
 {
   if (event == GEvent.CLICKED)
   {
+    if (safe_mode)
+    {
+      if (button == prev_button && prev_btn_cooldown > 0)
+      {
+        println("prev button cooldown");
+        return;
+      }
+      
+      if (button == next_button && next_btn_cooldown > 0)
+      {
+        println("next button cooldown");
+        println(next_button.isEnabled());
+        return;
+      }
+    }
+
     if (button == prev_button)
     {
       page_nums[layer]--;
+
+      if (current_Page == rp)
+      {
+        rp.set_recipes_page();
+      }
+      else if (current_Page == fp)
+      {
+        fp.set_fridge_page();
+      }
+      else if (current_Page == mp)
+      {
+        mp.set_matching_page();
+      }
+      else if (current_Page == ap)
+      {
+        ap.set_activity_page();
+      }
+
+      if (safe_mode)
+      {
+        prev_btn_cooldown = COOLDOWN_FRAMES;
+        prev_button.setEnabled(false);
+        println("prev button cooldown set", prev_button.isEnabled());
+      }
     }
     else if (button == next_button)
     {
       page_nums[layer]++;
-    }
 
-    if (current_Page == rp)
-    {
-      rp.set_recipes_page();
-    }
-    else if (current_Page == fp)
-    {
-      fp.set_fridge_page();
-    }
-    else if (current_Page == mp)
-    {
-      mp.set_matching_page();
-    }
-    else if (current_Page == ap)
-    {
-      ap.set_activity_page();
+      if (current_Page == rp)
+      {
+        rp.set_recipes_page();
+      }
+      else if (current_Page == fp)
+      {
+        fp.set_fridge_page();
+      }
+      else if (current_Page == mp)
+      {
+        mp.set_matching_page();
+      }
+      else if (current_Page == ap)
+      {
+        ap.set_activity_page();
+      }
+
+      if (safe_mode)
+      {
+        next_btn_cooldown = COOLDOWN_FRAMES;
+        next_button.setEnabled(false);
+        println("next button cooldown set", next_button.isEnabled());
+      }
     }
 
   }

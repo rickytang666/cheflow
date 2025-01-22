@@ -135,6 +135,30 @@ void draw()
     textAlign(CENTER, TOP);
     text(greeting_text, width/2, 80);
   }
+
+
+  if (safe_mode)
+  {
+    if (prev_btn_cooldown > 0)
+    {
+      prev_btn_cooldown--;
+
+      if (prev_btn_cooldown == 0)
+      {
+        prev_button.setEnabled(page_nums[layer] > 0);
+      }
+    }
+
+    if (next_btn_cooldown > 0)
+    {
+      next_btn_cooldown--;
+
+      if (next_btn_cooldown == 0)
+      {
+        next_button.setEnabled(page_nums[layer] < total_page_nums[layer] - 1);
+      }
+    }
+  }
   
 }
 
