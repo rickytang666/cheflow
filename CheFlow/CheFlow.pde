@@ -78,10 +78,12 @@ Activity_Page ap;
 void setup() 
 {
   size(1000, 700);
-  G4P.messagesEnabled(false);
+  
   import_data();
   initialize_fonts();
   initialize_UI_colors();
+
+  createGUI();
   
   nb = new Nav_Bar(this);
   rp = new Recipes_Page(this);

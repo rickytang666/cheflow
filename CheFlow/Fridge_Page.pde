@@ -8,7 +8,7 @@ class Frige_Page extends Page
   ArrayList<GAbstractControl> static_controls = new ArrayList<GAbstractControl>();
   
   GLabel title, page_indicator;
-  GImageButton prev_button, next_button, back, add_button;
+  GImageButton back, add_button;
   
   /* CONSTRUCTORS */
 
@@ -59,15 +59,14 @@ class Frige_Page extends Page
     title.setLocalColor(6, accent_col);
 
     float navButtonY = height - 50;
-    
-    prev_button = new GImageButton(parent, width / 2 - 60, navButtonY, button_height, button_height, new String[] {"previous 1.png", "previous 2.png"});
-    prev_button.addEventHandler(parent, "handleButtonEvents");
 
-    next_button = new GImageButton(parent, width / 2 + 60, navButtonY, button_height, button_height, new String[] {"next 1.png", "next 2.png"});
-    next_button.addEventHandler(parent, "handleButtonEvents");
+    prev_button.setEnabled(true);
+    prev_button.setVisible(true);
+    next_button.setEnabled(true);
+    next_button.setVisible(true);
     
     back = new GImageButton(parent, 20, 150, 60, 60, new String[] {"back button 1.png", "back button 2.png"});
-    back.addEventHandler(parent, "handleButtonEvents");
+    back.addEventHandler(parent, "back_button_handler");
 
     add_button = new GImageButton(parent, 20, 300, 60, 60, new String[] {"add 1.png", "add 2.png"});
     add_button.addEventHandler(parent, "add_button_handler_f");
@@ -77,8 +76,6 @@ class Frige_Page extends Page
     page_indicator.setOpaque(true);
     
     static_controls.add(title);
-    static_controls.add(prev_button);
-    static_controls.add(next_button);
     static_controls.add(back);
     static_controls.add(add_button);
     static_controls.add(page_indicator);

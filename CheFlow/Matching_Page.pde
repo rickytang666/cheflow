@@ -8,7 +8,6 @@ class Matching_Page extends Page
   ArrayList<GAbstractControl> static_controls = new ArrayList<GAbstractControl>();
   
   GLabel title, page_indicator, duration_hint, time_priority_hint;
-  GImageButton prev_button, next_button;
   GImageToggleButton time_priority_toggle;
   GTextField duration_editor;
 
@@ -62,11 +61,10 @@ class Matching_Page extends Page
 
     float navButtonY = height - 50;
 
-    prev_button = new GImageButton(parent, width / 2 - 60, navButtonY, button_height, button_height, new String[] {"previous 1.png", "previous 2.png"});
-    prev_button.addEventHandler(parent, "handleButtonEvents");
-
-    next_button = new GImageButton(parent, width / 2 + 60, navButtonY, button_height, button_height, new String[] {"next 1.png", "next 2.png"});
-    next_button.addEventHandler(parent, "handleButtonEvents");
+    prev_button.setEnabled(true);
+    prev_button.setVisible(true);
+    next_button.setEnabled(true);
+    next_button.setVisible(true);
 
     page_indicator = new GLabel(parent, width - 150, navButtonY, 150, button_height);
     page_indicator.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
@@ -92,8 +90,6 @@ class Matching_Page extends Page
     time_priority_toggle.addEventHandler(parent, "time_priority_toggle_handler");
 
     static_controls.add(title);
-    static_controls.add(prev_button);
-    static_controls.add(next_button);
     static_controls.add(page_indicator);
     static_controls.add(duration_editor);
     static_controls.add(duration_hint);

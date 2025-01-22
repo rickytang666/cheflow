@@ -7,7 +7,7 @@ class Recipes_Page extends Page
 
   ArrayList<GAbstractControl> static_controls = new ArrayList<GAbstractControl>();
 
-  GImageButton prev_button, next_button, back, add_button, search_button;
+  GImageButton back, add_button, search_button;
   GTextField search_bar;
   GImageToggleButton search_toggle;
 
@@ -70,17 +70,16 @@ class Recipes_Page extends Page
     title.setFont(new Font("Segoe UI Semibold", Font.ITALIC, 20));
     title.setOpaque(true);
     title.setLocalColor(6, accent_col);
-    
-    float navButtonY = height - 50;
-    
-    prev_button = new GImageButton(parent, width / 2 - 60, navButtonY,  button_height, button_height, new String[] {"previous 1.png", "previous 2.png"});
-    prev_button.addEventHandler(parent, "handleButtonEvents");
 
-    next_button = new GImageButton(parent, width / 2 + 60, navButtonY, button_height, button_height, new String[] {"next 1.png", "next 2.png"});
-    next_button.addEventHandler(parent, "handleButtonEvents");
-    
+    float navButtonY = height - 50;
+
+    prev_button.setEnabled(true);
+    prev_button.setVisible(true);
+    next_button.setEnabled(true);
+    next_button.setVisible(true);
+           
     back = new GImageButton(parent, 20, 150, 60, 60, new String[] {"back button 1.png", "back button 2.png"});
-    back.addEventHandler(parent, "handleButtonEvents");
+    back.addEventHandler(parent, "back_button_handler");
 
     add_button = new GImageButton(parent, 20, 300, 60, 60, new String[] {"add 1.png", "add 2.png"});
     add_button.addEventHandler(parent, "add_button_handler");
@@ -110,8 +109,6 @@ class Recipes_Page extends Page
     page_indicator.setOpaque(true);
 
     static_controls.add(title);
-    static_controls.add(prev_button);
-    static_controls.add(next_button);
     static_controls.add(back);
     static_controls.add(search_bar);
     static_controls.add(search_button);
@@ -302,83 +299,6 @@ class Recipes_Page extends Page
 
 
 /* EVENT HANDLERS */
-
-public void handleButtonEvents(GImageButton button, GEvent event) 
-{
-  
-  if (event == GEvent.CLICKED)
-  {
-    
-    if (button == rp.next_button) 
-    {
-      page_nums[layer]++;
-      rp.set_recipes_page();
-    }
-    else if (button == rp.prev_button) 
-    {
-      page_nums[layer]--;
-      rp.set_recipes_page();
-    }
-    else if (button == rp.back)
-    {
-      page_nums[layer] = 0;
-      total_page_nums[layer] = 0;
-      layer--;
-      
-      rp.set_recipes_page();
-    }
-    else if (button == fp.prev_button)
-    {
-      
-      page_nums[layer]--;
-      fp.set_fridge_page();
-      
-    }
-    else if (button == fp.next_button)
-    {
-      
-      page_nums[layer]++;
-      fp.set_fridge_page();
-      
-    }
-    else if (button == fp.back)
-    {
-      page_nums[layer] = 0;
-      total_page_nums[layer] = 0;
-      layer--;
-      fp.set_fridge_page();
-    }
-    else if (button == mp.prev_button)
-    {
-      page_nums[layer]--;
-      mp.set_matching_page();
-    }
-    else if (button == mp.next_button)
-    {
-      page_nums[layer]++;
-      mp.set_matching_page();
-    }
-    else if (button == ap.prev_button)
-    {
-      page_nums[layer]--;
-      ap.set_activity_page();
-    }
-    else if (button == ap.next_button)
-    {
-      page_nums[layer]++;
-      ap.set_activity_page();
-    }
-    else if (button == ap.back)
-    {
-      page_nums[layer] = 0;
-      total_page_nums[layer] = 0;
-      layer--;
-      ap.set_activity_page(); 
-    }
-  }
-  
-}
-
 
 public void search_button_handler(GImageButton button, GEvent event)
 {
