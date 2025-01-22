@@ -72,6 +72,11 @@ class Home_Page extends Page
     title.setOpaque(true);
     title.setLocalColor(6, accent_col);
 
+    prev_button.setEnabled(false);
+    prev_button.setVisible(false);
+    next_button.setEnabled(false);
+    next_button.setVisible(false);
+
     autosave_toggle = new GImageToggleButton(parent, 120, 150, "toggle.png", 1, 2);
     autosave_toggle.setState(auto_save ? 1 : 0);
     autosave_toggle.addEventHandler(parent, "autosave_toggle_handler");

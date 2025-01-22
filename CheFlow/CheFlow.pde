@@ -78,10 +78,12 @@ Activity_Page ap;
 void setup() 
 {
   size(1000, 700);
-  G4P.messagesEnabled(false);
+  
   import_data();
   initialize_fonts();
   initialize_UI_colors();
+
+  createGUI();
   
   nb = new Nav_Bar(this);
   rp = new Recipes_Page(this);
@@ -132,6 +134,30 @@ void draw()
     textFont(createFont("Segoe UI Bold", 60));
     textAlign(CENTER, TOP);
     text(greeting_text, width/2, 80);
+  }
+
+
+  if (safe_mode)
+  {
+    if (prev_btn_cooldown > 0)
+    {
+      prev_btn_cooldown--;
+
+      if (prev_btn_cooldown == 0)
+      {
+        prev_button.setEnabled(page_nums[layer] > 0);
+      }
+    }
+
+    if (next_btn_cooldown > 0)
+    {
+      next_btn_cooldown--;
+
+      if (next_btn_cooldown == 0)
+      {
+        next_button.setEnabled(page_nums[layer] < total_page_nums[layer] - 1);
+      }
+    }
   }
   
 }
