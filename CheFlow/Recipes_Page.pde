@@ -79,8 +79,6 @@ class Recipes_Page extends Page
     next_button = new GImageButton(parent, width / 2 + 60, navButtonY, button_height, button_height, new String[] {"next 1.png", "next 2.png"});
     next_button.addEventHandler(parent, "handleButtonEvents");
     
-    println(next_button != null);
-    
     back = new GImageButton(parent, 20, 150, 60, 60, new String[] {"back button 1.png", "back button 2.png"});
     back.addEventHandler(parent, "handleButtonEvents");
 
@@ -173,8 +171,6 @@ class Recipes_Page extends Page
     clear_variable_controls();
 
     update_nav_gui();
-    
-    println(next_button == null);
         
     if (layer == 0)
     {
