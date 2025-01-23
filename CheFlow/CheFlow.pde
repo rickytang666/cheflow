@@ -63,8 +63,8 @@ final int buttons_per_page = 8;
 final float button_width = 400;
 final float button_height = 40;
 final float button_spacing = 10;
-final float button_startX = 1000/2 - button_width/2;
-final float button_startY = 700 - (button_height + button_spacing) * (buttons_per_page + 1);
+final float button_startX = 1000/2 - button_width/2; // make sure button is in the middle
+final float button_startY = 700 - (button_height + button_spacing) * (buttons_per_page + 1); // make sure the buttons are at the bottom (don't exceed the height)
 
 int layer = 0; // the higher the innermost we are in, controlled by back and ingredient/recipe buttons
 int[] page_nums = {0, 0, 0}; // the current page number for each layer

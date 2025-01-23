@@ -197,6 +197,11 @@ class Activity_Page extends Page
 
     update_nav_gui();
 
+    /*
+    If the layer is 0, we display all the log records
+    If the layer is 1, we display the details of the selected log record and the search results of recipe selection
+     */
+
     if (layer == 0)
     {
 

@@ -6,7 +6,7 @@ class Ingredient
   
   String name;
 
-  ArrayList<String> related_recipes;
+  ArrayList<String> related_recipes; // for displaying the related recipes, constantly updating
 
   GButton button;
   GImageButton del_button;
@@ -18,7 +18,7 @@ class Ingredient
   
   Ingredient(String n)
   {
-    this.name = n.toLowerCase(); 
+    this.name = n.toLowerCase(); // case insensitive for ingredients
     this.related_recipes = new ArrayList<String>();
     this.button = null;
     this.del_button = null;
@@ -36,11 +36,15 @@ class Ingredient
 
   void set_contents()
   {
+    // fill out the related recipes array using the global function
+
     this.related_recipes = get_related_recipes(this.name);
   }
 
   void dispose_controls()
   {
+    // dispose all the controls it has
+
     if (this.button != null)
     {
       this.button.dispose();
@@ -73,8 +77,11 @@ class Ingredient
 }
 
 
+// Essentially a bundle (ingredient + essential data & control)
+
 class IngredientStatus
-{
+{  
+
   Ingredient ingredient;
   boolean is_essential;
 
@@ -94,6 +101,8 @@ class IngredientStatus
 
   void dispose_controls()
   {
+    // dispose all the controls it has, and the ingredient's
+    
     if (this.essential_toggle != null)
     {
       this.essential_toggle.dispose();

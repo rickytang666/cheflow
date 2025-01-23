@@ -1,7 +1,7 @@
 // Common GUIs
 
 GImageButton prev_button, next_button;
-boolean safe_mode = true;
+final boolean safe_mode = true;
 int next_btn_cooldown = 0, prev_btn_cooldown = 0;
 final int COOLDOWN_FRAMES = 20;
 
