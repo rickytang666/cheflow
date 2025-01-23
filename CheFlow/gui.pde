@@ -109,3 +109,28 @@ public void back_button_handler(GImageButton button, GEvent event)
 
   }
 }
+
+
+public void search_button_handler(GImageButton button, GEvent event)
+{
+  if (event == GEvent.CLICKED)
+  {
+    if (button == rp.search_button)
+    {
+      fill_search_results(rp.search_bar.getText());
+      page_nums[0] = 0;
+      total_page_nums[0] = max(1, (int) ceil((float) search_results.size() / buttons_per_page));
+      page_nums[0] = constrain(page_nums[0], 0, total_page_nums[0] - 1);
+      rp.set_recipes_page();
+    }
+    else if (button == ap.search_button)
+    {
+      fill_search_results(ap.search_bar.getText());
+      page_nums[0] = 0;
+      total_page_nums[0] = max(1, (int) ceil((float) search_results.size() / buttons_per_page));
+      page_nums[0] = constrain(page_nums[0], 0, total_page_nums[0] - 1);
+      ap.set_activity_page();
+    }
+
+  }
+}

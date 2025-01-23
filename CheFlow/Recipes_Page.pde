@@ -300,30 +300,6 @@ class Recipes_Page extends Page
 
 /* EVENT HANDLERS */
 
-public void search_button_handler(GImageButton button, GEvent event)
-{
-  if (event == GEvent.CLICKED)
-  {
-    if (button == rp.search_button)
-    {
-      fill_search_results(rp.search_bar.getText());
-      page_nums[0] = 0;
-      total_page_nums[0] = max(1, (int) ceil((float) search_results.size() / buttons_per_page));
-      page_nums[0] = constrain(page_nums[0], 0, total_page_nums[0] - 1);
-      rp.set_recipes_page();
-    }
-    else if (button == ap.search_button)
-    {
-      fill_search_results(ap.search_bar.getText());
-      page_nums[0] = 0;
-      total_page_nums[0] = max(1, (int) ceil((float) search_results.size() / buttons_per_page));
-      page_nums[0] = constrain(page_nums[0], 0, total_page_nums[0] - 1);
-      ap.set_activity_page();
-    }
-
-  }
-}
-
 
 public void search_mode_handler(GImageToggleButton button, GEvent event)
 {
@@ -561,6 +537,3 @@ public void ingredient_renamer_handler(GTextField source, GEvent event)
     
   }
 }
-
-
-public void handleTextEvents(GEditableTextControl textcontrol, GEvent event) { /* code */ }
