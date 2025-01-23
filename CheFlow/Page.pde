@@ -1,9 +1,10 @@
+// This file is for the abstract Page class, define the members and shared methods
 
 abstract class Page
 {
   /* SHARED FIELDS */
 
-  PApplet parent;
+  PApplet parent; // The page need a PApplet to refer to, in order to put controls
 
   /* CONSTRUCTORS */
 
