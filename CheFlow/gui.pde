@@ -1,15 +1,24 @@
-// Common GUIs
+// This file contains the global GUI functions for the application
+// Note that the variables are global here, and the functions are all shared in multiple pages
+
+/* GLOBAL VARIABLES OR CONSTANTS */
 
 GImageButton prev_button, next_button;
-final boolean safe_mode = true;
-int next_btn_cooldown = 0, prev_btn_cooldown = 0;
-final int COOLDOWN_FRAMES = 20;
+final boolean safe_mode = true; // If true, the buttons will have a cooldown before they can be clicked again
+int next_btn_cooldown = 0, prev_btn_cooldown = 0; // keep track of the cooldowns for the buttons
+final int COOLDOWN_FRAMES = 20; // number of frames to wait before the button can be clicked again
+
+/* GUI FUNCTIONS */
 
 public void createGUI()
 {
-  G4P.messagesEnabled(false);
+  G4P.messagesEnabled(false); // Don't want to see the messages printed
 
   float navButtonY = height - 50;
+
+  // set up the page buttons globally
+
+  // for image buttons, we need to use string array to specify the image faces for the button
     
   prev_button = new GImageButton(this, width / 2 - 60, navButtonY,  button_height, button_height, new String[] {"previous 1.png", "previous 2.png"});
   prev_button.addEventHandler(this, "page_button_handler");
@@ -19,12 +28,16 @@ public void createGUI()
 }
 
 
+/* EVENT HANDLERS (SHARED) */
+
+
 public void page_button_handler(GImageButton button, GEvent event)
 {
+
+  // if the button is clicked, add/subtract the page num and update the correct page
+
   if (event == GEvent.CLICKED)
   {
-
-
     if (button == prev_button)
     {
       page_nums[layer]--;
@@ -48,9 +61,10 @@ public void page_button_handler(GImageButton button, GEvent event)
 
       if (safe_mode)
       {
+        // send the button to cooldown after clicking
+
         prev_btn_cooldown = COOLDOWN_FRAMES;
         prev_button.setEnabled(false);
-        // println("prev button cooldown set", prev_button.isEnabled());
       }
     }
     else if (button == next_button)
@@ -76,9 +90,10 @@ public void page_button_handler(GImageButton button, GEvent event)
 
       if (safe_mode)
       {
+        // send the button to cooldown after clicking
+
         next_btn_cooldown = COOLDOWN_FRAMES;
         next_button.setEnabled(false);
-        // println("next button cooldown set", next_button.isEnabled());
       }
     }
 
@@ -90,6 +105,9 @@ public void back_button_handler(GImageButton button, GEvent event)
 {
   if (event == GEvent.CLICKED)
   {
+
+    // update the nav info and reset the correct page
+
     page_nums[layer] = 0;
     total_page_nums[layer] = 0;
     layer--;
@@ -113,6 +131,10 @@ public void back_button_handler(GImageButton button, GEvent event)
 
 public void search_button_handler(GImageButton button, GEvent event)
 {
+  // fill the search result based on the search content
+  // update the nav info based on the updated array
+  // reset the correct page
+
   if (event == GEvent.CLICKED)
   {
     if (button == rp.search_button)

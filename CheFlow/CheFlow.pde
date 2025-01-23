@@ -27,7 +27,7 @@ final color accent_col = #9eef7b; // normal light green
 final color accent_col2 = #ff2984; // saturated pink
 final color accent_col3 = #a5ff01; // bright green (lime)
 final color dark_col = #1C1C1E; // very dark grey for dark mode interface
-final color text_col = #e4e4e4; // almost white for text
+final color text_col = color(255) ; // white for text
 Font UI_font1; // slightly more bolded one
 Font UI_font2; // normal font weight one
 PFont drawing_font; // font for graphs/maps
