@@ -91,7 +91,6 @@ class Home_Page extends Page
     insights.setIcon(img, 1, GAlign.NORTH, GAlign.CENTER, GAlign.TOP);
     insights.setTextAlign(GAlign.CENTER, GAlign.TOP);
     insights.setOpaque(true);
-    
     insights.setFont(UI_font2.deriveFont(20.0));
     
     String str = "\n";
@@ -102,13 +101,18 @@ class Home_Page extends Page
     str += "Your longest streak is " + get_longest_streak() + " days.\n \n";
 
     insights.setText(str);
-
     insights.resizeToFit(true, true);
 
     export_button = new GButton(parent, 400, 400, 200, 40, "Export Data");
+    export_button.setLocalColor(3, accent_col);
+    export_button.setLocalColor(4, accent_col);
+    export_button.setLocalColor(6, #e2f06b);
     export_button.addEventHandler(parent, "export_button_handler");
 
     graph_button = new GButton(parent, 400, 450, 200, 40, "View Graph");
+    graph_button.setLocalColor(3, accent_col);
+    graph_button.setLocalColor(4, accent_col);
+    graph_button.setLocalColor(6, #e2f06b);
     graph_button.addEventHandler(parent, "graph_button_handler");
 
     days_droplist = new GDropList(parent, 650, 450, 150, 150, 3, 20);
@@ -134,9 +138,15 @@ class Home_Page extends Page
     regression_droplist.addEventHandler(parent, "regression_droplist_handler");
 
     heatmap_button = new GButton(parent, 400, 500, 200, 40, "View Heatmap");
+    heatmap_button.setLocalColor(3, accent_col);
+    heatmap_button.setLocalColor(4, accent_col);
+    heatmap_button.setLocalColor(6, #e2f06b);
     heatmap_button.addEventHandler(parent, "heatmap_button_handler");
 
     notice_button = new GButton(parent, 400, 550, 200, 40, "User Notice");
+    notice_button.setLocalColor(3, accent_col);
+    notice_button.setLocalColor(4, accent_col);
+    notice_button.setLocalColor(6, #e2f06b);
     notice_button.addEventHandler(parent, "notice_button_handler");
 
     static_controls.add(title);
