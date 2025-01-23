@@ -124,7 +124,8 @@ class Frige_Page extends Page
         float x = button_startX;
         float y = button_startY + button_index * (button_height + button_spacing);
 
-        ing.button = new GButton(parent, x, y, button_width, button_height, ing.name);
+        String name = truncate_text(ing.name, button_width);
+        ing.button = new GButton(parent, x, y, button_width, button_height, name);
         ing.button.setLocalColor(4, accent_col3);
         ing.button.setLocalColor(3, accent_col3);
         ing.button.setLocalColor(6, #edde32);
@@ -146,7 +147,7 @@ class Frige_Page extends Page
       current_ing.renamer.setText(current_ing.name);
       current_ing.renamer.addEventHandler(parent, "ingredient_renamer_handler_f");
 
-      current_ing.label = new GLabel(parent, width/2 - 200, 180, 400, 20, content);
+      current_ing.label = new GLabel(parent, width/2 - 200, 180, 400, 40, content);
       current_ing.label.setLocalColor(2, text_col);
       current_ing.label.setTextAlign(GAlign.CENTER, GAlign.TOP);
 
@@ -158,6 +159,7 @@ class Frige_Page extends Page
       for(int i = start; i < end; ++i)
       {
         String recipe_name = current_ing.related_recipes.get(i);
+        recipe_name = truncate_text(recipe_name, button_width);
         int index = i - start;
         float x = button_startX;
         float y = button_startY + index * (button_height + button_spacing);

@@ -136,7 +136,8 @@ class Matching_Page extends Page
       float x = button_startX;
       float y = button_startY + index * (button_height + button_spacing);
 
-      r.title_label = new GLabel(parent, x, y, button_width, button_height, r.name);
+      String name = truncate_text(r.name, button_width);
+      r.title_label = new GLabel(parent, x, y, button_width, button_height, name);
       r.title_label.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
       r.title_label.setOpaque(true);
 

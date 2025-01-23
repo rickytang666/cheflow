@@ -190,7 +190,8 @@ class Recipes_Page extends Page
         float x = button_startX;
         float y = button_startY + buttonIndex * (button_height + button_spacing);
 
-        r.button = new GButton(parent, x, y, button_width, button_height, r.name);
+        String name = truncate_text(r.name, button_width);
+        r.button = new GButton(parent, x, y, button_width, button_height, name);
         r.button.setFont(UI_font1);
         r.button.setLocalColor(3, accent_col2);
         r.button.setLocalColor(4, accent_col2);
@@ -236,7 +237,8 @@ class Recipes_Page extends Page
         float x = button_startX;
         float y = button_startY + buttonIndex * (button_height + button_spacing);
 
-        ing.button = new GButton(parent, x, y, button_width, button_height, ing.name);
+        String name = truncate_text(ing.name, button_width);
+        ing.button = new GButton(parent, x, y, button_width, button_height, name);
         ing.button.setLocalColor(4, accent_col3);
         ing.button.setLocalColor(3, accent_col3);
         ing.button.setLocalColor(6, #edde32);
@@ -266,7 +268,7 @@ class Recipes_Page extends Page
       current_ing.renamer.setText(current_ing.name);
       current_ing.renamer.addEventHandler(parent, "ingredient_renamer_handler");
 
-      current_ing.label = new GLabel(parent, width/2 - 200, 180, 400, 20, content);
+      current_ing.label = new GLabel(parent, width/2 - 200, 180, 400, 40, content);
       current_ing.label.setLocalColor(2, text_col);
       current_ing.label.setTextAlign(GAlign.CENTER, GAlign.TOP);
 
@@ -276,6 +278,7 @@ class Recipes_Page extends Page
       for (int i = start; i < end; i++)
       {
         String recipe_name = current_ing.related_recipes.get(i);
+        recipe_name = truncate_text(recipe_name, button_width);
         int index = i - start;
         float x = button_startX;
         float y = button_startY + index * (button_height + button_spacing);
@@ -364,7 +367,7 @@ public void recipe_button_handler(GButton button, GEvent event)
     for (int i = 0; i < recipes.size(); i++) 
     {
       Recipe r = recipes.get(i);
-      if (r.name.equals(button.getText())) 
+      if (r.button == button) 
       {
         current_r = r;
         layer = 1;

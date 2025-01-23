@@ -1,4 +1,29 @@
 
+
+String truncate_text(String text, float maxWidth) 
+{
+    maxWidth *= 0.8; // leave enough margin
+    textFont(drawing_font);
+    float w = textWidth(text);
+    
+    if (w <= maxWidth) 
+    {
+      return text;
+    }
+    
+    String str = text + "...";
+    int i = text.length() - 1;
+    
+    while(textWidth(str) > maxWidth)
+    {
+      --i;
+      str = text.substring(0, i) + "...";
+    }
+
+    return str;
+}
+
+
 Boolean is_recipe_repeated(String name, ArrayList<Recipe> arr)
 {
   for (Recipe r : arr)

@@ -180,7 +180,9 @@ class Activity_Page extends Page
         float x = button_startX;
         float y = button_startY + button_index * (button_height + button_spacing);
 
-        l.button = new GButton(parent, x, y, button_width, button_height, l.time_finished.get_time_str() + " - " + (l.recipe == null ? l.name : l.recipe.name));
+        String str = l.time_finished.get_time_str() + " - " + (l.recipe == null ? l.name : l.recipe.name);
+        str = truncate_text(str, button_width);
+        l.button = new GButton(parent, x, y, button_width, button_height, str);
         l.button.setLocalColor(3, #48bcb2);
         l.button.setLocalColor(4, #48bcb2);
         l.button.setLocalColor(6, #7995fd);
@@ -204,8 +206,8 @@ class Activity_Page extends Page
 
       current_log.recipe_label = new GLabel(parent, width - 300, 100, 250, 30);
       current_log.recipe_label.setOpaque(true);
-      String str = "Selected: " + (current_log.recipe == null ? current_log.name : current_log.recipe.name);
-      
+      String str = current_log.recipe == null ? current_log.name : "Selected: " + current_log.recipe.name;
+      str = truncate_text(str, 250);
       current_log.recipe_label.setText(str);
       
 

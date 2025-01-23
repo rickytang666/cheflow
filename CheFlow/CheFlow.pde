@@ -78,6 +78,7 @@ Activity_Page ap;
 void setup() 
 {
   size(1000, 700);
+  frameRate(60);
   
   import_data();
   initialize_fonts();
