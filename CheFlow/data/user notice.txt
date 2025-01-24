@@ -1,1 +1,3 @@
-Don't click the navigation buttons too fast like a gamer (especiall for a slow computer), just click them like you would normally do
+Don't click the navigation buttons too fast like a gamer (especially for a slow computer), just click them like you would normally do (the clicking frequency limit for this app is 3 clicks/second)
+In the RECIPES PAGE, the search toggle is only available for outermost layer, and the add button is only enabled when you turn off the search mode.
+Autosave Mode saves the data for you whenever you make changes. The normal mode is doing the same thing as long as you close the program via the "X" button rather than forcing stop running the code.
