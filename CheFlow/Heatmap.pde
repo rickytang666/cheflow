@@ -80,7 +80,7 @@ void drawHeatMap(PApplet appc)
 
 color getColor(int value) 
 {
-  float val = constrain(value, 0, 300); // 5 hours is already full marks, for the criteria of this app
+  float val = constrain(value, 0, 240); // 4 hours is already full marks, for the criteria of this app
 
   color startColor = #fff5f5; // a very very faint red
   color endColor = #ff2222; // saturated red
