@@ -35,6 +35,134 @@ void sort_recipes(int option)
   }
 }
 
+// Levenshtein Distance: Measures how many single-character edits (insertions, deletions, substitutions) are needed to change one string into another.
+// allows some fuzzy matching
+// Link to research: https://www.geeksforgeeks.org/introduction-to-levenshtein-distance/
+
+/* 
+  Distance between "kitten" and "sitting" is 3:
+  Replace 'k' with 's'.
+  Replace 'e' with 'i'.
+  Add 'g' at the end.
+ */
+
+int levenshtein_distance(String s1, String s2) 
+{
+
+  // Create a 2D array (DP table) to store the distances between substrings of the two strings
+
+  // dp[i][j] stores the minimum number of edits required to transform the first i characters of s1 to the first j characters of s2
+
+  int[][] dp = new int[s1.length() + 1][s2.length() + 1];
+
+  for (int i = 0; i <= s1.length(); i++) 
+  {
+    for (int j = 0; j <= s2.length(); j++) 
+    {
+      if (i == 0) 
+      {
+        // if s1 is empty, we need to add all characters of s2
+
+        dp[i][j] = j;
+      } 
+      else if (j == 0) 
+      {
+        // if s2 is empty, we need to remove all characters of s1
+
+        dp[i][j] = i;
+      } 
+      else 
+      {
+        // If the current characters are the same, cost = 0
+        // Otherwise, cost = 1 (we need a substitution)
+
+        int cost = (s1.charAt(i - 1) == s2.charAt(j - 1)) ? 0 : 1;
+
+        // Fill dp[i][j] with the minimum of three operations:
+        // 1. Deletion (dp[i-1][j] + 1)
+        // 2. Insertion (dp[i][j-1] + 1)
+        // 3. Substitution (dp[i-1][j-1] + cost)
+        
+        dp[i][j] = min( min(dp[i - 1][j] + 1, dp[i][j - 1] + 1), dp[i - 1][j - 1] + cost );
+      }
+    }
+  }
+
+  // the minimum number of edits required to transform the entire s1 into s2 is stored here
+
+  return dp[s1.length()][s2.length()];
+}
+
+// Function to calculate similarity between two strings based on the Levenshtein distance
+/* 
+  1.0 - exactly match
+  0.9+ - very strict (minor differences)
+  0.7+ - strict (some differences)
+  0.5+ - lenient (many differences) allow partial overlap or rearrangement
+  0.3+ - very lenient (major differences) allow partial overlap or rearrangement
+  0.0-0.3 - almost no similarity
+*/
+
+float calculate_similarity(String s1, String s2) 
+{
+  int max_length = max(s1.length(), s2.length());
+  int distance = levenshtein_distance(s1, s2);
+  return 1.0 - (float) distance / max_length; // similarity as a percentage
+}
+
+// Recursive binary searching function
+
+ArrayList<Recipe> recursive_search(int start, int end, String search)
+{
+  // handle wrong case
+
+  if (start > end)
+  {
+    return new ArrayList<Recipe>();
+  }
+
+  // Base case: if there's only 1 recipe, we only check this
+
+  if (start == end)
+  {
+    ArrayList<Recipe> result = new ArrayList<Recipe>();
+    Recipe r = recipes.get(start);
+    
+    // split the name into words and just check for keyword
+
+    String[] words = r.name.toLowerCase().split("\\s+"); // split by space (\\s+ is the regex for space, more robust than " ", since it can handle any whitespaces)
+    for (String word : words)
+    {
+      float similarity = calculate_similarity(word, search);
+
+      // either highly matched but not exactly, or partially matched but contains the keyword
+
+      if (similarity >= 0.7 || (similarity >= 0.4 && word.contains(search)))
+      {
+        result.add(r);
+        break;
+      }
+    }
+
+    return result;
+  }
+
+  // split the list into 2 halves
+
+  int mid = (start + end) / 2;
+
+  // resurively search the left and right halves
+
+  ArrayList<Recipe> left = recursive_search(start, mid, search);
+  ArrayList<Recipe> right = recursive_search(mid + 1, end, search);
+
+  // merge the results
+
+  left.addAll(right);
+  return left;
+
+}
+
 // Function to fill the search results based on the search string provided
 
 void fill_search_results(String search)
@@ -50,18 +178,13 @@ void fill_search_results(String search)
   }
   else
   {
-    for (Recipe r : recipes)
-    {
-      // compare them in case-insensitive manner
-
-      if (r.name.toLowerCase().contains(search.toLowerCase()))
-      {
-        search_results.add(r);
-      }
-    }
+    // use the recursive search function to find the matching recipes
+    search_results = recursive_search(0, recipes.size() - 1, search.toLowerCase());
   }
   
 }
+
+
 
 // Function to fill the matching results based on each recipe's calculations
 
