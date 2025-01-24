@@ -1,20 +1,5 @@
 [
   {
-    "duration": 30,
-    "name": "Tin Tin Chow Mein",
-    "ingredients": [
-      {
-        "is_essential": true,
-        "name": "noodles"
-      },
-      {
-        "is_essential": false,
-        "name": "funny one hh"
-      }
-    ],
-    "id": 99
-  },
-  {
     "duration": 5,
     "name": "fried egg",
     "ingredients": [
@@ -65,7 +50,7 @@
         "name": "butter"
       },
       {
-        "is_essential": true,
+        "is_essential": false,
         "name": "cheese"
       }
     ],

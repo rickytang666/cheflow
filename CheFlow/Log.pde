@@ -1,3 +1,4 @@
+// This file contains the Log class, which is used to store and manage the logs of the user's cooking activities.
 
 class Log
 {
@@ -8,7 +9,8 @@ class Log
   Time time_finished;
   int duration;
 
-  GButton button, del_button;
+  GButton button;
+  GImageButton del_button;
   GLabel recipe_label;
 
   /* CONSTRUCTORS */
@@ -16,8 +18,8 @@ class Log
   Log()
   {
     this.recipe = null;
-    this.name = "Custom cooking";
-    this.time_finished = new Time();
+    this.name = "Custom cooking"; // default name, used when the user doesn't select a recipe
+    this.time_finished = new Time(); // default time is now
     this.duration = 1;
 
     this.button = null;
@@ -33,6 +35,8 @@ class Log
     this.recipe = r;
   }
 
+
+  // Function to dispose all controls it has, to make sure it's gui is clean
 
   void dispose_controls()
   {
@@ -55,6 +59,8 @@ class Log
 
   void delete()
   {
+    // remove from the log records data structure, and dispose all of the controls
+
     log_records.remove(this);
 
     dispose_controls();

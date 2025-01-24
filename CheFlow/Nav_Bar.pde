@@ -1,10 +1,12 @@
 
 /** NAV BAR CLASS **/
 
+// The nav bar sits at the top of the screen and allows the user to navigate between the different pages
+
 class Nav_Bar
 {
   PApplet parent;
-  GButton home_button, recipes_button, fridge_button, matching_button, activity_button;
+  GButton home_button, recipes_button, fridge_button, matching_button, activity_button; // buttons for directory of each page
 
   Nav_Bar(PApplet p)
   {
@@ -13,11 +15,43 @@ class Nav_Bar
 
   void setup()
   {
-    home_button = new GButton(parent, 200, 5, 100, 50, "Home");
-    recipes_button = new GButton(parent, 350, 5, 100, 50, "Recipes");
-    fridge_button = new GButton(parent, 500, 5, 100, 50, "Fridge");
-    matching_button = new GButton(parent, 650, 5, 100, 50, "Matching");
-    activity_button = new GButton(parent, 800, 5, 100, 50, "Activity");
+    float start_x = 140;
+
+    float spacing = 20;
+
+    float btn_width = (width - start_x - 6 * spacing) / 5.0; // calculate the width of button
+
+    color col = #EBA3FF; // faint pink
+
+    Font font = new Font("Segoe UI SemiBold", Font.PLAIN, 20); // Use a bigger font for the buttons
+
+    // Set up all the buttons for the pages
+
+    home_button = new GButton(parent, start_x + spacing, 5, btn_width, 50, "Home");
+    home_button.setFont(font);
+    home_button.setLocalColor(3, col);
+    home_button.setLocalColor(4, col);
+    home_button.setLocalColor(6, #67CBFD); // light blue
+    recipes_button = new GButton(parent, start_x + btn_width + 2 * spacing, 5, btn_width, 50, "Recipes");
+    recipes_button.setFont(font);
+    recipes_button.setLocalColor(3, col);
+    recipes_button.setLocalColor(4, col);
+    recipes_button.setLocalColor(6, #67CBFD);
+    fridge_button = new GButton(parent, start_x + 2 * btn_width + 3 * spacing, 5, btn_width, 50, "Fridge");
+    fridge_button.setFont(font);
+    fridge_button.setLocalColor(3, col);
+    fridge_button.setLocalColor(4, col);
+    fridge_button.setLocalColor(6, #67CBFD);
+    matching_button = new GButton(parent, start_x + 3 * btn_width + 4 * spacing, 5, btn_width, 50, "Matching");
+    matching_button.setFont(font);
+    matching_button.setLocalColor(3, col);
+    matching_button.setLocalColor(4, col);
+    matching_button.setLocalColor(6, #67CBFD);
+    activity_button = new GButton(parent, start_x + 4 * btn_width + 5 * spacing, 5, btn_width, 50, "Activity");
+    activity_button.setFont(font);
+    activity_button.setLocalColor(3, col);
+    activity_button.setLocalColor(4, col);
+    activity_button.setLocalColor(6, #67CBFD);
 
     home_button.addEventHandler(parent, "nav_bar_buttons_handler");
     recipes_button.addEventHandler(parent, "nav_bar_buttons_handler");
@@ -29,8 +63,9 @@ class Nav_Bar
   
   void draw()
   {
-    color col = color(246, 200, 219);
-    fill(col);
+    // for background of navbar
+
+    fill( #fffcb1); // light yellow
     noStroke();
     rect(0, 0, width, 60);
   }
@@ -40,6 +75,8 @@ class Nav_Bar
 
 void switch_page(Page new_page)
 {
+  // "delete" the current page and set up the new page
+
   current_Page.die();
   current_Page = new_page;
   current_Page.setup();
@@ -50,6 +87,9 @@ void switch_page(Page new_page)
 
 public void nav_bar_buttons_handler(GButton button, GEvent event)
 {
+
+  // This handler is called when any of the navbar buttons are clicked, and switches the page accordingly
+
   if (event == GEvent.CLICKED)
   {
     if (button == nb.home_button)

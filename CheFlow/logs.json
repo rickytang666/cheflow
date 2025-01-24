@@ -1,16 +1,21 @@
 [
   {
-    "duration": 32,
-    "name": "Tin Tin Chow Mein",
+    "duration": 1,
+    "name": "fried egg",
+    "time finished": "2025-01-19 15:37"
+  },
+  {
+    "duration": 2,
+    "name": "vegetable soup",
     "time finished": "2025-01-18 13:57"
   },
   {
     "duration": 40,
-    "name": "pancake",
+    "name": "beef stir fry",
     "time finished": "2025-01-18 11:49"
   },
   {
-    "duration": 560,
+    "duration": 279,
     "name": "Custom cooking",
     "time finished": "2025-01-17 21:31"
   },
@@ -21,7 +26,7 @@
   },
   {
     "duration": 220,
-    "name": "grilled cheese",
+    "name": "beef stir fry",
     "time finished": "2025-01-15 07:52"
   },
   {
