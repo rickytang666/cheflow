@@ -1,7 +1,7 @@
 
 /** HOME PAGE CLASS **/
 
-class Home_Page extends Page
+class Home_Page extends Page // Derived from Page class
 {
   /* FIELDS */
 

@@ -11,7 +11,7 @@ class Recipe
   GImageButton del_button;
   GTextField renamer;
   GTextField duration_editor;
-  float matching_score; // also recommendation mark, how well it matches the fridge items
+  float matching_score; // aka recommendation mark, how well it matches the fridge items
   GLabel title_label, matching_score_label, duration_hint;
 
   /* CONSTRUCTORS */

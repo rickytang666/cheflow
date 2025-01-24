@@ -1,7 +1,7 @@
 
 /** ACTIVITY PAGE CLASS **/
 
-class Activity_Page extends Page
+class Activity_Page extends Page // Derived from Page class
 {
   /* FIELDS */
 

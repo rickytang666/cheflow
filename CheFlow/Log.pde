@@ -17,8 +17,8 @@ class Log
   Log()
   {
     this.recipe = null;
-    this.name = "Custom cooking";
-    this.time_finished = new Time();
+    this.name = "Custom cooking"; // default name, used when the user doesn't select a recipe
+    this.time_finished = new Time(); // default time is now
     this.duration = 1;
 
     this.button = null;
@@ -34,6 +34,8 @@ class Log
     this.recipe = r;
   }
 
+
+  // Function to dispose all controls it has, to make sure it's gui is clean
 
   void dispose_controls()
   {
@@ -56,6 +58,8 @@ class Log
 
   void delete()
   {
+    // remove from the log records data structure, and dispose all of the controls
+
     log_records.remove(this);
 
     dispose_controls();

@@ -28,8 +28,8 @@ final color accent_col2 = #ff2984; // saturated pink
 final color accent_col3 = #a5ff01; // bright green (lime)
 final color dark_col = #1C1C1E; // very dark grey for dark mode interface
 final color text_col = color(255) ; // white for text
-Font UI_font1; // slightly more bolded one
-Font UI_font2; // normal font weight one
+Font UI_font1; // slightly more bolded one for java.awt.Font (G4P uses this)
+Font UI_font2; // normal font weight one for java.awt.Font (G4P uses this)
 PFont drawing_font; // font for graphs/maps
 PImage logo;
 String greeting_text = "Good Morning";
@@ -67,7 +67,7 @@ final float button_startX = 1000/2 - button_width/2; // make sure button is in t
 final float button_startY = 700 - (button_height + button_spacing) * (buttons_per_page + 1); // make sure the buttons are at the bottom (don't exceed the height)
 
 int layer = 0; // the higher the innermost we are in, controlled by back and ingredient/recipe buttons
-int[] page_nums = {0, 0, 0}; // the current page number for each layer
+int[] page_nums = {0, 0, 0}; // the current page number for each layer, count from 0 since it is an index
 int[] total_page_nums = {0, 0, 0}; // the total number of pages for each layer, constantly updating
 
 // Current elements we are visiting, for loading the relevant data

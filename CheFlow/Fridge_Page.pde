@@ -1,7 +1,7 @@
 
 /** FRIDGE PAGE CLASS **/
 
-class Frige_Page extends Page
+class Frige_Page extends Page // Derived from Page class
 {
   /* FIELDS */
 
