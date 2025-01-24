@@ -1,4 +1,4 @@
-![logo](https://github.com/user-attachments/assets/2e9d0cf9-0b1e-4e78-bdb9-2f7cfbaa8987)
+<img src="https://github.com/user-attachments/assets/2e9d0cf9-0b1e-4e78-bdb9-2f7cfbaa8987" alt="logo" height="200"/>
 
 
 # 🍳 **CheFlow**
