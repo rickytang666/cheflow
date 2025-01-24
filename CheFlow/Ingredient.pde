@@ -1,3 +1,6 @@
+// This file contains Ingredient and IngredientStatus classes, which are used to store and manage the ingredients and their essential status in the program. 
+// The Ingredient class contains the name of the ingredient, a list of related recipes, and the GUI elements associated with the ingredient. 
+// The IngredientStatus class is a bundle
 
 class Ingredient
 {

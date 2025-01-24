@@ -172,7 +172,7 @@ ArrayList<String> get_related_recipes(String name)
     {
       if (ing_status.ingredient.name.equals(name))
       {
-        related_recipes.add(r.name);
+        related_recipes.add(r.name); // add the recipe name to the list
         break;
       }
     }
@@ -185,6 +185,8 @@ ArrayList<String> get_related_recipes(String name)
 
 void sort_log_records()
 {
+  // use the compare function to sort the log records based on the time finished (implemented in Time class)
+
   log_records.sort((a, b) -> b.time_finished.compareTo(a.time_finished));
 }
 
@@ -195,7 +197,6 @@ void sort_log_records()
 
 color get_color_from_value(float value)
 {
-
   // red is 0, green is 100
 
   value = constrain(value, 0, 100); // Ensure the value is within the 0-100 range
@@ -217,6 +218,8 @@ color get_color_from_value(float value)
 
 Boolean is_leap_year(int input)
 {
+  // Leap year is divisible by 4, but not by 100 unless it is divisible by 400
+
   if (input % 4 == 0)
   {
     if (input % 100 == 0)
@@ -258,6 +261,8 @@ int days_in_month(int month, int year)
 
 int validate_time_str(String timeStr) 
 {
+  // return values: 0 for valid, -1 for incorrect format, -2 for invalid date/time, -3 for later than the current time
+
   // Split the string into date and time
 
   String[] parts = timeStr.split(" ");
@@ -276,6 +281,8 @@ int validate_time_str(String timeStr)
   {
     return -1; // Incorrect date format
   }
+
+  // parse the numbers in the string. use try-catch to handle the NumberFormatException
 
   try 
   {
@@ -342,7 +349,7 @@ int validate_time_str(String timeStr)
 }
 
 
-/* STATISTICS INSIGHTS RELATED */
+/* STATISTICS & INSIGHTS RELATED */
 
 // Function to get the average duration of the activities in the last n days (for the insights page in home page)
 

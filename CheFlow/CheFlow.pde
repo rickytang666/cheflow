@@ -41,7 +41,6 @@ ArrayList<Recipe> search_results = new ArrayList<Recipe>(); // search results ba
 ArrayList<Recipe> matching_results = new ArrayList<Recipe>(); // a copy of recipes, for recommendations (matching page)
 ArrayList<Ingredient> fridge = new ArrayList<Ingredient>(); // FRIDGE stores all the ingredients
 ArrayList<Log> log_records = new ArrayList<Log>(); // storing all of the user's cooking activities records
-
 ArrayList<Integer> daily_durations = new ArrayList<>(); // every day's total cooking time (past 365 days, in minutes)
 
 // File Input/Output Related
@@ -52,12 +51,13 @@ final String file_name_logs = "logs.json";
 final String file_name_user_notice = "user notice.txt";
 
 /* 
+  boolean for controling the auto save feature:
   if on, the program saves the data instantly after any changes; 
   if off, only saves the data if you close the program by the "x" (not the stop running)
 */
 boolean auto_save = false;
 
-// Button Dimensions and Positions & Pages Navigations
+// Button Dimensions and Positions & Pages Navigations Information Variables
 
 final int buttons_per_page = 8;
 final float button_width = 400;
@@ -82,10 +82,10 @@ int recipe_id = 1, ingredient_id = 1; // For assigning non-repeating new names
 int duration_demand = 30; // For recommendations, the default time requirement is set to 30 minutes
 boolean time_priority = false; // For recommendations, if the user really cares about the time limits
 
-// All of the pages/navbar, each of the objects handle their own elements
+// All of the pages objects/navbar, each of the objects handle their own elements
 
 Nav_Bar nb;
-Page current_Page;
+Page current_Page; // keeps track of the current page we are visiting
 Recipes_Page rp;
 Frige_Page fp;
 Home_Page hp;
@@ -162,7 +162,6 @@ void draw()
 
   
   // Handle the cooldown of any buttons (using counting frames)
-
 
   if (safe_mode)
   {

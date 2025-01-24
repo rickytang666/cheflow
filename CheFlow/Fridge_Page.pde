@@ -58,6 +58,8 @@ class Frige_Page extends Page // Derived from Page class
   void set_nav_gui()
   {
     // set up the static gui elements
+
+    // title label on the left top
     
     title = new GLabel(parent, 10, 70, 200, 40, "FRIDGE PAGE");
     title.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
@@ -157,7 +159,7 @@ class Frige_Page extends Page // Derived from Page class
         float x = button_startX;
         float y = button_startY + button_index * (button_height + button_spacing);
 
-        // set up buttons
+        // set up buttons and truncate the text if necessary
 
         // static-hover-clicked -> lime green-yellow-light blue
 
@@ -230,7 +232,7 @@ public void add_button_handler_f(GImageButton button, GEvent event)
     // use the id to give a unique default name
     
     String name = "ingredient " + ingredient_id;
-    ++ingredient_id;
+    ++ingredient_id; // increment the global id
     Ingredient ing = new Ingredient(name);
     fridge.add(0, ing);
 
@@ -257,11 +259,11 @@ public void ingredient_button_handler_f(GButton button, GEvent event)
       if (ing.button == button)
       {
 
-        // if found, zoom in the layer and set the new fridge page, update the nav info
+        // if the ingredient is found, zoom in the layer and set the new fridge page, update the nav info
 
         current_ing = ing;
         layer = 1;
-        ing.set_contents();
+        ing.set_contents(); // update the related recipes data structure
         page_nums[1] = 0;
         total_page_nums[1] = max(1, (int) ceil((float) current_ing.related_recipes.size() / buttons_per_page));
         fp.set_fridge_page();
@@ -280,7 +282,7 @@ public void ingredient_del_button_handler_f(GImageButton button, GEvent event)
     {
       if (ing.del_button == button)
       {
-        // remove the ingredient (dispose controls also), update the nav info, and save data
+        // remove the ingredient (dispose controls as well), update the nav info, and save data
 
         ing.dispose_controls();
         fridge.remove(ing);

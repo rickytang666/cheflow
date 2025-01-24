@@ -10,8 +10,8 @@ void export_recipes()
     // create a JSON object for each recipe, put in the necessary fields
 
     JSONObject recipe_obj = new JSONObject();
-    recipe_obj.setInt("id", r.id);
     recipe_obj.setString("name", r.name);
+    recipe_obj.setInt("id", r.id);
     recipe_obj.setInt("duration", r.duration);
 
     // assign a JSON array for the ingredients of the recipe, append the recipe into big array

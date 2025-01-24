@@ -322,13 +322,13 @@ class Recipes_Page extends Page // Derived from Page class, unfortunately the mo
 
       for (int i = start; i < end; i++)
       {
+        // calculate the positions, truncate the text, and set the labels
+
         String recipe_name = current_ing.related_recipes.get(i);
         recipe_name = truncate_text(recipe_name, button_width);
         int index = i - start;
         float x = button_startX;
         float y = button_startY + index * (button_height + button_spacing);
-
-        // just a GLabel
 
         GLabel label = new GLabel(parent, x, y, button_width, button_height, recipe_name);
         label.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);

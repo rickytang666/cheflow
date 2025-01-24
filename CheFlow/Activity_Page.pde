@@ -158,7 +158,7 @@ class Activity_Page extends Page // Derived from Page class
       search_bar.setText("");
     }
 
-    // Only when the layer is 1, we pull up those log editing controls
+    // Only when the layer is 1 (we are editing a log activity), we pull up those log editing controls
 
     search_bar.setEnabled(layer == 1 && current_log != null);
     search_bar.setVisible(layer == 1 && current_log != null);
@@ -200,7 +200,7 @@ class Activity_Page extends Page // Derived from Page class
     /*
     If the layer is 0, we display all the log records
     If the layer is 1, we display the details of the selected log record and the search results of recipe selection
-     */
+    */
 
     if (layer == 0)
     {

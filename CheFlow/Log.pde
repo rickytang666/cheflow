@@ -1,3 +1,4 @@
+// This file contains the Log class, which is used to store and manage the logs of the user's cooking activities.
 
 class Log
 {

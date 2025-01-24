@@ -25,7 +25,7 @@ class Nav_Bar
 
     Font font = new Font("Segoe UI SemiBold", Font.PLAIN, 20); // Use a bigger font for the buttons
 
-    // Set up all the buttons
+    // Set up all the buttons for the pages
 
     home_button = new GButton(parent, start_x + spacing, 5, btn_width, 50, "Home");
     home_button.setFont(font);

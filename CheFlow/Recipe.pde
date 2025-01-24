@@ -1,3 +1,4 @@
+// This file contains the Recipe class, which is used to represent a recipe in the program. 
 
 class Recipe
 {

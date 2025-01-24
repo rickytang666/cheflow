@@ -12,7 +12,7 @@ final int COOLDOWN_FRAMES = 20; // number of frames to wait before the button ca
 
 public void createGUI()
 {
-  G4P.messagesEnabled(false); // Don't want to see the messages printed
+  G4P.messagesEnabled(false); // Don't want to see the tedious messages printed
 
   float navButtonY = height - 50;
 
@@ -106,7 +106,7 @@ public void back_button_handler(GImageButton button, GEvent event)
   if (event == GEvent.CLICKED)
   {
 
-    // update the nav info and reset the correct page
+    // update the navigation info and reset the correct page
 
     page_nums[layer] = 0;
     total_page_nums[layer] = 0;
@@ -142,15 +142,13 @@ public void search_button_handler(GImageButton button, GEvent event)
       fill_search_results(rp.search_bar.getText());
       page_nums[0] = 0;
       total_page_nums[0] = max(1, (int) ceil((float) search_results.size() / buttons_per_page));
-      page_nums[0] = constrain(page_nums[0], 0, total_page_nums[0] - 1);
       rp.set_recipes_page();
     }
     else if (button == ap.search_button)
     {
       fill_search_results(ap.search_bar.getText());
-      page_nums[0] = 0;
-      total_page_nums[0] = max(1, (int) ceil((float) search_results.size() / buttons_per_page));
-      page_nums[0] = constrain(page_nums[0], 0, total_page_nums[0] - 1);
+      page_nums[1] = 0;
+      total_page_nums[1] = max(1, (int) ceil((float) search_results.size() / buttons_per_page));
       ap.set_activity_page();
     }
 
