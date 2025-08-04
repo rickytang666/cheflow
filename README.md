@@ -1,7 +1,10 @@
 <div align="center">
-    <img src="CheFlow/data/logo.png" width="200" alt="CheFlow Logo"/>
+    <img src="CheFlow/data/logo.png" width="300" alt="CheFlow Logo"/>
     <br>
-    <em>A comprehensive recipe management and cooking analytics platform</em>
+    <br>
+    <em>
+        <h3>A comprehensive recipe management and cooking analytics platform</h3>
+    </em>
 </div>
 
 ---
@@ -77,10 +80,10 @@ Built with Processing 4, it combines recipe storage, ingredient tracking, smart 
 
 ### Usage
 
-**Recipes**: Add recipes with essential/optional ingredients and cooking time
-**Fridge**: Track your ingredient inventory for smart matching
-**Matching**: Get recipe recommendations based on available ingredients and time constraints
-**Activities**: Log cooking sessions and view analytics with heatmaps and trend analysis
+- **Recipes**: Add recipes with essential/optional ingredients and cooking time
+- **Fridge**: Track your ingredient inventory for smart matching
+- **Matching**: Get recipe recommendations based on available ingredients and time constraints
+- **Activities**: Log cooking sessions and view analytics with heatmaps and trend analysis
 
 Data is auto-saved in JSON format for easy backup and portability.
 
